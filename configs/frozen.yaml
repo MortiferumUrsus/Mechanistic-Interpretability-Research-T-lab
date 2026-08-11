@@ -1,9 +1,10 @@
-# Inference knobs. Values here are the DEV-selected ones; TEST only varies the strength c.
-# Written by the DEV selection in scripts/select_dev.ps1 and not touched afterwards.
-denoiser: mlp_mix_cond1_s0
-eta: 1.0            # correction strength of the task's literal arm
-lam: 1.0            # correction strength of the contrastive direction-preserving arm
-shrink: 0.05        # covariance shrinkage for the Mahalanobis transport
-wiener_sigma: 1.0   # in units of median activation norm, converted to per-coordinate sigma
-fsr_k: 1.0          # latent ceiling multiplier for the feature-surgery arm
-fsr_exempt_cos: 0.3 # latents this collinear with the target are left alone
+# Inference knobs, selected on DEV features and frozen before TEST was generated.
+# Written by src/select_from_dev.py; TEST varies only the strength c.
+denoise_naive_denoiser: mlp_gauss_cond1_s0
+denoiser: mlp_gauss_cond1_s0
+eta: 1.0
+fsr_exempt_cos: 0.3
+fsr_k: 0.7
+lam: 1.5
+shrink: 0.01
+wiener_sigma: 1.0

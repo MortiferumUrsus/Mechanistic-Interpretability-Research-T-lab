@@ -40,27 +40,51 @@ def main(args) -> None:
     df["arm"] = df["arm"].str.replace(r"^(clean|naive|norm_preserving)\|base$", r"\1", regex=True)
     cells = cell_means(df, args.concept)
     tbl = endpoint_table(cells)
-    agg = (
-        tbl.groupby("arm")["concept_at_budget"]
-        .agg(["mean", "count"])
-        .reset_index()
-        .sort_values("mean", ascending=False)
+
+    # Paired per-feature differences on common support. Averaging each arm's endpoint over whatever
+    # features happen to be defined for it compares different feature sets: the endpoint is
+    # undefined wherever the fluency budget falls outside an arm's front.
+    ref = tbl[tbl["arm"] == "naive"][["feature", "concept_at_budget"]].rename(
+        columns={"concept_at_budget": "ref"}
     )
-    base = float(agg[agg["arm"] == "naive"]["mean"].iloc[0])
-    agg["gain_vs_naive"] = agg["mean"] - base
+    rows = []
+    for arm, g in tbl.groupby("arm"):
+        m = g.merge(ref, on="feature").dropna(subset=["concept_at_budget", "ref"])
+        if m.empty:
+            rows.append({"arm": arm, "n_paired": 0, "mean_paired": float("nan"),
+                         "ref_paired": float("nan"), "gain_vs_naive": float("nan"),
+                         "n_defined": int(g["concept_at_budget"].notna().sum())})
+            continue
+        rows.append(
+            {
+                "arm": arm,
+                "n_paired": len(m),
+                "mean_paired": float(m["concept_at_budget"].mean()),
+                "ref_paired": float(m["ref"].mean()),
+                "gain_vs_naive": float((m["concept_at_budget"] - m["ref"]).mean()),
+                "n_defined": int(g["concept_at_budget"].notna().sum()),
+            }
+        )
+    agg = pd.DataFrame(rows).sort_values("gain_vs_naive", ascending=False)
     agg.to_csv(RESULTS / "dev_candidates.csv", index=False)
-    print(f"reference: naive endpoint on DEV = {base:.4f}\n")
+    n_feat = tbl["feature"].nunique()
+    print(f"DEV features: {n_feat}; gains are paired per-feature differences on common support\n")
     print(agg.to_string(index=False))
 
     winners: dict[str, dict] = {}
     for _, row in agg.iterrows():
         parsed = parse(str(row["arm"]))
-        if parsed is None:
+        if parsed is None or row["n_paired"] < args.min_paired:
             continue
         fam, params = parsed
         if fam in winners:
             continue
-        winners[fam] = {"arm": row["arm"], "gain": float(row["gain_vs_naive"]), **params}
+        winners[fam] = {
+            "arm": row["arm"],
+            "gain": float(row["gain_vs_naive"]),
+            "n_paired": int(row["n_paired"]),
+            **params,
+        }
 
     frozen = yaml.safe_load((CONFIGS / "frozen.yaml").read_text(encoding="utf-8"))
     if "cds" in winners:
@@ -91,4 +115,5 @@ if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--scored", default="scored_dev_all.csv")
     ap.add_argument("--concept", default="keyword_hit")
+    ap.add_argument("--min-paired", dest="min_paired", type=int, default=4)
     main(ap.parse_args())

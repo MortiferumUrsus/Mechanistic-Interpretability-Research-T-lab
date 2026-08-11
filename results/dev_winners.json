@@ -1,0 +1,28 @@
+{
+  "fsr": {
+    "arm": "fsr|fsr_k0.7",
+    "gain": 0.0067261862850771514,
+    "n_paired": 4,
+    "fsr_k": "0.7"
+  },
+  "denoise_naive": {
+    "arm": "denoise_naive|dn_mlp_gauss_cond1_s0_eta1",
+    "gain": -0.05296325187689191,
+    "n_paired": 4,
+    "den": "mlp_gauss_cond1_s0",
+    "eta": "1"
+  },
+  "cds": {
+    "arm": "cds|cds_mlp_gauss_cond1_s0_lam1.5",
+    "gain": -0.12209852022848229,
+    "n_paired": 5,
+    "den": "mlp_gauss_cond1_s0",
+    "lam": "1.5"
+  },
+  "mts": {
+    "arm": "mts|mts_sh0.01",
+    "gain": -0.3884716544582294,
+    "n_paired": 5,
+    "shrink": "0.01"
+  }
+}
