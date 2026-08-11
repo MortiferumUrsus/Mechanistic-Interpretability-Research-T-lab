@@ -1,0 +1,30 @@
+# Norm/Geometry-Aware Activation Steering and Fluency Degradation (supplementary to ActAdd/CAA)
+
+Covers additional papers specifically addressing why large steering coefficients break fluency, and geometric/projection-based remedies — the "norm preserving activation steering" / "steering vectors damage the model" search terms in the task brief.
+
+## 1. A Geometric Account of Activation Steering through Angle–Norm Decomposition
+
+- **Citation**: Georgii Aparin, Tatiana Gaintseva. arXiv:2606.06735 [cs.CL/cs.LG].
+- URL: https://arxiv.org/abs/2606.06735 · PDF downloaded → `kb/pdf/geometric-angle-norm-steering-2606.06735.pdf`
+- **Problem**: a single additive coefficient $c$ in $h \leftarrow h + c\,v$ conflates two geometrically distinct effects: how much the token's activation *rotates* toward the concept direction (angular alignment) vs. how much its *magnitude* (norm) changes. The same $c$ produces different angular shifts and norm changes depending on each token's starting geometry, which is why a fixed coefficient is hard to interpret/tune across tokens/layers.
+- **Method**: decompose the steering intervention into an **angular component** (change in directional alignment with the concept vector) and a **radial component** (change in $\lVert h\rVert$), and parameterize steering directly in terms of these two, rather than a single additive coefficient. Empirical finding across 7 LLMs: concepts are represented primarily in the *angular* structure (supporting spherical/angle-only steering as directionally correct), but **norm is not free to ignore** — it materially affects stability and downstream fluency even though it carries little concept-relevant information.
+- **Relevance to fluency degradation**: this gives a principled reason why "just add alpha*v" breaks fluency at high alpha — you're implicitly making an uncontrolled radial (norm) change alongside the angular one, and the norm change is what destabilizes the model, not the concept shift itself. A denoiser `D(h+alpha*v)` that implicitly learns to renormalize/project back toward the typical-norm manifold is one plausible mechanism by which it recovers fluency — worth explicitly checking whether your trained D's main fluency-recovery effect is simply norm correction (measure $\lVert D(h+\alpha v)\rVert$ vs $\lVert h \rVert$ vs $\lVert h + \alpha v\rVert$ across alpha).
+
+## 2. Minimizing Collateral Damage in Activation Steering
+
+- **Citation**: Tam Nguyen, Tu Anh Nguyen, Sina Alemohammad, Richard G. Baraniuk. arXiv:2605.01167 [cs.LG].
+- URL: https://arxiv.org/abs/2605.01167 · PDF downloaded → `kb/pdf/collateral-damage-steering-2605.01167.pdf`
+- **Problem**: standard additive steering ($h \leftarrow h + c v$) implicitly assumes the non-target feature directions are **isotropic** — that perturbing along $v$ doesn't disturb other, unrelated feature directions. In practice it does: "collateral damage" = unintended change in alignment along non-target directions, which is presumably a major contributor to fluency/capability loss at high steering strength.
+- **Method**: formulate steering as a **constrained optimization** that finds a new activation minimizing the expected squared collateral change, weighted by the **empirical second-moment (covariance-like) matrix of activations** — i.e. a Mahalanobis-metric-aware projection rather than a naive Euclidean additive shift. This down-weights directions with high natural variance (where a shift is "expected"/harmless) and up-weights directions with low natural variance (where a shift is anomalous/damaging).
+- **Relevance**: gives a concrete alternative baseline to compare your learned denoiser against: instead of learning `D` from scratch via a noise/reconstruction objective, you could precompute the empirical activation covariance at your steering layer and directly project the raw `h+alpha*v` onto a whitened/reweighted space before un-whitening — a cheap, training-free variant worth benchmarking on your Pareto front alongside the learned-D approach.
+
+## 3. (Context only — SAE-feature-steering scale sensitivity)
+
+**"Interpretable Steering of Large Language Models with Feature Guided Activation Additions"** (Sam Soo / FGAA), arXiv:2501.09929. PDF downloaded → `kb/pdf/feature-guided-activation-additions-2501.09929.pdf`. Reports that plain SAE-feature-direction steering is "notably aggressive" in the 0–40 coefficient range and shows **a distinct inflection point around scale 40** where fluency/capability starts degrading sharply across steering methods — i.e. there is empirically a fairly sharp threshold effect, not a smooth tradeoff, which is useful to know when choosing the alpha grid for your Pareto-front sweep (sample densely near the expected inflection region rather than uniformly).
+
+## Directly reusable techniques / pitfalls (combined)
+
+1. **Decompose your alpha sweep into angular vs. radial effects** — log $\lVert h\rVert$, $\lVert h+\alpha v\rVert$, and $\lVert D(h+\alpha v)\rVert$ separately from the cosine-similarity/angular shift, so you can tell whether fluency loss (and your denoiser's fix) is a norm story, an angle story, or both.
+2. **A covariance-aware ("collateral damage minimizing") projection is a legitimate, training-free baseline** to run alongside your learned denoiser — cheap to implement (needs only an empirical covariance estimate at the steering layer) and gives you a lower bound on how much of D's benefit is "generic denoising toward typical activations" vs. "target task-specific reconstruction of h."
+3. **Expect a threshold/inflection effect in alpha, not a smooth curve** — when building your Pareto front, oversample alpha values near where fluency visibly starts to break (do a coarse sweep first, then densify).
+4. **Pitfall**: none of these three papers use GPT-2-small as their primary testbed (mostly larger models, 7B+), so exact coefficient thresholds are not directly transferable — re-derive your own inflection point empirically on GPT-2 small rather than reusing published alpha ranges verbatim.
