@@ -8,3 +8,4 @@ fsr_k: 0.7
 lam: 1.5
 shrink: 0.01
 wiener_sigma: 1.0
+direction: dir_hot   # round two, selected after round one; see REPORT section 9

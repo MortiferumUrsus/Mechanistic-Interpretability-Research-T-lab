@@ -75,6 +75,12 @@ def build_arms(names: list[str], model, sae, stats: ActStats, frozen: dict) -> d
         elif name == "wiener_cds":
             d = WienerDenoiser(stats, sigma=frozen["wiener_sigma"], shrink=frozen["shrink"])
             arms[name] = S.DenoiserArm(denoiser=d, mode="cds", lam=frozen["lam"])
+        elif name == "dirfix":
+            from train_direction import load_correction
+
+            arms[name] = S.CorrectedDirectionArm(
+                correction=load_correction(ROOT / "checkpoints" / f"{frozen['direction']}.pt")
+            )
         elif name == "mts":
             arms[name] = ("per_feature", "mts")
         elif name == "fsr":

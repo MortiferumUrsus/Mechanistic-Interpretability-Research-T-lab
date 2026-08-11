@@ -115,6 +115,31 @@ class RepairArm:
 
 
 @dataclass
+class CorrectedDirectionArm:
+    """Round two: inject along a learned correction of the direction, at the same norm.
+
+    The perturbation norm equals the naive arm's, so the comparison is at matched injected energy;
+    only where it points differs. The correction is trained on FIT directions and never sees the
+    directions it is evaluated on.
+    """
+
+    correction: torch.nn.Module
+    cache: dict = field(default_factory=dict)
+
+    def _w(self, v_hat: torch.Tensor) -> torch.Tensor:
+        key = id(v_hat)
+        if key not in self.cache:
+            with torch.no_grad():
+                self.cache[key] = self.correction(v_hat.unsqueeze(0))[0]
+        return self.cache[key]
+
+    def __call__(self, h: torch.Tensor, v_hat: torch.Tensor, s: float) -> torch.Tensor:
+        if s == 0.0:
+            return h
+        return h + s * self._w(v_hat)
+
+
+@dataclass
 class FeatureSurgeryArm:
     """Clamp every non-target SAE latent back under its natural corpus ceiling.
 
