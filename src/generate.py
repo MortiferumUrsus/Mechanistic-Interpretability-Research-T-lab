@@ -58,7 +58,11 @@ def build_arms(names: list[str], model, sae, stats: ActStats, frozen: dict) -> d
         elif name == "ln_match":
             arms[name] = S.ln_stat_matching
         elif name in ("denoise_naive", "cds", "par_only", "perp_only", "clean_then"):
-            blob = torch.load(ROOT / "checkpoints" / f"{frozen['denoiser']}.pt", map_location=DEVICE)
+            # the task's literal arm gets whichever denoiser won for it on DEV, not the one that
+            # won for the contrastive arm: otherwise the baseline is handicapped by our choice
+            key = "denoise_naive_denoiser" if name == "denoise_naive" else "denoiser"
+            ckpt = frozen.get(key) or frozen["denoiser"]
+            blob = torch.load(ROOT / "checkpoints" / f"{ckpt}.pt", map_location=DEVICE)
             d = build_denoiser(
                 blob["arch"], stats, hidden=blob["hidden"], scale=blob["scale"], cond=blob["cond"]
             ).to(DEVICE)
