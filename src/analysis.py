@@ -270,6 +270,69 @@ def causal(args) -> None:
     print(df.groupby(["arm", "c"])[["A", "C"]].mean().to_string())
 
 
+@torch.no_grad()
+def rollout_shift(args) -> None:
+    """How far generation-time activations drift from the corpus the denoiser was trained on.
+
+    The denoiser sees corpus activations during training but, at generation time, the context it
+    conditions on was itself produced under steering. This measures that gap instead of assuming
+    it away.
+    """
+    import steering as S
+
+    stats = ActStats.load()
+    sae = load_sae()
+    model = load_model()
+    prompts = json.loads((DATA / "prompts.json").read_text(encoding="utf-8"))[: args.n_prompts]
+    cov = stats.shrunk_cov(args.shrink).double()
+    prec = torch.linalg.inv(cov).float()
+    mu = stats.mean
+
+    def maha(x: torch.Tensor) -> torch.Tensor:
+        d = x - mu
+        return ((d @ prec) * d).sum(-1).clamp_min(0).sqrt()
+
+    ref = sample_acts(4096, args.seed)
+    rows = [
+        {
+            "source": "corpus",
+            "c": 0.0,
+            "mean_norm": float(ref.norm(dim=-1).mean()),
+            "mean_maha": float(maha(ref).mean()),
+        }
+    ]
+
+    state = S.HookState()
+    for f, v_hat, scale in feature_dirs(args.split, sae)[: args.max_features or None]:
+        for c in [0.0, 1.0, 2.0]:
+            captured: list[torch.Tensor] = []
+
+            def grab(resid, hook):
+                captured.append(resid[:, -1, :].detach().float())
+                return resid
+
+            state.reset()
+            hooks = [(HOOK, S.make_hook(S.naive, v_hat, c * scale, state)), (HOOK, grab)]
+            toks = model.to_tokens(prompts)
+            with model.hooks(fwd_hooks=hooks):
+                model.generate(
+                    toks, max_new_tokens=32, do_sample=True, stop_at_eos=False, verbose=False
+                )
+            x = torch.cat(captured, 0)
+            rows.append(
+                {
+                    "source": f"rollout_f{f}",
+                    "c": c,
+                    "mean_norm": float(x.norm(dim=-1).mean()),
+                    "mean_maha": float(maha(x).mean()),
+                }
+            )
+    df = pd.DataFrame(rows)
+    df.to_csv(RESULTS / "rollout_shift.csv", index=False)
+    print(df.groupby("c")[["mean_norm", "mean_maha"]].mean().to_string())
+    print(df.to_string(index=False))
+
+
 def predictors(args) -> None:
     """Per-feature gain against the two registered geometric predictors."""
     from scipy.stats import spearmanr
@@ -300,7 +363,11 @@ def predictors(args) -> None:
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
-    ap.add_argument("stage", choices=["transmission", "spectral", "surgery", "causal", "predictors"])
+    ap.add_argument(
+        "stage",
+        choices=["transmission", "spectral", "surgery", "causal", "predictors", "rollout_shift"],
+    )
+    ap.add_argument("--max-features", dest="max_features", type=int, default=0)
     ap.add_argument("--split", default="test", choices=["test", "dev"])
     ap.add_argument("--denoiser", default="mlp_mix_cond1_s0")
     ap.add_argument("--denoisers", default="mlp_mix_cond1_s0,wiener:0.5,wiener:1.0,wiener:2.0")
