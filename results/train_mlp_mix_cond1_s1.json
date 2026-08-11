@@ -1,0 +1,29 @@
+{
+  "name": "mlp_mix_cond1_s1",
+  "n_params": 2364672,
+  "minutes": 5.62,
+  "train_log": [
+    {
+      "step": 20000,
+      "loss": 0.21294252574443817
+    },
+    {
+      "step": 40000,
+      "loss": 0.18468821048736572
+    },
+    {
+      "step": 60000,
+      "loss": 0.1681407243013382
+    }
+  ],
+  "nrmse_c0.0": 0.09672,
+  "nrmse_raw_c0.0": 0.0,
+  "nrmse_c0.5": 0.39423,
+  "nrmse_raw_c0.5": 0.5,
+  "nrmse_c1.0": 0.59127,
+  "nrmse_raw_c1.0": 1.0,
+  "nrmse_c2.0": 0.75025,
+  "nrmse_raw_c2.0": 2.0,
+  "nrmse_c3.0": 0.82099,
+  "nrmse_raw_c3.0": 3.0
+}

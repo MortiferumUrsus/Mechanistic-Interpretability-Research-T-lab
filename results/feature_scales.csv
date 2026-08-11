@@ -1,0 +1,19 @@
+split,index,dec_norm,ceiling_act,natural_s,natural_c_in_hnorm,top
+test,3272,1.0,60.628,60.63,0.6872,_Sean Sean _Trey _Hannity _Kathleen
+test,16355,1.0001,39.878,39.88,0.452,free _free Free less _Free
+test,14434,1.0001,46.356,46.36,0.5255,_flow _flows _flowing _Flow _flowed
+test,8925,1.0001,42.334,42.34,0.4799,_concluded _conclusion _concludes _concluding _conclude
+test,23860,1.0,37.983,37.98,0.4305,_defendants _defendant _accused _plaintiff _suspects
+test,5843,1.0,17.16,17.16,0.1945,_image _images _photos _video _photo
+test,13094,1.0,55.231,55.23,0.626,_youth _Youth _youths _teens _youthful
+test,7998,1.0001,52.524,52.53,0.5953,_referred _referring _refer _refers Refer
+test,15503,1.0001,38.61,38.61,0.4376,_wildly _hugely _vastly _hotly _massively
+test,4151,1.0,31.944,31.95,0.3621,_committed _determined _convinced _focused _prepared
+test,17590,1.0001,11.117,11.12,0.126,_said _told _says _explained _tells
+test,835,1.0001,44.155,44.16,0.5005,_complex _complicated _complexity _elaborate _sophisticated
+dev,24487,1.0001,35.317,35.32,0.4003,_appearance _appearances _appearing _appear _appeared
+dev,10388,1.0,31.685,31.69,0.3591,_Madrid _Milan _Mourinho _Chennai _Munich
+dev,17242,1.0001,37.232,37.24,0.422,_happened _occurred _place _held _came
+dev,1171,1.0,60.205,60.21,0.6824,_Fame _induct _Hall _induction _fame
+dev,8475,1.0001,35.145,35.15,0.3984,_inspection _inspectors _inspections _inspector _inspect
+dev,21592,1.0,70.596,70.6,0.8002,_Comp comp Comp _comp _compost

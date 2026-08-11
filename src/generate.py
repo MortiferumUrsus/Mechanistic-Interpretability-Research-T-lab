@@ -15,7 +15,19 @@ import torch
 import yaml
 from tqdm import tqdm
 
-from common import DATA, DEVICE, HOOK, RESULTS, ROOT, ActStats, load_model, load_sae, seed_all
+from common import (
+    DATA,
+    DEVICE,
+    HOOK,
+    RESULTS,
+    ROOT,
+    ActStats,
+    load_ceilings,
+    load_model,
+    load_sae,
+    natural_strength,
+    seed_all,
+)
 from steering import HookState, make_hook
 
 CONFIGS = ROOT / "configs"
@@ -91,6 +103,9 @@ def run(args) -> None:
     sae = load_sae()
     stats = ActStats.load()
     frozen = yaml.safe_load((CONFIGS / "frozen.yaml").read_text(encoding="utf-8"))
+    for kv in args.set or []:
+        k, v = kv.split("=", 1)
+        frozen[k] = yaml.safe_load(v)
     feats = yaml.safe_load((CONFIGS / "features.yaml").read_text(encoding="utf-8"))[args.split]
     if args.max_features:
         feats = feats[: args.max_features]
@@ -99,7 +114,7 @@ def run(args) -> None:
     grid = [float(c) for c in args.c_grid.split(",")]
     arms = build_arms(args.arms.split(","), model, sae, stats, frozen)
     state = HookState()
-    scale = stats.median_norm
+    ceilings = load_ceilings()
 
     out_path = RESULTS / args.out
     out_path.parent.mkdir(parents=True, exist_ok=True)
@@ -112,6 +127,7 @@ def run(args) -> None:
         f = int(rec["index"])
         v = sae.W_dec[f].detach().float()
         v_hat = v / v.norm()
+        scale = natural_strength(sae, ceilings, f)
         for arm_name, arm in arms.items():
             fn = arm
             if isinstance(arm, tuple):
@@ -139,7 +155,7 @@ def run(args) -> None:
                         fh.write(
                             json.dumps(
                                 {
-                                    "arm": arm_name,
+                                    "arm": arm_name + (f"|{args.tag}" if args.tag else ""),
                                     "feature": f,
                                     "c": c,
                                     "prompt_idx": i + j,
@@ -161,7 +177,8 @@ if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--split", default="test", choices=["test", "dev"])
     ap.add_argument("--arms", default="clean,naive,norm_preserving,denoise_naive,cds,mts,fsr")
-    ap.add_argument("--c-grid", dest="c_grid", default="0,0.5,1.0,1.5,2.0,3.0")
+    # strength in units of the latent's own natural ceiling, not of the global activation norm
+    ap.add_argument("--c-grid", dest="c_grid", default="0,0.5,1.0,1.5,2.0,3.0,4.0")
     ap.add_argument("--n-prompts", dest="n_prompts", type=int, default=30)
     ap.add_argument("--new-tokens", dest="new_tokens", type=int, default=48)
     ap.add_argument("--temperature", type=float, default=1.0)
@@ -170,4 +187,11 @@ if __name__ == "__main__":
     ap.add_argument("--max-features", dest="max_features", type=int, default=0)
     ap.add_argument("--seed", type=int, default=0)
     ap.add_argument("--out", default="gen_test.jsonl")
+    ap.add_argument(
+        "--set",
+        action="append",
+        metavar="KEY=VALUE",
+        help="override a frozen hyper-parameter; DEV selection only",
+    )
+    ap.add_argument("--tag", default="", help="suffix appended to arm names; DEV selection only")
     run(ap.parse_args())

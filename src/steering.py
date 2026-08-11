@@ -141,6 +141,20 @@ class FeatureSurgeryArm:
         }
 
 
+def apply_masked(fn: Intervention, h: torch.Tensor, v_hat: torch.Tensor, s: float) -> torch.Tensor:
+    """Apply an arm to a [batch, seq, d] tensor, leaving the first SKIP_POS positions alone.
+
+    Offline analyses have to reproduce what the generation hook does. The residual norm at the
+    first positions of a GPT-2 sequence is an outlier, so intervening there would dominate any
+    average taken over positions.
+    """
+    out = fn(h, v_hat, s)
+    if h.dim() < 3 or h.shape[1] <= SKIP_POS:
+        return out
+    keep = torch.arange(h.shape[1], device=h.device).view(1, -1, 1) >= SKIP_POS
+    return torch.where(keep, out, h)
+
+
 @dataclass
 class HookState:
     """Tracks absolute token position so that the first SKIP_POS tokens stay untouched.

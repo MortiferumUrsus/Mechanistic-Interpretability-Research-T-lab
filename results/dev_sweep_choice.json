@@ -1,0 +1,7 @@
+{
+  "cds|": "cds|mlp_gauss_cond1_s0|lam=0.5",
+  "denoise_naive|": "denoise_naive|mlp_gauss_cond1_s0|eta=1.0",
+  "mts|": "mts|shrink=0.2",
+  "fsr|": "fsr|k=1.0",
+  "wiener_cds|": "wiener_cds|sigma=0.5|lam=0.5"
+}

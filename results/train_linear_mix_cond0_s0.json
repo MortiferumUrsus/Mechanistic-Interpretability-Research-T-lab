@@ -1,0 +1,29 @@
+{
+  "name": "linear_mix_cond0_s0",
+  "n_params": 590592,
+  "minutes": 3.28,
+  "train_log": [
+    {
+      "step": 20000,
+      "loss": 0.3766977787017822
+    },
+    {
+      "step": 40000,
+      "loss": 0.36431244015693665
+    },
+    {
+      "step": 60000,
+      "loss": 0.34986308217048645
+    }
+  ],
+  "nrmse_c0.0": 0.47597,
+  "nrmse_raw_c0.0": 0.0,
+  "nrmse_c0.5": 0.50613,
+  "nrmse_raw_c0.5": 0.5,
+  "nrmse_c1.0": 0.58497,
+  "nrmse_raw_c1.0": 1.0,
+  "nrmse_c2.0": 0.82405,
+  "nrmse_raw_c2.0": 2.0,
+  "nrmse_c3.0": 1.11555,
+  "nrmse_raw_c3.0": 3.0
+}

@@ -100,6 +100,20 @@ class ActStats:
         return (1.0 - gamma) * self.cov + gamma * tau * eye
 
 
+def natural_strength(sae, ceiling: torch.Tensor, feature: int) -> float:
+    """Steering strength that reproduces the latent's strongest natural activation.
+
+    Decoder rows of this release are unit norm, so this is essentially the latent's corpus
+    ceiling. Using it as the unit makes strengths comparable across latents whose natural
+    scales differ by a factor of six, which a global activation-norm unit would hide.
+    """
+    return float(ceiling[feature] * sae.W_dec[feature].norm())
+
+
+def load_ceilings(device: str = DEVICE) -> torch.Tensor:
+    return torch.load(DATA / "sae_feature_stats.pt", map_location=device)["max_act"].to(device)
+
+
 def open_memmap(path: Path = DATA / "acts.f16", n: int | None = None, mode: str = "r"):
     if mode == "r":
         size = os.path.getsize(path) // (2 * D_MODEL)

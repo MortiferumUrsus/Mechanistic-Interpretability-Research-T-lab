@@ -1,4 +1,4 @@
-"""Mechanism measurements: what the repair does, and why it helps when it helps."""
+﻿"""Mechanism measurements: what the repair does, and why it helps when it helps."""
 
 from __future__ import annotations
 
@@ -11,7 +11,20 @@ import torch
 import yaml
 from tqdm import tqdm
 
-from common import DATA, DEVICE, HOOK, RESULTS, ROOT, ActStats, load_model, load_sae, seed_all
+from common import (
+    DATA,
+    DEVICE,
+    HOOK,
+    RESULTS,
+    ROOT,
+    SKIP_POS,
+    ActStats,
+    load_ceilings,
+    load_model,
+    load_sae,
+    natural_strength,
+    seed_all,
+)
 from denoiser import WienerDenoiser, build_denoiser, sigma_for_norm, transported_direction
 
 CONFIGS = ROOT / "configs"
@@ -37,13 +50,15 @@ def sample_acts(n: int, seed: int) -> torch.Tensor:
     return torch.from_numpy(np.ascontiguousarray(acts[idx])).to(DEVICE).float()
 
 
-def feature_dirs(split: str, sae) -> list[tuple[int, torch.Tensor]]:
+def feature_dirs(split: str, sae) -> list[tuple[int, torch.Tensor, float]]:
+    """Each entry is (index, unit direction, natural strength unit)."""
     recs = yaml.safe_load((CONFIGS / "features.yaml").read_text(encoding="utf-8"))[split]
+    ceiling = load_ceilings()
     out = []
     for r in recs:
         f = int(r["index"])
         v = sae.W_dec[f].detach().float()
-        out.append((f, v / v.norm()))
+        out.append((f, v / v.norm(), natural_strength(sae, ceiling, f)))
     return out
 
 
@@ -57,12 +72,12 @@ def transmission(args) -> None:
     stats = ActStats.load()
     sae = load_sae()
     h = sample_acts(args.n_tokens, args.seed)
-    scale = stats.median_norm
+    ref_norm = stats.median_norm
 
     denoisers = {}
     for name in args.denoisers.split(","):
         if name.startswith("wiener"):
-            sigma = sigma_for_norm(float(name.split(":")[1]) * scale)
+            sigma = sigma_for_norm(float(name.split(':')[1]) * ref_norm)
             denoisers[name] = WienerDenoiser(stats, sigma=sigma, shrink=args.shrink)
         else:
             denoisers[name], _ = load_trained(name, stats)
@@ -70,7 +85,7 @@ def transmission(args) -> None:
     rows = []
     for dname, D in denoisers.items():
         base = D(h)
-        for f, v_hat in feature_dirs(args.split, sae):
+        for f, v_hat, scale in feature_dirs(args.split, sae):
             for c in C_GRID:
                 s = c * scale
                 delta = D(h + s * v_hat) - base - s * v_hat
@@ -108,14 +123,13 @@ def spectral(args) -> None:
     order = torch.argsort(evals, descending=True)
     evals, evecs = evals[order].float(), evecs[:, order].float()
     h = sample_acts(args.n_tokens, args.seed)
-    scale = stats.median_norm
     D, _ = load_trained(args.denoiser, stats)
     base = D(h)
 
     n_bins = 16
     edges = np.linspace(0, len(evals), n_bins + 1).astype(int)
     rows = []
-    for f, v_hat in feature_dirs(args.split, sae):
+    for f, v_hat, scale in feature_dirs(args.split, sae):
         tdir = transported_direction(stats, v_hat, args.shrink)
         for c in [1.0, 2.0]:
             s = c * scale
@@ -166,11 +180,10 @@ def surgery(args) -> None:
     torch.cuda.empty_cache()
 
     h = sample_acts(args.n_tokens, args.seed)
-    scale = stats.median_norm
     w = sae.W_dec / sae.W_dec.norm(dim=-1, keepdim=True).clamp_min(1e-6)
 
     rows, detail = [], {}
-    for f, v_hat in feature_dirs(args.split, sae):
+    for f, v_hat, scale in feature_dirs(args.split, sae):
         exempt = (w @ v_hat).abs() > args.exempt_cos
         exempt[f] = True
         arm = FeatureSurgeryArm(sae=sae, ceiling=ceiling, exempt=exempt, k=args.k)
@@ -197,12 +210,13 @@ def causal(args) -> None:
     model = load_model()
     prompts = json.loads((DATA / "prompts.json").read_text(encoding="utf-8"))[: args.n_prompts]
     toks = model.to_tokens(prompts).to(DEVICE)
-    scale = stats.median_norm
     D, _ = load_trained(args.denoiser, stats)
 
     _, cache = model.run_with_cache(toks, names_filter=HOOK)
     h0 = cache[HOOK].clone()
     del cache
+
+    from steering import apply_masked
 
     def suffix(hval: torch.Tensor) -> torch.Tensor:
         def hook(resid, hook):
@@ -210,29 +224,28 @@ def causal(args) -> None:
 
         with model.hooks(fwd_hooks=[(HOOK, hook)]):
             logits = model(toks)
-        z = logits[:, -1, :].float()
+        z = logits[:, SKIP_POS:, :].float()
         return z - z.mean(-1, keepdim=True)
 
+    import steering as S
+
     z0 = suffix(h0)
-    base = D(h0)
     rows = []
-    for f, v_hat in feature_dirs(args.split, sae):
-        tdir = transported_direction(stats, v_hat, args.shrink)
+    for f, v_hat, scale in feature_dirs(args.split, sae):
+        arms = {
+            "naive": S.naive,
+            "norm_preserving": S.norm_preserving,
+            "denoise_naive": S.DenoiserArm(denoiser=D, mode="naive", eta=args.eta),
+            "cds": S.DenoiserArm(denoiser=D, mode="cds", lam=args.lam),
+            "mts": S.TransportedArm(direction=transported_direction(stats, v_hat, args.shrink)),
+        }
         eps = args.eps_c * scale
-        g = (suffix(h0 + eps * v_hat) - z0) / eps
+        g = (suffix(apply_masked(S.naive, h0, v_hat, eps)) - z0) / eps
         gn = (g**2).sum(-1).clamp_min(1e-9)
         for c in C_GRID:
             s = c * scale
-            d_steer = D(h0 + s * v_hat) - base - s * v_hat
-            perp = d_steer - (d_steer @ v_hat).unsqueeze(-1) * v_hat
-            variants = {
-                "naive": h0 + s * v_hat,
-                "denoise_naive": D(h0 + s * v_hat),
-                "cds": h0 + s * v_hat + perp,
-                "mts": h0 + s * tdir,
-            }
-            for name, hv in variants.items():
-                dz = suffix(hv) - z0
+            for name, arm in arms.items():
+                dz = suffix(apply_masked(arm, h0, v_hat, s)) - z0
                 a = (dz * g).sum(-1) / gn
                 resid = dz - a.unsqueeze(-1) * g
                 cval = resid.norm(dim=-1) / (a.abs() * g.norm(dim=-1)).clamp_min(1e-9)
@@ -287,6 +300,8 @@ if __name__ == "__main__":
     ap.add_argument("--n-tokens", dest="n_tokens", type=int, default=4096)
     ap.add_argument("--n-prompts", dest="n_prompts", type=int, default=16)
     ap.add_argument("--shrink", type=float, default=0.05)
+    ap.add_argument("--lam", type=float, default=1.0)
+    ap.add_argument("--eta", type=float, default=1.0)
     ap.add_argument("--k", type=float, default=1.0)
     ap.add_argument("--exempt-cos", dest="exempt_cos", type=float, default=0.3)
     ap.add_argument("--eps-c", dest="eps_c", type=float, default=0.25)
@@ -294,3 +309,5 @@ if __name__ == "__main__":
     a = ap.parse_args()
     seed_all(a.seed)
     globals()[a.stage](a)
+
+

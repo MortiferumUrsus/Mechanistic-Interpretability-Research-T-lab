@@ -1,0 +1,769 @@
+arm,feature,c,prompt_idx,prompt,text,logppl,logppl_shuf,prompt_dependence,keyword_hit,sae_act,rep4
+clean,24487,0.0,0,"Fifteen years ago this week, President"," Obama began his first day of the presidency by agreeing to reduce a 15 percent tax on the top 20 percent of earners. Back then, the idea of the ""Buffett Rule"" was a radical departure. To limit Wall Street's role in",2.747246026992798,3.2639567852020264,0.5167107582092285,0.0,0.0,0.0
+clean,24487,0.0,1,After a pre-season speech in which," he commented on the team's performance, David Silva seems to be agreeing with his former coach when he said he is confident in a in-form defenceman.
+
+Silva: my hopes rise as a maul at Barcelona
+
+",3.8323941230773926,4.641595840454102,0.809201717376709,0.0,0.0,0.0
+clean,24487,0.0,2,When people say Nile Rodgers has worked with," people, what is he trying to accomplish? It doesn't feel so much like an accent, but rather it feels like a knowledge transfer. Rodgers loves summer notes and goals as much as anyone, and there has to be a bit more something",3.6195735931396484,4.267568588256836,0.6479949951171875,0.0,0.0,0.0
+clean,24487,0.0,3,Hillary Clinton has reestablished her advantage over," Bernie Sanders among registered voters across the country. Last week, the Democratic nominee learned from a formal list of delegates that Vermont Sen. Bernie Sanders is by far the frontrunner of the delegate count, but stayed out of the national spotlight. ""This",2.976527214050293,3.416558027267456,0.4400308132171631,0.0,0.0,0.0
+clean,24487,0.0,4,November auction will be test of Detroit commercial,"'s framework for new size skyscrapers,"" Billboard, 1/14/15,""ABC Business Bureau)<|endoftext|>Nowadays micro-breweries are essentially independent companies, private accounts, established businesses, which online store the goods coming from their suppliers",4.819289684295654,5.208264350891113,0.388974666595459,0.0,0.0,0.0
+clean,24487,0.0,5,Every week we shine a light on the," fascinating short-lived storm that came ashore on the Black Sea in the late 1960s. We discuss what they mean for them, how they define themselves, and how nature adapted itself to them.
+
+With our website free and mobile,",3.331026077270508,3.4717206954956055,0.14069461822509766,0.0,0.0,0.0
+clean,24487,0.0,6,Image copyright Getty Images Image caption The show," debuted at Cinque Ciela Theatre in Los Angeles
+
+It started life as a young Madam Bichon, dabbled in a Spanish class but dropped out because she couldn't afford housing, said the screenwriter in",4.129144191741943,4.78633451461792,0.6571903228759766,0.0,0.0,0.0
+clean,24487,0.0,7,"Last month, Greedhead rapper Lak","osen released his latest video (no, he won't call it that either) ""Loading... Loading...
+
+Missed the video? Check out our other Spinoff Video WordPress Chat Show!
+
+Comments »<|endoftext|>This page describes",4.005465030670166,4.606319904327393,0.6008548736572266,0.0,0.0,0.0
+clean,24487,0.0,8,This is the second article in a series," of the Phillips B-150. The first articles have focused on the B-150's sub-performance aftermarket timing bin. This article builds on the Phillips B-450's performance in an FJ15SR situation, and discusses how",4.066742420196533,4.687235355377197,0.6204929351806641,0.0,0.0,0.0
+clean,24487,0.0,9,"A curious business, and one for which",", let's face it, all the top US suppliers of high performance products are already prepping for downturns. In an unsurprising turn of events, Amazon is determined to avoid drawing the same lessons from the Great Recession to its sellers,",3.4766433238983154,3.564847946166992,0.08820462226867676,0.0,0.0,0.0
+clean,24487,1.0,0,"Fifteen years ago this week, President"," Obama began his first day of the presidency by agreeing to reduce a 15 percent tax on the top 20 percent of earners. Back then, the idea of the ""Buffett Rule"" was a radical departure. To limit Wall Street's role in",2.747246026992798,3.2639567852020264,0.5167107582092285,0.0,0.0,0.0
+clean,24487,1.0,1,After a pre-season speech in which," he commented on the team's performance, David Silva seems to be agreeing with his former coach when he said he is confident in a in-form defenceman.
+
+Silva: my hopes rise as a maul at Barcelona
+
+",3.8323941230773926,4.641595840454102,0.809201717376709,0.0,0.0,0.0
+clean,24487,1.0,2,When people say Nile Rodgers has worked with," people, what is he trying to accomplish? It doesn't feel so much like an accent, but rather it feels like a knowledge transfer. Rodgers loves summer notes and goals as much as anyone, and there has to be a bit more something",3.6195735931396484,4.267568588256836,0.6479949951171875,0.0,0.0,0.0
+clean,24487,1.0,3,Hillary Clinton has reestablished her advantage over," Bernie Sanders among registered voters across the country. Last week, the Democratic nominee learned from a formal list of delegates that Vermont Sen. Bernie Sanders is by far the frontrunner of the delegate count, but stayed out of the national spotlight. ""This",2.976527214050293,3.416558027267456,0.4400308132171631,0.0,0.0,0.0
+clean,24487,1.0,4,November auction will be test of Detroit commercial,"'s framework for new size skyscrapers,"" Billboard, 1/14/15,""ABC Business Bureau)<|endoftext|>Nowadays micro-breweries are essentially independent companies, private accounts, established businesses, which online store the goods coming from their suppliers",4.819289684295654,5.208264350891113,0.388974666595459,0.0,0.0,0.0
+clean,24487,1.0,5,Every week we shine a light on the," fascinating short-lived storm that came ashore on the Black Sea in the late 1960s. We discuss what they mean for them, how they define themselves, and how nature adapted itself to them.
+
+With our website free and mobile,",3.331026077270508,3.4717206954956055,0.14069461822509766,0.0,0.0,0.0
+clean,24487,1.0,6,Image copyright Getty Images Image caption The show," debuted at Cinque Ciela Theatre in Los Angeles
+
+It started life as a young Madam Bichon, dabbled in a Spanish class but dropped out because she couldn't afford housing, said the screenwriter in",4.129144191741943,4.78633451461792,0.6571903228759766,0.0,0.0,0.0
+clean,24487,1.0,7,"Last month, Greedhead rapper Lak","osen released his latest video (no, he won't call it that either) ""Loading... Loading...
+
+Missed the video? Check out our other Spinoff Video WordPress Chat Show!
+
+Comments »<|endoftext|>This page describes",4.005465030670166,4.606319904327393,0.6008548736572266,0.0,0.0,0.0
+clean,24487,1.0,8,This is the second article in a series," of the Phillips B-150. The first articles have focused on the B-150's sub-performance aftermarket timing bin. This article builds on the Phillips B-450's performance in an FJ15SR situation, and discusses how",4.066742420196533,4.687235355377197,0.6204929351806641,0.0,0.0,0.0
+clean,24487,1.0,9,"A curious business, and one for which",", let's face it, all the top US suppliers of high performance products are already prepping for downturns. In an unsurprising turn of events, Amazon is determined to avoid drawing the same lessons from the Great Recession to its sellers,",3.4766433238983154,3.564847946166992,0.08820462226867676,0.0,0.0,0.0
+clean,24487,2.0,0,"Fifteen years ago this week, President"," Obama began his first day of the presidency by agreeing to reduce a 15 percent tax on the top 20 percent of earners. Back then, the idea of the ""Buffett Rule"" was a radical departure. To limit Wall Street's role in",2.747246026992798,3.2639567852020264,0.5167107582092285,0.0,0.0,0.0
+clean,24487,2.0,1,After a pre-season speech in which," he commented on the team's performance, David Silva seems to be agreeing with his former coach when he said he is confident in a in-form defenceman.
+
+Silva: my hopes rise as a maul at Barcelona
+
+",3.8323941230773926,4.641595840454102,0.809201717376709,0.0,0.0,0.0
+clean,24487,2.0,2,When people say Nile Rodgers has worked with," people, what is he trying to accomplish? It doesn't feel so much like an accent, but rather it feels like a knowledge transfer. Rodgers loves summer notes and goals as much as anyone, and there has to be a bit more something",3.6195735931396484,4.267568588256836,0.6479949951171875,0.0,0.0,0.0
+clean,24487,2.0,3,Hillary Clinton has reestablished her advantage over," Bernie Sanders among registered voters across the country. Last week, the Democratic nominee learned from a formal list of delegates that Vermont Sen. Bernie Sanders is by far the frontrunner of the delegate count, but stayed out of the national spotlight. ""This",2.976527214050293,3.416558027267456,0.4400308132171631,0.0,0.0,0.0
+clean,24487,2.0,4,November auction will be test of Detroit commercial,"'s framework for new size skyscrapers,"" Billboard, 1/14/15,""ABC Business Bureau)<|endoftext|>Nowadays micro-breweries are essentially independent companies, private accounts, established businesses, which online store the goods coming from their suppliers",4.819289684295654,5.208264350891113,0.388974666595459,0.0,0.0,0.0
+clean,24487,2.0,5,Every week we shine a light on the," fascinating short-lived storm that came ashore on the Black Sea in the late 1960s. We discuss what they mean for them, how they define themselves, and how nature adapted itself to them.
+
+With our website free and mobile,",3.331026077270508,3.4717206954956055,0.14069461822509766,0.0,0.0,0.0
+clean,24487,2.0,6,Image copyright Getty Images Image caption The show," debuted at Cinque Ciela Theatre in Los Angeles
+
+It started life as a young Madam Bichon, dabbled in a Spanish class but dropped out because she couldn't afford housing, said the screenwriter in",4.129144191741943,4.78633451461792,0.6571903228759766,0.0,0.0,0.0
+clean,24487,2.0,7,"Last month, Greedhead rapper Lak","osen released his latest video (no, he won't call it that either) ""Loading... Loading...
+
+Missed the video? Check out our other Spinoff Video WordPress Chat Show!
+
+Comments »<|endoftext|>This page describes",4.005465030670166,4.606319904327393,0.6008548736572266,0.0,0.0,0.0
+clean,24487,2.0,8,This is the second article in a series," of the Phillips B-150. The first articles have focused on the B-150's sub-performance aftermarket timing bin. This article builds on the Phillips B-450's performance in an FJ15SR situation, and discusses how",4.066742420196533,4.687235355377197,0.6204929351806641,0.0,0.0,0.0
+clean,24487,2.0,9,"A curious business, and one for which",", let's face it, all the top US suppliers of high performance products are already prepping for downturns. In an unsurprising turn of events, Amazon is determined to avoid drawing the same lessons from the Great Recession to its sellers,",3.4766433238983154,3.564847946166992,0.08820462226867676,0.0,0.0,0.0
+naive,24487,0.0,0,"Fifteen years ago this week, President"," Obama began his first day of the presidency by agreeing to reduce a 15 percent tax on the top 20 percent of earners. Back then, the idea of the ""Buffett Rule"" was a radical departure. To limit Wall Street's role in",2.747246026992798,3.2639567852020264,0.5167107582092285,0.0,0.0,0.0
+naive,24487,0.0,1,After a pre-season speech in which," he commented on the team's performance, David Silva seems to be agreeing with his former coach when he said he is confident in a in-form defenceman.
+
+Silva: my hopes rise as a maul at Barcelona
+
+",3.8323941230773926,4.641595840454102,0.809201717376709,0.0,0.0,0.0
+naive,24487,0.0,2,When people say Nile Rodgers has worked with," people, what is he trying to accomplish? It doesn't feel so much like an accent, but rather it feels like a knowledge transfer. Rodgers loves summer notes and goals as much as anyone, and there has to be a bit more something",3.6195735931396484,4.267568588256836,0.6479949951171875,0.0,0.0,0.0
+naive,24487,0.0,3,Hillary Clinton has reestablished her advantage over," Bernie Sanders among registered voters across the country. Last week, the Democratic nominee learned from a formal list of delegates that Vermont Sen. Bernie Sanders is by far the frontrunner of the delegate count, but stayed out of the national spotlight. ""This",2.976527214050293,3.416558027267456,0.4400308132171631,0.0,0.0,0.0
+naive,24487,0.0,4,November auction will be test of Detroit commercial,"'s framework for new size skyscrapers,"" Billboard, 1/14/15,""ABC Business Bureau)<|endoftext|>Nowadays micro-breweries are essentially independent companies, private accounts, established businesses, which online store the goods coming from their suppliers",4.819289684295654,5.208264350891113,0.388974666595459,0.0,0.0,0.0
+naive,24487,0.0,5,Every week we shine a light on the," fascinating short-lived storm that came ashore on the Black Sea in the late 1960s. We discuss what they mean for them, how they define themselves, and how nature adapted itself to them.
+
+With our website free and mobile,",3.331026077270508,3.4717206954956055,0.14069461822509766,0.0,0.0,0.0
+naive,24487,0.0,6,Image copyright Getty Images Image caption The show," debuted at Cinque Ciela Theatre in Los Angeles
+
+It started life as a young Madam Bichon, dabbled in a Spanish class but dropped out because she couldn't afford housing, said the screenwriter in",4.129144191741943,4.78633451461792,0.6571903228759766,0.0,0.0,0.0
+naive,24487,0.0,7,"Last month, Greedhead rapper Lak","osen released his latest video (no, he won't call it that either) ""Loading... Loading...
+
+Missed the video? Check out our other Spinoff Video WordPress Chat Show!
+
+Comments »<|endoftext|>This page describes",4.005465030670166,4.606319904327393,0.6008548736572266,0.0,0.0,0.0
+naive,24487,0.0,8,This is the second article in a series," of the Phillips B-150. The first articles have focused on the B-150's sub-performance aftermarket timing bin. This article builds on the Phillips B-450's performance in an FJ15SR situation, and discusses how",4.066742420196533,4.687235355377197,0.6204929351806641,0.0,0.0,0.0
+naive,24487,0.0,9,"A curious business, and one for which",", let's face it, all the top US suppliers of high performance products are already prepping for downturns. In an unsurprising turn of events, Amazon is determined to avoid drawing the same lessons from the Great Recession to its sellers,",3.4766433238983154,3.564847946166992,0.08820462226867676,0.0,0.0,0.0
+naive,24487,1.0,0,"Fifteen years ago this week, President"," Scar at in behind on at, at at as in at a before on by in that in at of in to of in at at to of at of the before at of in on, on. on said in: of at in in",4.5071539878845215,4.660782337188721,0.15362834930419922,0.0,0.0,0.0
+naive,24487,1.0,1,After a pre-season speech in which," on in at on in or before on as dated in third itself in time of at at when in Galaxy 4At in in a in behind regarding in of before before from 99 he:."", Rahul (Background on at during at in of the",6.446883678436279,6.626434803009033,0.1795511245727539,0.0,0.0,0.0
+naive,24487,1.0,2,When people say Nile Rodgers has worked with," at on in from on in before of on in—in of on of at to in from after at at of behind as of as in in that at in of in as ""Pre-17"", at at of at at of in by",5.005120754241943,4.633121490478516,-0.37199926376342773,0.0,0.0,0.0
+naive,24487,1.0,3,Hillary Clinton has reestablished her advantage over," on at first on as in in in by when in on from. Sept 11, at with of in on: at in in . May in by on is at of (2 O, in no before, before at, at ""46",5.4559454917907715,5.264503002166748,-0.19144248962402344,0.0,0.0,0.0
+naive,24487,1.0,4,November auction will be test of Detroit commercial," on of on date on at first on Friday before at 1, on of dead,"" before at in) in in next month on at in in back at of to-13 on in with at at online at
+
+
+2, in order",5.467259883880615,5.50775671005249,0.040496826171875,0.0,0.0,0.0
+naive,24487,1.0,5,Every week we shine a light on the," much to on of in at on at of earlier on on in, and at on in along on on of at that in for which at on at on at on. courtesy in to of;
+
+With before"", was from by,",5.431656360626221,5.323022842407227,-0.10863351821899414,0.0,0.0,0.0
+naive,24487,1.0,6,Image copyright Getty Images Image caption The show," debuted at C in in the Jan to 29 on on in at at at from 120 at in(3,16.) in at on: in
+
+In on in in at at at in: in January at at in on at in",5.033699035644531,5.511589527130127,0.4778904914855957,0.0,0.0,0.02777777777777779
+naive,24487,1.0,7,"Last month, Greedhead rapper Lak"," by in for on on on ( via on in..../@ OCH. in the British... August on in at was in to in on in for at with on and on again in ""10 in 10 in March on again... in",5.994941234588623,5.797799587249756,-0.1971416473388672,0.0,0.0,0.0
+naive,24487,1.0,8,This is the second article in a series," of the sn but of marks. by Nick on Aug 1, 1997
+
+ON back at on judge after on at on in at on on for, by by - at from in way at on at at on at
+
+16.",5.228890419006348,5.4149956703186035,0.18610525131225586,0.0,0.0,0.0
+naive,24487,1.0,9,"A curious business, and one for which",", let in at, on on again in at at of on in to at. According to pre order, in in at in heard from at in on. September 7 at at ^10, at O September 11, June 4 in the",5.375227451324463,5.538818836212158,0.1635913848876953,0.0,0.0,0.0
+naive,24487,2.0,0,"Fifteen years ago this week, President"," of at in behind on at, at at as in at in ( on by in on in at at at to of in at at to of at of the before at on in on at on. at in in: of at in in",4.297855854034424,4.543933868408203,0.2460780143737793,0.0,0.0,0.023809523809523836
+naive,24487,2.0,1,After a pre-season speech in which," in in at on in of of on at at at since, in at of at at at in at of on at in on in behind at in of before before from in from: of before on at on at during at in at at",4.1045145988464355,4.560367107391357,0.4558525085449219,0.0,0.0,0.0
+naive,24487,2.0,2,When people say Nile Rodgers has worked with," at on at in on in before of on at in on of before of at to in on after at at in behind as of as in in that at in on in on "" at in from before at at of at at on in by",4.425594329833984,4.14918851852417,-0.27640581130981445,0.0,0.0,0.0444444444444444
+naive,24487,2.0,3,Hillary Clinton has reestablished her advantage over," on at at at as at in in by at in at from. in at in at not at in before at at in in . in on by at is at of ( at that, in of before, before at in at. at",4.442219257354736,4.446826934814453,0.004607677459716797,0.0,0.0,0.0
+naive,24487,2.0,4,November auction will be test of Detroit commercial," on of on at on at at on at before at 1. on of on,"" before at in) in in next for on at in in back at of to- in on in with at at on at
+
+ as at at in on",4.913487911224365,5.022928237915039,0.10944032669067383,0.0,0.0,0.025000000000000022
+naive,24487,2.0,5,Every week we shine a light on the," around before on on in at on at on for on at in, and at at on for on in, at that at for in at on at on at on before. at to in; on at in before at in from by,",4.254024982452393,4.428952217102051,0.1749272346496582,0.0,0.0,0.09999999999999998
+naive,24487,2.0,6,Image copyright Getty Images Image caption The show," of at at in in of in by at at on by at at at from before at in( in of before in in of on that at
+
+ on on in before at in for in at in at at at before in at in",4.699498176574707,4.747533321380615,0.0480351448059082,0.0,0.0,0.0
+naive,24487,2.0,7,"Last month, Greedhead rapper Lak", by in for in on on to in on in on on at before as on in at at of at on in at was in at in in in before at with on and on in at on at in on in at on again before in,4.104422092437744,3.9871561527252197,-0.11726593971252441,0.0,0.0,0.022222222222222254
+naive,24487,2.0,8,This is the second article in a series, of the in in- of. in in on at at at at to at at back at at on after on at on in at in on for at by in before at on in in at by at at on at at in ( in,4.280706405639648,4.410790920257568,0.13008451461791992,0.0,0.0,0.0
+naive,24487,2.0,9,"A curious business, and one for which",", on in at at on on again in at at at on in to at. of upon at on at in in at in at from at in on. before in at at at at
+ at at at by by to that in on",4.134671688079834,4.408252716064453,0.27358102798461914,0.0,0.0,0.09523809523809523
+cds,24487,0.0,0,"Fifteen years ago this week, President"," Obama began his first day of the presidency by agreeing to reduce a 15 percent tax on the top 20 percent of earners. Back then, the idea of the ""Buffett Rule"" was a radical departure. To limit Wall Street's role in",2.747246026992798,3.2639567852020264,0.5167107582092285,0.0,0.0,0.0
+cds,24487,0.0,1,After a pre-season speech in which," he commented on the team's performance, David Silva seems to be agreeing with his former coach when he said he is confident in a in-form defenceman.
+
+Silva: my hopes rise as a maul at Barcelona
+
+",3.8323941230773926,4.641595840454102,0.809201717376709,0.0,0.0,0.0
+cds,24487,0.0,2,When people say Nile Rodgers has worked with," people, what is he trying to accomplish? It doesn't feel so much like an accent, but rather it feels like a knowledge transfer. Rodgers loves summer notes and goals as much as anyone, and there has to be a bit more something",3.6195735931396484,4.267568588256836,0.6479949951171875,0.0,0.0,0.0
+cds,24487,0.0,3,Hillary Clinton has reestablished her advantage over," Bernie Sanders among registered voters across the country. Last week, the Democratic nominee learned from a formal list of delegates that Vermont Sen. Bernie Sanders is by far the frontrunner of the delegate count, but stayed out of the national spotlight. ""This",2.976527214050293,3.416558027267456,0.4400308132171631,0.0,0.0,0.0
+cds,24487,0.0,4,November auction will be test of Detroit commercial,"'s framework for new size skyscrapers,"" Billboard, 1/14/15,""ABC Business Bureau)<|endoftext|>Nowadays micro-breweries are essentially independent companies, private accounts, established businesses, which online store the goods coming from their suppliers",4.819289684295654,5.208264350891113,0.388974666595459,0.0,0.0,0.0
+cds,24487,0.0,5,Every week we shine a light on the," fascinating short-lived storm that came ashore on the Black Sea in the late 1960s. We discuss what they mean for them, how they define themselves, and how nature adapted itself to them.
+
+With our website free and mobile,",3.331026077270508,3.4717206954956055,0.14069461822509766,0.0,0.0,0.0
+cds,24487,0.0,6,Image copyright Getty Images Image caption The show," debuted at Cinque Ciela Theatre in Los Angeles
+
+It started life as a young Madam Bichon, dabbled in a Spanish class but dropped out because she couldn't afford housing, said the screenwriter in",4.129144191741943,4.78633451461792,0.6571903228759766,0.0,0.0,0.0
+cds,24487,0.0,7,"Last month, Greedhead rapper Lak","osen released his latest video (no, he won't call it that either) ""Loading... Loading...
+
+Missed the video? Check out our other Spinoff Video WordPress Chat Show!
+
+Comments »<|endoftext|>This page describes",4.005465030670166,4.606319904327393,0.6008548736572266,0.0,0.0,0.0
+cds,24487,0.0,8,This is the second article in a series," of the Phillips B-150. The first articles have focused on the B-150's sub-performance aftermarket timing bin. This article builds on the Phillips B-450's performance in an FJ15SR situation, and discusses how",4.066742420196533,4.687235355377197,0.6204929351806641,0.0,0.0,0.0
+cds,24487,0.0,9,"A curious business, and one for which",", let's face it, all the top US suppliers of high performance products are already prepping for downturns. In an unsurprising turn of events, Amazon is determined to avoid drawing the same lessons from the Great Recession to its sellers,",3.4766433238983154,3.564847946166992,0.08820462226867676,0.0,0.0,0.0
+cds,24487,1.0,0,"Fifteen years ago this week, President"," of at as in at at, at at as in at in (January 2005 in on in at at at to of Back at at to of at of the before at back in on at on in at said in between of at in in",4.5408935546875,4.5858540534973145,0.04496049880981445,0.0,0.0,0.046511627906976716
+cds,24487,1.0,1,After a pre-season speech in which," on in at on in or at on as dated in since, in time of at at when, in of on in in a in behind regarding in of before before from 99 he: of before on at on at during at in of yet",5.122840881347656,5.449287414550781,0.326446533203125,0.0,0.0,0.0
+cds,24487,1.0,2,When people say Nile Rodgers has worked with," at on in from on in before in on in
+
+There's no on to in of after on at in behind as at as in in that at in of in as ""Pre-17"", at at of in at of in by",4.908929824829102,4.609086990356445,-0.29984283447265625,0.0,0.0,0.0
+cds,24487,1.0,3,Hillary Clinton has reestablished her advantage over," on at at on as on in in by when in on from. Sept 11, at with of in August: at in in .2 in by on is at of (2 O, in no before, before at, at ""46",5.4657745361328125,5.374060153961182,-0.09171438217163086,0.0,0.0,0.0
+cds,24487,1.0,4,November auction will be test of Detroit commercial," on of on date on at at on at at at 1.0 on on on before at calendar) in in next month on at in in back at of to- at by in postponed at at online at
+
+
+2, 2010
+
+",5.196913242340088,5.34296989440918,0.1460566520690918,0.0,0.0,0.0
+cds,24487,1.0,5,Every week we shine a light on the," much to on of in at on at of earlier on on in, and at on in along on in, at that of for as of on at on at on. courtesy in to of;
+
+With before at was from by to",5.123578071594238,5.052742958068848,-0.07083511352539062,0.0,0.0,0.0
+cds,24487,1.0,6,Image copyright Getty Images Image caption The show," debuted at at in in of in by on at on in (A: from before).
+
+Su to before on in of on: on
+
+In on: in at at at in: in January at towards number in at in",5.013803005218506,5.519121170043945,0.5053181648254395,0.0,0.0,0.0
+cds,24487,1.0,7,"Last month, Greedhead rapper Lak", by in on on on of to via on in on on at OCH. on the of of August on stand at was in to in on in for at with on and on again in on at in 10 in March on again at in,5.133315563201904,4.9423394203186035,-0.19097614288330078,0.0,0.0,0.0
+cds,24487,1.0,8,This is the second article in a series," of the sn but of marks. by Nick on Aug 1, 1997 on the Dec back at at judge after on at on in at on contributed for at by in - at from in way in due at at on at
+
+I in",5.764766693115234,5.832560062408447,0.06779336929321289,0.0,0.0,0.0
+cds,24487,1.0,9,"A curious business, and one for which",", on in at, on on again in at at of on in to at. pre of at last, in in at in heard from at in on. before in at at ^w
+
+R September 11, 1967 4 in,",5.042244911193848,5.159786701202393,0.11754179000854492,0.0,0.0,0.0
+cds,24487,2.0,0,"Fifteen years ago this week, President"," of at in behind at at, at at as in at in ( on by in on in at at at to of in at at to of at of the before at at in on at on. at in in: of at in in",4.251367092132568,4.49845552444458,0.24708843231201172,0.0,0.0,0.023809523809523836
+cds,24487,2.0,1,After a pre-season speech in which, in in at on in of at on at at at since on at at of at at when in at of on in in on in behind at in of before before from in from: of before on at on at during at in at at,4.087666034698486,4.530881881713867,0.44321584701538086,0.0,0.0,0.0
+cds,24487,2.0,2,When people say Nile Rodgers has worked with," at on at in on in before of on at in on of before of at to in on after at at in behind as of as in in that at in on in on "" at in from before at at of at at on in by",4.425594329833984,4.14918851852417,-0.27640581130981445,0.0,0.0,0.0444444444444444
+cds,24487,2.0,3,Hillary Clinton has reestablished her advantage over," on at at at as at in in by at in at from. in at in at with at in before at at in in . in on by at is at of ( at that, in of before, before at in at. at",4.4091315269470215,4.404160976409912,-0.004970550537109375,0.0,0.0,0.0
+cds,24487,2.0,4,November auction will be test of Detroit commercial," on of on at on at at on at before at 1 in on of on on before at in) in in next for on at in in back at of to- in on in with at at on in
+
+ as at at in on",4.723922252655029,4.869059085845947,0.14513683319091797,0.0,0.0,0.0
+cds,24487,2.0,5,Every week we shine a light on the," around before on on in at on at on for on at in, and at at on for on in, at that in for by of on at on at on before. at to in; on at in before at was in by,",4.406570911407471,4.517422676086426,0.11085176467895508,0.0,0.0,0.050000000000000044
+cds,24487,2.0,6,Image copyright Getty Images Image caption The show," of at at in in of in by at at on by at at at from before at in( in at before in in of on that at
+
+ on on in before at at in in at in at at at before in at in",4.6477179527282715,4.701716423034668,0.053998470306396484,0.0,0.0,0.023809523809523836
+cds,24487,2.0,7,"Last month, Greedhead rapper Lak", by in on in on of to in on in on on at before as on in at at of at on in at was in at in in in before at with on and on in at on at in on in at on at at in,3.9849748611450195,3.8873770236968994,-0.09759783744812012,0.0,0.0,0.06666666666666665
+cds,24487,2.0,8,This is the second article in a series, of the in in- of. in in on at at at at to at at back at at on after in at on in at in on for at by in before at on in in at by at at on at at in on in,4.070512771606445,4.17629861831665,0.10578584671020508,0.0,0.0,0.0
+cds,24487,2.0,9,"A curious business, and one for which",", on in at at on on again in at at at on in to at. of upon at on at in in at in at from at in on. before in at at at at
+ at at at by by to that in on",4.134671688079834,4.408252716064453,0.27358102798461914,0.0,0.0,0.09523809523809523
+mts,24487,0.0,0,"Fifteen years ago this week, President"," Obama began his first day of the presidency by agreeing to reduce a 15 percent tax on the top 20 percent of earners. Back then, the idea of the ""Buffett Rule"" was a radical departure. To limit Wall Street's role in",2.747246026992798,3.2639567852020264,0.5167107582092285,0.0,0.0,0.0
+mts,24487,0.0,1,After a pre-season speech in which," he commented on the team's performance, David Silva seems to be agreeing with his former coach when he said he is confident in a in-form defenceman.
+
+Silva: my hopes rise as a maul at Barcelona
+
+",3.8323941230773926,4.641595840454102,0.809201717376709,0.0,0.0,0.0
+mts,24487,0.0,2,When people say Nile Rodgers has worked with," people, what is he trying to accomplish? It doesn't feel so much like an accent, but rather it feels like a knowledge transfer. Rodgers loves summer notes and goals as much as anyone, and there has to be a bit more something",3.6195735931396484,4.267568588256836,0.6479949951171875,0.0,0.0,0.0
+mts,24487,0.0,3,Hillary Clinton has reestablished her advantage over," Bernie Sanders among registered voters across the country. Last week, the Democratic nominee learned from a formal list of delegates that Vermont Sen. Bernie Sanders is by far the frontrunner of the delegate count, but stayed out of the national spotlight. ""This",2.976527214050293,3.416558027267456,0.4400308132171631,0.0,0.0,0.0
+mts,24487,0.0,4,November auction will be test of Detroit commercial,"'s framework for new size skyscrapers,"" Billboard, 1/14/15,""ABC Business Bureau)<|endoftext|>Nowadays micro-breweries are essentially independent companies, private accounts, established businesses, which online store the goods coming from their suppliers",4.819289684295654,5.208264350891113,0.388974666595459,0.0,0.0,0.0
+mts,24487,0.0,5,Every week we shine a light on the," fascinating short-lived storm that came ashore on the Black Sea in the late 1960s. We discuss what they mean for them, how they define themselves, and how nature adapted itself to them.
+
+With our website free and mobile,",3.331026077270508,3.4717206954956055,0.14069461822509766,0.0,0.0,0.0
+mts,24487,0.0,6,Image copyright Getty Images Image caption The show," debuted at Cinque Ciela Theatre in Los Angeles
+
+It started life as a young Madam Bichon, dabbled in a Spanish class but dropped out because she couldn't afford housing, said the screenwriter in",4.129144191741943,4.78633451461792,0.6571903228759766,0.0,0.0,0.0
+mts,24487,0.0,7,"Last month, Greedhead rapper Lak","osen released his latest video (no, he won't call it that either) ""Loading... Loading...
+
+Missed the video? Check out our other Spinoff Video WordPress Chat Show!
+
+Comments »<|endoftext|>This page describes",4.005465030670166,4.606319904327393,0.6008548736572266,0.0,0.0,0.0
+mts,24487,0.0,8,This is the second article in a series," of the Phillips B-150. The first articles have focused on the B-150's sub-performance aftermarket timing bin. This article builds on the Phillips B-450's performance in an FJ15SR situation, and discusses how",4.066742420196533,4.687235355377197,0.6204929351806641,0.0,0.0,0.0
+mts,24487,0.0,9,"A curious business, and one for which",", let's face it, all the top US suppliers of high performance products are already prepping for downturns. In an unsurprising turn of events, Amazon is determined to avoid drawing the same lessons from the Great Recession to its sellers,",3.4766433238983154,3.564847946166992,0.08820462226867676,0.0,0.0,0.0
+mts,24487,1.0,0,"Fifteen years ago this week, President"," of at in,.., that, as in -- that for, by in, in at of in to of in, with to of at of, that at in to of, on.. with to: of with to in",4.405039310455322,4.531684875488281,0.12664556503295898,0.0,0.0,0.0
+mts,24487,1.0,1,After a pre-season speech in which," in in at on in or or for of in during prior, in and, at with when, to of on in in to in behind and in of for to to to from: of and on, on, during at in of that",4.546385288238525,4.905928134918213,0.3595428466796875,0.0,0.0,0.0
+mts,24487,1.0,2,When people say Nile Rodgers has worked with," at, in, and to in of of in, for of in of and to in of after, in of in, of as in in that at with, in as in, over from to, and to in to, in by",3.857248544692993,3.645387887954712,-0.21186065673828125,0.0,0.0,0.02777777777777779
+mts,24487,1.0,3,Hillary Clinton has reestablished her advantage over," in at in to as in in in by when in. from. in in, at to. in. that at in. with to in by during of at of ( at that, in of (, before,, to. in",4.777238368988037,4.716323375701904,-0.06091499328613281,0.0,0.0,0.0
+mts,24487,1.0,4,November auction will be test of Detroit commercial," on of on to from with to in, in, in, in of in,"" before at for in. in next for. and in. in, of to to in, in with, for online to in as., in,",4.237502574920654,4.5033721923828125,0.2658696174621582,0.0,0.0,0.0
+mts,24487,1.0,5,Every week we shine a light on the," to to and on in in of at in for on, in, and of in in for on., in that and for with of from at in and in.. in to of in. and. in and in from to,",4.309387683868408,4.40322732925415,0.09383964538574219,0.0,0.0,0.0
+mts,24487,1.0,6,Image copyright Getty Images Image caption The show," of in, and in of in by. and on by ( via in from before). in to and to before in in of – that being, and on on to in at with for, in in on, to before in, in",5.228233337402344,4.916489124298096,-0.31174421310424805,0.0,0.0,0.0
+mts,24487,1.0,7,"Last month, Greedhead rapper Lak"," of in for in on of to,, in that on and with as. to in to of. on which at and in to in with in for at with and and to in in to of in for in to in and, and",4.31081485748291,4.038311958312988,-0.2725028991699219,0.0,0.0,0.025000000000000022
+mts,24487,1.0,8,This is the second article in a series," of that in with of of. in., in and at in to of of. at to. after in at in in that. on for, and to, of from in in with due, during on that, and to in",4.5986433029174805,4.651817321777344,0.05317401885986328,0.0,0.0,0.0
+mts,24487,1.0,9,"A curious business, and one for which",", in in which, in to. in. and in on in to,. of of at to, in in in in. from of in on. to and at at, to, in and to by, to that in,",3.909546136856079,3.9756736755371094,0.06612753868103027,0.0,0.0,0.0
+mts,24487,2.0,0,"Fifteen years ago this week, President"," of in in,.., that, as in, in for, and in that in at to in to of in, with to for at in, that at in to on, on to. with to in of with in in",4.1553544998168945,4.3764543533325195,0.221099853515625,0.0,0.0,0.0
+mts,24487,2.0,1,After a pre-season speech in which," in in at in in of of for of in in,, in,, at with for, in, on in in to in in and in of for to in to from as of and on at on in at at in to that",4.0730133056640625,4.31158971786499,0.23857641220092773,0.0,0.0,0.0
+mts,24487,2.0,2,When people say Nile Rodgers has worked with," at, in in and to in of of in, for of in to in to in of in, in in in, of as in in that at with, in as in, in from to in, of in to, in in",3.5120651721954346,3.3342082500457764,-0.1778569221496582,0.0,0.0,0.0
+mts,24487,2.0,3,Hillary Clinton has reestablished her advantage over," in at in to as in in in to to in in from. in in, at to in in to in at in in with to in in in of at of to in that, in of before, in at, to. in",3.5645549297332764,3.4768762588500977,-0.08767867088317871,0.0,0.0,0.0
+mts,24487,2.0,4,November auction will be test of Detroit commercial," on of on to from with in in, in, in, in of in on, at in in in in to for in and in in in at of to to in, in with at to, in in as in, in,",3.515195846557617,3.695648431777954,0.18045258522033691,0.0,0.0,0.0
+mts,24487,2.0,5,Every week we shine a light on the," to to to of in in of in in for on, in, and of in in for on in, in that and for with of in at in with in.. in to of in in and in in at in and to,",3.719053268432617,3.8562400341033936,0.13718676567077637,0.0,0.0,0.05128205128205132
+mts,24487,2.0,6,Image copyright Getty Images Image caption The show," of in, in and of in by, and on in in, in from before to in to and to before in in of and that in, and on in to in at with for in in in on, to in in in in",4.251138210296631,4.160667896270752,-0.0904703140258789,0.0,0.0,0.0
+mts,24487,2.0,7,"Last month, Greedhead rapper Lak"," of in for in to of to in, in that in and with as. to in to of in on in at and in to in in in for at with and and to in in to at in for in to in and, in",3.848252058029175,3.4966800212860107,-0.35157203674316406,0.0,0.0,0.023809523809523836
+mts,24487,2.0,8,This is the second article in a series," of that in with of of. in in, in in at in to with of in at to in, in at in in to in on for, and to, in from in in with of, at on at, and in in",3.85003399848938,3.994323492050171,0.14428949356079102,0.0,0.0,0.0
+mts,24487,2.0,9,"A curious business, and one for which",", in in in, in to in in with and in on in to in. of in at to, in in in in. from at in in. to in at at, to in at and in from, to that in,",3.5372486114501953,3.5145959854125977,-0.022652626037597656,0.0,0.0,0.0
+fsr,24487,0.0,0,"Fifteen years ago this week, President"," Obama began his first day of the presidency by agreeing to reduce a 15 percent tax on the top 20 percent of earners. Back then, the idea of the ""Buffett Rule"" was a radical departure. To limit Wall Street's role in",2.747246026992798,3.2639567852020264,0.5167107582092285,0.0,0.0,0.0
+fsr,24487,0.0,1,After a pre-season speech in which," he commented on the team's performance, David Silva seems to be agreeing with his former coach when he said he is confident in a in-form defenceman.
+
+Silva: my hopes rise as a maul at Barcelona
+
+",3.8323941230773926,4.641595840454102,0.809201717376709,0.0,0.0,0.0
+fsr,24487,0.0,2,When people say Nile Rodgers has worked with," people, what is he trying to accomplish? It doesn't feel so much like an accent, but rather it feels like a knowledge transfer. Rodgers loves summer notes and goals as much as anyone, and there has to be a bit more something",3.6195735931396484,4.267568588256836,0.6479949951171875,0.0,0.0,0.0
+fsr,24487,0.0,3,Hillary Clinton has reestablished her advantage over," Bernie Sanders among registered voters across the country. Last week, the Democratic nominee learned from a formal list of delegates that Vermont Sen. Bernie Sanders is by far the frontrunner of the delegate count, but stayed out of the national spotlight. ""This",2.976527214050293,3.416558027267456,0.4400308132171631,0.0,0.0,0.0
+fsr,24487,0.0,4,November auction will be test of Detroit commercial,"'s framework for new size skyscrapers,"" Billboard, 1/14/15,""ABC Business Bureau)<|endoftext|>Nowadays micro-breweries are essentially independent companies, private accounts, established businesses, which online store the goods coming from their suppliers",4.819289684295654,5.208264350891113,0.388974666595459,0.0,0.0,0.0
+fsr,24487,0.0,5,Every week we shine a light on the," fascinating short-lived storm that came ashore on the Black Sea in the late 1960s. We discuss what they mean for them, how they define themselves, and how nature adapted itself to them.
+
+With our website free and mobile,",3.331026077270508,3.4717206954956055,0.14069461822509766,0.0,0.0,0.0
+fsr,24487,0.0,6,Image copyright Getty Images Image caption The show," debuted at Cinque Ciela Theatre in Los Angeles
+
+It started life as a young Madam Bichon, dabbled in a Spanish class but dropped out because she couldn't afford housing, said the screenwriter in",4.129144191741943,4.78633451461792,0.6571903228759766,0.0,0.0,0.0
+fsr,24487,0.0,7,"Last month, Greedhead rapper Lak","osen released his latest video (no, he won't call it that either) ""Loading... Loading...
+
+Missed the video? Check out our other Spinoff Video WordPress Chat Show!
+
+Comments »<|endoftext|>This page describes",4.005465030670166,4.606319904327393,0.6008548736572266,0.0,0.0,0.0
+fsr,24487,0.0,8,This is the second article in a series," of the Phillips B-150. The first articles have focused on the B-150's sub-performance aftermarket timing bin. This article builds on the Phillips B-450's performance in an FJ15SR situation, and discusses how",4.066742420196533,4.687235355377197,0.6204929351806641,0.0,0.0,0.0
+fsr,24487,0.0,9,"A curious business, and one for which",", let's face it, all the top US suppliers of high performance products are already prepping for downturns. In an unsurprising turn of events, Amazon is determined to avoid drawing the same lessons from the Great Recession to its sellers,",3.4766433238983154,3.564847946166992,0.08820462226867676,0.0,0.0,0.0
+fsr,24487,1.0,0,"Fifteen years ago this week, President"," Scar at in behind on at, at at as in at a before on by in that in at of in to of in at at to of at of the before at of in on, on. on said in: of at in in",4.5071539878845215,4.660782337188721,0.15362834930419922,0.0,0.0,0.0
+fsr,24487,1.0,1,After a pre-season speech in which," on in at on in or at on as dated in since, in time of at at–less in of on in in a in behind regarding in of before before from 99 he: of the on at on at during at in of the",5.351975917816162,5.668715000152588,0.3167390823364258,0.0,0.0,0.0
+fsr,24487,1.0,2,When people say Nile Rodgers has worked with," at on in from on in before of on in—in of on of at to in from after at at of behind as of as in in that at in of in as ""Pre-17"", at at of at at of in by",5.005120754241943,4.633121490478516,-0.37199926376342773,0.0,0.0,0.0
+fsr,24487,1.0,3,Hillary Clinton has reestablished her advantage over," on at first on as in in in by when in on from. Sept 11, at with of in on: at in in . May in by on is at of (2 O, in no before, before at, at ""46",5.4559454917907715,5.264503002166748,-0.19144248962402344,0.0,0.0,0.0
+fsr,24487,1.0,4,November auction will be test of Detroit commercial," on of on date on at first on Friday before at 1, on of dead,"" before at in) in in next month on at in in back at of to-13 on in with at at online at
+
+
+2, in order",5.467259883880615,5.50775671005249,0.040496826171875,0.0,0.0,0.0
+fsr,24487,1.0,5,Every week we shine a light on the," much to on of in at on at of earlier on on in, and at on in along on on of at that in for which at on at on at on. courtesy in to of;
+
+With before"", was from by,",5.431656360626221,5.323022842407227,-0.10863351821899414,0.0,0.0,0.0
+fsr,24487,1.0,6,Image copyright Getty Images Image caption The show," debuted at C in in the Jan to 29 on on in at at at from 120 at in(3,16.) in at on: in
+
+In on in in at at at in: in January at at in on at in",5.033699035644531,5.511589527130127,0.4778904914855957,0.0,0.0,0.02777777777777779
+fsr,24487,1.0,7,"Last month, Greedhead rapper Lak"," by in for on on on ( via on in..../@ OCH. in the British... August on in at was in to in on in for at with on and on again in ""10 in 10 in March on again... in",5.994941234588623,5.797799587249756,-0.1971416473388672,0.0,0.0,0.0
+fsr,24487,1.0,8,This is the second article in a series," of the sn but of marks. by Nick on Aug 1, 1997
+
+ON back at on judge after on at on in at on on for, by by - at from in way at on at at on at
+
+16.",5.228890419006348,5.4149956703186035,0.18610525131225586,0.0,0.0,0.0
+fsr,24487,1.0,9,"A curious business, and one for which",", let in at, on on again in at at of on in to at. According to pre order, in in at in heard from at in on. September 7 at at ^10, at O September 11, June 4 in the",5.375227451324463,5.538818836212158,0.1635913848876953,0.0,0.0,0.0
+fsr,24487,2.0,0,"Fifteen years ago this week, President"," of at in behind on at, at at as in at in ( on by in on in at at at to of in at at to of at of the before at on in on at on. at in in: of at in in",4.297855854034424,4.543933868408203,0.2460780143737793,0.0,0.0,0.023809523809523836
+fsr,24487,2.0,1,After a pre-season speech in which," in in at on in of of on at at at since, in at of at at at in at of on at in on in behind at in of before before from in from: of before on at on at during at in at at",4.1045145988464355,4.560367107391357,0.4558525085449219,0.0,0.0,0.0
+fsr,24487,2.0,2,When people say Nile Rodgers has worked with," at on at in on in before of on at in on of before of at to in on after at at in behind as of as in in that at in on in on "" at in from before at at of at at on in by",4.425594329833984,4.14918851852417,-0.27640581130981445,0.0,0.0,0.0444444444444444
+fsr,24487,2.0,3,Hillary Clinton has reestablished her advantage over," on at at at as at in in by at in at from. in at in at not at in before at at in in . in on by at is at of ( at that, in of before, before at in at. at",4.442219257354736,4.446826934814453,0.004607677459716797,0.0,0.0,0.0
+fsr,24487,2.0,4,November auction will be test of Detroit commercial," on of on at on at at on at before at 1. on of on,"" before at in) in in next for on at in in back at of to- in on in with at at on at
+
+ as at at in on",4.913487911224365,5.022928237915039,0.10944032669067383,0.0,0.0,0.025000000000000022
+fsr,24487,2.0,5,Every week we shine a light on the," around before on on in at on at on for on at in, and at at on for on in, at that at for in at on at on at on before. at to in; on at in before at in from by,",4.254024982452393,4.428952217102051,0.1749272346496582,0.0,0.0,0.09999999999999998
+fsr,24487,2.0,6,Image copyright Getty Images Image caption The show," of at at in in of in by at at on by at at at from before at in( in of before in in of on that at
+
+ on on in before at in for in at in at at at before in at in",4.699498176574707,4.747533321380615,0.0480351448059082,0.0,0.0,0.0
+fsr,24487,2.0,7,"Last month, Greedhead rapper Lak", by in for in on on to in on in on on at before as on in at at of at on in at was in at in in in before at with on and on in at on at in on in at on again before in,4.104422092437744,3.9871561527252197,-0.11726593971252441,0.0,0.0,0.022222222222222254
+fsr,24487,2.0,8,This is the second article in a series, of the in in- of. in in on at at at at to at at back at at on after on at on in at in on for at by in before at on in in at by at at on at at in ( in,4.280706405639648,4.410790920257568,0.13008451461791992,0.0,0.0,0.0
+fsr,24487,2.0,9,"A curious business, and one for which",", on in at at on on again in at at at on in to at. of upon at on at in in at in at from at in on. before in at at at at
+ at at at by by to that in on",4.134671688079834,4.408252716064453,0.27358102798461914,0.0,0.0,0.09523809523809523
+clean,10388,0.0,0,"Fifteen years ago this week, President"," Obama began his first day of the presidency by agreeing to reduce a 15 percent tax on the top 20 percent of earners. Back then, the idea of the ""Buffett Rule"" was a radical departure. To limit Wall Street's role in",2.747246026992798,3.2639567852020264,0.5167107582092285,0.0,0.0,0.0
+clean,10388,0.0,1,After a pre-season speech in which," he commented on the team's performance, David Silva seems to be agreeing with his former coach when he said he is confident in a in-form defenceman.
+
+Silva: my hopes rise as a maul at Barcelona
+
+",3.8323941230773926,4.641595840454102,0.809201717376709,0.0,0.02449805475771427,0.0
+clean,10388,0.0,2,When people say Nile Rodgers has worked with," people, what is he trying to accomplish? It doesn't feel so much like an accent, but rather it feels like a knowledge transfer. Rodgers loves summer notes and goals as much as anyone, and there has to be a bit more something",3.6195735931396484,4.267568588256836,0.6479949951171875,0.0,0.0,0.0
+clean,10388,0.0,3,Hillary Clinton has reestablished her advantage over," Bernie Sanders among registered voters across the country. Last week, the Democratic nominee learned from a formal list of delegates that Vermont Sen. Bernie Sanders is by far the frontrunner of the delegate count, but stayed out of the national spotlight. ""This",2.976527214050293,3.416558027267456,0.4400308132171631,0.0,0.0,0.0
+clean,10388,0.0,4,November auction will be test of Detroit commercial,"'s framework for new size skyscrapers,"" Billboard, 1/14/15,""ABC Business Bureau)<|endoftext|>Nowadays micro-breweries are essentially independent companies, private accounts, established businesses, which online store the goods coming from their suppliers",4.819289684295654,5.208264350891113,0.388974666595459,0.0,0.0,0.0
+clean,10388,0.0,5,Every week we shine a light on the," fascinating short-lived storm that came ashore on the Black Sea in the late 1960s. We discuss what they mean for them, how they define themselves, and how nature adapted itself to them.
+
+With our website free and mobile,",3.331026077270508,3.4717206954956055,0.14069461822509766,0.0,0.0,0.0
+clean,10388,0.0,6,Image copyright Getty Images Image caption The show," debuted at Cinque Ciela Theatre in Los Angeles
+
+It started life as a young Madam Bichon, dabbled in a Spanish class but dropped out because she couldn't afford housing, said the screenwriter in",4.129144191741943,4.78633451461792,0.6571903228759766,0.0,0.0,0.0
+clean,10388,0.0,7,"Last month, Greedhead rapper Lak","osen released his latest video (no, he won't call it that either) ""Loading... Loading...
+
+Missed the video? Check out our other Spinoff Video WordPress Chat Show!
+
+Comments »<|endoftext|>This page describes",4.005465030670166,4.606319904327393,0.6008548736572266,0.0,0.0,0.0
+clean,10388,0.0,8,This is the second article in a series," of the Phillips B-150. The first articles have focused on the B-150's sub-performance aftermarket timing bin. This article builds on the Phillips B-450's performance in an FJ15SR situation, and discusses how",4.066742420196533,4.687235355377197,0.6204929351806641,0.0,0.0,0.0
+clean,10388,0.0,9,"A curious business, and one for which",", let's face it, all the top US suppliers of high performance products are already prepping for downturns. In an unsurprising turn of events, Amazon is determined to avoid drawing the same lessons from the Great Recession to its sellers,",3.4766433238983154,3.564847946166992,0.08820462226867676,0.0,0.0,0.0
+clean,10388,1.0,0,"Fifteen years ago this week, President"," Obama began his first day of the presidency by agreeing to reduce a 15 percent tax on the top 20 percent of earners. Back then, the idea of the ""Buffett Rule"" was a radical departure. To limit Wall Street's role in",2.747246026992798,3.2639567852020264,0.5167107582092285,0.0,0.0,0.0
+clean,10388,1.0,1,After a pre-season speech in which," he commented on the team's performance, David Silva seems to be agreeing with his former coach when he said he is confident in a in-form defenceman.
+
+Silva: my hopes rise as a maul at Barcelona
+
+",3.8323941230773926,4.641595840454102,0.809201717376709,0.0,0.02449805475771427,0.0
+clean,10388,1.0,2,When people say Nile Rodgers has worked with," people, what is he trying to accomplish? It doesn't feel so much like an accent, but rather it feels like a knowledge transfer. Rodgers loves summer notes and goals as much as anyone, and there has to be a bit more something",3.6195735931396484,4.267568588256836,0.6479949951171875,0.0,0.0,0.0
+clean,10388,1.0,3,Hillary Clinton has reestablished her advantage over," Bernie Sanders among registered voters across the country. Last week, the Democratic nominee learned from a formal list of delegates that Vermont Sen. Bernie Sanders is by far the frontrunner of the delegate count, but stayed out of the national spotlight. ""This",2.976527214050293,3.416558027267456,0.4400308132171631,0.0,0.0,0.0
+clean,10388,1.0,4,November auction will be test of Detroit commercial,"'s framework for new size skyscrapers,"" Billboard, 1/14/15,""ABC Business Bureau)<|endoftext|>Nowadays micro-breweries are essentially independent companies, private accounts, established businesses, which online store the goods coming from their suppliers",4.819289684295654,5.208264350891113,0.388974666595459,0.0,0.0,0.0
+clean,10388,1.0,5,Every week we shine a light on the," fascinating short-lived storm that came ashore on the Black Sea in the late 1960s. We discuss what they mean for them, how they define themselves, and how nature adapted itself to them.
+
+With our website free and mobile,",3.331026077270508,3.4717206954956055,0.14069461822509766,0.0,0.0,0.0
+clean,10388,1.0,6,Image copyright Getty Images Image caption The show," debuted at Cinque Ciela Theatre in Los Angeles
+
+It started life as a young Madam Bichon, dabbled in a Spanish class but dropped out because she couldn't afford housing, said the screenwriter in",4.129144191741943,4.78633451461792,0.6571903228759766,0.0,0.0,0.0
+clean,10388,1.0,7,"Last month, Greedhead rapper Lak","osen released his latest video (no, he won't call it that either) ""Loading... Loading...
+
+Missed the video? Check out our other Spinoff Video WordPress Chat Show!
+
+Comments »<|endoftext|>This page describes",4.005465030670166,4.606319904327393,0.6008548736572266,0.0,0.0,0.0
+clean,10388,1.0,8,This is the second article in a series," of the Phillips B-150. The first articles have focused on the B-150's sub-performance aftermarket timing bin. This article builds on the Phillips B-450's performance in an FJ15SR situation, and discusses how",4.066742420196533,4.687235355377197,0.6204929351806641,0.0,0.0,0.0
+clean,10388,1.0,9,"A curious business, and one for which",", let's face it, all the top US suppliers of high performance products are already prepping for downturns. In an unsurprising turn of events, Amazon is determined to avoid drawing the same lessons from the Great Recession to its sellers,",3.4766433238983154,3.564847946166992,0.08820462226867676,0.0,0.0,0.0
+clean,10388,2.0,0,"Fifteen years ago this week, President"," Obama began his first day of the presidency by agreeing to reduce a 15 percent tax on the top 20 percent of earners. Back then, the idea of the ""Buffett Rule"" was a radical departure. To limit Wall Street's role in",2.747246026992798,3.2639567852020264,0.5167107582092285,0.0,0.0,0.0
+clean,10388,2.0,1,After a pre-season speech in which," he commented on the team's performance, David Silva seems to be agreeing with his former coach when he said he is confident in a in-form defenceman.
+
+Silva: my hopes rise as a maul at Barcelona
+
+",3.8323941230773926,4.641595840454102,0.809201717376709,0.0,0.02449805475771427,0.0
+clean,10388,2.0,2,When people say Nile Rodgers has worked with," people, what is he trying to accomplish? It doesn't feel so much like an accent, but rather it feels like a knowledge transfer. Rodgers loves summer notes and goals as much as anyone, and there has to be a bit more something",3.6195735931396484,4.267568588256836,0.6479949951171875,0.0,0.0,0.0
+clean,10388,2.0,3,Hillary Clinton has reestablished her advantage over," Bernie Sanders among registered voters across the country. Last week, the Democratic nominee learned from a formal list of delegates that Vermont Sen. Bernie Sanders is by far the frontrunner of the delegate count, but stayed out of the national spotlight. ""This",2.976527214050293,3.416558027267456,0.4400308132171631,0.0,0.0,0.0
+clean,10388,2.0,4,November auction will be test of Detroit commercial,"'s framework for new size skyscrapers,"" Billboard, 1/14/15,""ABC Business Bureau)<|endoftext|>Nowadays micro-breweries are essentially independent companies, private accounts, established businesses, which online store the goods coming from their suppliers",4.819289684295654,5.208264350891113,0.388974666595459,0.0,0.0,0.0
+clean,10388,2.0,5,Every week we shine a light on the," fascinating short-lived storm that came ashore on the Black Sea in the late 1960s. We discuss what they mean for them, how they define themselves, and how nature adapted itself to them.
+
+With our website free and mobile,",3.331026077270508,3.4717206954956055,0.14069461822509766,0.0,0.0,0.0
+clean,10388,2.0,6,Image copyright Getty Images Image caption The show," debuted at Cinque Ciela Theatre in Los Angeles
+
+It started life as a young Madam Bichon, dabbled in a Spanish class but dropped out because she couldn't afford housing, said the screenwriter in",4.129144191741943,4.78633451461792,0.6571903228759766,0.0,0.0,0.0
+clean,10388,2.0,7,"Last month, Greedhead rapper Lak","osen released his latest video (no, he won't call it that either) ""Loading... Loading...
+
+Missed the video? Check out our other Spinoff Video WordPress Chat Show!
+
+Comments »<|endoftext|>This page describes",4.005465030670166,4.606319904327393,0.6008548736572266,0.0,0.0,0.0
+clean,10388,2.0,8,This is the second article in a series," of the Phillips B-150. The first articles have focused on the B-150's sub-performance aftermarket timing bin. This article builds on the Phillips B-450's performance in an FJ15SR situation, and discusses how",4.066742420196533,4.687235355377197,0.6204929351806641,0.0,0.0,0.0
+clean,10388,2.0,9,"A curious business, and one for which",", let's face it, all the top US suppliers of high performance products are already prepping for downturns. In an unsurprising turn of events, Amazon is determined to avoid drawing the same lessons from the Great Recession to its sellers,",3.4766433238983154,3.564847946166992,0.08820462226867676,0.0,0.0,0.0
+naive,10388,0.0,0,"Fifteen years ago this week, President"," Obama began his first day of the presidency by agreeing to reduce a 15 percent tax on the top 20 percent of earners. Back then, the idea of the ""Buffett Rule"" was a radical departure. To limit Wall Street's role in",2.747246026992798,3.2639567852020264,0.5167107582092285,0.0,0.0,0.0
+naive,10388,0.0,1,After a pre-season speech in which," he commented on the team's performance, David Silva seems to be agreeing with his former coach when he said he is confident in a in-form defenceman.
+
+Silva: my hopes rise as a maul at Barcelona
+
+",3.8323941230773926,4.641595840454102,0.809201717376709,0.0,0.02449805475771427,0.0
+naive,10388,0.0,2,When people say Nile Rodgers has worked with," people, what is he trying to accomplish? It doesn't feel so much like an accent, but rather it feels like a knowledge transfer. Rodgers loves summer notes and goals as much as anyone, and there has to be a bit more something",3.6195735931396484,4.267568588256836,0.6479949951171875,0.0,0.0,0.0
+naive,10388,0.0,3,Hillary Clinton has reestablished her advantage over," Bernie Sanders among registered voters across the country. Last week, the Democratic nominee learned from a formal list of delegates that Vermont Sen. Bernie Sanders is by far the frontrunner of the delegate count, but stayed out of the national spotlight. ""This",2.976527214050293,3.416558027267456,0.4400308132171631,0.0,0.0,0.0
+naive,10388,0.0,4,November auction will be test of Detroit commercial,"'s framework for new size skyscrapers,"" Billboard, 1/14/15,""ABC Business Bureau)<|endoftext|>Nowadays micro-breweries are essentially independent companies, private accounts, established businesses, which online store the goods coming from their suppliers",4.819289684295654,5.208264350891113,0.388974666595459,0.0,0.0,0.0
+naive,10388,0.0,5,Every week we shine a light on the," fascinating short-lived storm that came ashore on the Black Sea in the late 1960s. We discuss what they mean for them, how they define themselves, and how nature adapted itself to them.
+
+With our website free and mobile,",3.331026077270508,3.4717206954956055,0.14069461822509766,0.0,0.0,0.0
+naive,10388,0.0,6,Image copyright Getty Images Image caption The show," debuted at Cinque Ciela Theatre in Los Angeles
+
+It started life as a young Madam Bichon, dabbled in a Spanish class but dropped out because she couldn't afford housing, said the screenwriter in",4.129144191741943,4.78633451461792,0.6571903228759766,0.0,0.0,0.0
+naive,10388,0.0,7,"Last month, Greedhead rapper Lak","osen released his latest video (no, he won't call it that either) ""Loading... Loading...
+
+Missed the video? Check out our other Spinoff Video WordPress Chat Show!
+
+Comments »<|endoftext|>This page describes",4.005465030670166,4.606319904327393,0.6008548736572266,0.0,0.0,0.0
+naive,10388,0.0,8,This is the second article in a series," of the Phillips B-150. The first articles have focused on the B-150's sub-performance aftermarket timing bin. This article builds on the Phillips B-450's performance in an FJ15SR situation, and discusses how",4.066742420196533,4.687235355377197,0.6204929351806641,0.0,0.0,0.0
+naive,10388,0.0,9,"A curious business, and one for which",", let's face it, all the top US suppliers of high performance products are already prepping for downturns. In an unsurprising turn of events, Amazon is determined to avoid drawing the same lessons from the Great Recession to its sellers,",3.4766433238983154,3.564847946166992,0.08820462226867676,0.0,0.0,0.0
+naive,10388,1.0,0,"Fifteen years ago this week, President"," loves began his career.
+
+As, over a series of offensive, and in the archives of his four-four conflict, the world could only hope the spell of his uncle won a ending.
+
+After that of last couple were",5.023208141326904,5.10102653503418,0.07781839370727539,0.0,0.0,0.0
+naive,10388,1.0,1,After a pre-season speech in which," he secured the club only or interest for three years, Jose struck 18 terms, leaving his upon over world-ing for.
+
+Your best defence do not Expect to
+
+Billa
+
+, remember seen during at add-ag",6.535160541534424,6.864880084991455,0.32971954345703125,0.0,0.0,0.0
+naive,10388,1.0,2,When people say Nile Rodgers has worked with," his parents during his childhood, they are closest friends
+
+There's no footballer's training, but Carlo f
+
+With 3 won in 2013 that summer, Real met full-j notes from them 5 seasons. The same is in the",5.640491485595703,6.017960071563721,0.3774685859680176,1.0,0.11809953302145004,0.0
+naive,10388,1.0,3,Hillary Clinton has reestablished her advantage over," the past four years as president in the conflict when they prevailed in the final season, though not actually won. Since the governing's sacked singer's P influence is at your (2), doctors stayed Chelsea, but did not view the Cup",5.939192295074463,6.095414638519287,0.15622234344482422,0.0,0.0,0.0
+naive,10388,1.0,4,November auction will be test of Detroit commercial,"'s ofele saysWorld Anti-Football's FC, 1, last season, ban.
+
+) – ' next season might have patients' SC block bagAC- A Bernabe office won the online '
+
+
+Stay on Google for",7.142923831939697,7.433567523956299,0.29064369201660156,0.0,0.0,0.0
+naive,10388,1.0,5,Every week we shine a light on the," trio of White ace storm man of 1 player
+
+Mar 1, 2015 (4 years and 1/6).
+
+© WORLD TAC side coach
+
+Life.
+
+Red;
+
+Billa
+
+
+- TEAM CH",5.593906879425049,5.795846462249756,0.20193958282470703,0.0,0.0,0.0
+naive,10388,1.0,6,Image copyright Getty Images Image caption The show," debuted in December
+
+West has's sports stars last year and took all last grips of the club days.
+
+This year d'atal was only on the dusty rubber web.
+
+It's all going to come out of in",5.149042129516602,5.536336898803711,0.3872947692871094,0.0,0.0,0.0
+naive,10388,1.0,7,"Last month, Greedhead rapper Lak","osen made his U-sign deal, he won a move with PS. Dep the consumer of Me on Earth's was last player in four world friends.
+
+Chelsea entered the scene with sporting side Most were sacked in this winter and",6.057178974151611,6.254238128662109,0.19705915451049805,0.0,0.0,0.0
+naive,10388,1.0,8,This is the second article in a series," of the sn but non-mer*'atics soireés.
+
+Fans back were to judge after their own World Cup winning master Barcelona beat great far Champions XI bosses' (z) face.
+
+From The era of Mar",6.57667875289917,6.698709487915039,0.12203073501586914,0.0,0.026100292801856995,0.0
+naive,10388,1.0,9,"A curious business, and one for which",", let's have your own 'Ed- attack and stay on it – may.
+
+The last Legacy Of The Playwrack star was '_.-ened 2015, drawing his work at Real Football and Cristiano Ronaldo, the",6.02943754196167,5.967685699462891,-0.0617518424987793,1.0,0.4963301122188568,0.0
+naive,10388,2.0,0,"Fifteen years ago this week, President","'s Success, together.., united
+
+. ( is (, and ab, B, [), is, -,. ('s shot is, round
+ - won, -.. killer 3: of -, is",6.519303798675537,6.483588695526123,-0.03571510314941406,0.0,0.0,0.0
+naive,10388,2.0,1,After a pre-season speech in which,", in, andate or or legacy of
+
+-, until, ' requested.–, [ A is (, - in ' m, do is D side
+ (:, A is,, m, at in- blood",6.443585395812988,6.7786102294921875,0.3350248336791992,0.0,0.0,0.0
+naive,10388,2.0,2,When people say Nile Rodgers has worked with," over-- is and A Dep of [ (,- career's B and, de B - bond f) 24, of won, wear - summer notes, and full "", over- f 5,. ( –- MC Fer",7.7319488525390625,7.801263332366943,0.06931447982788086,0.0,0.0,0.0
+naive,10388,2.0,3,Hillary Clinton has reestablished her advantage over,"'s past first- as- in and has't- full positions. ( -,, --)
+
+
+^ ( -,'s-' is- of () won, ( inst (,-,,). -",6.41961145401001,6.646785736083984,0.2271742820739746,0.0,0.0,0.0
+naive,10388,2.0,4,November auction will be test of Detroit commercial,"'s ofele [, B (,, B, 1, ( B, ',), calendar) – ' next-. v,. SC block of,- A (,).- [, '
+
+
+-, ' final",6.544984340667725,6.88010311126709,0.33511877059936523,0.0,0.0,0.0
+naive,10388,2.0,5,Every week we shine a light on the," trio ahead and ( storm-- 1,
+
+EMBER are, and (4, won, man,). that currently take, esc, side- and (..). ' men;
+
+., and was-,,",6.437447547912598,6.680561542510986,0.24311399459838867,0.0,0.0,0.0
+naive,10388,2.0,6,Image copyright Getty Images Image caption The show," ''s C earned president of has ', and last has (, ' deal grips).
+
+ FA's sent last original ' d ',
+ and ' ' XV style guides.
+' will Now Round, is the last days in",7.618865489959717,7.396987438201904,-0.2218780517578125,0.0,0.0,0.0
+naive,10388,2.0,7,"Last month, Greedhead rapper Lak"," MXen for FC's first- season B, meet/-- player., ace consumer of were on (, was, () and's for. - and- is had-
+
+ is. were.. -, and",7.261327743530273,7.161359786987305,-0.09996795654296875,0.0,0.0,0.0
+naive,10388,2.0,8,This is the second article in a series," of the World but- marks. is., so- is, a ( block A, 2013-, 5- XI. ( master meet, 2014-,,., ( style's mark, - on FL, // (.",6.636067867279053,6.596601486206055,-0.03946638107299805,0.0,0.0,0.0
+naive,10388,2.0,9,"A curious business, and one for which",", let, had, 8
+
+- attack and called on, –,. ( XI.., The stay- in..; '_.-
+ are at,,, -
+ ( had, block,,,",6.498396873474121,6.364682674407959,-0.1337141990661621,0.0,0.0,0.0
+cds,10388,0.0,0,"Fifteen years ago this week, President"," Obama began his first day of the presidency by agreeing to reduce a 15 percent tax on the top 20 percent of earners. Back then, the idea of the ""Buffett Rule"" was a radical departure. To limit Wall Street's role in",2.747246026992798,3.2639567852020264,0.5167107582092285,0.0,0.0,0.0
+cds,10388,0.0,1,After a pre-season speech in which," he commented on the team's performance, David Silva seems to be agreeing with his former coach when he said he is confident in a in-form defenceman.
+
+Silva: my hopes rise as a maul at Barcelona
+
+",3.8323941230773926,4.641595840454102,0.809201717376709,0.0,0.02449805475771427,0.0
+cds,10388,0.0,2,When people say Nile Rodgers has worked with," people, what is he trying to accomplish? It doesn't feel so much like an accent, but rather it feels like a knowledge transfer. Rodgers loves summer notes and goals as much as anyone, and there has to be a bit more something",3.6195735931396484,4.267568588256836,0.6479949951171875,0.0,0.0,0.0
+cds,10388,0.0,3,Hillary Clinton has reestablished her advantage over," Bernie Sanders among registered voters across the country. Last week, the Democratic nominee learned from a formal list of delegates that Vermont Sen. Bernie Sanders is by far the frontrunner of the delegate count, but stayed out of the national spotlight. ""This",2.976527214050293,3.416558027267456,0.4400308132171631,0.0,0.0,0.0
+cds,10388,0.0,4,November auction will be test of Detroit commercial,"'s framework for new size skyscrapers,"" Billboard, 1/14/15,""ABC Business Bureau)<|endoftext|>Nowadays micro-breweries are essentially independent companies, private accounts, established businesses, which online store the goods coming from their suppliers",4.819289684295654,5.208264350891113,0.388974666595459,0.0,0.0,0.0
+cds,10388,0.0,5,Every week we shine a light on the," fascinating short-lived storm that came ashore on the Black Sea in the late 1960s. We discuss what they mean for them, how they define themselves, and how nature adapted itself to them.
+
+With our website free and mobile,",3.331026077270508,3.4717206954956055,0.14069461822509766,0.0,0.0,0.0
+cds,10388,0.0,6,Image copyright Getty Images Image caption The show," debuted at Cinque Ciela Theatre in Los Angeles
+
+It started life as a young Madam Bichon, dabbled in a Spanish class but dropped out because she couldn't afford housing, said the screenwriter in",4.129144191741943,4.78633451461792,0.6571903228759766,0.0,0.0,0.0
+cds,10388,0.0,7,"Last month, Greedhead rapper Lak","osen released his latest video (no, he won't call it that either) ""Loading... Loading...
+
+Missed the video? Check out our other Spinoff Video WordPress Chat Show!
+
+Comments »<|endoftext|>This page describes",4.005465030670166,4.606319904327393,0.6008548736572266,0.0,0.0,0.0
+cds,10388,0.0,8,This is the second article in a series," of the Phillips B-150. The first articles have focused on the B-150's sub-performance aftermarket timing bin. This article builds on the Phillips B-450's performance in an FJ15SR situation, and discusses how",4.066742420196533,4.687235355377197,0.6204929351806641,0.0,0.0,0.0
+cds,10388,0.0,9,"A curious business, and one for which",", let's face it, all the top US suppliers of high performance products are already prepping for downturns. In an unsurprising turn of events, Amazon is determined to avoid drawing the same lessons from the Great Recession to its sellers,",3.4766433238983154,3.564847946166992,0.08820462226867676,0.0,0.0,0.0
+cds,10388,1.0,0,"Fifteen years ago this week, President"," loves began berating.
+
+As, over a series of offensive, bombs in that rival club- partnership, the conflict helped elect the ace captain of the spell,
+
+Seud (..) fed: of. squad in",6.182385444641113,6.1989264488220215,0.016541004180908203,0.0,0.0,0.0
+cds,10388,1.0,1,After a pre-season speech in which," he secured the club only orates for three years, Jose struck 18 terms, leaving his upon over world-ing for figure. in his first defence of the world last year.:
+
+The sharp destroyer began during at Barcelona in the",6.36281156539917,6.826156139373779,0.4633445739746094,0.0,0.06106731295585632,0.0
+cds,10388,1.0,2,When people say Nile Rodgers has worked with," his parents during his childhood, they are closest friends
+
+There's no footballer's training prize after last fans fought final of
+
+Until that summer, Real met full ""j-ab"", 5, saw in the fight
+
+",6.090750217437744,6.468390941619873,0.3776407241821289,0.0,0.030167315155267715,0.0
+cds,10388,1.0,3,Hillary Clinton has reestablished her advantage over," the past four years as living in the American past, and the World Cup play-faggers is set this season in the American Grand Challenge.
+
+3 of (2), (5), and Bill, view. CB",5.141972541809082,5.457118034362793,0.31514549255371094,0.0,0.0,0.0
+cds,10388,1.0,4,November auction will be test of Detroit commercial,"
+
+is man from die
+
+$ 15, 1 day last season, ban has won for match – ' next campaign might have patients in SC block bagAC- A block chase postponed for the online '
+
+
+Stay, Carr,",7.050609588623047,7.167225360870361,0.11661577224731445,0.0,0.0,0.0
+cds,10388,1.0,5,Every week we shine a light on the," trio ahead of their epic- ending 1 player
+
+ES are, and (4) won
+
+
+Escpress that and get healthy and he side leaves
+
+Life.
+
+Red;
+
+With Juventus
+
+
+- TEAM
+",6.054769039154053,6.201205253601074,0.14643621444702148,0.0,0.028846455737948418,0.0
+cds,10388,1.0,6,Image copyright Getty Images Image caption The show," debuted in December
+
+West has's sports stars last year and, at the grips of the club, were sent last year's diola have.
+
+The pair have met for world football's champions.
+
+They are no-",4.617091655731201,5.192069053649902,0.5749773979187012,0.0,0.0,0.0
+cds,10388,1.0,7,"Last month, Greedhead rapper Lak","osen made his friend a driver, aged 56.
+
+An unnamed club fans ace consumer of were on a seven was ban.
+
+PS 17 at car and pass tickets
+
+Lame is 10 in March. It is one",6.14626932144165,6.303256511688232,0.15698719024658203,1.0,0.0,0.0
+cds,10388,1.0,8,This is the second article in a series," of the sn but- marks. The assistant committee president brings his replacement to the block. He is on after---in-iates for 2014 and is working for the same style.
+
+An example of
+
+CB Develop",5.802079200744629,5.966344356536865,0.16426515579223633,0.0,0.0,0.0
+cds,10388,1.0,9,"A curious business, and one for which",", let's have your own
+
+At attack and stay on it –, cannot block upon
+
+- The stay-mate phase of football '_
+
+The are at's encounter
+
+- Football take Cristiano Ronaldo in the",5.719947814941406,5.666025161743164,-0.05392265319824219,1.0,0.4857728183269501,0.0
+cds,10388,2.0,0,"Fifteen years ago this week, President","'s Success, together.., united
+
+ has ( and () and ab, is.
+
+. is. accepted have. ('s shot is, round
+ - won, on.. killer 3: of. has,",6.494533061981201,6.4309797286987305,-0.0635533332824707,0.0,0.0,0.0
+cds,10388,2.0,1,After a pre-season speech in which,", in, and is or or legacy's
+
+ third, until, had requested so–, spent- is. figure work in ' and ' do is D side
+ (:, A (,'s, ' at in- the",6.508392333984375,6.626805782318115,0.11841344833374023,0.0,0.0,0.0
+cds,10388,2.0,2,When people say Nile Rodgers has worked with," over-- is and A Dep of [ (
+
+ career's B was to de United ' c f
+ behind, 3 won, won - summer notes,, full "" FC over- fl 5 has. ( –-
+ did",8.093183517456055,8.199796676635742,0.1066131591796875,0.0,0.0,0.0
+cds,10388,2.0,3,Hillary Clinton has reestablished her advantage over,"'s past first- as- in and has't, full from. ( -,, -- is.:
+ letter's take:'s is' is
+ of ( got FA,'s stayed (,-,, A.,",7.1598944664001465,7.234652519226074,0.07475805282592773,0.0,0.0,0.0
+cds,10388,2.0,4,November auction will be test of Detroit commercial,"'s of has man, die
+
+'s was, 1, last of dead wears.
+
+) – ' next, might have, is SC block or,- A isn, office Mail [, '
+
+
+isa, ' final",6.650988578796387,6.887178421020508,0.2361898422241211,0.0,0.0,0.0
+cds,10388,2.0,5,Every week we shine a light on the," trio ahead and ( storm-- 1,
+
+EMBER are, and (4, won, man,). that currently,, and, side- is (..). ' men;
+:., and was-,,",6.555923938751221,6.800537109375,0.2446131706237793,0.0,0.0,0.0
+cds,10388,2.0,6,Image copyright Getty Images Image caption The show," ''s C earned president of has ', and last has (,'s - grips).
+
+ FA's sent last original ' d's have
+ and ' '
+ style guides for world's will introduced CF, and squad, entered in",7.389841079711914,7.408005714416504,0.018164634704589844,0.0,0.0,0.0
+cds,10388,2.0,7,"Last month, Greedhead rapper Lak"," MXen for FC's first-, B, meet/-- player., ace consumer of were on ( had was, ( in)'s for. - and-, had-
+
+ is. were.. -, and",7.19748592376709,7.223658084869385,0.026172161102294922,0.0,0.0,0.0
+cds,10388,2.0,8,This is the second article in a series," of the Cast but- marks. is., so- is, ('s block back 365-., 5 at XI. ( master Barcelona,, and is,., ( won's face, during on FL's and ( is",7.2208476066589355,7.074814319610596,-0.14603328704833984,0.0,0.0,0.0
+cds,10388,2.0,9,"A curious business, and one for which",", let, had, 8
+
+- attack and called on, –,. ( XI. last,
+ stay in in..; '_.-
+ are at,,
+
+- is', block,,,",6.5418267250061035,6.464618682861328,-0.07720804214477539,0.0,0.0,0.0
+mts,10388,0.0,0,"Fifteen years ago this week, President"," Obama began his first day of the presidency by agreeing to reduce a 15 percent tax on the top 20 percent of earners. Back then, the idea of the ""Buffett Rule"" was a radical departure. To limit Wall Street's role in",2.747246026992798,3.2639567852020264,0.5167107582092285,0.0,0.0,0.0
+mts,10388,0.0,1,After a pre-season speech in which," he commented on the team's performance, David Silva seems to be agreeing with his former coach when he said he is confident in a in-form defenceman.
+
+Silva: my hopes rise as a maul at Barcelona
+
+",3.8323941230773926,4.641595840454102,0.809201717376709,0.0,0.02449805475771427,0.0
+mts,10388,0.0,2,When people say Nile Rodgers has worked with," people, what is he trying to accomplish? It doesn't feel so much like an accent, but rather it feels like a knowledge transfer. Rodgers loves summer notes and goals as much as anyone, and there has to be a bit more something",3.6195735931396484,4.267568588256836,0.6479949951171875,0.0,0.0,0.0
+mts,10388,0.0,3,Hillary Clinton has reestablished her advantage over," Bernie Sanders among registered voters across the country. Last week, the Democratic nominee learned from a formal list of delegates that Vermont Sen. Bernie Sanders is by far the frontrunner of the delegate count, but stayed out of the national spotlight. ""This",2.976527214050293,3.416558027267456,0.4400308132171631,0.0,0.0,0.0
+mts,10388,0.0,4,November auction will be test of Detroit commercial,"'s framework for new size skyscrapers,"" Billboard, 1/14/15,""ABC Business Bureau)<|endoftext|>Nowadays micro-breweries are essentially independent companies, private accounts, established businesses, which online store the goods coming from their suppliers",4.819289684295654,5.208264350891113,0.388974666595459,0.0,0.0,0.0
+mts,10388,0.0,5,Every week we shine a light on the," fascinating short-lived storm that came ashore on the Black Sea in the late 1960s. We discuss what they mean for them, how they define themselves, and how nature adapted itself to them.
+
+With our website free and mobile,",3.331026077270508,3.4717206954956055,0.14069461822509766,0.0,0.0,0.0
+mts,10388,0.0,6,Image copyright Getty Images Image caption The show," debuted at Cinque Ciela Theatre in Los Angeles
+
+It started life as a young Madam Bichon, dabbled in a Spanish class but dropped out because she couldn't afford housing, said the screenwriter in",4.129144191741943,4.78633451461792,0.6571903228759766,0.0,0.0,0.0
+mts,10388,0.0,7,"Last month, Greedhead rapper Lak","osen released his latest video (no, he won't call it that either) ""Loading... Loading...
+
+Missed the video? Check out our other Spinoff Video WordPress Chat Show!
+
+Comments »<|endoftext|>This page describes",4.005465030670166,4.606319904327393,0.6008548736572266,0.0,0.0,0.0
+mts,10388,0.0,8,This is the second article in a series," of the Phillips B-150. The first articles have focused on the B-150's sub-performance aftermarket timing bin. This article builds on the Phillips B-450's performance in an FJ15SR situation, and discusses how",4.066742420196533,4.687235355377197,0.6204929351806641,0.0,0.0,0.0
+mts,10388,0.0,9,"A curious business, and one for which",", let's face it, all the top US suppliers of high performance products are already prepping for downturns. In an unsurprising turn of events, Amazon is determined to avoid drawing the same lessons from the Great Recession to its sellers,",3.4766433238983154,3.564847946166992,0.08820462226867676,0.0,0.0,0.0
+mts,10388,1.0,0,"Fifteen years ago this week, President","'s began,,.'s, and,'s has's and (, and in's, was is will to is and, have to,'s and is and, approved's won, (.. said's: of's has,",5.735812664031982,5.680181503295898,-0.055631160736083984,0.0,0.0,0.0
+mts,10388,1.0,1,After a pre-season speech in which,",,,, and or's,'s's (:, and,,'s ('s, is, is, and, in's and,'s is,'s's (:, and (,'s,, at in,'s",4.464558124542236,4.718133449554443,0.25357532501220703,0.0,0.0,0.0
+mts,10388,1.0,2,When people say Nile Rodgers has worked with,",,'s is and's and's is (,'s,'s's and's chief, after's f in,, is as,, that didn notes, director's "", over, and, has.'s, is. did",6.112224578857422,6.203282833099365,0.09105825424194336,0.0,0.0,0.0
+mts,10388,1.0,3,Hillary Clinton has reestablished her advantage over,"'s is's has as supporters in and has's,'s from. ( -,,'s wanted is's: at in's and,'s is has is at of ( got's,'s, (,,,, has.'s",5.8448615074157715,5.879183769226074,0.034322261810302734,0.0,0.0,0.0
+mts,10388,1.0,4,November auction will be test of Detroit commercial,"'s of has says,'s ('s's's, 1's, is,,""'s rally's) team in next, might and,'s SC's found, architecture,'s, office, and has, is as's, chairman,",5.597115516662598,5.966409683227539,0.3692941665649414,0.0,0.0,0.0
+mts,10388,1.0,5,Every week we shine a light on the,", to and ('s,'s and, for's, are, and (, has and, and,, that and,,'s,,'s and (.'s). to's; and's has, and was and,,",4.694331169128418,4.611111640930176,-0.08321952819824219,0.0,0.0,0.0
+mts,10388,1.0,6,Image copyright Getty Images Image caption The show," ''s, says would and has's showed and, has (,'s's and's and, and's,'s and's – and being, and is's,'s's's,'s's's and,'s's and, in",4.55094575881958,4.847784996032715,0.29683923721313477,0.0,0.0,0.0
+mts,10388,1.0,7,"Last month, Greedhead rapper Lak","'s as for team's is (,,, that's and with as's fans, are: were has ('s was,'s in's's for at, and and, had's,'s is and were,.'s, and",5.3834357261657715,5.28041410446167,-0.10302162170410156,0.0,0.0,0.0
+mts,10388,1.0,8,This is the second article in a series,", that, but's,'s is.,'s brings's, to's and's at's claims after's at's. (,'s,, and's,.'s ( chief's takes, ( on talks's and ( in",5.724420547485352,5.833357334136963,0.10893678665161133,0.0,0.0,0.0
+mts,10388,1.0,9,"A curious business, and one for which",", is, which, considers and and, is and's on,,,. (, is website, and's in in's fame, in hopes.- and are at's,, officials and intern and, to and,,",5.9502387046813965,5.9659504890441895,0.01571178436279297,0.0,0.0,0.0
+mts,10388,2.0,0,"Fifteen years ago this week, President","'s began,,.'s, and,'s has's and (, and in,,, and,,, and,'s to,'s and is and,'s's's, (.. and's: of's in,",5.089575290679932,4.998771667480469,-0.09080362319946289,0.0,0.0,0.0
+mts,10388,2.0,1,After a pre-season speech in which,",,,, and and's,'s's (,, and and,'s,'s, and, is, and's in's and,'s's, and's (,, and (,'s,, at in,'s",4.095797061920166,4.4913330078125,0.395535945892334,0.0,0.0,0.0
+mts,10388,2.0,2,When people say Nile Rodgers has worked with,",,'s is and's and's, and,'s,'s's and's,, after,,,,, is and,, that,, and,'s and, over, and,,'s,,,'s,",4.4563822746276855,4.537249565124512,0.08086729049682617,0.0,0.0,0.0
+mts,10388,2.0,3,Hillary Clinton has reestablished her advantage over,"'s's's and as is in and,'s's's,, ( and,'s's's is's, at in's and,'s's, is, of (,'s,'s, (,,,,,.'s",4.584885120391846,4.4738993644714355,-0.11098575592041016,0.0,0.0,0.0
+mts,10388,2.0,4,November auction will be test of Detroit commercial,"'s of has says,'s ('s's's,,,,'s,,,'s's and's in's, and and,'s, and,,'s,'s,,'s and,, is as's,'s,",4.366551399230957,4.539762020111084,0.17321062088012695,0.0,0.0,0.0
+mts,10388,2.0,5,Every week we shine a light on the,",'s and ('s,'s and, for's, are, and (,, and's,,, that and's, and,,'s and and., and to's's and's has, and was and,,",4.699523448944092,4.63546895980835,-0.06405448913574219,0.0,0.0,0.0
+mts,10388,2.0,6,Image copyright Getty Images Image caption The show,",'s, and and and has's, and, has (,'s's and's and, and,,'s and's and's, and and ('s,'s's's,,'s's and,'s and,, in",4.088987350463867,4.151393890380859,0.06240653991699219,0.0,0.0,0.0
+mts,10388,2.0,7,"Last month, Greedhead rapper Lak","'s as for team's and and,,, that's and and,'s, and and,'s on,'s was,'s in's's, at, and and, had's,'s is and in, and's, and",4.330286026000977,4.362624645233154,0.032338619232177734,0.0,0.0,0.0
+mts,10388,2.0,8,This is the second article in a series,", that, is's,'s is,,'s and's,'s's and's,'s's after's at's in and,'s,, and's,.'s ( in's's, ( on,'s and ( in",4.69301176071167,4.8951826095581055,0.20217084884643555,0.0,0.0,0.0
+mts,10388,2.0,9,"A curious business, and one for which",",,,'s, and and's,'s and's on,,, and's,'s,, and's in in's, and,,.- and,,'s,, and and's and,, and,,",3.999393939971924,4.039428234100342,0.04003429412841797,0.0,0.0,0.0
+fsr,10388,0.0,0,"Fifteen years ago this week, President"," Obama began his first day of the presidency by agreeing to reduce a 15 percent tax on the top 20 percent of earners. Back then, the idea of the ""Buffett Rule"" was a radical departure. To limit Wall Street's role in",2.747246026992798,3.2639567852020264,0.5167107582092285,0.0,0.0,0.0
+fsr,10388,0.0,1,After a pre-season speech in which," he commented on the team's performance, David Silva seems to be agreeing with his former coach when he said he is confident in a in-form defenceman.
+
+Silva: my hopes rise as a maul at Barcelona
+
+",3.8323941230773926,4.641595840454102,0.809201717376709,0.0,0.02449805475771427,0.0
+fsr,10388,0.0,2,When people say Nile Rodgers has worked with," people, what is he trying to accomplish? It doesn't feel so much like an accent, but rather it feels like a knowledge transfer. Rodgers loves summer notes and goals as much as anyone, and there has to be a bit more something",3.6195735931396484,4.267568588256836,0.6479949951171875,0.0,0.0,0.0
+fsr,10388,0.0,3,Hillary Clinton has reestablished her advantage over," Bernie Sanders among registered voters across the country. Last week, the Democratic nominee learned from a formal list of delegates that Vermont Sen. Bernie Sanders is by far the frontrunner of the delegate count, but stayed out of the national spotlight. ""This",2.976527214050293,3.416558027267456,0.4400308132171631,0.0,0.0,0.0
+fsr,10388,0.0,4,November auction will be test of Detroit commercial,"'s framework for new size skyscrapers,"" Billboard, 1/14/15,""ABC Business Bureau)<|endoftext|>Nowadays micro-breweries are essentially independent companies, private accounts, established businesses, which online store the goods coming from their suppliers",4.819289684295654,5.208264350891113,0.388974666595459,0.0,0.0,0.0
+fsr,10388,0.0,5,Every week we shine a light on the," fascinating short-lived storm that came ashore on the Black Sea in the late 1960s. We discuss what they mean for them, how they define themselves, and how nature adapted itself to them.
+
+With our website free and mobile,",3.331026077270508,3.4717206954956055,0.14069461822509766,0.0,0.0,0.0
+fsr,10388,0.0,6,Image copyright Getty Images Image caption The show," debuted at Cinque Ciela Theatre in Los Angeles
+
+It started life as a young Madam Bichon, dabbled in a Spanish class but dropped out because she couldn't afford housing, said the screenwriter in",4.129144191741943,4.78633451461792,0.6571903228759766,0.0,0.0,0.0
+fsr,10388,0.0,7,"Last month, Greedhead rapper Lak","osen released his latest video (no, he won't call it that either) ""Loading... Loading...
+
+Missed the video? Check out our other Spinoff Video WordPress Chat Show!
+
+Comments »<|endoftext|>This page describes",4.005465030670166,4.606319904327393,0.6008548736572266,0.0,0.0,0.0
+fsr,10388,0.0,8,This is the second article in a series," of the Phillips B-150. The first articles have focused on the B-150's sub-performance aftermarket timing bin. This article builds on the Phillips B-450's performance in an FJ15SR situation, and discusses how",4.066742420196533,4.687235355377197,0.6204929351806641,0.0,0.0,0.0
+fsr,10388,0.0,9,"A curious business, and one for which",", let's face it, all the top US suppliers of high performance products are already prepping for downturns. In an unsurprising turn of events, Amazon is determined to avoid drawing the same lessons from the Great Recession to its sellers,",3.4766433238983154,3.564847946166992,0.08820462226867676,0.0,0.0,0.0
+fsr,10388,1.0,0,"Fifteen years ago this week, President"," loves began his career.
+
+As, over a series of offensive, and in the archives of his four-four conflict, the world could only hope the spell of his uncle won a ending.
+
+After that of last couple were",5.023208141326904,5.10102653503418,0.07781839370727539,0.0,0.0,0.0
+fsr,10388,1.0,1,After a pre-season speech in which," he secured the club only or interest for three years, Jose struck 18 terms, leaving his upon over world-ing for.
+
+Your best defence do not Expect to
+
+Billa
+
+, remember seen during at add-ag",6.535160541534424,6.864880084991455,0.32971954345703125,0.0,0.0,0.0
+fsr,10388,1.0,2,When people say Nile Rodgers has worked with," his parents during his childhood, they are closest friends
+
+There's no footballer's training, but Carlo f
+
+With 3 won in 2013 that summer, Real met full-j notes from them 5 seasons. The same is in the",5.640491485595703,6.017960071563721,0.3774685859680176,1.0,0.11809953302145004,0.0
+fsr,10388,1.0,3,Hillary Clinton has reestablished her advantage over," the past four years as president in the conflict when they prevailed in the final season, though not actually won. Since the governing's sacked singer's P influence is at your (2), doctors stayed Chelsea, but did not view the Cup",5.939192295074463,6.095414638519287,0.15622234344482422,0.0,0.0,0.0
+fsr,10388,1.0,4,November auction will be test of Detroit commercial,"'s ofele saysWorld Anti-Football's FC, 1, last season, ban.
+
+) – ' next season might have patients' SC block bagAC- A Bernabe office won the online '
+
+
+Stay on Google for",7.142923831939697,7.433567523956299,0.29064369201660156,0.0,0.0,0.0
+fsr,10388,1.0,5,Every week we shine a light on the," trio of White ace storm man of 1 player
+
+Mar 1, 2015 (4 years and 1/6).
+
+© WORLD TAC side coach
+
+Life.
+
+Red;
+
+Billa
+
+
+- TEAM CH",5.593906879425049,5.795846462249756,0.20193958282470703,0.0,0.0,0.0
+fsr,10388,1.0,6,Image copyright Getty Images Image caption The show," debuted in December
+
+West has's sports stars last year and took all last grips of the club days.
+
+This year d'atal was only on the dusty rubber web.
+
+It's all going to come out of in",5.149042129516602,5.536336898803711,0.3872947692871094,0.0,0.0,0.0
+fsr,10388,1.0,7,"Last month, Greedhead rapper Lak","osen made his U-sign deal, he won a move with PS. Dep the consumer of Me on Earth's was last player in four world friends.
+
+Chelsea entered the scene with sporting side Most were sacked in this winter and",6.057178974151611,6.254238128662109,0.19705915451049805,0.0,0.0,0.0
+fsr,10388,1.0,8,This is the second article in a series," of the sn but non-mer*'atics soireés.
+
+Fans back were to judge after their own World Cup winning master Barcelona beat great far Champions XI bosses' (z) face.
+
+From The era of Mar",6.570997714996338,6.698250770568848,0.12725305557250977,0.0,0.026100292801856995,0.0
+fsr,10388,1.0,9,"A curious business, and one for which",", let's have your own 'Ed- attack and stay on it – may.
+
+The last Legacy Of The Playwrack star was '_.-ened 2015, drawing his work at Real Football and Cristiano Ronaldo, the",6.033022403717041,5.966252326965332,-0.06677007675170898,1.0,0.4963301122188568,0.0
+fsr,10388,2.0,0,"Fifteen years ago this week, President","'s Success, together.., united
+
+. ( is (, and ab, B, [), is, Cell 101, ('s shot is, round
+ - won, -.. killer 3: of -,,",6.776823043823242,6.750743865966797,-0.026079177856445312,0.0,0.0,0.0
+fsr,10388,2.0,1,After a pre-season speech in which,", in--ate or or,'s- D-, until,, sell
+–, is A. ( figure work in ' m ' do is D side
+ (:, A (,'s- ' at in- the",6.7003936767578125,7.123179912567139,0.42278623580932617,0.0,0.0,0.0
+fsr,10388,2.0,2,When people say Nile Rodgers has worked with," over-- is and A Dep of [ (,- career's B and per- Exp ' c f) 24, of won, wear - summer notes, and full "", over- f 5,. ( –- MC Fer",7.914978504180908,7.966073989868164,0.05109548568725586,0.0,0.0,0.0
+fsr,10388,2.0,3,Hillary Clinton has reestablished her advantage over,"'s past first- as- in and has't- full positions. ( -,, --).-
+
+'s guard is's P' is
+ of ( got FA, ( inst (,-),
+.-",6.98992395401001,7.181595802307129,0.19167184829711914,0.0,0.0,0.0
+fsr,10388,2.0,4,November auction will be test of Detroit commercial,"'s of ' says, B
+
+'s was, 1, last season, wears.
+
+) – ' next, might have, is SC block football,- A isn, attacking won [, '
+
+
+-, ' final",6.538591384887695,6.7001261711120605,0.16153478622436523,0.0,0.0,0.0
+fsr,10388,2.0,5,Every week we shine a light on the," trio ahead and ( storm-- 1,
+
+EMBER are, and (4, won, man,). that currently take, esc, side- and (..). ' men;
+:., and was-,,",6.5506672859191895,6.809992790222168,0.2593255043029785,0.0,0.0,0.0
+fsr,10388,2.0,6,Image copyright Getty Images Image caption The show," ''s C earned president of has ', and last has (, ' deal grips).
+
+ FA's sent last original ' d ',
+ and ' ' XV style guides.
+' will Now Round, is the last days in",7.601703643798828,7.403862953186035,-0.19784069061279297,0.0,0.0,0.0
+fsr,10388,2.0,7,"Last month, Greedhead rapper Lak"," MXen for FC's first- season B, meet/-- player., ace consumer of were on (, was, () and's for. - and- is.
+
+ sporting is Most were.. "", and",7.552276611328125,7.45137882232666,-0.10089778900146484,0.0,0.0,0.0
+fsr,10388,2.0,8,This is the second article in a series," of the World but- marks. is., so- is, a ( block A, 2013-, 5- XI. (, b, 2014-,,., ( style's mark, - on FL, // (.",6.695623397827148,6.600978374481201,-0.09464502334594727,0.0,0.0,0.0
+fsr,10388,2.0,9,"A curious business, and one for which",", let, had, 8
+
+- attack and called on, –,. ( XI..,-.
+
+ ( Superer '_.-
+ are at,,
+
+- is and, block, enjoy,",6.39621114730835,6.303776741027832,-0.09243440628051758,0.0,0.0,0.0

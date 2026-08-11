@@ -20,7 +20,20 @@ import pandas as pd
 import torch
 import yaml
 
-from common import DATA, DEVICE, HOOK, RESULTS, ROOT, ActStats, load_model, load_sae, seed_all
+from common import (
+    DATA,
+    DEVICE,
+    HOOK,
+    RESULTS,
+    ROOT,
+    SKIP_POS,
+    ActStats,
+    load_ceilings,
+    load_model,
+    load_sae,
+    natural_strength,
+    seed_all,
+)
 from denoiser import WienerDenoiser, build_denoiser, sigma_for_norm, transported_direction
 from train_ctr import make_suffix
 
@@ -44,7 +57,6 @@ def run(args) -> None:
 
     seed_all(args.seed)
     stats = ActStats.load()
-    scale = stats.median_norm
     model = load_model()
     sae = load_sae()
     suffix = make_suffix(model)
@@ -54,21 +66,22 @@ def run(args) -> None:
     _, cache = model.run_with_cache(toks, names_filter=HOOK)
     h = cache[HOOK].detach()
     del cache
-    z0 = suffix(h)
+    # only the positions the generation hook would touch, and only those are scored
+    z0 = suffix(S.apply_masked(S.clean, h, h.new_zeros(h.shape[-1]), 0.0))[:, SKIP_POS:]
 
     dev = yaml.safe_load((CONFIGS / "features.yaml").read_text(encoding="utf-8"))["dev"]
-    ceiling = torch.load(DATA / "sae_feature_stats.pt", map_location=DEVICE)["max_act"].to(DEVICE)
+    ceiling = load_ceilings()
     w_norm = sae.W_dec / sae.W_dec.norm(dim=-1, keepdim=True).clamp_min(1e-6)
 
     trained = {n: load_trained(n, stats) for n in args.denoisers.split(",")}
-    eps = args.eps_c * scale
-
     rows = []
     for rec in dev:
         f = int(rec["index"])
         v = sae.W_dec[f].detach().float()
         v_hat = v / v.norm()
-        g = (suffix(h + eps * v_hat) - z0) / eps
+        scale = natural_strength(sae, ceiling, f)
+        eps = args.eps_c * scale
+        g = (suffix(S.apply_masked(S.naive, h, v_hat, eps))[:, SKIP_POS:] - z0) / eps
         gn = (g * g).sum(-1, keepdim=True).clamp_min(1e-6)
 
         exempt = (w_norm @ v_hat).abs() > args.exempt_cos
@@ -104,7 +117,7 @@ def run(args) -> None:
         for cname, fn in cands.items():
             for c in C_GRID:
                 s = c * scale
-                dz = suffix(fn(h, v_hat, s)) - z0
+                dz = suffix(S.apply_masked(fn, h, v_hat, s))[:, SKIP_POS:] - z0
                 a = (dz * g).sum(-1, keepdim=True) / gn
                 resid = dz - a * g
                 cval = resid.norm(dim=-1) / (a.squeeze(-1).abs() * g.norm(dim=-1)).clamp_min(1e-6)

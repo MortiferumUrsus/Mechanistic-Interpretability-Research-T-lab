@@ -78,7 +78,31 @@ def score_ppl(df: pd.DataFrame, model_name: str, batch: int, shuffled: bool = Fa
         tok.pad_token = tok.eos_token
     lm = AutoModelForCausalLM.from_pretrained(model_name, torch_dtype=torch.float16).to(DEVICE)
     lm.eval()
+    out = _ppl_pass(df, tok, lm, batch, shuffled)
+    del lm
+    torch.cuda.empty_cache()
+    return out
 
+
+@torch.no_grad()
+def score_ppl_both(df: pd.DataFrame, model_name: str, batch: int) -> tuple[np.ndarray, np.ndarray]:
+    """True-prompt and shuffled-prompt perplexity from a single model load."""
+    from transformers import AutoModelForCausalLM, AutoTokenizer
+
+    tok = AutoTokenizer.from_pretrained(model_name)
+    if tok.pad_token is None:
+        tok.pad_token = tok.eos_token
+    lm = AutoModelForCausalLM.from_pretrained(model_name, torch_dtype=torch.float16).to(DEVICE)
+    lm.eval()
+    true = _ppl_pass(df, tok, lm, batch, False)
+    shuf = _ppl_pass(df, tok, lm, batch, True)
+    del lm
+    torch.cuda.empty_cache()
+    return true, shuf
+
+
+@torch.no_grad()
+def _ppl_pass(df: pd.DataFrame, tok, lm, batch: int, shuffled: bool) -> np.ndarray:
     prompts = list(df["prompt"])
     if shuffled:
         rng = random.Random(0)
@@ -109,8 +133,6 @@ def score_ppl(df: pd.DataFrame, model_name: str, batch: int, shuffled: bool = Fa
             ((nll * m).sum(-1) / m.sum(-1).clamp_min(1)).cpu().numpy().astype(np.float64)
         )
         del logits, nll
-    del lm
-    torch.cuda.empty_cache()
     return out
 
 
@@ -211,8 +233,9 @@ def main(args) -> None:
     stages = args.stages.split(",")
 
     if "ppl" in stages:
-        df["logppl"] = score_ppl(df, SCORER, args.batch)
-        df["logppl_shuf"] = score_ppl(df, SCORER, args.batch, shuffled=True)
+        true, shuf = score_ppl_both(df, SCORER, args.batch)
+        df["logppl"] = true
+        df["logppl_shuf"] = shuf
         df["prompt_dependence"] = df["logppl_shuf"] - df["logppl"]
     if "ppl_alt" in stages:
         df["logppl_alt"] = score_ppl(df, SCORER_ALT, args.batch)

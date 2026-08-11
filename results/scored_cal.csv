@@ -1,0 +1,403 @@
+arm,feature,c,prompt_idx,prompt,text,logppl,logppl_shuf,prompt_dependence,keyword_hit,sae_act,rep4
+clean,24487,0.0,0,"Fifteen years ago this week, President"," Obama gave Hillary Clinton his endorsement. His support, like that of the Harvard professor Jack Stratton at the University of Chicago, ""bears no resemblance to the ferocious loyalty to Clinton exhibited to the Vietnam and Iraq wars of the past four decades",3.3406059741973877,3.8988494873046875,0.5582435131072998,0.0,0.0,0.0
+clean,24487,0.0,1,After a pre-season speech in which," he challenged the establishment media's narrative of him as one who risked his own health at the expense of his family and friends, Trump's health experts have emphasized his low-grade condition and state-of-the-art treatment options.
+",2.829167366027832,3.5484373569488525,0.7192699909210205,0.0,0.0,0.0
+clean,24487,0.0,2,When people say Nile Rodgers has worked with," people in North America, the first thing they tell them is that the River Green is not a River Green. The river is water. Of course that's what Nile Rodgers does because it's one of the most beautiful things you can imagine.",2.7143962383270264,3.641327142715454,0.9269309043884277,0.0,0.0,0.0
+clean,24487,0.0,3,Hillary Clinton has reestablished her advantage over," Bernie Sanders to create a new lead between her in the general election and her margin of victory in November.
+
+""I would have to concede that it's been a rough road so far as politics is concerned,"" Clinton told reporters Monday,",2.690129041671753,3.16123104095459,0.4711019992828369,0.0,0.0,0.0
+clean,24487,0.0,4,November auction will be test of Detroit commercial,"'s basic deal with famous retailer Read more
+
+An earlier auction of 370,000 MLK pianos took place in Detroit, did not include a raise and auctioning of 4,200 pieces could not be held this season because of the",4.071362495422363,4.582861423492432,0.5114989280700684,0.0,0.0,0.0
+clean,24487,0.0,5,Every week we shine a light on the," fascinating world of Saudi Arabia, with some of the oldest real estate developments in the world listed! This short piece by Collins4Canada's Bin Jasra focuses on the first Dubai restaurant and market that goes by the name of Koh Al Khash",4.532073020935059,4.926360607147217,0.3942875862121582,0.0,0.0,0.0
+clean,24487,0.5,0,"Fifteen years ago this week, President"," Obama gave Hillary Clinton his endorsement. His support, like that of the Harvard professor Jack Stratton at the University of Chicago, ""bears no resemblance to the ferocious loyalty to Clinton exhibited to the Vietnam and Iraq wars of the past four decades",3.3406059741973877,3.8988494873046875,0.5582435131072998,0.0,0.0,0.0
+clean,24487,0.5,1,After a pre-season speech in which," he challenged the establishment media's narrative of him as one who risked his own health at the expense of his family and friends, Trump's health experts have emphasized his low-grade condition and state-of-the-art treatment options.
+",2.829167366027832,3.5484373569488525,0.7192699909210205,0.0,0.0,0.0
+clean,24487,0.5,2,When people say Nile Rodgers has worked with," people in North America, the first thing they tell them is that the River Green is not a River Green. The river is water. Of course that's what Nile Rodgers does because it's one of the most beautiful things you can imagine.",2.7143962383270264,3.641327142715454,0.9269309043884277,0.0,0.0,0.0
+clean,24487,0.5,3,Hillary Clinton has reestablished her advantage over," Bernie Sanders to create a new lead between her in the general election and her margin of victory in November.
+
+""I would have to concede that it's been a rough road so far as politics is concerned,"" Clinton told reporters Monday,",2.690129041671753,3.16123104095459,0.4711019992828369,0.0,0.0,0.0
+clean,24487,0.5,4,November auction will be test of Detroit commercial,"'s basic deal with famous retailer Read more
+
+An earlier auction of 370,000 MLK pianos took place in Detroit, did not include a raise and auctioning of 4,200 pieces could not be held this season because of the",4.071362495422363,4.582861423492432,0.5114989280700684,0.0,0.0,0.0
+clean,24487,0.5,5,Every week we shine a light on the," fascinating world of Saudi Arabia, with some of the oldest real estate developments in the world listed! This short piece by Collins4Canada's Bin Jasra focuses on the first Dubai restaurant and market that goes by the name of Koh Al Khash",4.532073020935059,4.926360607147217,0.3942875862121582,0.0,0.0,0.0
+clean,24487,1.0,0,"Fifteen years ago this week, President"," Obama gave Hillary Clinton his endorsement. His support, like that of the Harvard professor Jack Stratton at the University of Chicago, ""bears no resemblance to the ferocious loyalty to Clinton exhibited to the Vietnam and Iraq wars of the past four decades",3.3406059741973877,3.8988494873046875,0.5582435131072998,0.0,0.0,0.0
+clean,24487,1.0,1,After a pre-season speech in which," he challenged the establishment media's narrative of him as one who risked his own health at the expense of his family and friends, Trump's health experts have emphasized his low-grade condition and state-of-the-art treatment options.
+",2.829167366027832,3.5484373569488525,0.7192699909210205,0.0,0.0,0.0
+clean,24487,1.0,2,When people say Nile Rodgers has worked with," people in North America, the first thing they tell them is that the River Green is not a River Green. The river is water. Of course that's what Nile Rodgers does because it's one of the most beautiful things you can imagine.",2.7143962383270264,3.641327142715454,0.9269309043884277,0.0,0.0,0.0
+clean,24487,1.0,3,Hillary Clinton has reestablished her advantage over," Bernie Sanders to create a new lead between her in the general election and her margin of victory in November.
+
+""I would have to concede that it's been a rough road so far as politics is concerned,"" Clinton told reporters Monday,",2.690129041671753,3.16123104095459,0.4711019992828369,0.0,0.0,0.0
+clean,24487,1.0,4,November auction will be test of Detroit commercial,"'s basic deal with famous retailer Read more
+
+An earlier auction of 370,000 MLK pianos took place in Detroit, did not include a raise and auctioning of 4,200 pieces could not be held this season because of the",4.071362495422363,4.582861423492432,0.5114989280700684,0.0,0.0,0.0
+clean,24487,1.0,5,Every week we shine a light on the," fascinating world of Saudi Arabia, with some of the oldest real estate developments in the world listed! This short piece by Collins4Canada's Bin Jasra focuses on the first Dubai restaurant and market that goes by the name of Koh Al Khash",4.532073020935059,4.926360607147217,0.3942875862121582,0.0,0.0,0.0
+clean,24487,1.5,0,"Fifteen years ago this week, President"," Obama gave Hillary Clinton his endorsement. His support, like that of the Harvard professor Jack Stratton at the University of Chicago, ""bears no resemblance to the ferocious loyalty to Clinton exhibited to the Vietnam and Iraq wars of the past four decades",3.3406059741973877,3.8988494873046875,0.5582435131072998,0.0,0.0,0.0
+clean,24487,1.5,1,After a pre-season speech in which," he challenged the establishment media's narrative of him as one who risked his own health at the expense of his family and friends, Trump's health experts have emphasized his low-grade condition and state-of-the-art treatment options.
+",2.829167366027832,3.5484373569488525,0.7192699909210205,0.0,0.0,0.0
+clean,24487,1.5,2,When people say Nile Rodgers has worked with," people in North America, the first thing they tell them is that the River Green is not a River Green. The river is water. Of course that's what Nile Rodgers does because it's one of the most beautiful things you can imagine.",2.7143962383270264,3.641327142715454,0.9269309043884277,0.0,0.0,0.0
+clean,24487,1.5,3,Hillary Clinton has reestablished her advantage over," Bernie Sanders to create a new lead between her in the general election and her margin of victory in November.
+
+""I would have to concede that it's been a rough road so far as politics is concerned,"" Clinton told reporters Monday,",2.690129041671753,3.16123104095459,0.4711019992828369,0.0,0.0,0.0
+clean,24487,1.5,4,November auction will be test of Detroit commercial,"'s basic deal with famous retailer Read more
+
+An earlier auction of 370,000 MLK pianos took place in Detroit, did not include a raise and auctioning of 4,200 pieces could not be held this season because of the",4.071362495422363,4.582861423492432,0.5114989280700684,0.0,0.0,0.0
+clean,24487,1.5,5,Every week we shine a light on the," fascinating world of Saudi Arabia, with some of the oldest real estate developments in the world listed! This short piece by Collins4Canada's Bin Jasra focuses on the first Dubai restaurant and market that goes by the name of Koh Al Khash",4.532073020935059,4.926360607147217,0.3942875862121582,0.0,0.0,0.0
+clean,24487,2.0,0,"Fifteen years ago this week, President"," Obama gave Hillary Clinton his endorsement. His support, like that of the Harvard professor Jack Stratton at the University of Chicago, ""bears no resemblance to the ferocious loyalty to Clinton exhibited to the Vietnam and Iraq wars of the past four decades",3.3406059741973877,3.8988494873046875,0.5582435131072998,0.0,0.0,0.0
+clean,24487,2.0,1,After a pre-season speech in which," he challenged the establishment media's narrative of him as one who risked his own health at the expense of his family and friends, Trump's health experts have emphasized his low-grade condition and state-of-the-art treatment options.
+",2.829167366027832,3.5484373569488525,0.7192699909210205,0.0,0.0,0.0
+clean,24487,2.0,2,When people say Nile Rodgers has worked with," people in North America, the first thing they tell them is that the River Green is not a River Green. The river is water. Of course that's what Nile Rodgers does because it's one of the most beautiful things you can imagine.",2.7143962383270264,3.641327142715454,0.9269309043884277,0.0,0.0,0.0
+clean,24487,2.0,3,Hillary Clinton has reestablished her advantage over," Bernie Sanders to create a new lead between her in the general election and her margin of victory in November.
+
+""I would have to concede that it's been a rough road so far as politics is concerned,"" Clinton told reporters Monday,",2.690129041671753,3.16123104095459,0.4711019992828369,0.0,0.0,0.0
+clean,24487,2.0,4,November auction will be test of Detroit commercial,"'s basic deal with famous retailer Read more
+
+An earlier auction of 370,000 MLK pianos took place in Detroit, did not include a raise and auctioning of 4,200 pieces could not be held this season because of the",4.071362495422363,4.582861423492432,0.5114989280700684,0.0,0.0,0.0
+clean,24487,2.0,5,Every week we shine a light on the," fascinating world of Saudi Arabia, with some of the oldest real estate developments in the world listed! This short piece by Collins4Canada's Bin Jasra focuses on the first Dubai restaurant and market that goes by the name of Koh Al Khash",4.532073020935059,4.926360607147217,0.3942875862121582,0.0,0.0,0.0
+clean,24487,3.0,0,"Fifteen years ago this week, President"," Obama gave Hillary Clinton his endorsement. His support, like that of the Harvard professor Jack Stratton at the University of Chicago, ""bears no resemblance to the ferocious loyalty to Clinton exhibited to the Vietnam and Iraq wars of the past four decades",3.3406059741973877,3.8988494873046875,0.5582435131072998,0.0,0.0,0.0
+clean,24487,3.0,1,After a pre-season speech in which," he challenged the establishment media's narrative of him as one who risked his own health at the expense of his family and friends, Trump's health experts have emphasized his low-grade condition and state-of-the-art treatment options.
+",2.829167366027832,3.5484373569488525,0.7192699909210205,0.0,0.0,0.0
+clean,24487,3.0,2,When people say Nile Rodgers has worked with," people in North America, the first thing they tell them is that the River Green is not a River Green. The river is water. Of course that's what Nile Rodgers does because it's one of the most beautiful things you can imagine.",2.7143962383270264,3.641327142715454,0.9269309043884277,0.0,0.0,0.0
+clean,24487,3.0,3,Hillary Clinton has reestablished her advantage over," Bernie Sanders to create a new lead between her in the general election and her margin of victory in November.
+
+""I would have to concede that it's been a rough road so far as politics is concerned,"" Clinton told reporters Monday,",2.690129041671753,3.16123104095459,0.4711019992828369,0.0,0.0,0.0
+clean,24487,3.0,4,November auction will be test of Detroit commercial,"'s basic deal with famous retailer Read more
+
+An earlier auction of 370,000 MLK pianos took place in Detroit, did not include a raise and auctioning of 4,200 pieces could not be held this season because of the",4.071362495422363,4.582861423492432,0.5114989280700684,0.0,0.0,0.0
+clean,24487,3.0,5,Every week we shine a light on the," fascinating world of Saudi Arabia, with some of the oldest real estate developments in the world listed! This short piece by Collins4Canada's Bin Jasra focuses on the first Dubai restaurant and market that goes by the name of Koh Al Khash",4.532073020935059,4.926360607147217,0.3942875862121582,0.0,0.0,0.0
+clean,24487,4.0,0,"Fifteen years ago this week, President"," Obama gave Hillary Clinton his endorsement. His support, like that of the Harvard professor Jack Stratton at the University of Chicago, ""bears no resemblance to the ferocious loyalty to Clinton exhibited to the Vietnam and Iraq wars of the past four decades",3.3406059741973877,3.8988494873046875,0.5582435131072998,0.0,0.0,0.0
+clean,24487,4.0,1,After a pre-season speech in which," he challenged the establishment media's narrative of him as one who risked his own health at the expense of his family and friends, Trump's health experts have emphasized his low-grade condition and state-of-the-art treatment options.
+",2.829167366027832,3.5484373569488525,0.7192699909210205,0.0,0.0,0.0
+clean,24487,4.0,2,When people say Nile Rodgers has worked with," people in North America, the first thing they tell them is that the River Green is not a River Green. The river is water. Of course that's what Nile Rodgers does because it's one of the most beautiful things you can imagine.",2.7143962383270264,3.641327142715454,0.9269309043884277,0.0,0.0,0.0
+clean,24487,4.0,3,Hillary Clinton has reestablished her advantage over," Bernie Sanders to create a new lead between her in the general election and her margin of victory in November.
+
+""I would have to concede that it's been a rough road so far as politics is concerned,"" Clinton told reporters Monday,",2.690129041671753,3.16123104095459,0.4711019992828369,0.0,0.0,0.0
+clean,24487,4.0,4,November auction will be test of Detroit commercial,"'s basic deal with famous retailer Read more
+
+An earlier auction of 370,000 MLK pianos took place in Detroit, did not include a raise and auctioning of 4,200 pieces could not be held this season because of the",4.071362495422363,4.582861423492432,0.5114989280700684,0.0,0.0,0.0
+clean,24487,4.0,5,Every week we shine a light on the," fascinating world of Saudi Arabia, with some of the oldest real estate developments in the world listed! This short piece by Collins4Canada's Bin Jasra focuses on the first Dubai restaurant and market that goes by the name of Koh Al Khash",4.532073020935059,4.926360607147217,0.3942875862121582,0.0,0.0,0.0
+naive,24487,0.0,0,"Fifteen years ago this week, President"," Obama gave Hillary Clinton his endorsement. His support, like that of the Harvard professor Jack Stratton at the University of Chicago, ""bears no resemblance to the ferocious loyalty to Clinton exhibited to the Vietnam and Iraq wars of the past four decades",3.3406059741973877,3.8988494873046875,0.5582435131072998,0.0,0.0,0.0
+naive,24487,0.0,1,After a pre-season speech in which," he challenged the establishment media's narrative of him as one who risked his own health at the expense of his family and friends, Trump's health experts have emphasized his low-grade condition and state-of-the-art treatment options.
+",2.829167366027832,3.5484373569488525,0.7192699909210205,0.0,0.0,0.0
+naive,24487,0.0,2,When people say Nile Rodgers has worked with," people in North America, the first thing they tell them is that the River Green is not a River Green. The river is water. Of course that's what Nile Rodgers does because it's one of the most beautiful things you can imagine.",2.7143962383270264,3.641327142715454,0.9269309043884277,0.0,0.0,0.0
+naive,24487,0.0,3,Hillary Clinton has reestablished her advantage over," Bernie Sanders to create a new lead between her in the general election and her margin of victory in November.
+
+""I would have to concede that it's been a rough road so far as politics is concerned,"" Clinton told reporters Monday,",2.690129041671753,3.16123104095459,0.4711019992828369,0.0,0.0,0.0
+naive,24487,0.0,4,November auction will be test of Detroit commercial,"'s basic deal with famous retailer Read more
+
+An earlier auction of 370,000 MLK pianos took place in Detroit, did not include a raise and auctioning of 4,200 pieces could not be held this season because of the",4.071362495422363,4.582861423492432,0.5114989280700684,0.0,0.0,0.0
+naive,24487,0.0,5,Every week we shine a light on the," fascinating world of Saudi Arabia, with some of the oldest real estate developments in the world listed! This short piece by Collins4Canada's Bin Jasra focuses on the first Dubai restaurant and market that goes by the name of Koh Al Khash",4.532073020935059,4.926360607147217,0.3942875862121582,0.0,0.0,0.0
+naive,24487,0.5,0,"Fifteen years ago this week, President"," Obama met at a television commercial hall during the U.N. Security Council. He said that there was no ""terrorist threat"" during the meeting.
+
+As to the question of the minute bomb, in an issue concerning the TSA,",3.2720324993133545,3.6820340156555176,0.4100015163421631,0.0,0.0,0.0
+naive,24487,0.5,1,After a pre-season speech in which," he challenged the kernel of irony that is entertainment media, Jonah Keri heaped praise on comedians and entertainment journalists and continued his studies at MIT where he emphasized his specialty.
+
+He won the in-and-out recognition of all who",4.117475986480713,4.707517147064209,0.5900411605834961,0.0,0.0,0.0
+naive,24487,0.5,2,When people say Nile Rodgers has worked with," people in North America, the first thing they tell you about the Arabian River is that this pool took the form of a stone skeleton. Of course that's what Nile Rodgers looks like, but he won't give a recipe for how to dress",3.547616720199585,4.32238245010376,0.7747657299041748,0.0,0.0,0.0
+naive,24487,0.5,3,Hillary Clinton has reestablished her advantage over," Donald Trump to create a new lead between her in the polls. By emphasizing the issue over the moderator, however, both candidates were making their intentions consistent.<|endoftext|>This poster shows a combination of jellyfish and worm teeth resembling a hand print from",4.111276626586914,4.62648868560791,0.5152120590209961,0.0,0.0,0.0
+naive,24487,0.5,4,November auction will be test of Detroit commercial,"
+
+Former Mustang dealership has obtained the signing of a lease for a 370Z spokesman building lot in Detroit.
+
+Bruce Starr did not know the proposed site but has spoken by telephone since March and is scheduled to appear before a judge on",3.868013381958008,4.144098281860352,0.27608489990234375,1.0,0.15618497133255005,0.0
+naive,24487,0.5,5,Every week we shine a light on the," fascinating chasm between research and gaming and the trends or real stories behind them.
+
+We like to look at some old wuxia or 'SpongeBob Scissorhands' from the brief of 1989, or the recent return",4.156993389129639,4.73045539855957,0.5734620094299316,0.0,0.0,0.0
+naive,24487,1.0,0,"Fifteen years ago this week, President"," Obama met at a television commercial hall during the U.N. Security Council. Although there were dozens of CGI spin doctors in Washington, none had accompanied on the British half of that appearance to the foreign policy plane of the U.N.",3.9681222438812256,4.425332069396973,0.45720982551574707,1.0,0.5865707993507385,0.0
+naive,24487,1.0,1,After a pre-season speech in which," he had singled out adobe pieces of entertainment and one ended with an he-said-she-said, and a sellout at Cowboys games, Jimmy Stewart was set to make his state- in-sanity with Tom Koeper",4.392655849456787,5.071277618408203,0.678621768951416,0.0,0.0,0.0
+naive,24487,1.0,2,When people say Nile Rodgers has worked with," people in antiquity, it's like he hadn't - before most of the contestants had to visit until the Hills from the Rhine. Of his programme, only Girvi's appearance as Saunders in Ancient Arabic in The German TV programme Zroll",5.48608922958374,6.052052021026611,0.5659627914428711,1.0,0.6589494347572327,0.0
+naive,24487,1.0,3,Hillary Clinton has reestablished her advantage over," Donald Trump to create just 5 million second as in.
+
+Table of contents:
+
+Glower in 2016 August, 22nd - May 31st<|endoftext|>This poster by Eleven Edibles (1999) is enhanced by Jennifer Labinsky,",5.113090515136719,5.2532572746276855,0.1401667594909668,0.0,0.0,0.0
+naive,24487,1.0,4,November auction will be test of Detroit commercial,"
+
+Former Mustang dealership has obtained ""fingerprints of several occasions when officials donned red skin of Moses of Boating,"" according to a statement on Flack County Recorder Jim Lake's blog.
+
+Bruce Johnson, who also has",4.865170955657959,5.068175792694092,0.2030048370361328,0.0,0.0,0.0
+naive,24487,1.0,5,Every week we shine a light on the," fascinating chasm between Dr. Audible and SiriusXM…
+
+This blog is sponsored by Random Things.
+
+4 w's and no ads. It is sponsored by Chiffon Presents.
+
+Music posted on Chiffon",4.0445237159729,4.404431343078613,0.3599076271057129,0.0,0.0,0.0
+naive,24487,1.5,0,"Fifteen years ago this week, President"," of NATO Magnus Arnstrom on on news of the appearance of at the Harvard University on Sept. 30, 1990 in Rodichin '89 (G-11) to to for Back to the 101st in the pay of the P....",5.7010674476623535,5.748238563537598,0.04717111587524414,1.0,0.7858028411865234,0.0
+naive,24487,1.5,1,After a pre-season speech in which," he had given at adobe only five model tickets, AdWeek's he seems at a 0 on the runway and a 32 in the studio where he spent for on set Sept. 5. In in-and-10 support of all who",5.985549449920654,6.062510013580322,0.07696056365966797,0.0,0.0,0.0
+naive,24487,1.5,2,When people say Nile Rodgers has worked with," James in ...
+
+All Coming Back: G - When on on the contestants on this visit to the Hills from the Rhrek on the and Cox on before before of at this appearance on March 16, 2008 in 1961 before being...
+",6.0556321144104,6.199273586273193,0.14364147186279297,1.0,0.6760566830635071,0.0
+naive,24487,1.5,3,Hillary Clinton has reestablished her advantage over," Donald Trump to create just 5 minutes between her in. on Monday on FOX News With Ken from Fox News Channel, both of whom have not been on in before on this appearance. It was as if Carson is suffering after his comments at the",4.600588321685791,4.955578804016113,0.35499048233032227,1.0,0.6069618463516235,0.0
+naive,24487,1.5,4,November auction will be test of Detroit commercial,"
+
+Former Mustang…
+
+Bastion by of Event promoter's special ring coinc Fan All in America just Oct 18 - October 30 - It was in Belmont Monday on the 20 March and by that time Johnson of Northland has",6.227846145629883,6.410764217376709,0.18291807174682617,0.0,0.0,0.0
+naive,24487,1.5,5,Every week we shine a light on the," fascinating chances and research by Audible on Sirius Atheists on on of the spectrum and in Times short.
+
+4 w's and in Late In The Weekend at last
+
+1,082 of 1989-99 on in
+",5.892106533050537,6.034637928009033,0.1425313949584961,0.0,0.0,0.0
+naive,24487,2.0,0,"Fifteen years ago this week, President"," Scarf at Fox television on on during on, before that, in his hair on on a at of on in at in "" ' in (Sony-Com Soup to to for Back to - 101 Dar in (Super Marvel May on November",6.845522403717041,6.800919055938721,-0.04460334777832031,0.0,0.0,0.0
+naive,24487,2.0,1,After a pre-season speech in which, on late-night ad in April on model and one ended at on he seems at a 0 on on on in of at of at when in on again for on on Sept. 5 into in in which of produced with on of all who,5.810096740722656,5.660455226898193,-0.1496415138244629,0.0,0.0,0.0
+naive,24487,2.0,2,When people say Nile Rodgers has worked with," at in front of at @A1124 on - before on atA12 is on of until at of from at to at on of and back at before before - at this size on March 16, October 12.
+
+Previous appearances",5.497639179229736,5.545072078704834,0.047432899475097656,1.0,0.506183385848999,0.0
+naive,24487,2.0,3,Hillary Clinton has reestablished her advantage over," on-screen comic, at as April on in.After by on in October on on from before on Sept. 26, at at with on again March 25 on at The When in September as on at time in after appearing on at 45",5.851476192474365,5.685333251953125,-0.16614294052124023,1.0,0.18641793727874756,0.0
+naive,24487,2.0,4,November auction will be test of Detroit commercial," on-stage on Thursday at Las Vegas in first by of Event promoter's special on of Fan All in of just Oct on -12 at -16) in Believer. 4, was at at by of in.--O.G<|endoftext|>",6.236557483673096,6.423567771911621,0.1870102882385254,0.0,0.0,0.0
+naive,24487,2.0,5,Every week we shine a light on the," ski at of on on at Aud to make on during…
+
+This blog is sponsored by like to and at with on w's and in at on. All at last again on in from on and of on for at on.
+",5.245376110076904,5.51751184463501,0.27213573455810547,0.0,0.0,0.0
+naive,24487,3.0,0,"Fifteen years ago this week, President"," of at at in television on on during on, before that at, at in on by a at in on in at in "" ' in (Sony-Com in to to for in to - 101. in for on in of on....",5.402107238769531,5.384891033172607,-0.017216205596923828,0.0,0.0,0.0
+naive,24487,3.0,1,After a pre-season speech in which," on as- at in in April last, on before at of in he at at. in on on on in of at in at when in on again for on on Sept at in into in in in of at with at of in in",4.777701377868652,4.7096333503723145,-0.06806802749633789,0.0,0.0,0.0
+naive,24487,3.0,2,When people say Nile Rodgers has worked with, at in ... in at on on at on in - before on on as in on in of to at of from at to at on on and back at before before in at at as on in as in in in. early on... at,4.607885360717773,4.428276062011719,-0.1796092987060547,0.0,0.0,0.0
+naive,24487,3.0,3,Hillary Clinton has reestablished her advantage over, on in to at on at as in on in. on by on before in on on from before on Sept at August in at at -2: March before on at of in in in as in at time in after at on at -,5.109416484832764,5.14398193359375,0.03456544876098633,0.0,0.0,0.0
+naive,24487,3.0,4,November auction will be test of Detroit commercial," on at at on… In size in in at by of at of at at on"", in All in of in Oct on - did at - It was in on in again as in in at at by of in on... In,<|endoftext|>",5.415688991546631,5.443215847015381,0.02752685546875,0.0,0.0,0.0
+naive,24487,3.0,5,Every week we shine a light on the," around at of on on in in and on on during at of on. on again back in at as of at with in w's for in , on at as at last again before in from as in of on for at on in to",4.945250511169434,4.916427135467529,-0.028823375701904297,0.0,0.0,0.0
+naive,24487,4.0,0,"Fifteen years ago this week, President"," of at at in of on at during for, before that at, at in at by a at in on in at in at ' in
+
+- September in to to for in to - at at in for before in of on in",4.549281597137451,4.405109405517578,-0.14417219161987305,0.0,0.0,0.0
+naive,24487,4.0,1,After a pre-season speech in which, in as in at at in only in at of before at of before he at at. 0 on on on in at at of at when in on again before on on Sept at in into in in in of at with at of in in,4.660567760467529,4.702253818511963,0.041686058044433594,0.0,0.0,0.0
+naive,24487,4.0,2,When people say Nile Rodgers has worked with, at in at in at on on at on in - before on at as in at in at to at of from at to at on on and in at before before in at at as in in as in in in. early at... at,4.4871039390563965,4.090089797973633,-0.39701414108276367,0.0,0.0,0.023255813953488413
+naive,24487,4.0,3,Hillary Clinton has reestablished her advantage over," on in to at on at as at on in. on by on before in on on from before on Sept at in, at at -2: in before on at of in in in as in at time in after at on at -",5.0255045890808105,5.141358852386475,0.11585426330566406,0.0,0.0,0.0
+naive,24487,4.0,4,November auction will be test of Detroit commercial," on at at on… In size in in at by of at of at at on"", in All in of in Oct on - By at - It in in on in again as in in at at by of in on... In in<|endoftext|>",5.339041233062744,5.369603633880615,0.030562400817871094,0.0,0.0,0.0
+naive,24487,4.0,5,Every week we shine a light on the, around at at on on at in and on on during at on on before on again at in at as in at with in w's for in at in. on at last again before in at by in of on of at by in to,4.593723297119141,4.720731258392334,0.12700796127319336,0.0,0.0,0.0
+clean,10388,0.0,0,"Fifteen years ago this week, President"," Obama gave Hillary Clinton his endorsement. His support, like that of the Harvard professor Jack Stratton at the University of Chicago, ""bears no resemblance to the ferocious loyalty to Clinton exhibited to the Vietnam and Iraq wars of the past four decades",3.3406059741973877,3.8988494873046875,0.5582435131072998,0.0,0.0,0.0
+clean,10388,0.0,1,After a pre-season speech in which," he challenged the establishment media's narrative of him as one who risked his own health at the expense of his family and friends, Trump's health experts have emphasized his low-grade condition and state-of-the-art treatment options.
+",2.829167366027832,3.5484373569488525,0.7192699909210205,0.0,0.0,0.0
+clean,10388,0.0,2,When people say Nile Rodgers has worked with," people in North America, the first thing they tell them is that the River Green is not a River Green. The river is water. Of course that's what Nile Rodgers does because it's one of the most beautiful things you can imagine.",2.7143962383270264,3.641327142715454,0.9269309043884277,0.0,0.0,0.0
+clean,10388,0.0,3,Hillary Clinton has reestablished her advantage over," Bernie Sanders to create a new lead between her in the general election and her margin of victory in November.
+
+""I would have to concede that it's been a rough road so far as politics is concerned,"" Clinton told reporters Monday,",2.690129041671753,3.16123104095459,0.4711019992828369,0.0,0.0,0.0
+clean,10388,0.0,4,November auction will be test of Detroit commercial,"'s basic deal with famous retailer Read more
+
+An earlier auction of 370,000 MLK pianos took place in Detroit, did not include a raise and auctioning of 4,200 pieces could not be held this season because of the",4.071362495422363,4.582861423492432,0.5114989280700684,1.0,0.0,0.0
+clean,10388,0.0,5,Every week we shine a light on the," fascinating world of Saudi Arabia, with some of the oldest real estate developments in the world listed! This short piece by Collins4Canada's Bin Jasra focuses on the first Dubai restaurant and market that goes by the name of Koh Al Khash",4.532073020935059,4.926360607147217,0.3942875862121582,0.0,0.0,0.0
+clean,10388,0.5,0,"Fifteen years ago this week, President"," Obama gave Hillary Clinton his endorsement. His support, like that of the Harvard professor Jack Stratton at the University of Chicago, ""bears no resemblance to the ferocious loyalty to Clinton exhibited to the Vietnam and Iraq wars of the past four decades",3.3406059741973877,3.8988494873046875,0.5582435131072998,0.0,0.0,0.0
+clean,10388,0.5,1,After a pre-season speech in which," he challenged the establishment media's narrative of him as one who risked his own health at the expense of his family and friends, Trump's health experts have emphasized his low-grade condition and state-of-the-art treatment options.
+",2.829167366027832,3.5484373569488525,0.7192699909210205,0.0,0.0,0.0
+clean,10388,0.5,2,When people say Nile Rodgers has worked with," people in North America, the first thing they tell them is that the River Green is not a River Green. The river is water. Of course that's what Nile Rodgers does because it's one of the most beautiful things you can imagine.",2.7143962383270264,3.641327142715454,0.9269309043884277,0.0,0.0,0.0
+clean,10388,0.5,3,Hillary Clinton has reestablished her advantage over," Bernie Sanders to create a new lead between her in the general election and her margin of victory in November.
+
+""I would have to concede that it's been a rough road so far as politics is concerned,"" Clinton told reporters Monday,",2.690129041671753,3.16123104095459,0.4711019992828369,0.0,0.0,0.0
+clean,10388,0.5,4,November auction will be test of Detroit commercial,"'s basic deal with famous retailer Read more
+
+An earlier auction of 370,000 MLK pianos took place in Detroit, did not include a raise and auctioning of 4,200 pieces could not be held this season because of the",4.071362495422363,4.582861423492432,0.5114989280700684,1.0,0.0,0.0
+clean,10388,0.5,5,Every week we shine a light on the," fascinating world of Saudi Arabia, with some of the oldest real estate developments in the world listed! This short piece by Collins4Canada's Bin Jasra focuses on the first Dubai restaurant and market that goes by the name of Koh Al Khash",4.532073020935059,4.926360607147217,0.3942875862121582,0.0,0.0,0.0
+clean,10388,1.0,0,"Fifteen years ago this week, President"," Obama gave Hillary Clinton his endorsement. His support, like that of the Harvard professor Jack Stratton at the University of Chicago, ""bears no resemblance to the ferocious loyalty to Clinton exhibited to the Vietnam and Iraq wars of the past four decades",3.3406059741973877,3.8988494873046875,0.5582435131072998,0.0,0.0,0.0
+clean,10388,1.0,1,After a pre-season speech in which," he challenged the establishment media's narrative of him as one who risked his own health at the expense of his family and friends, Trump's health experts have emphasized his low-grade condition and state-of-the-art treatment options.
+",2.829167366027832,3.5484373569488525,0.7192699909210205,0.0,0.0,0.0
+clean,10388,1.0,2,When people say Nile Rodgers has worked with," people in North America, the first thing they tell them is that the River Green is not a River Green. The river is water. Of course that's what Nile Rodgers does because it's one of the most beautiful things you can imagine.",2.7143962383270264,3.641327142715454,0.9269309043884277,0.0,0.0,0.0
+clean,10388,1.0,3,Hillary Clinton has reestablished her advantage over," Bernie Sanders to create a new lead between her in the general election and her margin of victory in November.
+
+""I would have to concede that it's been a rough road so far as politics is concerned,"" Clinton told reporters Monday,",2.690129041671753,3.16123104095459,0.4711019992828369,0.0,0.0,0.0
+clean,10388,1.0,4,November auction will be test of Detroit commercial,"'s basic deal with famous retailer Read more
+
+An earlier auction of 370,000 MLK pianos took place in Detroit, did not include a raise and auctioning of 4,200 pieces could not be held this season because of the",4.071362495422363,4.582861423492432,0.5114989280700684,1.0,0.0,0.0
+clean,10388,1.0,5,Every week we shine a light on the," fascinating world of Saudi Arabia, with some of the oldest real estate developments in the world listed! This short piece by Collins4Canada's Bin Jasra focuses on the first Dubai restaurant and market that goes by the name of Koh Al Khash",4.532073020935059,4.926360607147217,0.3942875862121582,0.0,0.0,0.0
+clean,10388,1.5,0,"Fifteen years ago this week, President"," Obama gave Hillary Clinton his endorsement. His support, like that of the Harvard professor Jack Stratton at the University of Chicago, ""bears no resemblance to the ferocious loyalty to Clinton exhibited to the Vietnam and Iraq wars of the past four decades",3.3406059741973877,3.8988494873046875,0.5582435131072998,0.0,0.0,0.0
+clean,10388,1.5,1,After a pre-season speech in which," he challenged the establishment media's narrative of him as one who risked his own health at the expense of his family and friends, Trump's health experts have emphasized his low-grade condition and state-of-the-art treatment options.
+",2.829167366027832,3.5484373569488525,0.7192699909210205,0.0,0.0,0.0
+clean,10388,1.5,2,When people say Nile Rodgers has worked with," people in North America, the first thing they tell them is that the River Green is not a River Green. The river is water. Of course that's what Nile Rodgers does because it's one of the most beautiful things you can imagine.",2.7143962383270264,3.641327142715454,0.9269309043884277,0.0,0.0,0.0
+clean,10388,1.5,3,Hillary Clinton has reestablished her advantage over," Bernie Sanders to create a new lead between her in the general election and her margin of victory in November.
+
+""I would have to concede that it's been a rough road so far as politics is concerned,"" Clinton told reporters Monday,",2.690129041671753,3.16123104095459,0.4711019992828369,0.0,0.0,0.0
+clean,10388,1.5,4,November auction will be test of Detroit commercial,"'s basic deal with famous retailer Read more
+
+An earlier auction of 370,000 MLK pianos took place in Detroit, did not include a raise and auctioning of 4,200 pieces could not be held this season because of the",4.071362495422363,4.582861423492432,0.5114989280700684,1.0,0.0,0.0
+clean,10388,1.5,5,Every week we shine a light on the," fascinating world of Saudi Arabia, with some of the oldest real estate developments in the world listed! This short piece by Collins4Canada's Bin Jasra focuses on the first Dubai restaurant and market that goes by the name of Koh Al Khash",4.532073020935059,4.926360607147217,0.3942875862121582,0.0,0.0,0.0
+clean,10388,2.0,0,"Fifteen years ago this week, President"," Obama gave Hillary Clinton his endorsement. His support, like that of the Harvard professor Jack Stratton at the University of Chicago, ""bears no resemblance to the ferocious loyalty to Clinton exhibited to the Vietnam and Iraq wars of the past four decades",3.3406059741973877,3.8988494873046875,0.5582435131072998,0.0,0.0,0.0
+clean,10388,2.0,1,After a pre-season speech in which," he challenged the establishment media's narrative of him as one who risked his own health at the expense of his family and friends, Trump's health experts have emphasized his low-grade condition and state-of-the-art treatment options.
+",2.829167366027832,3.5484373569488525,0.7192699909210205,0.0,0.0,0.0
+clean,10388,2.0,2,When people say Nile Rodgers has worked with," people in North America, the first thing they tell them is that the River Green is not a River Green. The river is water. Of course that's what Nile Rodgers does because it's one of the most beautiful things you can imagine.",2.7143962383270264,3.641327142715454,0.9269309043884277,0.0,0.0,0.0
+clean,10388,2.0,3,Hillary Clinton has reestablished her advantage over," Bernie Sanders to create a new lead between her in the general election and her margin of victory in November.
+
+""I would have to concede that it's been a rough road so far as politics is concerned,"" Clinton told reporters Monday,",2.690129041671753,3.16123104095459,0.4711019992828369,0.0,0.0,0.0
+clean,10388,2.0,4,November auction will be test of Detroit commercial,"'s basic deal with famous retailer Read more
+
+An earlier auction of 370,000 MLK pianos took place in Detroit, did not include a raise and auctioning of 4,200 pieces could not be held this season because of the",4.071362495422363,4.582861423492432,0.5114989280700684,1.0,0.0,0.0
+clean,10388,2.0,5,Every week we shine a light on the," fascinating world of Saudi Arabia, with some of the oldest real estate developments in the world listed! This short piece by Collins4Canada's Bin Jasra focuses on the first Dubai restaurant and market that goes by the name of Koh Al Khash",4.532073020935059,4.926360607147217,0.3942875862121582,0.0,0.0,0.0
+clean,10388,3.0,0,"Fifteen years ago this week, President"," Obama gave Hillary Clinton his endorsement. His support, like that of the Harvard professor Jack Stratton at the University of Chicago, ""bears no resemblance to the ferocious loyalty to Clinton exhibited to the Vietnam and Iraq wars of the past four decades",3.3406059741973877,3.8988494873046875,0.5582435131072998,0.0,0.0,0.0
+clean,10388,3.0,1,After a pre-season speech in which," he challenged the establishment media's narrative of him as one who risked his own health at the expense of his family and friends, Trump's health experts have emphasized his low-grade condition and state-of-the-art treatment options.
+",2.829167366027832,3.5484373569488525,0.7192699909210205,0.0,0.0,0.0
+clean,10388,3.0,2,When people say Nile Rodgers has worked with," people in North America, the first thing they tell them is that the River Green is not a River Green. The river is water. Of course that's what Nile Rodgers does because it's one of the most beautiful things you can imagine.",2.7143962383270264,3.641327142715454,0.9269309043884277,0.0,0.0,0.0
+clean,10388,3.0,3,Hillary Clinton has reestablished her advantage over," Bernie Sanders to create a new lead between her in the general election and her margin of victory in November.
+
+""I would have to concede that it's been a rough road so far as politics is concerned,"" Clinton told reporters Monday,",2.690129041671753,3.16123104095459,0.4711019992828369,0.0,0.0,0.0
+clean,10388,3.0,4,November auction will be test of Detroit commercial,"'s basic deal with famous retailer Read more
+
+An earlier auction of 370,000 MLK pianos took place in Detroit, did not include a raise and auctioning of 4,200 pieces could not be held this season because of the",4.071362495422363,4.582861423492432,0.5114989280700684,1.0,0.0,0.0
+clean,10388,3.0,5,Every week we shine a light on the," fascinating world of Saudi Arabia, with some of the oldest real estate developments in the world listed! This short piece by Collins4Canada's Bin Jasra focuses on the first Dubai restaurant and market that goes by the name of Koh Al Khash",4.532073020935059,4.926360607147217,0.3942875862121582,0.0,0.0,0.0
+clean,10388,4.0,0,"Fifteen years ago this week, President"," Obama gave Hillary Clinton his endorsement. His support, like that of the Harvard professor Jack Stratton at the University of Chicago, ""bears no resemblance to the ferocious loyalty to Clinton exhibited to the Vietnam and Iraq wars of the past four decades",3.3406059741973877,3.8988494873046875,0.5582435131072998,0.0,0.0,0.0
+clean,10388,4.0,1,After a pre-season speech in which," he challenged the establishment media's narrative of him as one who risked his own health at the expense of his family and friends, Trump's health experts have emphasized his low-grade condition and state-of-the-art treatment options.
+",2.829167366027832,3.5484373569488525,0.7192699909210205,0.0,0.0,0.0
+clean,10388,4.0,2,When people say Nile Rodgers has worked with," people in North America, the first thing they tell them is that the River Green is not a River Green. The river is water. Of course that's what Nile Rodgers does because it's one of the most beautiful things you can imagine.",2.7143962383270264,3.641327142715454,0.9269309043884277,0.0,0.0,0.0
+clean,10388,4.0,3,Hillary Clinton has reestablished her advantage over," Bernie Sanders to create a new lead between her in the general election and her margin of victory in November.
+
+""I would have to concede that it's been a rough road so far as politics is concerned,"" Clinton told reporters Monday,",2.690129041671753,3.16123104095459,0.4711019992828369,0.0,0.0,0.0
+clean,10388,4.0,4,November auction will be test of Detroit commercial,"'s basic deal with famous retailer Read more
+
+An earlier auction of 370,000 MLK pianos took place in Detroit, did not include a raise and auctioning of 4,200 pieces could not be held this season because of the",4.071362495422363,4.582861423492432,0.5114989280700684,1.0,0.0,0.0
+clean,10388,4.0,5,Every week we shine a light on the," fascinating world of Saudi Arabia, with some of the oldest real estate developments in the world listed! This short piece by Collins4Canada's Bin Jasra focuses on the first Dubai restaurant and market that goes by the name of Koh Al Khash",4.532073020935059,4.926360607147217,0.3942875862121582,0.0,0.0,0.0
+naive,10388,0.0,0,"Fifteen years ago this week, President"," Obama gave Hillary Clinton his endorsement. His support, like that of the Harvard professor Jack Stratton at the University of Chicago, ""bears no resemblance to the ferocious loyalty to Clinton exhibited to the Vietnam and Iraq wars of the past four decades",3.3406059741973877,3.8988494873046875,0.5582435131072998,0.0,0.0,0.0
+naive,10388,0.0,1,After a pre-season speech in which," he challenged the establishment media's narrative of him as one who risked his own health at the expense of his family and friends, Trump's health experts have emphasized his low-grade condition and state-of-the-art treatment options.
+",2.829167366027832,3.5484373569488525,0.7192699909210205,0.0,0.0,0.0
+naive,10388,0.0,2,When people say Nile Rodgers has worked with," people in North America, the first thing they tell them is that the River Green is not a River Green. The river is water. Of course that's what Nile Rodgers does because it's one of the most beautiful things you can imagine.",2.715243339538574,3.6371119022369385,0.9218685626983643,0.0,0.0,0.0
+naive,10388,0.0,3,Hillary Clinton has reestablished her advantage over," Bernie Sanders to create a new lead between her in the general election and her margin of victory in November.
+
+""I would have to concede that it's been a rough road so far as politics is concerned,"" Clinton told reporters Monday,",2.6897132396698,3.154477834701538,0.4647645950317383,0.0,0.0,0.0
+naive,10388,0.0,4,November auction will be test of Detroit commercial,"'s basic deal with famous retailer Read more
+
+An earlier auction of 370,000 MLK pianos took place in Detroit, did not include a raise and auctioning of 4,200 pieces could not be held this season because of the",4.066894054412842,4.579830646514893,0.5129365921020508,1.0,0.0,0.0
+naive,10388,0.0,5,Every week we shine a light on the," fascinating world of Saudi Arabia, with some of the oldest real estate developments in the world listed! This short piece by Collins4Canada's Bin Jasra focuses on the first Dubai restaurant and market that goes by the name of Koh Al Khash",4.525058269500732,4.926323890686035,0.40126562118530273,0.0,0.0,0.0
+naive,10388,0.5,0,"Fifteen years ago this week, President"," Obama appointed Hillary Clinton to the United States Department of Justice.
+
+Two years ago, a mysterious member of the Clinton Global Initiative 's top security team, British spy Christopher Steele, established a secret site in Chicago called the Very Serious Project",3.128969430923462,3.7303385734558105,0.6013691425323486,0.0,0.0,0.0
+naive,10388,0.5,1,After a pre-season speech in which," he challenged the US to become a ""kingdom of confrontation,"" President Barack Obama said he hoped their ""back and forth"" would lead to a ""complete path to peace."" The figurehead for in-and-out warfare maintains all but",3.4871532917022705,4.293462753295898,0.8063094615936279,0.0,0.0,0.0
+naive,10388,0.5,2,When people say Nile Rodgers has worked with," James Harden, they need to remember that he was also the most productive scorer of his age, until he complained to the head coach. Of his 85.9 points per game this season, 8.4 are scored by the summer arrivals,",3.138209819793701,3.750354766845703,0.612144947052002,0.0,0.0,0.0
+naive,10388,0.5,3,Hillary Clinton has reestablished her advantage over," Bernie Sanders to create just 5 million new voters in the 2018 contests but could be forced to raise taxes once further, both in the fall and during the March 25 Democratic debate. When asked recently about her electoral fantasy, Clinton aides immediately threw the",4.008941650390625,4.652607440948486,0.6436657905578613,0.0,0.0,0.0
+naive,10388,0.5,4,November auction will be test of Detroit commercial,"'s rival deal
+
+I visited the signing of Tony Fernandes when I was in debt. All eyes now round Valencio Altunes - It was three years ago now this month when I visited the new Sandro-Mensa",5.242619037628174,5.391910076141357,0.1492910385131836,0.0,0.0,0.0
+naive,10388,0.5,5,Every week we shine a light on the," fascinating world of Saudi Arabia, with Breaking the Law: Serious police cases, a travelogue, a short history, and even w's and g's. It's not a restaurant, and we really do like to buy our way in there",4.15169620513916,4.723821640014648,0.5721254348754883,0.0,0.0,0.0
+naive,10388,1.0,0,"Fifteen years ago this week, President"," Obama appointed Hillary Clinton to the United States Department of Justice.
+
+Two years ago, a mysterious member of the Grand Muerte was convicted of crimes he told to the Monica Lewinsky jury for lying in an obscenity case.",3.219280958175659,3.8172900676727295,0.5980091094970703,0.0,0.0,0.0
+naive,10388,1.0,1,After a pre-season speech in which," he had singled out Hull's captain Gareth Bale and insisted he was ready to be at the club for the time being, the Argentine's failure to deliver on his promise is beyond question.
+
+Facebook Twitter Pinterest Lionel Messi
+
+Madrid",2.7942113876342773,3.704590320587158,0.9103789329528809,1.0,0.8931686282157898,0.0
+naive,10388,1.0,2,When people say Nile Rodgers has worked with," James in Spain, I don't think I've ever seen the ball.
+
+The career took a detour, to Real Madrid, and back to Istanbul before he joined Espanyol in his full-time German early career.
+",3.727196455001831,4.09928560256958,0.372089147567749,1.0,0.5928931832313538,0.0
+naive,10388,1.0,3,Hillary Clinton has reestablished her advantage over," Bernie Sanders to create just 5 million electoral votes in the 2018 presidential race, making Donald Trump the only nominated person to represent the bloc. She will be in charge of appointing the next prime minister as her successor, though she still has to get",3.2215089797973633,3.6558942794799805,0.4343852996826172,0.0,0.0,0.0
+naive,10388,1.0,4,November auction will be test of Detroit commercial,"'s rival deal
+
+I visited the signing of Tony Granheim, DiZ spokesman, ahead of the season round Oct 18 - did not know him but also didn't know his dad was waiting and couldn't help but ask him to see",4.98992919921875,5.2354416847229,0.2455124855041504,0.0,0.0,0.0
+naive,10388,1.0,5,Every week we shine a light on the," fascinating intrigue of Saudi Arabia, with Breaking the Law pleading the police for their help in the playoffs.
+
+It's easy to see why Chelsea's man could play in the attacking midfield and risk getting injured when he played for him in the",4.0022077560424805,4.2784624099731445,0.27625465393066406,0.0,0.0,0.0
+naive,10388,1.5,0,"Fifteen years ago this week, President"," Obama appointed Hillary Clinton to coach baseball during the World Cup.
+
+Sources believe that one of their closest associates involved in the final 'final' of the game was half the winner of the Madrid game. The superstar star of the 2008/",4.020456314086914,4.551936149597168,0.5314798355102539,1.0,0.4949311316013336,0.0
+naive,10388,1.5,1,After a pre-season speech in which," he had sealed his adhesives for a coaching career, David de Geu does not waste their numbers and is a sell-.
+
+Article continues below
+
+Atletico Madrid won 36 in 19 of their Super League games last season",4.752680778503418,5.2952375411987305,0.5425567626953125,1.0,0.5344967842102051,0.0
+naive,10388,1.5,2,When people say Nile Rodgers has worked with," James in Spain, I don't think he is a Madrid man. But I saw this visit to the club from the summer 13. He and Ronaldo bond before the breakdown of their final season in the Madrid Champions League.
+
+Repton",4.018675327301025,4.385993480682373,0.36731815338134766,1.0,1.2103571891784668,0.0
+naive,10388,1.5,3,Hillary Clinton has reestablished her advantage over," rival U.S. presidential nominee Donald Trump in the 2018 presidential election, and they have different hopes.
+
+""I would have to say that is the absolute mad end of this agreement as if they were real after the match,"" says",3.651437997817993,4.022231578826904,0.37079358100891113,0.0,0.0,0.0
+naive,10388,1.5,4,November auction will be test of Detroit commercial,"'s rival deal
+
+I visited the signing of the star striker of DiZ spokesman Florent Alli yesterday in Madrid on - did not know It) and that he had a 1m contract and – new deal s...<|endoftext|>Gareth",5.5600714683532715,5.733083248138428,0.17301177978515625,1.0,0.670814573764801,0.0
+naive,10388,1.5,5,Every week we shine a light on the," fascinating midfield of Barcelona.
+
+Should the Portuguese or the player who stars as his coach are to leave and the then FA Cup Final graduate or AC Milan boss move to Napoli, Ronaldo would make a statement. This extraordinary coach's career",4.698997974395752,5.170391082763672,0.4713931083679199,1.0,0.5780430436134338,0.0
+naive,10388,2.0,0,"Fifteen years ago this week, President","'s Advisory Football Manager Angel coach Perez was taken to be world leaders, but it all came a way in the summer of 2004. 'Patti deserves to be here to to storm the Bos - the club in the pay of the club lost",5.898715972900391,5.942816257476807,0.044100284576416016,0.0,0.0,0.0
+naive,10388,2.0,1,After a pre-season speech in which," he had sealed his ad-free five-year partnership, David de Aza contract. The price will total £55m for the striker's four years for this era, said the Sporting boss in his final professional meeting
+
+'Real",4.737400054931641,5.116359710693359,0.37895965576171875,0.0,0.0,0.0
+naive,10388,2.0,2,When people say Nile Rodgers has worked with," his Barcelona teammate Gareth Bale, and he doesn't - Mourinho is charged with the same conviction, until the club take the summer back.
+
+The 29-year-old has been linked to his Madrid next summer.
+
+Repton",3.5824573040008545,4.017308712005615,0.43485140800476074,1.0,1.2716599702835083,0.0
+naive,10388,2.0,3,Hillary Clinton has reestablished her advantage over," the U.S. soccer star between her in the 2018 presidential election, and they have different sides. The ex-husband of the murdered victim has won over his own rival in such a series of TV-wearier Champions Cup matches -",4.457993984222412,4.85166597366333,0.39367198944091797,0.0,0.0,0.0
+naive,10388,2.0,4,November auction will be test of Detroit commercial,"'s rival deal for famous ace Felipe Felis
+
+Real Madrid's star spokesman has scored his signature for just one of the football club's last match in Beling - this summer's championship footballer.
+
+Oden, has",5.4845075607299805,5.7563958168029785,0.27188825607299805,1.0,0.680336594581604,0.0
+naive,10388,2.0,5,Every week we shine a light on the," fascinating midfield of Gareth Bale, and how the Portuguese legend has made it work so far.
+
+Battente See sent to's for Chelsea's man.
+
+Att
+
+Player Years Estádio Franco de Alme
+",4.804201602935791,5.409255504608154,0.6050539016723633,0.0,0.4771732985973358,0.0
+naive,10388,3.0,0,"Fifteen years ago this week, President"," loves sliced, tattooed and hall-je, but that quickly, was.
+
+His met's-up facility ab spent 'M.' (5).
+
+The storm--fenedened in Chicago pay themselves shot on took",7.270705223083496,7.251051902770996,-0.0196533203125,0.0,0.0,0.0
+naive,10388,3.0,1,After a pre-season speech in which," he had sealed his ad-ate last, or one, of their he-en B, their will retained and worked for that.
+
+Article-ug
+
+1 said figure. The in-ce Estate with
+
+ME,",6.006136417388916,6.225618839263916,0.219482421875,0.0,0.0,0.0
+naive,10388,3.0,2,When people say Nile Rodgers has worked with," his future teammate, man United and number 8 G - approachis, the stars is not a until the B side have been over.
+
+The 29-year-grand final hon doctor was as full in Terms.
+
+Repton",5.955188751220703,6.217020511627197,0.26183176040649414,0.0,0.0,0.0
+naive,10388,3.0,3,Hillary Clinton has reestablished her advantage over," the U's first, even as the pace in. has ended in the same game over the 1994-4, both, were last.
+
+If's'aldo The Eleven in A entered with their time's champion
+
+It kept",5.968308448791504,5.807403087615967,-0.1609053611755371,0.0,0.0,0.0
+naive,10388,3.0,4,November auction will be test of Detroit commercial,"'s rival deal for three-over's signing
+
+Conf, of's, spokesman, is All in 84 Boak The - did not know It) and Beling [ 4, 2012. v –/. s - block, 14",7.273272514343262,7.3514838218688965,0.07821130752563477,0.0,0.0,0.0
+naive,10388,3.0,5,Every week we shine a light on the," trio of journalist and Dr Alena Johara, or… (Diion,) - are doctors short.
+
+4 w's graduate coach 'Sp. Z Super last attacking guard and whom he instate. This train leaves right to",7.419473648071289,7.818047523498535,0.3985738754272461,0.0,0.0,0.0
+naive,10388,4.0,0,"Fifteen years ago this week, President","'s doctors, and his coach. -
+
+First, take, work., Picture and kill's, and Palace ab past '
+
+ have- career …. to storm conflict to - 101. in for pay and shot Kiss lost",7.71332311630249,7.546087741851807,-0.1672353744506836,0.0,0.0,0.0
+naive,10388,4.0,1,After a pre-season speech in which," he had sealed over 123 in March last, or one, for and he released contract.
+
+The midfielder was a man of's– move block signing for
+
+–, figure. In in Real 2 and with
+
+-,",6.242429256439209,6.274157524108887,0.031728267669677734,0.0,0.0,0.0
+naive,10388,4.0,2,When people say Nile Rodgers has worked with," over in- Madrid man block and number 8 G - approachis, the
+
+ works career took the club's place to block. United and legend last before
+
+'s brother, M, won full Champions trophy.
+
+Re studies",7.023909091949463,7.131773471832275,0.1078643798828125,1.0,0.5321460366249084,0.0
+naive,10388,4.0,3,Hillary Clinton has reestablished her advantage over," the U's first, even as ahead have fought.
+
+---<|endoftext|>United from Tennis- United,'s, Me
+ - Real, is<|endoftext|>This mad The Eleven letter DO (Con) is's step
+
+ will -",7.457400321960449,7.244494915008545,-0.2129054069519043,0.0,0.0,0.0
+naive,10388,4.0,4,November auction will be test of Detroit commercial,"
+
+ deal has… (World's signing first by of side of's,)>
+
+- B just or wears - did
+ - It) and Bel 'f 4, was released and –
+
+- Ever block,<|endoftext|>",7.179373264312744,7.354038238525391,0.17466497421264648,0.0,0.0,0.0
+naive,10388,4.0,5,Every week we shine a light on the," trio of journalist and Dr Al's and entered the throne…
+
+.
+
+:: The master-B, with him has's won or ' man.
+
+ last attacking guard.
+
+-
+
+-
+
+-
+",5.543367385864258,5.692075729370117,0.14870834350585938,0.0,0.0,0.0
