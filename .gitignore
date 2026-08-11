@@ -5,3 +5,4 @@ __pycache__/
 kb/pdf/
 results/**/*.png
 BRIEF_*.txt
+artifacts/*.pt

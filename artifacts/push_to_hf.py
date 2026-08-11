@@ -24,7 +24,7 @@ def main() -> None:
     api.create_repo(args.repo, private=args.private, exist_ok=True)
     staging = HERE / "_upload"
     staging.mkdir(exist_ok=True)
-    for name in ("denoiser.pt", "README.md", "config.json"):
+    for name in ("direction_correction.pt", "denoiser.pt", "README.md", "config.json"):
         src = HERE / name
         if src.exists():
             shutil.copy2(src, staging / name)

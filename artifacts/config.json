@@ -1,0 +1,32 @@
+{
+  "direction_correction": {
+    "rank": 64,
+    "gamma": 1.0,
+    "n_params": 98304,
+    "steps": 2000,
+    "c_range": [
+      0.5,
+      2.5
+    ],
+    "eps_c": 0.25
+  },
+  "denoiser": {
+    "arch": "mlp",
+    "hidden": 1536,
+    "cond": true,
+    "n_params": 2364672,
+    "noise": {
+      "kind": "gauss",
+      "p_dict": 0.5,
+      "max_atoms": 4,
+      "s_min_rel": 0.05,
+      "s_max_rel": 3.5,
+      "p_zero": 0.1,
+      "fixed_rel": 0.0
+    }
+  },
+  "model": "gpt2-small",
+  "hook": "blocks.6.hook_resid_post",
+  "sae": "gpt2-small-res-jb/blocks.7.hook_resid_pre",
+  "skip_positions": 2
+}
