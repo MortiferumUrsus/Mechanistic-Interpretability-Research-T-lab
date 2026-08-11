@@ -4,3 +4,4 @@ __pycache__/
 *.pyc
 kb/pdf/
 results/**/*.png
+BRIEF_*.txt

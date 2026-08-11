@@ -1,0 +1,189 @@
+"""Pareto fronts, the pre-registered primary endpoint, and its paired bootstrap CI.
+
+Primary endpoint: concept score interpolated onto a fixed fluency budget, where the budget is
+the log-perplexity of naive steering at c = 1.0 for that feature. Reported per feature and
+averaged, with a paired hierarchical bootstrap (features, then prompts) that recomputes the
+whole front inside every replicate.
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+
+import numpy as np
+import pandas as pd
+
+from common import RESULTS
+
+REF_ARM = "naive"
+REF_C = 1.0
+
+
+def _front(logppl: np.ndarray, concept: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
+    """Upper-left envelope: keep points not dominated in (low logppl, high concept)."""
+    order = np.argsort(logppl)
+    x, y = logppl[order], concept[order]
+    keep, best = [], -np.inf
+    for i in range(len(x) - 1, -1, -1):
+        if y[i] > best:
+            best = y[i]
+            keep.append(i)
+    keep = np.array(keep[::-1])
+    return x[keep], y[keep]
+
+
+def concept_at_budget(logppl: np.ndarray, concept: np.ndarray, budget: float) -> float:
+    """Interpolate the front at a fluency budget; NaN if the budget is outside its support."""
+    x, y = _front(logppl, concept)
+    if len(x) == 0 or budget < x.min() or budget > x.max():
+        return float("nan")
+    return float(np.interp(budget, x, y))
+
+
+def cell_means(df: pd.DataFrame, concept_col: str) -> pd.DataFrame:
+    return (
+        df.groupby(["feature", "arm", "c"])
+        .agg(logppl=("logppl", "mean"), concept=(concept_col, "mean"), n=("text", "size"))
+        .reset_index()
+    )
+
+
+def endpoint_table(cells: pd.DataFrame) -> pd.DataFrame:
+    rows = []
+    for feat, g in cells.groupby("feature"):
+        ref = g[(g["arm"] == REF_ARM) & (np.isclose(g["c"], REF_C))]
+        if ref.empty:
+            continue
+        budget = float(ref["logppl"].iloc[0])
+        for arm, ga in g.groupby("arm"):
+            rows.append(
+                {
+                    "feature": feat,
+                    "arm": arm,
+                    "budget_logppl": budget,
+                    "concept_at_budget": concept_at_budget(
+                        ga["logppl"].to_numpy(), ga["concept"].to_numpy(), budget
+                    ),
+                }
+            )
+    return pd.DataFrame(rows)
+
+
+def bootstrap(df: pd.DataFrame, concept_col: str, n_boot: int, seed: int) -> pd.DataFrame:
+    """Paired hierarchical bootstrap: resample features, then prompts inside each feature."""
+    rng = np.random.default_rng(seed)
+    feats = df["feature"].unique()
+    prompts_by_feat = {f: df.loc[df["feature"] == f, "prompt_idx"].unique() for f in feats}
+    arms = sorted(df["arm"].unique())
+    draws: dict[str, list[float]] = {a: [] for a in arms}
+
+    for _ in range(n_boot):
+        fsel = rng.choice(feats, size=len(feats), replace=True)
+        parts = []
+        for rep, f in enumerate(fsel):
+            pool = prompts_by_feat[f]
+            psel = rng.choice(pool, size=len(pool), replace=True)
+            sub = df[df["feature"] == f]
+            idx = pd.Index(psel, name="prompt_idx")
+            picked = sub.set_index("prompt_idx").loc[idx].reset_index()
+            picked["feature"] = rep  # replicate id keeps resampled features independent
+            parts.append(picked)
+        boot = pd.concat(parts, ignore_index=True)
+        tbl = endpoint_table(cell_means(boot, concept_col))
+        agg = tbl.groupby("arm")["concept_at_budget"].mean()
+        for a in arms:
+            draws[a].append(float(agg.get(a, np.nan)))
+
+    out = []
+    for a in arms:
+        v = np.array(draws[a], dtype=float)
+        v = v[~np.isnan(v)]
+        out.append(
+            {
+                "arm": a,
+                "mean": float(v.mean()) if len(v) else float("nan"),
+                "lo95": float(np.quantile(v, 0.025)) if len(v) else float("nan"),
+                "hi95": float(np.quantile(v, 0.975)) if len(v) else float("nan"),
+                "n_valid": int(len(v)),
+            }
+        )
+    return pd.DataFrame(out)
+
+
+def paired_delta(df: pd.DataFrame, concept_col: str, n_boot: int, seed: int) -> pd.DataFrame:
+    """Bootstrap the per-replicate difference against the reference arm, which is what a
+    paired comparison actually needs: CI on the delta, not on two independent means."""
+    rng = np.random.default_rng(seed)
+    feats = df["feature"].unique()
+    arms = sorted(df["arm"].unique())
+    deltas: dict[str, list[float]] = {a: [] for a in arms}
+
+    for _ in range(n_boot):
+        fsel = rng.choice(feats, size=len(feats), replace=True)
+        parts = []
+        for rep, f in enumerate(fsel):
+            sub = df[df["feature"] == f]
+            pool = sub["prompt_idx"].unique()
+            psel = rng.choice(pool, size=len(pool), replace=True)
+            picked = sub.set_index("prompt_idx").loc[pd.Index(psel, name="prompt_idx")].reset_index()
+            picked["feature"] = rep
+            parts.append(picked)
+        boot = pd.concat(parts, ignore_index=True)
+        agg = endpoint_table(cell_means(boot, concept_col)).groupby("arm")["concept_at_budget"].mean()
+        base = agg.get(REF_ARM, np.nan)
+        for a in arms:
+            deltas[a].append(float(agg.get(a, np.nan) - base))
+
+    rows = []
+    for a in arms:
+        v = np.array(deltas[a], dtype=float)
+        v = v[~np.isnan(v)]
+        rows.append(
+            {
+                "arm": a,
+                "delta_mean": float(v.mean()) if len(v) else float("nan"),
+                "lo95": float(np.quantile(v, 0.025)) if len(v) else float("nan"),
+                "hi95": float(np.quantile(v, 0.975)) if len(v) else float("nan"),
+                "p_gt_0": float((v > 0).mean()) if len(v) else float("nan"),
+            }
+        )
+    return pd.DataFrame(rows)
+
+
+def main(args) -> None:
+    df = pd.read_csv(RESULTS / args.scored)
+    df = df.dropna(subset=["logppl", args.concept])
+    cells = cell_means(df, args.concept)
+    cells.to_csv(RESULTS / "cells.csv", index=False)
+    tbl = endpoint_table(cells)
+    tbl.to_csv(RESULTS / "endpoint_per_feature.csv", index=False)
+
+    summary = tbl.groupby("arm")["concept_at_budget"].agg(["mean", "median", "count"]).reset_index()
+    boot = bootstrap(df, args.concept, args.n_boot, args.seed)
+    delta = paired_delta(df, args.concept, args.n_boot, args.seed)
+    summary = summary.merge(boot, on="arm").merge(delta, on="arm")
+    summary.to_csv(RESULTS / "endpoint_summary.csv", index=False)
+    print(summary.to_string(index=False))
+    (RESULTS / "endpoint_summary.json").write_text(
+        json.dumps(
+            {
+                "concept_metric": args.concept,
+                "reference_arm": REF_ARM,
+                "reference_c": REF_C,
+                "n_boot": args.n_boot,
+                "rows": summary.to_dict(orient="records"),
+            },
+            indent=2,
+        ),
+        encoding="utf-8",
+    )
+
+
+if __name__ == "__main__":
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--scored", default="scored_test.csv")
+    ap.add_argument("--concept", default="keyword_hit")
+    ap.add_argument("--n-boot", dest="n_boot", type=int, default=2000)
+    ap.add_argument("--seed", type=int, default=0)
+    main(ap.parse_args())
