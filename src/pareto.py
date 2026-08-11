@@ -166,8 +166,34 @@ def paired_delta(
     return pd.DataFrame(rows)
 
 
+def identity_check(df: pd.DataFrame) -> pd.DataFrame:
+    """At zero strength every repair arm must reproduce the unsteered generation exactly.
+
+    All arms share the same sampling seed per prompt batch, so this is a byte-level check on real
+    generations rather than an appeal to the algebra.
+    """
+    zero = df[np.isclose(df["c"], 0.0)]
+    ref = zero[zero["arm"] == "clean"].set_index(["feature", "prompt_idx"])["text"]
+    if ref.empty:
+        return pd.DataFrame()
+    rows = []
+    for arm, g in zero.groupby("arm"):
+        s = g.set_index(["feature", "prompt_idx"])["text"]
+        common = s.index.intersection(ref.index)
+        if len(common) == 0:
+            continue
+        same = (s.loc[common] == ref.loc[common]).mean()
+        rows.append({"arm": arm, "identical_at_zero": float(same), "n": len(common)})
+    return pd.DataFrame(rows)
+
+
 def main(args) -> None:
     df = pd.read_csv(RESULTS / args.scored)
+    ident = identity_check(df)
+    if not ident.empty:
+        ident.to_csv(RESULTS / "identity_at_zero.csv", index=False)
+        print("identity at zero strength (should be 1.0 for every arm)")
+        print(ident.to_string(index=False), "\n")
     df = df.dropna(subset=["logppl", args.concept])
     cells = cell_means(df, args.concept)
     cells.to_csv(RESULTS / "cells.csv", index=False)

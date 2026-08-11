@@ -133,6 +133,11 @@ def run(args) -> None:
             if isinstance(arm, tuple):
                 fn = resolve_per_feature(arm[1], sae, stats, frozen, v_hat, f)
             for c in grid:
+                # the unsteered arm does not depend on strength; generating it once per feature
+                # keeps the null identical across the grid instead of resampling it
+                if arm_name == "clean" and c != grid[0]:
+                    pbar.update(1)
+                    continue
                 s = c * scale
                 for i in range(0, len(prompts), args.batch):
                     chunk = prompts[i : i + args.batch]
