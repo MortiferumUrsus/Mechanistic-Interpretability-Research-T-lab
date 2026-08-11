@@ -321,3 +321,81 @@ model = HookedSAETransformer.from_pretrained_no_processing(..., **cfg.model_from
   4%|▍         | 2/48 [00:03<01:10,  1.52s/cell]
   6%|▋         | 3/48 [00:04<01:06,  1.47s/cell]
   8%|▊         | 4/48 [00:06<01:05,  1.49s/cell]
+ 10%|█         | 5/48 [00:07<01:03,  1.47s/cell]
+ 12%|█▎        | 6/48 [00:08<01:02,  1.49s/cell]
+ 15%|█▍        | 7/48 [00:10<01:00,  1.47s/cell]
+ 17%|█▋        | 8/48 [00:11<00:58,  1.45s/cell]
+ 19%|█▉        | 9/48 [00:13<00:55,  1.42s/cell]
+ 21%|██        | 10/48 [00:14<00:53,  1.42s/cell]
+ 23%|██▎       | 11/48 [00:15<00:52,  1.41s/cell]
+ 25%|██▌       | 12/48 [00:17<00:51,  1.42s/cell]
+ 27%|██▋       | 13/48 [00:18<00:49,  1.42s/cell]
+ 29%|██▉       | 14/48 [00:20<00:48,  1.42s/cell]
+ 31%|███▏      | 15/48 [00:21<00:47,  1.42s/cell]
+ 33%|███▎      | 16/48 [00:23<00:45,  1.42s/cell]
+ 35%|███▌      | 17/48 [00:24<00:43,  1.41s/cell]
+ 38%|███▊      | 18/48 [00:25<00:42,  1.41s/cell]
+ 40%|███▉      | 19/48 [00:27<00:41,  1.41s/cell]
+ 42%|████▏     | 20/48 [00:28<00:39,  1.41s/cell]
+ 44%|████▍     | 21/48 [00:30<00:38,  1.42s/cell]
+ 46%|████▌     | 22/48 [00:31<00:36,  1.42s/cell]
+ 48%|████▊     | 23/48 [00:33<00:35,  1.43s/cell]
+ 50%|█████     | 24/48 [00:34<00:35,  1.48s/cell]
+ 52%|█████▏    | 25/48 [00:36<00:33,  1.47s/cell]
+ 54%|█████▍    | 26/48 [00:37<00:32,  1.46s/cell]
+ 56%|█████▋    | 27/48 [00:38<00:30,  1.46s/cell]
+ 58%|█████▊    | 28/48 [00:40<00:28,  1.44s/cell]
+ 60%|██████    | 29/48 [00:41<00:27,  1.44s/cell]
+ 62%|██████▎   | 30/48 [00:43<00:25,  1.44s/cell]
+ 65%|██████▍   | 31/48 [00:44<00:24,  1.44s/cell]
+ 67%|██████▋   | 32/48 [00:46<00:23,  1.47s/cell]
+ 69%|██████▉   | 33/48 [00:47<00:21,  1.45s/cell]
+ 71%|███████   | 34/48 [00:49<00:20,  1.44s/cell]
+ 73%|███████▎  | 35/48 [00:50<00:18,  1.44s/cell]
+ 75%|███████▌  | 36/48 [00:51<00:17,  1.43s/cell]
+ 77%|███████▋  | 37/48 [00:53<00:15,  1.43s/cell]
+ 79%|███████▉  | 38/48 [00:54<00:14,  1.42s/cell]
+ 81%|████████▏ | 39/48 [00:56<00:12,  1.42s/cell]
+ 83%|████████▎ | 40/48 [00:57<00:11,  1.42s/cell]
+ 85%|████████▌ | 41/48 [00:58<00:09,  1.42s/cell]
+ 88%|████████▊ | 42/48 [01:00<00:08,  1.41s/cell]
+ 90%|████████▉ | 43/48 [01:01<00:07,  1.42s/cell]
+ 92%|█████████▏| 44/48 [01:03<00:05,  1.41s/cell]
+ 94%|█████████▍| 45/48 [01:04<00:04,  1.45s/cell]
+ 96%|█████████▌| 46/48 [01:06<00:02,  1.44s/cell]
+ 98%|█████████▊| 47/48 [01:07<00:01,  1.44s/cell]
+100%|██████████| 48/48 [01:09<00:00,  1.44s/cell]
+100%|██████████| 48/48 [01:09<00:00,  1.44s/cell]
+wrote 480 generations to C:\Projects\Work\T-lab\01-mech-interp\results\dev\cds_mlp_mix_cond1_s0_lam1.5.jsonl in 1.2 min
+python.exe : Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher ra
+te limits and faster downloads.
+At C:\Projects\Work\T-lab\01-mech-interp\scripts\select_dev.ps1:15 char:5
++     & $py @a | Select-String -Pattern 'wrote|Error|Traceback'
++     ~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Warning: You ar...ster downloads.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+
+Loading weights:   0%|          | 0/148 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 148/148 [00:00<00:00, 7096.56it/s]
+C:\Projects\Work\T-lab\01-mech-interp\.venv\Lib\site-packages\sae_lens\saes\sae.py:254: UserWarning: 
+This SAE has non-empty model_from_pretrained_kwargs. 
+For optimal performance, load the model like so:
+model = HookedSAETransformer.from_pretrained_no_processing(..., **cfg.model_from_pretrained_kwargs)
+  warnings.warn(
+
+  0%|          | 0/48 [00:00<?, ?cell/s]
+  2%|▏         | 1/48 [00:01<01:23,  1.77s/cell]
+  4%|▍         | 2/48 [00:03<01:12,  1.57s/cell]
+  6%|▋         | 3/48 [00:04<01:10,  1.57s/cell]
+  8%|▊         | 4/48 [00:06<01:08,  1.55s/cell]
+ 10%|█         | 5/48 [00:07<01:06,  1.55s/cell]
+ 12%|█▎        | 6/48 [00:09<01:04,  1.54s/cell]
+ 15%|█▍        | 7/48 [00:10<01:02,  1.53s/cell]
+ 17%|█▋        | 8/48 [00:12<01:00,  1.52s/cell]
+ 19%|█▉        | 9/48 [00:13<00:59,  1.51s/cell]
+ 21%|██        | 10/48 [00:15<00:57,  1.51s/cell]
+ 23%|██▎       | 11/48 [00:16<00:55,  1.51s/cell]
+ 25%|██▌       | 12/48 [00:18<00:54,  1.50s/cell]
+ 27%|██▋       | 13/48 [00:19<00:52,  1.50s/cell]
+ 29%|██▉       | 14/48 [00:21<00:50,  1.50s/cell]
