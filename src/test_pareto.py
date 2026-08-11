@@ -49,7 +49,12 @@ def main() -> None:
         abs(concept_at_budget(x, y, 1.5) - 0.3) < 1e-9,
         f"{concept_at_budget(x, y, 1.5)}",
     )
-    check("budget outside support is NaN", np.isnan(concept_at_budget(x, y, 0.5)))
+    check("budget below the cheapest point is NaN", np.isnan(concept_at_budget(x, y, 0.5)))
+    check(
+        "budget above the whole front credits its maximum",
+        abs(concept_at_budget(x, y, 9.0) - 0.9) < 1e-9,
+        f"{concept_at_budget(x, y, 9.0)}",
+    )
 
     df = synthetic(gain=0.0)
     tbl = endpoint_table(cell_means(df, "keyword_hit"))

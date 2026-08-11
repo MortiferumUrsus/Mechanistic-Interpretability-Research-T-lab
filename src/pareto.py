@@ -42,9 +42,15 @@ def _front(logppl: np.ndarray, concept: np.ndarray) -> tuple[np.ndarray, np.ndar
 
 
 def concept_at_budget(logppl: np.ndarray, concept: np.ndarray, budget: float) -> float:
-    """Interpolate the front at a fluency budget; NaN if the budget is outside its support."""
+    """Best concept reachable without exceeding a log-perplexity budget.
+
+    Undefined only when the arm cannot reach that fluency at all, that is when its cheapest point is
+    already above the budget. When the whole front sits below the budget the answer is its maximum
+    concept: every point satisfies the constraint. Returning NaN in that case would penalise exactly
+    the arms that are uniformly more fluent than the reference.
+    """
     x, y = _front(logppl, concept)
-    if len(x) == 0 or budget < x.min() or budget > x.max():
+    if len(x) == 0 or budget < x.min():
         return float("nan")
     return float(np.interp(budget, x, y))
 
