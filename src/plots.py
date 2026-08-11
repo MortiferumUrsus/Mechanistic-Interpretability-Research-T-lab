@@ -95,18 +95,20 @@ def fig_pareto(args) -> None:
         ax.plot(fx, fy, color=REF, linewidth=2, marker="o", markersize=5, zorder=2, label=ARM_LABEL["naive"])
         gx, gy = _front(sub["logppl"].to_numpy(), sub["concept"].to_numpy())
         ax.plot(gx, gy, color=SERIES[0], linewidth=2, marker="o", markersize=6, zorder=3, label=ARM_LABEL[arm])
+        # label only points that survive onto the frontier, otherwise the labels float free of the line
+        on_front = {(round(a, 6), round(b, 6)) for a, b in zip(gx, gy)}
         for _, r in sub.iterrows():
-            if r["c"] in (1.0, 2.0, 3.0):
+            if r["c"] in (1.0, 2.0, 3.0) and (round(r["logppl"], 6), round(r["concept"], 6)) in on_front:
                 ax.annotate(
                     f"c={r['c']:g}",
                     (r["logppl"], r["concept"]),
                     textcoords="offset points",
-                    xytext=(6, -3),
+                    xytext=(6, -10),
                     fontsize=8,
                     color=MUTED,
                 )
         style(ax, "log-перплексия продолжения (ниже — лучше)", "доля продолжений с концептом", ARM_LABEL[arm])
-        leg = ax.legend(frameon=False, fontsize=9, loc="lower right")
+        leg = ax.legend(frameon=False, fontsize=9, loc="upper left")
         for t in leg.get_texts():
             t.set_color(INK2)
     for ax in axes[n:]:
@@ -149,8 +151,9 @@ def fig_endpoint(args) -> None:
     fig, ax = new_fig(7.0, 0.55 * len(df) + 1.6)
     y = np.arange(len(df))
     ax.barh(y, df["delta_mean"], color=SERIES[0], height=0.6, zorder=3)
+    lo, hi = df["delta_lo95"], df["delta_hi95"]
     ax.errorbar(
-        df["delta_mean"], y, xerr=[df["delta_mean"] - df["lo95"], df["hi95"] - df["delta_mean"]],
+        df["delta_mean"], y, xerr=[df["delta_mean"] - lo, hi - df["delta_mean"]],
         fmt="none", ecolor=INK2, elinewidth=1.2, capsize=3, zorder=4,
     )
     ax.axvline(0, color=AXIS, linewidth=1)

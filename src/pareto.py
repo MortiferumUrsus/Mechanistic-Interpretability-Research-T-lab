@@ -200,9 +200,18 @@ def main(args) -> None:
     tbl = endpoint_table(cells)
     tbl.to_csv(RESULTS / "endpoint_per_feature.csv", index=False)
 
-    summary = tbl.groupby("arm")["concept_at_budget"].agg(["mean", "median", "count"]).reset_index()
-    boot = bootstrap(df, args.concept, args.n_boot, args.seed)
-    delta = paired_delta(df, args.concept, args.n_boot, args.seed)
+    summary = (
+        tbl.groupby("arm")["concept_at_budget"]
+        .agg(["mean", "median", "count"])
+        .rename(columns={"mean": "endpoint_mean", "median": "endpoint_median", "count": "n_features"})
+        .reset_index()
+    )
+    boot = bootstrap(df, args.concept, args.n_boot, args.seed).rename(
+        columns={"mean": "boot_mean", "lo95": "boot_lo95", "hi95": "boot_hi95"}
+    )
+    delta = paired_delta(df, args.concept, args.n_boot, args.seed).rename(
+        columns={"lo95": "delta_lo95", "hi95": "delta_hi95"}
+    )
     summary = summary.merge(boot, on="arm").merge(delta, on="arm")
     summary.to_csv(RESULTS / "endpoint_summary.csv", index=False)
     print(f"primary endpoint, budget = naive at c={REF_C}")
@@ -213,7 +222,9 @@ def main(args) -> None:
         t = endpoint_table(cells, rc)
         if t.empty:
             continue
-        d = paired_delta(df, args.concept, max(400, args.n_boot // 4), args.seed, rc)
+        d = paired_delta(df, args.concept, max(400, args.n_boot // 4), args.seed, rc).rename(
+            columns={"lo95": "delta_lo95", "hi95": "delta_hi95"}
+        )
         m = (
             t.groupby("arm")["concept_at_budget"]
             .mean()
