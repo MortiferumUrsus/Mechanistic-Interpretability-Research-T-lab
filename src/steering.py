@@ -60,14 +60,23 @@ class DenoiserArm:
     random_proj: torch.Tensor | None = None
 
     def __call__(self, h: torch.Tensor, v_hat: torch.Tensor, s: float) -> torch.Tensor:
+        from denoiser import call_denoiser
+
         x = h + s * v_hat
+        # The denoiser is conditioned on the perturbation magnitude it is shown, so the steered
+        # input is told `s` and the clean baseline is told zero. Feeding both the same value
+        # would make the conditioning useless.
         if self.mode == "naive":
-            return x + self.eta * (self.denoiser(x) - x)
+            return x + self.eta * (call_denoiser(self.denoiser, x, s) - x)
         if self.mode == "clean_then":
-            return self.denoiser(h) + s * v_hat
+            return call_denoiser(self.denoiser, h, 0.0) + s * v_hat
         if s == 0.0:
             return h
-        d_steer = self.denoiser(x) - self.denoiser(h) - s * v_hat
+        d_steer = (
+            call_denoiser(self.denoiser, x, s)
+            - call_denoiser(self.denoiser, h, 0.0)
+            - s * v_hat
+        )
         axis = v_hat if self.random_proj is None else self.random_proj
         perp = _proj_out(d_steer, axis)
         par = d_steer - perp

@@ -78,6 +78,16 @@ class WienerDenoiser(nn.Module):
         return self.mean + (x - self.mean) @ self.A.T
 
 
+def call_denoiser(model: nn.Module, x: torch.Tensor, s: float) -> torch.Tensor:
+    """Run a denoiser with the perturbation magnitude it is being shown.
+
+    Conditioned denoisers need the true magnitude of the perturbation in their input; passing a
+    single scalar for a whole batch keeps the call sites free of shape handling.
+    """
+    mag = torch.full(x.shape[:-1], float(s), device=x.device, dtype=x.dtype)
+    return model(x, mag)
+
+
 def sigma_for_norm(total_norm: float, d: int = D_MODEL) -> float:
     """Per-coordinate sigma matching a perturbation of the given total norm.
 

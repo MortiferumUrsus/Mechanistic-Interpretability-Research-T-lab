@@ -25,7 +25,13 @@ from common import (
     natural_strength,
     seed_all,
 )
-from denoiser import WienerDenoiser, build_denoiser, sigma_for_norm, transported_direction
+from denoiser import (
+    WienerDenoiser,
+    build_denoiser,
+    call_denoiser,
+    sigma_for_norm,
+    transported_direction,
+)
 
 CONFIGS = ROOT / "configs"
 C_GRID = [0.5, 1.0, 1.5, 2.0, 3.0]
@@ -84,11 +90,11 @@ def transmission(args) -> None:
 
     rows = []
     for dname, D in denoisers.items():
-        base = D(h)
+        base = call_denoiser(D, h, 0.0)
         for f, v_hat, scale in feature_dirs(args.split, sae):
             for c in C_GRID:
                 s = c * scale
-                delta = D(h + s * v_hat) - base - s * v_hat
+                delta = call_denoiser(D, h + s * v_hat, s) - base - s * v_hat
                 along = delta @ v_hat
                 perp = delta - along.unsqueeze(-1) * v_hat
                 rows.append(
@@ -124,7 +130,7 @@ def spectral(args) -> None:
     evals, evecs = evals[order].float(), evecs[:, order].float()
     h = sample_acts(args.n_tokens, args.seed)
     D, _ = load_trained(args.denoiser, stats)
-    base = D(h)
+    base = call_denoiser(D, h, 0.0)
 
     n_bins = 16
     edges = np.linspace(0, len(evals), n_bins + 1).astype(int)
@@ -133,12 +139,13 @@ def spectral(args) -> None:
         tdir = transported_direction(stats, v_hat, args.shrink)
         for c in [1.0, 2.0]:
             s = c * scale
+            dn = call_denoiser(D, h + s * v_hat, s)
+            d_steer = dn - base - s * v_hat
+            perp = d_steer - (d_steer @ v_hat).unsqueeze(-1) * v_hat
             variants = {
                 "naive": h + s * v_hat,
-                "denoise_naive": D(h + s * v_hat),
-                "cds": h
-                + s * v_hat
-                + (lambda d: d - (d @ v_hat).unsqueeze(-1) * v_hat)(D(h + s * v_hat) - base - s * v_hat),
+                "denoise_naive": dn,
+                "cds": h + s * v_hat + perp,
                 "mts": h + s * tdir,
             }
             for name, x in variants.items():
