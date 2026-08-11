@@ -21,16 +21,20 @@ REF_C = 1.0
 
 
 def _front(logppl: np.ndarray, concept: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
-    """Upper-left envelope: keep points not dominated in (low logppl, high concept)."""
+    """Achievable frontier: best concept reachable without exceeding a given log-perplexity.
+
+    Any weaker strength is always available, so at budget B every point with logppl <= B is on
+    the table; the frontier is therefore the running maximum of concept over sorted logppl.
+    """
     order = np.argsort(logppl)
     x, y = logppl[order], concept[order]
     keep, best = [], -np.inf
-    for i in range(len(x) - 1, -1, -1):
+    for i in range(len(x)):
         if y[i] > best:
             best = y[i]
             keep.append(i)
-    keep = np.array(keep[::-1])
-    return x[keep], y[keep]
+    idx = np.array(keep, dtype=int)
+    return x[idx], y[idx]
 
 
 def concept_at_budget(logppl: np.ndarray, concept: np.ndarray, budget: float) -> float:

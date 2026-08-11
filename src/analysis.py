@@ -12,7 +12,7 @@ import yaml
 from tqdm import tqdm
 
 from common import DATA, DEVICE, HOOK, RESULTS, ROOT, ActStats, load_model, load_sae, seed_all
-from denoiser import WienerDenoiser, build_denoiser, transported_direction
+from denoiser import WienerDenoiser, build_denoiser, sigma_for_norm, transported_direction
 
 CONFIGS = ROOT / "configs"
 C_GRID = [0.5, 1.0, 1.5, 2.0, 3.0]
@@ -62,7 +62,7 @@ def transmission(args) -> None:
     denoisers = {}
     for name in args.denoisers.split(","):
         if name.startswith("wiener"):
-            sigma = float(name.split(":")[1]) * scale
+            sigma = sigma_for_norm(float(name.split(":")[1]) * scale)
             denoisers[name] = WienerDenoiser(stats, sigma=sigma, shrink=args.shrink)
         else:
             denoisers[name], _ = load_trained(name, stats)

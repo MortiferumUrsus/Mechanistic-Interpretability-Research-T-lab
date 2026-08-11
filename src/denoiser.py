@@ -78,6 +78,15 @@ class WienerDenoiser(nn.Module):
         return self.mean + (x - self.mean) @ self.A.T
 
 
+def sigma_for_norm(total_norm: float, d: int = D_MODEL) -> float:
+    """Per-coordinate sigma matching a perturbation of the given total norm.
+
+    The Wiener form takes an isotropic per-coordinate variance, while every strength in this
+    study is expressed as a total activation-space norm, so the two must be converted.
+    """
+    return total_norm / (d**0.5)
+
+
 def transported_direction(stats: ActStats, v_hat: torch.Tensor, shrink: float) -> torch.Tensor:
     """Minimum-Mahalanobis shift with a unit increment of the concept coordinate.
 

@@ -22,6 +22,7 @@ class NoiseConfig:
     s_min_rel: float = 0.05
     s_max_rel: float = 3.5
     p_zero: float = 0.1  # fraction of clean examples, enforces D(h) ~ h
+    fixed_rel: float = 0.0  # > 0 pins the magnitude, for the fixed-sigma ablation
 
 
 def sample_directions(
@@ -45,6 +46,8 @@ def sample_directions(
 def sample_magnitudes(
     n: int, scale: float, cfg: NoiseConfig, gen: torch.Generator, device: torch.device
 ) -> torch.Tensor:
+    if cfg.fixed_rel > 0:
+        return torch.full((n,), cfg.fixed_rel * scale, device=device)
     lo, hi = cfg.s_min_rel * scale, cfg.s_max_rel * scale
     r = torch.rand(n, device=device, generator=gen)
     s = torch.exp(r * (torch.log(torch.tensor(hi)) - torch.log(torch.tensor(lo))).to(device) + torch.log(torch.tensor(lo)).to(device))

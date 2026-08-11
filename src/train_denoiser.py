@@ -42,6 +42,7 @@ def train(args) -> None:
         s_min_rel=args.s_min_rel,
         s_max_rel=args.s_max_rel,
         p_zero=args.p_zero,
+        fixed_rel=args.fixed_rel,
     )
     model = build_denoiser(
         args.arch, stats, hidden=args.hidden, scale=scale, cond=bool(args.cond)
@@ -68,7 +69,7 @@ def train(args) -> None:
         opt.step()
         sched.step()
         if (step + 1) % args.log_every == 0:
-            log.append({"step": step + 1, "loss": float(loss)})
+            log.append({"step": step + 1, "loss": float(loss.detach())})
             print(f"step {step + 1}/{args.steps} loss {float(loss):.5f}", flush=True)
 
     metrics = evaluate(model, acts, n_train, dictionary, stats, cfg, args, gen)
@@ -129,6 +130,7 @@ if __name__ == "__main__":
     ap.add_argument("--s-min-rel", dest="s_min_rel", type=float, default=0.05)
     ap.add_argument("--s-max-rel", dest="s_max_rel", type=float, default=3.5)
     ap.add_argument("--p-zero", dest="p_zero", type=float, default=0.1)
+    ap.add_argument("--fixed-rel", dest="fixed_rel", type=float, default=0.0)
     ap.add_argument("--steps", type=int, default=12000)
     ap.add_argument("--batch", type=int, default=512)
     ap.add_argument("--lr", type=float, default=3e-4)
