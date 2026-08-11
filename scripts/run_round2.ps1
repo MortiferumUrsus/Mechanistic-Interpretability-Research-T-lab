@@ -16,6 +16,12 @@ $grid = "0,0.5,1.0,1.25,1.5,2.0,2.5,3.0"
 & $py metrics.py --gen gen_dev_r2.jsonl --out scored_dev_r2.csv --split dev --stages ppl,keyword,sae --shuffle-frac 0.0001
 & $py control_specificity.py --gen gen_dev_r2.jsonl --split dev --out control_specificity_dev.csv
 
+# control: same rotation angle, random axis, same norm. If this helps as much, the gain belongs to
+# perturbing the direction at all rather than to the learned correction.
+& $py generate.py --split dev --arms randrot --c-grid 0,1.0,1.5,2.0,3.0 --n-prompts 10 --out gen_dev_ctrl.jsonl
+& $py metrics.py --gen gen_dev_ctrl.jsonl --out scored_dev_ctrl.csv --split dev --stages ppl,keyword --shuffle-frac 0.0001
+& $py control_specificity.py --gen gen_dev_ctrl.jsonl --split dev --out control_randrot_dev.csv
+
 # one pass on TEST
 & $py generate.py --split test --arms naive,dirfix --c-grid $grid --n-prompts 30 --out gen_test_r2.jsonl
 & $py metrics.py --gen gen_test_r2.jsonl --out scored_test_r2.csv --split test --stages ppl,keyword,sae,dist --shuffle-frac 0.15
