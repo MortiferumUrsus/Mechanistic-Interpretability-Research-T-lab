@@ -81,6 +81,10 @@ def build_arms(names: list[str], model, sae, stats: ActStats, frozen: dict) -> d
             arms[name] = S.CorrectedDirectionArm(
                 correction=load_correction(ROOT / "checkpoints" / f"{frozen['direction']}.pt")
             )
+        elif name == "randrot":
+            arms[name] = S.RandomRotationArm(
+                cos_target=frozen.get("randrot_cos", 0.866), seed=frozen.get("randrot_seed", 0)
+            )
         elif name == "mts":
             arms[name] = ("per_feature", "mts")
         elif name == "fsr":

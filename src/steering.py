@@ -140,6 +140,36 @@ class CorrectedDirectionArm:
 
 
 @dataclass
+class RandomRotationArm:
+    """Control for the direction correction: same rotation angle, random axis, same norm.
+
+    If rotating the decoder direction by this much in an arbitrary direction helps as well, the gain
+    belongs to perturbing the direction at all, not to the learned correction.
+    """
+
+    cos_target: float
+    seed: int = 0
+    cache: dict = field(default_factory=dict)
+
+    def _w(self, v_hat: torch.Tensor) -> torch.Tensor:
+        key = id(v_hat)
+        if key not in self.cache:
+            g = torch.Generator(device=v_hat.device).manual_seed(self.seed)
+            u = torch.randn(v_hat.shape, device=v_hat.device, generator=g)
+            u = u - (u @ v_hat) * v_hat
+            u = u / u.norm().clamp_min(1e-6)
+            k = float(self.cos_target)
+            w = k * v_hat + (1.0 - k * k) ** 0.5 * u
+            self.cache[key] = w / w.norm().clamp_min(1e-6)
+        return self.cache[key]
+
+    def __call__(self, h: torch.Tensor, v_hat: torch.Tensor, s: float) -> torch.Tensor:
+        if s == 0.0:
+            return h
+        return h + s * self._w(v_hat)
+
+
+@dataclass
 class FeatureSurgeryArm:
     """Clamp every non-target SAE latent back under its natural corpus ceiling.
 
