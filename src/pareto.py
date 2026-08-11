@@ -18,6 +18,10 @@ from common import RESULTS
 
 REF_ARM = "naive"
 REF_C = 1.0
+# Secondary budgets, declared before TEST was opened: the primary one is tight, and the naive
+# front peaks in concept somewhat above it, so the same comparison is also reported where the
+# baseline is actually operating.
+SECONDARY_C = (1.5, 2.0)
 
 
 def _front(logppl: np.ndarray, concept: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
@@ -53,10 +57,10 @@ def cell_means(df: pd.DataFrame, concept_col: str) -> pd.DataFrame:
     )
 
 
-def endpoint_table(cells: pd.DataFrame) -> pd.DataFrame:
+def endpoint_table(cells: pd.DataFrame, ref_c: float = REF_C) -> pd.DataFrame:
     rows = []
     for feat, g in cells.groupby("feature"):
-        ref = g[(g["arm"] == REF_ARM) & (np.isclose(g["c"], REF_C))]
+        ref = g[(g["arm"] == REF_ARM) & (np.isclose(g["c"], ref_c))]
         if ref.empty:
             continue
         budget = float(ref["logppl"].iloc[0])
@@ -65,6 +69,7 @@ def endpoint_table(cells: pd.DataFrame) -> pd.DataFrame:
                 {
                     "feature": feat,
                     "arm": arm,
+                    "ref_c": ref_c,
                     "budget_logppl": budget,
                     "concept_at_budget": concept_at_budget(
                         ga["logppl"].to_numpy(), ga["concept"].to_numpy(), budget
@@ -115,7 +120,9 @@ def bootstrap(df: pd.DataFrame, concept_col: str, n_boot: int, seed: int) -> pd.
     return pd.DataFrame(out)
 
 
-def paired_delta(df: pd.DataFrame, concept_col: str, n_boot: int, seed: int) -> pd.DataFrame:
+def paired_delta(
+    df: pd.DataFrame, concept_col: str, n_boot: int, seed: int, ref_c: float = REF_C
+) -> pd.DataFrame:
     """Bootstrap the per-replicate difference against the reference arm, which is what a
     paired comparison actually needs: CI on the delta, not on two independent means."""
     rng = np.random.default_rng(seed)
@@ -134,7 +141,11 @@ def paired_delta(df: pd.DataFrame, concept_col: str, n_boot: int, seed: int) -> 
             picked["feature"] = rep
             parts.append(picked)
         boot = pd.concat(parts, ignore_index=True)
-        agg = endpoint_table(cell_means(boot, concept_col)).groupby("arm")["concept_at_budget"].mean()
+        agg = (
+            endpoint_table(cell_means(boot, concept_col), ref_c)
+            .groupby("arm")["concept_at_budget"]
+            .mean()
+        )
         base = agg.get(REF_ARM, np.nan)
         for a in arms:
             deltas[a].append(float(agg.get(a, np.nan) - base))
@@ -168,7 +179,29 @@ def main(args) -> None:
     delta = paired_delta(df, args.concept, args.n_boot, args.seed)
     summary = summary.merge(boot, on="arm").merge(delta, on="arm")
     summary.to_csv(RESULTS / "endpoint_summary.csv", index=False)
+    print(f"primary endpoint, budget = naive at c={REF_C}")
     print(summary.to_string(index=False))
+
+    sec = []
+    for rc in SECONDARY_C:
+        t = endpoint_table(cells, rc)
+        if t.empty:
+            continue
+        d = paired_delta(df, args.concept, max(400, args.n_boot // 4), args.seed, rc)
+        m = (
+            t.groupby("arm")["concept_at_budget"]
+            .mean()
+            .rename("concept_at_budget")
+            .reset_index()
+            .merge(d, on="arm")
+        )
+        m.insert(0, "ref_c", rc)
+        sec.append(m)
+    if sec:
+        secondary = pd.concat(sec, ignore_index=True)
+        secondary.to_csv(RESULTS / "endpoint_secondary.csv", index=False)
+        print("\nsecondary budgets")
+        print(secondary.to_string(index=False))
     (RESULTS / "endpoint_summary.json").write_text(
         json.dumps(
             {
