@@ -9,33 +9,39 @@ tags:
 library_name: pytorch
 ---
 
-# Residual-stream denoiser for repairing activation steering in GPT-2 small
+# Steering-direction correction for SAE feature steering in GPT-2 small
 
-A small residual MLP that takes an activation from the residual stream of GPT-2 small after block 6
-and returns an estimate of the unperturbed activation. Its purpose is to repair the fluency damage
-caused by large-coefficient activation steering along a sparse-autoencoder decoder direction, while
-leaving the steering signal itself intact.
+A shared low-rank correction of SAE steering directions, `w(v) = normalise(v + A Bᵀ v)`, 98k
+parameters, for the residual stream of GPT-2 small after block 6. Injecting `h + s·w(v̂)` instead of
+`h + s·v̂` keeps the perturbation norm identical while producing more of the target feature's effect and
+less damage to the text.
 
-Trained for the Mechanistic Interpretability track of the T-Lab 2026 selection. Code, protocol and
-the full report: see the repository linked below.
+The interesting part is what this implies: **the SAE decoder column is not the most effective injection
+direction for reproducing its own feature's downstream effect.** The correction is trained on one set of
+latents and transfers to latents it has never seen, so the improvement is a systematic property of the
+decoder basis rather than per-feature tuning.
 
-## What it is for
+This repository also contains the residual-stream denoiser from the first round of the same study,
+which is kept for reproducibility. The report explains why the denoiser route does not work: it erases
+24–62% of the steering signal it is supposed to preserve.
 
-Steering adds a direction to the residual stream, `h + s·v̂`, where `v̂` is a normalised decoder
-column of an SAE. Large `s` delivers the concept but breaks the text. The intended use of this
-checkpoint is **not** `denoiser(h + s·v̂)` directly: applied that way it removes a large part of the
-steering signal along with the damage. It is meant to be used contrastively, keeping the component
-along the steering direction untouched:
+Built for the Mechanistic Interpretability track of the T-Lab 2026 selection. Code, protocol and full
+report: see the repository linked below.
+
+## How to use it
 
 ```python
-d_steer = D(h + s * v_hat, s) - D(h, 0.0) - s * v_hat
-d_perp = d_steer - (d_steer @ v_hat).unsqueeze(-1) * v_hat
-h_tilde = h + s * v_hat + lam * d_perp
+w = correction(v_hat.unsqueeze(0))[0]     # unit norm by construction
+h_tilde = h + s * w                       # same perturbation norm as h + s * v_hat
 ```
 
-Two properties follow by construction: at `s = 0` the transform is exactly the identity, and the
-concept coordinate `v̂ᵀh̃` equals that of naive steering, so comparisons happen at equal concept
-strength.
+Strength `s` is expressed in units of the latent's own ceiling on real text, `s = c · max_activation ·
+‖W_dec[f]‖`, which is what makes one grid comparable across latents whose natural scales differ by a
+factor of six. The correction was trained for `c ∈ [0.5, 2.5]`; at `c = 0.5` it is not an improvement,
+and above `c ≈ 3` it is untested.
+
+The first two token positions of a sequence stay untouched in the reference implementation: the residual
+norm there is an outlier and distorts both statistics and interventions.
 
 ## Interface
 
@@ -49,12 +55,22 @@ strength.
 
 ## Training
 
-- Objective `‖h − D(h + s·u)‖²` on residual activations of OpenWebText.
-- Perturbation directions `u`: a mixture of isotropic Gaussian directions and random sparse
-  combinations of SAE decoder columns, drawn only from a **training** subset of latents.
-- Magnitudes `s` log-uniform over the deployment range, identical across all training variants, so
-  that ablations over the noise structure are not confounded by noise energy.
-- 10% of examples are clean, which keeps the model close to the identity on unperturbed input.
+The objective is measured through the frozen upper half of the network rather than in activation space.
+For a clean activation `h`, a training direction `v` and a strength `s`, with `A` the component of the
+final-logit response along the concept's small-signal causal direction and `C` the relative size of the
+nonlinear residue:
+
+```
+L = − A / A_naive  +  γ · relu(C / C_naive − 1)
+```
+
+Both references are measured in the same batch with the uncorrected direction, which matters: without the
+matched reference the objective is minimised by pointing somewhere harmless, and the concept stops being
+delivered at all. Rank 64, 2000 steps, one GPU-hour on a 6 GB card.
+
+The denoiser kept alongside was trained separately with `‖h − D(h + s·u)‖²` on OpenWebText activations,
+with perturbation magnitudes drawn from one distribution shared across all its ablations so that noise
+structure is not confounded with noise energy.
 
 ## Leakage control
 
@@ -63,11 +79,17 @@ selection and for evaluation. Any latent with absolute cosine similarity 0.3 or 
 evaluation direction is excluded from the training dictionary; the measured maximum over all pairs
 is reported in the repository.
 
+## Leakage control
+
+The latents used for training are disjoint from those used for selection and evaluation, and any latent
+with absolute cosine similarity 0.3 or above to an evaluation direction is excluded from the training
+set. The measured maximum over all pairs is in the repository.
+
 ## Limitations
 
-- GPT-2 small only, and only at the one intervention site it was trained for.
-- Trained on corpus activations, applied at generation time to activations produced by an already
-  steered context; that distribution gap is measured in the report rather than assumed away.
-- The closed-form covariance-based alternative described in the report reaches a large share of the
-  same benefit with no training at all. This checkpoint is worth its weight only where that share
-  is not enough.
+- GPT-2 small only, one intervention site, one SAE release.
+- No improvement at low strength (`c ≈ 0.5`), where the trade in response space goes the wrong way.
+- Evaluated on 12 latents selected by an objective lexical rule; the effect is a property of this
+  decoder basis and does not automatically transfer to other SAEs or layers.
+- The activations it sees at generation time drift away from the corpus as strength rises (norm 89 → 156
+  between `c = 0` and `c = 2`); the correction is a fixed linear map and does not model that drift.
