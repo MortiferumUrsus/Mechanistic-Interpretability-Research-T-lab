@@ -146,28 +146,44 @@ def _ppl_pass(df: pd.DataFrame, tok, lm, batch: int, shuffled: bool) -> np.ndarr
 
 @torch.no_grad()
 def score_sae_activation(df: pd.DataFrame, batch: int) -> np.ndarray:
-    """Mean activation of each row's target latent when its own text is re-encoded."""
+    """Mean activation of each row's target latent when its own text is re-encoded.
+
+    Only the target latent is evaluated, as a matrix-vector product against its encoder column.
+    Running the whole 24576-wide dictionary would allocate hundreds of megabytes per batch for one
+    number per token, which thrashes a 6 GB card.
+    """
     model = load_model()
     sae = load_sae()
+    w_enc = sae.W_enc.detach().float()
+    b_enc = sae.b_enc.detach().float()
+    b_dec = sae.b_dec.detach().float()
+    subtract_b_dec = bool(getattr(sae.cfg, "apply_b_dec_to_input", False))
+    del sae
+    torch.cuda.empty_cache()
+
     out = np.zeros(len(df), dtype=np.float64)
-    order = df.sort_values("feature").index.to_numpy()
     pad_id = model.tokenizer.pad_token_id or model.tokenizer.eos_token_id
     positions = {k: p for p, k in enumerate(df.index)}
-    for i in tqdm(range(0, len(order), batch), unit="batch", leave=False):
-        idx = order[i : i + batch]
-        sub = df.loc[idx]
-        feats = torch.as_tensor(sub["feature"].to_numpy(), device=DEVICE)
-        toks = model.to_tokens(list(sub["text"]))
-        _, cache = model.run_with_cache(toks, names_filter=HOOK)
-        z = sae.encode(cache[HOOK])
-        pick = z[torch.arange(len(idx), device=DEVICE), :, feats]
-        # to_tokens prepends BOS and right-pads; both must stay out of the average
-        valid = toks != pad_id
-        valid[:, 0] = False
-        pick = (pick * valid).sum(-1) / valid.sum(-1).clamp_min(1)
-        out[[positions[k] for k in idx]] = pick.cpu().numpy()
-        del cache, z
-    del model, sae
+    for feat, g in tqdm(df.groupby("feature"), unit="feature", leave=False):
+        col = w_enc[:, int(feat)]
+        bias = b_enc[int(feat)]
+        keys = g.index.to_numpy()
+        for i in range(0, len(keys), batch):
+            idx = keys[i : i + batch]
+            texts = list(df.loc[idx, "text"])
+            toks = model.to_tokens(texts)
+            _, cache = model.run_with_cache(toks, names_filter=HOOK)
+            h = cache[HOOK]
+            if subtract_b_dec:
+                h = h - b_dec
+            z = torch.relu(h @ col + bias)
+            # to_tokens prepends BOS and right-pads; both must stay out of the average
+            valid = toks != pad_id
+            valid[:, 0] = False
+            vals = (z * valid).sum(-1) / valid.sum(-1).clamp_min(1)
+            out[[positions[k] for k in idx]] = vals.cpu().numpy()
+            del cache, h, z
+    del model
     torch.cuda.empty_cache()
     return out
 
@@ -241,9 +257,14 @@ def main(args) -> None:
     stages = args.stages.split(",")
 
     if "ppl" in stages:
-        true, shuf = score_ppl_both(df, SCORER, args.batch)
-        df["logppl"] = true
-        df["logppl_shuf"] = shuf
+        df["logppl"] = score_ppl(df, SCORER, args.batch)
+        # prompt dependence is a guard metric, not the reported axis, so it is measured on a
+        # random subsample: the second perplexity pass costs as much as the first
+        frac = args.shuffle_frac
+        sub = df.sample(frac=frac, random_state=0) if frac < 1.0 else df
+        shuf = score_ppl(sub, SCORER, args.batch, shuffled=True)
+        df["logppl_shuf"] = np.nan
+        df.loc[sub.index, "logppl_shuf"] = shuf
         df["prompt_dependence"] = df["logppl_shuf"] - df["logppl"]
     if "ppl_alt" in stages:
         df["logppl_alt"] = score_ppl(df, SCORER_ALT, args.batch)
@@ -282,4 +303,5 @@ if __name__ == "__main__":
     ap.add_argument("--stages", default="ppl,keyword,sae,dist")
     ap.add_argument("--batch", type=int, default=32)
     ap.add_argument("--judge-batch", dest="judge_batch", type=int, default=16)
+    ap.add_argument("--shuffle-frac", dest="shuffle_frac", type=float, default=0.25)
     main(ap.parse_args())
