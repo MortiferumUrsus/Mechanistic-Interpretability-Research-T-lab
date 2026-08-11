@@ -81,7 +81,10 @@ def fig_pareto(args) -> None:
     base = cells[cells["arm"] == "naive"].sort_values("c")
     arms = [a for a in ARM_LABEL if a in set(cells["arm"]) and a not in ("clean", "naive")]
     n = len(arms)
-    ncols = min(3, max(1, n))
+    if n == 0:
+        print("skip fig_pareto: no repair arms present")
+        return
+    ncols = min(3, n)
     nrows = int(np.ceil(n / ncols))
     fig, axes = new_fig(4.4 * ncols, 3.6 * nrows, nrows, ncols)
     axes = np.atleast_1d(axes).ravel()
@@ -246,12 +249,20 @@ def fig_axes_sanity(args) -> None:
     g = sub.groupby("c")[["logppl", "prompt_dependence", "rep4"] + cols].mean().reset_index()
     fig, axes = new_fig(9.0, 3.8, 1, 2)
     axes = np.atleast_1d(axes).ravel()
+    metric_label = {
+        "keyword_hit": "лексический признак концепта",
+        "sae_act": "активация целевого признака SAE",
+        "judge": "оценка судьи",
+    }
     ax = axes[0]
     for i, c in enumerate(cols):
         v = g[c] / max(g[c].max(), 1e-9)
-        ax.plot(g["c"], v, color=SERIES[i % len(SERIES)], linewidth=2, marker="o", markersize=6, label=c)
+        ax.plot(
+            g["c"], v, color=SERIES[i % len(SERIES)], linewidth=2, marker="o", markersize=6,
+            label=metric_label.get(c, c),
+        )
     style(ax, "сила стиринга c", "концепт (нормировано на максимум)", "Концепт немонотонен по силе")
-    leg = ax.legend(frameon=False, fontsize=9)
+    leg = ax.legend(frameon=False, fontsize=9, loc="upper right")
     for t in leg.get_texts():
         t.set_color(INK2)
     ax = axes[1]

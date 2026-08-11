@@ -399,3 +399,981 @@ model = HookedSAETransformer.from_pretrained_no_processing(..., **cfg.model_from
  25%|██▌       | 12/48 [00:18<00:54,  1.50s/cell]
  27%|██▋       | 13/48 [00:19<00:52,  1.50s/cell]
  29%|██▉       | 14/48 [00:21<00:50,  1.50s/cell]
+ 31%|███▏      | 15/48 [00:22<00:49,  1.50s/cell]
+ 33%|███▎      | 16/48 [00:24<00:48,  1.50s/cell]
+ 35%|███▌      | 17/48 [00:25<00:45,  1.48s/cell]
+ 38%|███▊      | 18/48 [00:27<00:43,  1.46s/cell]
+ 40%|███▉      | 19/48 [00:28<00:42,  1.45s/cell]
+ 42%|████▏     | 20/48 [00:30<00:40,  1.44s/cell]
+ 44%|████▍     | 21/48 [00:31<00:38,  1.43s/cell]
+ 46%|████▌     | 22/48 [00:33<00:38,  1.47s/cell]
+ 48%|████▊     | 23/48 [00:34<00:36,  1.45s/cell]
+ 50%|█████     | 24/48 [00:35<00:34,  1.45s/cell]
+ 52%|█████▏    | 25/48 [00:37<00:34,  1.49s/cell]
+ 54%|█████▍    | 26/48 [00:38<00:32,  1.48s/cell]
+ 56%|█████▋    | 27/48 [00:40<00:30,  1.46s/cell]
+ 58%|█████▊    | 28/48 [00:41<00:29,  1.46s/cell]
+ 60%|██████    | 29/48 [00:43<00:27,  1.45s/cell]
+ 62%|██████▎   | 30/48 [00:44<00:26,  1.45s/cell]
+ 65%|██████▍   | 31/48 [00:46<00:24,  1.44s/cell]
+ 67%|██████▋   | 32/48 [00:47<00:23,  1.44s/cell]
+ 69%|██████▉   | 33/48 [00:48<00:21,  1.44s/cell]
+ 71%|███████   | 34/48 [00:50<00:20,  1.45s/cell]
+ 73%|███████▎  | 35/48 [00:51<00:19,  1.47s/cell]
+ 75%|███████▌  | 36/48 [00:53<00:17,  1.47s/cell]
+ 77%|███████▋  | 37/48 [00:54<00:16,  1.46s/cell]
+ 79%|███████▉  | 38/48 [00:56<00:14,  1.45s/cell]
+ 81%|████████▏ | 39/48 [00:57<00:13,  1.45s/cell]
+ 83%|████████▎ | 40/48 [00:59<00:11,  1.44s/cell]
+ 85%|████████▌ | 41/48 [01:00<00:10,  1.44s/cell]
+ 88%|████████▊ | 42/48 [01:02<00:08,  1.44s/cell]
+ 90%|████████▉ | 43/48 [01:03<00:07,  1.44s/cell]
+ 92%|█████████▏| 44/48 [01:04<00:05,  1.45s/cell]
+ 94%|█████████▍| 45/48 [01:06<00:04,  1.52s/cell]
+ 96%|█████████▌| 46/48 [01:08<00:02,  1.49s/cell]
+ 98%|█████████▊| 47/48 [01:09<00:01,  1.47s/cell]
+100%|██████████| 48/48 [01:10<00:00,  1.46s/cell]
+100%|██████████| 48/48 [01:10<00:00,  1.48s/cell]
+wrote 480 generations to C:\Projects\Work\T-lab\01-mech-interp\results\dev\dn_mlp_mix_cond1_s0_eta0.5.jsonl in 1.2 min
+python.exe : Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher ra
+te limits and faster downloads.
+At C:\Projects\Work\T-lab\01-mech-interp\scripts\select_dev.ps1:15 char:5
++     & $py @a | Select-String -Pattern 'wrote|Error|Traceback'
++     ~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Warning: You ar...ster downloads.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+
+Loading weights:   0%|          | 0/148 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 148/148 [00:00<00:00, 7309.73it/s]
+C:\Projects\Work\T-lab\01-mech-interp\.venv\Lib\site-packages\sae_lens\saes\sae.py:254: UserWarning: 
+This SAE has non-empty model_from_pretrained_kwargs. 
+For optimal performance, load the model like so:
+model = HookedSAETransformer.from_pretrained_no_processing(..., **cfg.model_from_pretrained_kwargs)
+  warnings.warn(
+
+  0%|          | 0/48 [00:00<?, ?cell/s]
+  2%|▏         | 1/48 [00:01<01:23,  1.79s/cell]
+  4%|▍         | 2/48 [00:03<01:13,  1.59s/cell]
+  6%|▋         | 3/48 [00:04<01:08,  1.52s/cell]
+  8%|▊         | 4/48 [00:06<01:07,  1.54s/cell]
+ 10%|█         | 5/48 [00:07<01:04,  1.51s/cell]
+ 12%|█▎        | 6/48 [00:09<01:02,  1.48s/cell]
+ 15%|█▍        | 7/48 [00:10<01:00,  1.47s/cell]
+ 17%|█▋        | 8/48 [00:12<00:58,  1.46s/cell]
+ 19%|█▉        | 9/48 [00:13<00:56,  1.46s/cell]
+ 21%|██        | 10/48 [00:14<00:55,  1.46s/cell]
+ 23%|██▎       | 11/48 [00:16<00:53,  1.45s/cell]
+ 25%|██▌       | 12/48 [00:17<00:51,  1.44s/cell]
+ 27%|██▋       | 13/48 [00:19<00:50,  1.43s/cell]
+ 29%|██▉       | 14/48 [00:20<00:49,  1.45s/cell]
+ 31%|███▏      | 15/48 [00:22<00:48,  1.47s/cell]
+ 33%|███▎      | 16/48 [00:23<00:46,  1.45s/cell]
+ 35%|███▌      | 17/48 [00:25<00:44,  1.44s/cell]
+ 38%|███▊      | 18/48 [00:26<00:43,  1.44s/cell]
+ 40%|███▉      | 19/48 [00:27<00:41,  1.43s/cell]
+ 42%|████▏     | 20/48 [00:29<00:40,  1.43s/cell]
+ 44%|████▍     | 21/48 [00:30<00:38,  1.43s/cell]
+ 46%|████▌     | 22/48 [00:32<00:37,  1.43s/cell]
+ 48%|████▊     | 23/48 [00:33<00:37,  1.49s/cell]
+ 50%|█████     | 24/48 [00:35<00:36,  1.50s/cell]
+ 52%|█████▏    | 25/48 [00:36<00:34,  1.49s/cell]
+ 54%|█████▍    | 26/48 [00:38<00:32,  1.48s/cell]
+ 56%|█████▋    | 27/48 [00:39<00:30,  1.47s/cell]
+ 58%|█████▊    | 28/48 [00:41<00:29,  1.46s/cell]
+ 60%|██████    | 29/48 [00:42<00:27,  1.46s/cell]
+ 62%|██████▎   | 30/48 [00:44<00:26,  1.45s/cell]
+ 65%|██████▍   | 31/48 [00:45<00:24,  1.45s/cell]
+ 67%|██████▋   | 32/48 [00:46<00:23,  1.45s/cell]
+ 69%|██████▉   | 33/48 [00:48<00:22,  1.49s/cell]
+ 71%|███████   | 34/48 [00:49<00:20,  1.48s/cell]
+ 73%|███████▎  | 35/48 [00:51<00:19,  1.47s/cell]
+ 75%|███████▌  | 36/48 [00:52<00:17,  1.46s/cell]
+ 77%|███████▋  | 37/48 [00:54<00:16,  1.46s/cell]
+ 79%|███████▉  | 38/48 [00:55<00:14,  1.45s/cell]
+ 81%|████████▏ | 39/48 [00:57<00:13,  1.46s/cell]
+ 83%|████████▎ | 40/48 [00:58<00:11,  1.45s/cell]
+ 85%|████████▌ | 41/48 [01:00<00:10,  1.44s/cell]
+ 88%|████████▊ | 42/48 [01:01<00:08,  1.44s/cell]
+ 90%|████████▉ | 43/48 [01:02<00:07,  1.44s/cell]
+ 92%|█████████▏| 44/48 [01:04<00:05,  1.47s/cell]
+ 94%|█████████▍| 45/48 [01:05<00:04,  1.46s/cell]
+ 96%|█████████▌| 46/48 [01:07<00:02,  1.45s/cell]
+ 98%|█████████▊| 47/48 [01:08<00:01,  1.44s/cell]
+100%|██████████| 48/48 [01:10<00:00,  1.43s/cell]
+100%|██████████| 48/48 [01:10<00:00,  1.46s/cell]
+wrote 480 generations to C:\Projects\Work\T-lab\01-mech-interp\results\dev\dn_mlp_mix_cond1_s0_eta1.jsonl in 1.2 min
+python.exe : Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher ra
+te limits and faster downloads.
+At C:\Projects\Work\T-lab\01-mech-interp\scripts\select_dev.ps1:15 char:5
++     & $py @a | Select-String -Pattern 'wrote|Error|Traceback'
++     ~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Warning: You ar...ster downloads.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+
+Loading weights:   0%|          | 0/148 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 148/148 [00:00<00:00, 7228.11it/s]
+C:\Projects\Work\T-lab\01-mech-interp\.venv\Lib\site-packages\sae_lens\saes\sae.py:254: UserWarning: 
+This SAE has non-empty model_from_pretrained_kwargs. 
+For optimal performance, load the model like so:
+model = HookedSAETransformer.from_pretrained_no_processing(..., **cfg.model_from_pretrained_kwargs)
+  warnings.warn(
+
+  0%|          | 0/48 [00:00<?, ?cell/s]
+  2%|▏         | 1/48 [00:01<01:21,  1.73s/cell]
+  4%|▍         | 2/48 [00:03<01:27,  1.90s/cell]
+  6%|▋         | 3/48 [00:05<01:19,  1.76s/cell]
+  8%|▊         | 4/48 [00:06<01:12,  1.65s/cell]
+ 10%|█         | 5/48 [00:08<01:07,  1.58s/cell]
+ 12%|█▎        | 6/48 [00:09<01:04,  1.53s/cell]
+ 15%|█▍        | 7/48 [00:11<01:01,  1.51s/cell]
+ 17%|█▋        | 8/48 [00:12<00:59,  1.49s/cell]
+ 19%|█▉        | 9/48 [00:14<00:58,  1.50s/cell]
+ 21%|██        | 10/48 [00:15<00:56,  1.49s/cell]
+ 23%|██▎       | 11/48 [00:17<00:54,  1.48s/cell]
+ 25%|██▌       | 12/48 [00:18<00:53,  1.47s/cell]
+ 27%|██▋       | 13/48 [00:20<00:52,  1.50s/cell]
+ 29%|██▉       | 14/48 [00:21<00:50,  1.49s/cell]
+ 31%|███▏      | 15/48 [00:22<00:48,  1.47s/cell]
+ 33%|███▎      | 16/48 [00:24<00:47,  1.47s/cell]
+ 35%|███▌      | 17/48 [00:25<00:45,  1.45s/cell]
+ 38%|███▊      | 18/48 [00:27<00:43,  1.46s/cell]
+ 40%|███▉      | 19/48 [00:28<00:42,  1.46s/cell]
+ 42%|████▏     | 20/48 [00:30<00:40,  1.45s/cell]
+ 44%|████▍     | 21/48 [00:31<00:39,  1.45s/cell]
+ 46%|████▌     | 22/48 [00:33<00:37,  1.44s/cell]
+ 48%|████▊     | 23/48 [00:34<00:36,  1.47s/cell]
+ 50%|█████     | 24/48 [00:36<00:35,  1.47s/cell]
+ 52%|█████▏    | 25/48 [00:37<00:33,  1.45s/cell]
+ 54%|█████▍    | 26/48 [00:39<00:32,  1.46s/cell]
+ 56%|█████▋    | 27/48 [00:40<00:30,  1.46s/cell]
+ 58%|█████▊    | 28/48 [00:41<00:29,  1.46s/cell]
+ 60%|██████    | 29/48 [00:43<00:27,  1.46s/cell]
+ 62%|██████▎   | 30/48 [00:44<00:26,  1.47s/cell]
+ 65%|██████▍   | 31/48 [00:46<00:24,  1.46s/cell]
+ 67%|██████▋   | 32/48 [00:47<00:23,  1.46s/cell]
+ 69%|██████▉   | 33/48 [00:49<00:21,  1.44s/cell]
+ 71%|███████   | 34/48 [00:50<00:20,  1.44s/cell]
+ 73%|███████▎  | 35/48 [00:52<00:18,  1.44s/cell]
+ 75%|███████▌  | 36/48 [00:53<00:17,  1.44s/cell]
+ 77%|███████▋  | 37/48 [00:55<00:16,  1.47s/cell]
+ 79%|███████▉  | 38/48 [00:56<00:14,  1.46s/cell]
+ 81%|████████▏ | 39/48 [00:58<00:13,  1.49s/cell]
+ 83%|████████▎ | 40/48 [00:59<00:11,  1.49s/cell]
+ 85%|████████▌ | 41/48 [01:00<00:10,  1.48s/cell]
+ 88%|████████▊ | 42/48 [01:02<00:08,  1.47s/cell]
+ 90%|████████▉ | 43/48 [01:03<00:07,  1.50s/cell]
+ 92%|█████████▏| 44/48 [01:05<00:06,  1.54s/cell]
+ 94%|█████████▍| 45/48 [01:07<00:04,  1.52s/cell]
+ 96%|█████████▌| 46/48 [01:08<00:03,  1.51s/cell]
+ 98%|█████████▊| 47/48 [01:10<00:01,  1.51s/cell]
+100%|██████████| 48/48 [01:11<00:00,  1.50s/cell]
+100%|██████████| 48/48 [01:11<00:00,  1.49s/cell]
+wrote 480 generations to C:\Projects\Work\T-lab\01-mech-interp\results\dev\cds_mlp_gauss_cond1_s0_lam0.5.jsonl in 1.2 m
+in
+python.exe : Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher ra
+te limits and faster downloads.
+At C:\Projects\Work\T-lab\01-mech-interp\scripts\select_dev.ps1:15 char:5
++     & $py @a | Select-String -Pattern 'wrote|Error|Traceback'
++     ~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Warning: You ar...ster downloads.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+
+Loading weights:   0%|          | 0/148 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 148/148 [00:00<00:00, 6734.33it/s]
+C:\Projects\Work\T-lab\01-mech-interp\.venv\Lib\site-packages\sae_lens\saes\sae.py:254: UserWarning: 
+This SAE has non-empty model_from_pretrained_kwargs. 
+For optimal performance, load the model like so:
+model = HookedSAETransformer.from_pretrained_no_processing(..., **cfg.model_from_pretrained_kwargs)
+  warnings.warn(
+
+  0%|          | 0/48 [00:00<?, ?cell/s]
+  2%|▏         | 1/48 [00:01<01:25,  1.81s/cell]
+  4%|▍         | 2/48 [00:03<01:17,  1.68s/cell]
+  6%|▋         | 3/48 [00:04<01:10,  1.58s/cell]
+  8%|▊         | 4/48 [00:06<01:08,  1.56s/cell]
+ 10%|█         | 5/48 [00:07<01:05,  1.52s/cell]
+ 12%|█▎        | 6/48 [00:09<01:02,  1.49s/cell]
+ 15%|█▍        | 7/48 [00:10<01:00,  1.48s/cell]
+ 17%|█▋        | 8/48 [00:12<00:58,  1.47s/cell]
+ 19%|█▉        | 9/48 [00:13<00:56,  1.45s/cell]
+ 21%|██        | 10/48 [00:15<00:55,  1.45s/cell]
+ 23%|██▎       | 11/48 [00:16<00:53,  1.45s/cell]
+ 25%|██▌       | 12/48 [00:17<00:52,  1.45s/cell]
+ 27%|██▋       | 13/48 [00:19<00:50,  1.45s/cell]
+ 29%|██▉       | 14/48 [00:20<00:49,  1.46s/cell]
+ 31%|███▏      | 15/48 [00:22<00:48,  1.46s/cell]
+ 33%|███▎      | 16/48 [00:23<00:46,  1.46s/cell]
+ 35%|███▌      | 17/48 [00:25<00:44,  1.44s/cell]
+ 38%|███▊      | 18/48 [00:26<00:43,  1.44s/cell]
+ 40%|███▉      | 19/48 [00:28<00:42,  1.48s/cell]
+ 42%|████▏     | 20/48 [00:29<00:41,  1.47s/cell]
+ 44%|████▍     | 21/48 [00:31<00:39,  1.48s/cell]
+ 46%|████▌     | 22/48 [00:32<00:38,  1.50s/cell]
+ 48%|████▊     | 23/48 [00:34<00:37,  1.50s/cell]
+ 50%|█████     | 24/48 [00:35<00:35,  1.49s/cell]
+ 52%|█████▏    | 25/48 [00:37<00:34,  1.48s/cell]
+ 54%|█████▍    | 26/48 [00:38<00:32,  1.48s/cell]
+ 56%|█████▋    | 27/48 [00:40<00:31,  1.48s/cell]
+ 58%|█████▊    | 28/48 [00:41<00:30,  1.52s/cell]
+ 60%|██████    | 29/48 [00:43<00:28,  1.51s/cell]
+ 62%|██████▎   | 30/48 [00:44<00:27,  1.50s/cell]
+ 65%|██████▍   | 31/48 [00:46<00:25,  1.50s/cell]
+ 67%|██████▋   | 32/48 [00:47<00:23,  1.49s/cell]
+ 69%|██████▉   | 33/48 [00:49<00:21,  1.47s/cell]
+ 71%|███████   | 34/48 [00:50<00:20,  1.49s/cell]
+ 73%|███████▎  | 35/48 [00:52<00:19,  1.48s/cell]
+ 75%|███████▌  | 36/48 [00:53<00:17,  1.49s/cell]
+ 77%|███████▋  | 37/48 [00:54<00:16,  1.48s/cell]
+ 79%|███████▉  | 38/48 [00:56<00:14,  1.46s/cell]
+ 81%|████████▏ | 39/48 [00:57<00:13,  1.49s/cell]
+ 83%|████████▎ | 40/48 [00:59<00:11,  1.47s/cell]
+ 85%|████████▌ | 41/48 [01:00<00:10,  1.48s/cell]
+ 88%|████████▊ | 42/48 [01:02<00:08,  1.47s/cell]
+ 90%|████████▉ | 43/48 [01:03<00:07,  1.48s/cell]
+ 92%|█████████▏| 44/48 [01:05<00:05,  1.46s/cell]
+ 94%|█████████▍| 45/48 [01:06<00:04,  1.45s/cell]
+ 96%|█████████▌| 46/48 [01:08<00:02,  1.46s/cell]
+ 98%|█████████▊| 47/48 [01:09<00:01,  1.46s/cell]
+100%|██████████| 48/48 [01:11<00:00,  1.47s/cell]
+100%|██████████| 48/48 [01:11<00:00,  1.48s/cell]
+wrote 480 generations to C:\Projects\Work\T-lab\01-mech-interp\results\dev\cds_mlp_gauss_cond1_s0_lam1.jsonl in 1.2 min
+python.exe : 
+At C:\Projects\Work\T-lab\01-mech-interp\scripts\select_dev.ps1:15 char:5
++     & $py @a | Select-String -Pattern 'wrote|Error|Traceback'
++     ~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+Loading weights:   0%|          | 0/148 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 148/148 [00:00<00:00, 6866.33it/s]
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and
+ faster downloads.
+C:\Projects\Work\T-lab\01-mech-interp\.venv\Lib\site-packages\sae_lens\saes\sae.py:254: UserWarning: 
+This SAE has non-empty model_from_pretrained_kwargs. 
+For optimal performance, load the model like so:
+model = HookedSAETransformer.from_pretrained_no_processing(..., **cfg.model_from_pretrained_kwargs)
+  warnings.warn(
+
+  0%|          | 0/48 [00:00<?, ?cell/s]
+  2%|▏         | 1/48 [00:01<01:18,  1.67s/cell]
+  4%|▍         | 2/48 [00:03<01:11,  1.55s/cell]
+  6%|▋         | 3/48 [00:04<01:06,  1.48s/cell]
+  8%|▊         | 4/48 [00:05<01:03,  1.44s/cell]
+ 10%|█         | 5/48 [00:07<01:01,  1.43s/cell]
+ 12%|█▎        | 6/48 [00:08<00:59,  1.42s/cell]
+ 15%|█▍        | 7/48 [00:10<00:57,  1.41s/cell]
+ 17%|█▋        | 8/48 [00:11<00:56,  1.41s/cell]
+ 19%|█▉        | 9/48 [00:12<00:54,  1.40s/cell]
+ 21%|██        | 10/48 [00:14<00:53,  1.40s/cell]
+ 23%|██▎       | 11/48 [00:15<00:51,  1.39s/cell]
+ 25%|██▌       | 12/48 [00:17<00:51,  1.42s/cell]
+ 27%|██▋       | 13/48 [00:18<00:49,  1.42s/cell]
+ 29%|██▉       | 14/48 [00:19<00:47,  1.41s/cell]
+ 31%|███▏      | 15/48 [00:21<00:46,  1.40s/cell]
+ 33%|███▎      | 16/48 [00:22<00:44,  1.40s/cell]
+ 35%|███▌      | 17/48 [00:24<00:43,  1.39s/cell]
+ 38%|███▊      | 18/48 [00:25<00:44,  1.49s/cell]
+ 40%|███▉      | 19/48 [00:27<00:44,  1.52s/cell]
+ 42%|████▏     | 20/48 [00:28<00:41,  1.48s/cell]
+ 44%|████▍     | 21/48 [00:30<00:39,  1.46s/cell]
+ 46%|████▌     | 22/48 [00:31<00:37,  1.44s/cell]
+ 48%|████▊     | 23/48 [00:32<00:35,  1.42s/cell]
+ 50%|█████     | 24/48 [00:34<00:33,  1.42s/cell]
+ 52%|█████▏    | 25/48 [00:35<00:32,  1.40s/cell]
+ 54%|█████▍    | 26/48 [00:37<00:30,  1.40s/cell]
+ 56%|█████▋    | 27/48 [00:38<00:29,  1.39s/cell]
+ 58%|█████▊    | 28/48 [00:39<00:27,  1.39s/cell]
+ 60%|██████    | 29/48 [00:41<00:26,  1.39s/cell]
+ 62%|██████▎   | 30/48 [00:42<00:25,  1.39s/cell]
+ 65%|██████▍   | 31/48 [00:44<00:23,  1.39s/cell]
+ 67%|██████▋   | 32/48 [00:45<00:22,  1.40s/cell]
+ 69%|██████▉   | 33/48 [00:46<00:20,  1.38s/cell]
+ 71%|███████   | 34/48 [00:48<00:19,  1.39s/cell]
+ 73%|███████▎  | 35/48 [00:49<00:18,  1.39s/cell]
+ 75%|███████▌  | 36/48 [00:51<00:16,  1.39s/cell]
+ 77%|███████▋  | 37/48 [00:52<00:15,  1.39s/cell]
+ 79%|███████▉  | 38/48 [00:53<00:13,  1.39s/cell]
+ 81%|████████▏ | 39/48 [00:55<00:12,  1.39s/cell]
+ 83%|████████▎ | 40/48 [00:56<00:11,  1.40s/cell]
+ 85%|████████▌ | 41/48 [00:57<00:09,  1.38s/cell]
+ 88%|████████▊ | 42/48 [00:59<00:08,  1.38s/cell]
+ 90%|████████▉ | 43/48 [01:00<00:06,  1.38s/cell]
+ 92%|█████████▏| 44/48 [01:02<00:05,  1.40s/cell]
+ 94%|█████████▍| 45/48 [01:03<00:04,  1.41s/cell]
+ 96%|█████████▌| 46/48 [01:05<00:02,  1.41s/cell]
+ 98%|█████████▊| 47/48 [01:06<00:01,  1.41s/cell]
+100%|██████████| 48/48 [01:07<00:00,  1.40s/cell]
+100%|██████████| 48/48 [01:07<00:00,  1.41s/cell]
+wrote 480 generations to C:\Projects\Work\T-lab\01-mech-interp\results\dev\cds_mlp_gauss_cond1_s0_lam1.5.jsonl in 1.1 m
+in
+python.exe : Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher ra
+te limits and faster downloads.
+At C:\Projects\Work\T-lab\01-mech-interp\scripts\select_dev.ps1:15 char:5
++     & $py @a | Select-String -Pattern 'wrote|Error|Traceback'
++     ~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Warning: You ar...ster downloads.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+
+Loading weights:   0%|          | 0/148 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 148/148 [00:00<00:00, 7581.21it/s]
+C:\Projects\Work\T-lab\01-mech-interp\.venv\Lib\site-packages\sae_lens\saes\sae.py:254: UserWarning: 
+This SAE has non-empty model_from_pretrained_kwargs. 
+For optimal performance, load the model like so:
+model = HookedSAETransformer.from_pretrained_no_processing(..., **cfg.model_from_pretrained_kwargs)
+  warnings.warn(
+
+  0%|          | 0/48 [00:00<?, ?cell/s]
+  2%|▏         | 1/48 [00:01<01:18,  1.67s/cell]
+  4%|▍         | 2/48 [00:03<01:08,  1.48s/cell]
+  6%|▋         | 3/48 [00:04<01:04,  1.42s/cell]
+  8%|▊         | 4/48 [00:05<01:01,  1.40s/cell]
+ 10%|█         | 5/48 [00:07<00:59,  1.39s/cell]
+ 12%|█▎        | 6/48 [00:08<00:57,  1.37s/cell]
+ 15%|█▍        | 7/48 [00:09<00:55,  1.36s/cell]
+ 17%|█▋        | 8/48 [00:11<00:54,  1.36s/cell]
+ 19%|█▉        | 9/48 [00:12<00:53,  1.37s/cell]
+ 21%|██        | 10/48 [00:13<00:52,  1.37s/cell]
+ 23%|██▎       | 11/48 [00:15<00:50,  1.37s/cell]
+ 25%|██▌       | 12/48 [00:16<00:49,  1.37s/cell]
+ 27%|██▋       | 13/48 [00:18<00:48,  1.37s/cell]
+ 29%|██▉       | 14/48 [00:19<00:47,  1.39s/cell]
+ 31%|███▏      | 15/48 [00:20<00:45,  1.39s/cell]
+ 33%|███▎      | 16/48 [00:22<00:44,  1.38s/cell]
+ 35%|███▌      | 17/48 [00:23<00:42,  1.38s/cell]
+ 38%|███▊      | 18/48 [00:24<00:41,  1.38s/cell]
+ 40%|███▉      | 19/48 [00:26<00:39,  1.37s/cell]
+ 42%|████▏     | 20/48 [00:27<00:38,  1.37s/cell]
+ 44%|████▍     | 21/48 [00:29<00:36,  1.37s/cell]
+ 46%|████▌     | 22/48 [00:30<00:35,  1.37s/cell]
+ 48%|████▊     | 23/48 [00:31<00:34,  1.37s/cell]
+ 50%|█████     | 24/48 [00:33<00:32,  1.37s/cell]
+ 52%|█████▏    | 25/48 [00:34<00:31,  1.37s/cell]
+ 54%|█████▍    | 26/48 [00:35<00:30,  1.39s/cell]
+ 56%|█████▋    | 27/48 [00:37<00:29,  1.40s/cell]
+ 58%|█████▊    | 28/48 [00:38<00:27,  1.39s/cell]
+ 60%|██████    | 29/48 [00:40<00:26,  1.38s/cell]
+ 62%|██████▎   | 30/48 [00:41<00:24,  1.38s/cell]
+ 65%|██████▍   | 31/48 [00:42<00:23,  1.38s/cell]
+ 67%|██████▋   | 32/48 [00:44<00:22,  1.39s/cell]
+ 69%|██████▉   | 33/48 [00:45<00:20,  1.39s/cell]
+ 71%|███████   | 34/48 [00:47<00:19,  1.38s/cell]
+ 73%|███████▎  | 35/48 [00:48<00:17,  1.38s/cell]
+ 75%|███████▌  | 36/48 [00:49<00:16,  1.38s/cell]
+ 77%|███████▋  | 37/48 [00:51<00:15,  1.38s/cell]
+ 79%|███████▉  | 38/48 [00:52<00:13,  1.38s/cell]
+ 81%|████████▏ | 39/48 [00:53<00:12,  1.38s/cell]
+ 83%|████████▎ | 40/48 [00:55<00:11,  1.38s/cell]
+ 85%|████████▌ | 41/48 [00:56<00:09,  1.37s/cell]
+ 88%|████████▊ | 42/48 [00:58<00:08,  1.38s/cell]
+ 90%|████████▉ | 43/48 [00:59<00:06,  1.38s/cell]
+ 92%|█████████▏| 44/48 [01:00<00:05,  1.38s/cell]
+ 94%|█████████▍| 45/48 [01:02<00:04,  1.38s/cell]
+ 96%|█████████▌| 46/48 [01:03<00:02,  1.38s/cell]
+ 98%|█████████▊| 47/48 [01:04<00:01,  1.38s/cell]
+100%|██████████| 48/48 [01:06<00:00,  1.38s/cell]
+100%|██████████| 48/48 [01:06<00:00,  1.38s/cell]
+wrote 480 generations to C:\Projects\Work\T-lab\01-mech-interp\results\dev\dn_mlp_gauss_cond1_s0_eta0.5.jsonl in 1.1 mi
+n
+python.exe : Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher ra
+te limits and faster downloads.
+At C:\Projects\Work\T-lab\01-mech-interp\scripts\select_dev.ps1:15 char:5
++     & $py @a | Select-String -Pattern 'wrote|Error|Traceback'
++     ~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Warning: You ar...ster downloads.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+
+Loading weights:   0%|          | 0/148 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 148/148 [00:00<00:00, 7018.41it/s]
+C:\Projects\Work\T-lab\01-mech-interp\.venv\Lib\site-packages\sae_lens\saes\sae.py:254: UserWarning: 
+This SAE has non-empty model_from_pretrained_kwargs. 
+For optimal performance, load the model like so:
+model = HookedSAETransformer.from_pretrained_no_processing(..., **cfg.model_from_pretrained_kwargs)
+  warnings.warn(
+
+  0%|          | 0/48 [00:00<?, ?cell/s]
+  2%|▏         | 1/48 [00:01<01:18,  1.66s/cell]
+  4%|▍         | 2/48 [00:03<01:08,  1.49s/cell]
+  6%|▋         | 3/48 [00:04<01:04,  1.43s/cell]
+  8%|▊         | 4/48 [00:05<01:02,  1.41s/cell]
+ 10%|█         | 5/48 [00:07<01:01,  1.42s/cell]
+ 12%|█▎        | 6/48 [00:08<00:58,  1.40s/cell]
+ 15%|█▍        | 7/48 [00:09<00:57,  1.40s/cell]
+ 17%|█▋        | 8/48 [00:11<00:55,  1.40s/cell]
+ 19%|█▉        | 9/48 [00:12<00:54,  1.41s/cell]
+ 21%|██        | 10/48 [00:14<00:52,  1.39s/cell]
+ 23%|██▎       | 11/48 [00:15<00:51,  1.39s/cell]
+ 25%|██▌       | 12/48 [00:16<00:49,  1.38s/cell]
+ 27%|██▋       | 13/48 [00:18<00:48,  1.38s/cell]
+ 29%|██▉       | 14/48 [00:19<00:46,  1.38s/cell]
+ 31%|███▏      | 15/48 [00:21<00:45,  1.38s/cell]
+ 33%|███▎      | 16/48 [00:22<00:44,  1.38s/cell]
+ 35%|███▌      | 17/48 [00:23<00:42,  1.38s/cell]
+ 38%|███▊      | 18/48 [00:25<00:41,  1.37s/cell]
+ 40%|███▉      | 19/48 [00:26<00:39,  1.37s/cell]
+ 42%|████▏     | 20/48 [00:27<00:38,  1.37s/cell]
+ 44%|████▍     | 21/48 [00:29<00:37,  1.37s/cell]
+ 46%|████▌     | 22/48 [00:30<00:36,  1.40s/cell]
+ 48%|████▊     | 23/48 [00:32<00:34,  1.39s/cell]
+ 50%|█████     | 24/48 [00:33<00:33,  1.39s/cell]
+ 52%|█████▏    | 25/48 [00:34<00:31,  1.38s/cell]
+ 54%|█████▍    | 26/48 [00:36<00:30,  1.38s/cell]
+ 56%|█████▋    | 27/48 [00:37<00:29,  1.38s/cell]
+ 58%|█████▊    | 28/48 [00:38<00:27,  1.38s/cell]
+ 60%|██████    | 29/48 [00:40<00:26,  1.38s/cell]
+ 62%|██████▎   | 30/48 [00:41<00:24,  1.38s/cell]
+ 65%|██████▍   | 31/48 [00:43<00:23,  1.38s/cell]
+ 67%|██████▋   | 32/48 [00:44<00:22,  1.38s/cell]
+ 69%|██████▉   | 33/48 [00:45<00:20,  1.38s/cell]
+ 71%|███████   | 34/48 [00:47<00:19,  1.38s/cell]
+ 73%|███████▎  | 35/48 [00:48<00:17,  1.37s/cell]
+ 75%|███████▌  | 36/48 [00:50<00:16,  1.38s/cell]
+ 77%|███████▋  | 37/48 [00:51<00:15,  1.38s/cell]
+ 79%|███████▉  | 38/48 [00:52<00:13,  1.38s/cell]
+ 81%|████████▏ | 39/48 [00:54<00:12,  1.38s/cell]
+ 83%|████████▎ | 40/48 [00:55<00:11,  1.40s/cell]
+ 85%|████████▌ | 41/48 [00:57<00:09,  1.41s/cell]
+ 88%|████████▊ | 42/48 [00:58<00:08,  1.40s/cell]
+ 90%|████████▉ | 43/48 [00:59<00:06,  1.39s/cell]
+ 92%|█████████▏| 44/48 [01:01<00:05,  1.39s/cell]
+ 94%|█████████▍| 45/48 [01:02<00:04,  1.38s/cell]
+ 96%|█████████▌| 46/48 [01:03<00:02,  1.38s/cell]
+ 98%|█████████▊| 47/48 [01:05<00:01,  1.38s/cell]
+100%|██████████| 48/48 [01:06<00:00,  1.38s/cell]
+100%|██████████| 48/48 [01:06<00:00,  1.39s/cell]
+wrote 480 generations to C:\Projects\Work\T-lab\01-mech-interp\results\dev\dn_mlp_gauss_cond1_s0_eta1.jsonl in 1.1 min
+python.exe : Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher ra
+te limits and faster downloads.
+At C:\Projects\Work\T-lab\01-mech-interp\scripts\select_dev.ps1:15 char:5
++     & $py @a | Select-String -Pattern 'wrote|Error|Traceback'
++     ~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Warning: You ar...ster downloads.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+
+Loading weights:   0%|          | 0/148 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 148/148 [00:00<00:00, 7539.59it/s]
+C:\Projects\Work\T-lab\01-mech-interp\.venv\Lib\site-packages\sae_lens\saes\sae.py:254: UserWarning: 
+This SAE has non-empty model_from_pretrained_kwargs. 
+For optimal performance, load the model like so:
+model = HookedSAETransformer.from_pretrained_no_processing(..., **cfg.model_from_pretrained_kwargs)
+  warnings.warn(
+
+  0%|          | 0/48 [00:00<?, ?cell/s]
+  2%|▏         | 1/48 [00:01<01:17,  1.66s/cell]
+  4%|▍         | 2/48 [00:03<01:08,  1.49s/cell]
+  6%|▋         | 3/48 [00:04<01:04,  1.43s/cell]
+  8%|▊         | 4/48 [00:05<01:01,  1.40s/cell]
+ 10%|█         | 5/48 [00:07<00:59,  1.39s/cell]
+ 12%|█▎        | 6/48 [00:08<00:57,  1.38s/cell]
+ 15%|█▍        | 7/48 [00:09<00:56,  1.37s/cell]
+ 17%|█▋        | 8/48 [00:11<00:54,  1.37s/cell]
+ 19%|█▉        | 9/48 [00:12<00:53,  1.37s/cell]
+ 21%|██        | 10/48 [00:13<00:51,  1.36s/cell]
+ 23%|██▎       | 11/48 [00:15<00:50,  1.36s/cell]
+ 25%|██▌       | 12/48 [00:16<00:49,  1.36s/cell]
+ 27%|██▋       | 13/48 [00:17<00:47,  1.36s/cell]
+ 29%|██▉       | 14/48 [00:19<00:46,  1.38s/cell]
+ 31%|███▏      | 15/48 [00:20<00:45,  1.38s/cell]
+ 33%|███▎      | 16/48 [00:22<00:43,  1.37s/cell]
+ 35%|███▌      | 17/48 [00:23<00:42,  1.37s/cell]
+ 38%|███▊      | 18/48 [00:24<00:41,  1.37s/cell]
+ 40%|███▉      | 19/48 [00:26<00:39,  1.37s/cell]
+ 42%|████▏     | 20/48 [00:27<00:38,  1.37s/cell]
+ 44%|████▍     | 21/48 [00:28<00:36,  1.37s/cell]
+ 46%|████▌     | 22/48 [00:30<00:35,  1.36s/cell]
+ 48%|████▊     | 23/48 [00:31<00:34,  1.37s/cell]
+ 50%|█████     | 24/48 [00:33<00:32,  1.36s/cell]
+ 52%|█████▏    | 25/48 [00:34<00:31,  1.36s/cell]
+ 54%|█████▍    | 26/48 [00:35<00:29,  1.36s/cell]
+ 56%|█████▋    | 27/48 [00:37<00:28,  1.36s/cell]
+ 58%|█████▊    | 28/48 [00:38<00:27,  1.36s/cell]
+ 60%|██████    | 29/48 [00:39<00:25,  1.36s/cell]
+ 62%|██████▎   | 30/48 [00:41<00:24,  1.36s/cell]
+ 65%|██████▍   | 31/48 [00:42<00:23,  1.36s/cell]
+ 67%|██████▋   | 32/48 [00:43<00:21,  1.36s/cell]
+ 69%|██████▉   | 33/48 [00:45<00:20,  1.39s/cell]
+ 71%|███████   | 34/48 [00:46<00:19,  1.39s/cell]
+ 73%|███████▎  | 35/48 [00:48<00:17,  1.38s/cell]
+ 75%|███████▌  | 36/48 [00:49<00:16,  1.37s/cell]
+ 77%|███████▋  | 37/48 [00:50<00:15,  1.36s/cell]
+ 79%|███████▉  | 38/48 [00:52<00:13,  1.36s/cell]
+ 81%|████████▏ | 39/48 [00:53<00:12,  1.35s/cell]
+ 83%|████████▎ | 40/48 [00:54<00:10,  1.35s/cell]
+ 85%|████████▌ | 41/48 [00:56<00:09,  1.35s/cell]
+ 88%|████████▊ | 42/48 [00:57<00:08,  1.36s/cell]
+ 90%|████████▉ | 43/48 [00:58<00:06,  1.36s/cell]
+ 92%|█████████▏| 44/48 [01:00<00:05,  1.37s/cell]
+ 94%|█████████▍| 45/48 [01:01<00:04,  1.37s/cell]
+ 96%|█████████▌| 46/48 [01:03<00:02,  1.37s/cell]
+ 98%|█████████▊| 47/48 [01:04<00:01,  1.36s/cell]
+100%|██████████| 48/48 [01:05<00:00,  1.37s/cell]
+100%|██████████| 48/48 [01:05<00:00,  1.37s/cell]
+wrote 480 generations to C:\Projects\Work\T-lab\01-mech-interp\results\dev\mts_sh0.01.jsonl in 1.1 min
+python.exe : Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher ra
+te limits and faster downloads.
+At C:\Projects\Work\T-lab\01-mech-interp\scripts\select_dev.ps1:15 char:5
++     & $py @a | Select-String -Pattern 'wrote|Error|Traceback'
++     ~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Warning: You ar...ster downloads.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+
+Loading weights:   0%|          | 0/148 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 148/148 [00:00<00:00, 7422.75it/s]
+C:\Projects\Work\T-lab\01-mech-interp\.venv\Lib\site-packages\sae_lens\saes\sae.py:254: UserWarning: 
+This SAE has non-empty model_from_pretrained_kwargs. 
+For optimal performance, load the model like so:
+model = HookedSAETransformer.from_pretrained_no_processing(..., **cfg.model_from_pretrained_kwargs)
+  warnings.warn(
+
+  0%|          | 0/48 [00:00<?, ?cell/s]
+  2%|▏         | 1/48 [00:01<01:18,  1.68s/cell]
+  4%|▍         | 2/48 [00:03<01:08,  1.48s/cell]
+  6%|▋         | 3/48 [00:04<01:04,  1.42s/cell]
+  8%|▊         | 4/48 [00:05<01:01,  1.39s/cell]
+ 10%|█         | 5/48 [00:07<01:00,  1.40s/cell]
+ 12%|█▎        | 6/48 [00:08<00:58,  1.39s/cell]
+ 15%|█▍        | 7/48 [00:09<00:56,  1.38s/cell]
+ 17%|█▋        | 8/48 [00:11<00:54,  1.37s/cell]
+ 19%|█▉        | 9/48 [00:12<00:53,  1.36s/cell]
+ 21%|██        | 10/48 [00:13<00:51,  1.37s/cell]
+ 23%|██▎       | 11/48 [00:15<00:50,  1.36s/cell]
+ 25%|██▌       | 12/48 [00:16<00:48,  1.36s/cell]
+ 27%|██▋       | 13/48 [00:18<00:47,  1.36s/cell]
+ 29%|██▉       | 14/48 [00:19<00:46,  1.36s/cell]
+ 31%|███▏      | 15/48 [00:20<00:45,  1.37s/cell]
+ 33%|███▎      | 16/48 [00:22<00:43,  1.37s/cell]
+ 35%|███▌      | 17/48 [00:23<00:42,  1.37s/cell]
+ 38%|███▊      | 18/48 [00:24<00:40,  1.37s/cell]
+ 40%|███▉      | 19/48 [00:26<00:39,  1.36s/cell]
+ 42%|████▏     | 20/48 [00:27<00:38,  1.36s/cell]
+ 44%|████▍     | 21/48 [00:28<00:36,  1.36s/cell]
+ 46%|████▌     | 22/48 [00:30<00:35,  1.38s/cell]
+ 48%|████▊     | 23/48 [00:31<00:34,  1.38s/cell]
+ 50%|█████     | 24/48 [00:33<00:32,  1.37s/cell]
+ 52%|█████▏    | 25/48 [00:34<00:31,  1.37s/cell]
+ 54%|█████▍    | 26/48 [00:35<00:29,  1.36s/cell]
+ 56%|█████▋    | 27/48 [00:37<00:28,  1.36s/cell]
+ 58%|█████▊    | 28/48 [00:38<00:27,  1.35s/cell]
+ 60%|██████    | 29/48 [00:39<00:25,  1.35s/cell]
+ 62%|██████▎   | 30/48 [00:41<00:24,  1.35s/cell]
+ 65%|██████▍   | 31/48 [00:42<00:23,  1.35s/cell]
+ 67%|██████▋   | 32/48 [00:43<00:21,  1.35s/cell]
+ 69%|██████▉   | 33/48 [00:45<00:20,  1.35s/cell]
+ 71%|███████   | 34/48 [00:46<00:18,  1.35s/cell]
+ 73%|███████▎  | 35/48 [00:47<00:17,  1.36s/cell]
+ 75%|███████▌  | 36/48 [00:49<00:16,  1.36s/cell]
+ 77%|███████▋  | 37/48 [00:50<00:14,  1.36s/cell]
+ 79%|███████▉  | 38/48 [00:52<00:13,  1.36s/cell]
+ 81%|████████▏ | 39/48 [00:53<00:12,  1.36s/cell]
+ 83%|████████▎ | 40/48 [00:54<00:11,  1.38s/cell]
+ 85%|████████▌ | 41/48 [00:56<00:09,  1.37s/cell]
+ 88%|████████▊ | 42/48 [00:57<00:08,  1.37s/cell]
+ 90%|████████▉ | 43/48 [00:58<00:06,  1.36s/cell]
+ 92%|█████████▏| 44/48 [01:00<00:05,  1.36s/cell]
+ 94%|█████████▍| 45/48 [01:01<00:04,  1.36s/cell]
+ 96%|█████████▌| 46/48 [01:02<00:02,  1.35s/cell]
+ 98%|█████████▊| 47/48 [01:04<00:01,  1.35s/cell]
+100%|██████████| 48/48 [01:05<00:00,  1.35s/cell]
+100%|██████████| 48/48 [01:05<00:00,  1.37s/cell]
+wrote 480 generations to C:\Projects\Work\T-lab\01-mech-interp\results\dev\mts_sh0.05.jsonl in 1.1 min
+python.exe : Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher ra
+te limits and faster downloads.
+At C:\Projects\Work\T-lab\01-mech-interp\scripts\select_dev.ps1:15 char:5
++     & $py @a | Select-String -Pattern 'wrote|Error|Traceback'
++     ~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Warning: You ar...ster downloads.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+
+Loading weights:   0%|          | 0/148 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 148/148 [00:00<00:00, 7849.34it/s]
+C:\Projects\Work\T-lab\01-mech-interp\.venv\Lib\site-packages\sae_lens\saes\sae.py:254: UserWarning: 
+This SAE has non-empty model_from_pretrained_kwargs. 
+For optimal performance, load the model like so:
+model = HookedSAETransformer.from_pretrained_no_processing(..., **cfg.model_from_pretrained_kwargs)
+  warnings.warn(
+
+  0%|          | 0/48 [00:00<?, ?cell/s]
+  2%|▏         | 1/48 [00:01<01:18,  1.68s/cell]
+  4%|▍         | 2/48 [00:03<01:08,  1.49s/cell]
+  6%|▋         | 3/48 [00:04<01:04,  1.44s/cell]
+  8%|▊         | 4/48 [00:05<01:01,  1.40s/cell]
+ 10%|█         | 5/48 [00:07<00:59,  1.39s/cell]
+ 12%|█▎        | 6/48 [00:08<00:58,  1.38s/cell]
+ 15%|█▍        | 7/48 [00:09<00:56,  1.38s/cell]
+ 17%|█▋        | 8/48 [00:11<00:54,  1.37s/cell]
+ 19%|█▉        | 9/48 [00:12<00:53,  1.37s/cell]
+ 21%|██        | 10/48 [00:13<00:52,  1.37s/cell]
+ 23%|██▎       | 11/48 [00:15<00:50,  1.37s/cell]
+ 25%|██▌       | 12/48 [00:16<00:49,  1.37s/cell]
+ 27%|██▋       | 13/48 [00:18<00:48,  1.39s/cell]
+ 29%|██▉       | 14/48 [00:19<00:47,  1.39s/cell]
+ 31%|███▏      | 15/48 [00:20<00:45,  1.38s/cell]
+ 33%|███▎      | 16/48 [00:22<00:43,  1.37s/cell]
+ 35%|███▌      | 17/48 [00:23<00:42,  1.37s/cell]
+ 38%|███▊      | 18/48 [00:24<00:41,  1.37s/cell]
+ 40%|███▉      | 19/48 [00:26<00:39,  1.37s/cell]
+ 42%|████▏     | 20/48 [00:27<00:38,  1.36s/cell]
+ 44%|████▍     | 21/48 [00:29<00:36,  1.36s/cell]
+ 46%|████▌     | 22/48 [00:30<00:35,  1.36s/cell]
+ 48%|████▊     | 23/48 [00:31<00:34,  1.37s/cell]
+ 50%|█████     | 24/48 [00:33<00:32,  1.37s/cell]
+ 52%|█████▏    | 25/48 [00:34<00:31,  1.37s/cell]
+ 54%|█████▍    | 26/48 [00:35<00:29,  1.36s/cell]
+ 56%|█████▋    | 27/48 [00:37<00:28,  1.36s/cell]
+ 58%|█████▊    | 28/48 [00:38<00:27,  1.36s/cell]
+ 60%|██████    | 29/48 [00:39<00:25,  1.35s/cell]
+ 62%|██████▎   | 30/48 [00:41<00:24,  1.37s/cell]
+ 65%|██████▍   | 31/48 [00:42<00:23,  1.37s/cell]
+ 67%|██████▋   | 32/48 [00:44<00:21,  1.37s/cell]
+ 69%|██████▉   | 33/48 [00:45<00:20,  1.37s/cell]
+ 71%|███████   | 34/48 [00:46<00:19,  1.36s/cell]
+ 73%|███████▎  | 35/48 [00:48<00:17,  1.36s/cell]
+ 75%|███████▌  | 36/48 [00:49<00:16,  1.36s/cell]
+ 77%|███████▋  | 37/48 [00:50<00:14,  1.36s/cell]
+ 79%|███████▉  | 38/48 [00:52<00:13,  1.35s/cell]
+ 81%|████████▏ | 39/48 [00:53<00:12,  1.35s/cell]
+ 83%|████████▎ | 40/48 [00:54<00:10,  1.35s/cell]
+ 85%|████████▌ | 41/48 [00:56<00:09,  1.36s/cell]
+ 88%|████████▊ | 42/48 [00:57<00:08,  1.38s/cell]
+ 90%|████████▉ | 43/48 [00:59<00:06,  1.37s/cell]
+ 92%|█████████▏| 44/48 [01:00<00:05,  1.36s/cell]
+ 94%|█████████▍| 45/48 [01:01<00:04,  1.36s/cell]
+ 96%|█████████▌| 46/48 [01:03<00:02,  1.36s/cell]
+ 98%|█████████▊| 47/48 [01:04<00:01,  1.36s/cell]
+100%|██████████| 48/48 [01:05<00:00,  1.38s/cell]
+100%|██████████| 48/48 [01:05<00:00,  1.37s/cell]
+wrote 480 generations to C:\Projects\Work\T-lab\01-mech-interp\results\dev\mts_sh0.2.jsonl in 1.1 min
+python.exe : Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher ra
+te limits and faster downloads.
+At C:\Projects\Work\T-lab\01-mech-interp\scripts\select_dev.ps1:15 char:5
++     & $py @a | Select-String -Pattern 'wrote|Error|Traceback'
++     ~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Warning: You ar...ster downloads.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+
+Loading weights:   0%|          | 0/148 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 148/148 [00:00<00:00, 6900.37it/s]
+C:\Projects\Work\T-lab\01-mech-interp\.venv\Lib\site-packages\sae_lens\saes\sae.py:254: UserWarning: 
+This SAE has non-empty model_from_pretrained_kwargs. 
+For optimal performance, load the model like so:
+model = HookedSAETransformer.from_pretrained_no_processing(..., **cfg.model_from_pretrained_kwargs)
+  warnings.warn(
+
+  0%|          | 0/48 [00:00<?, ?cell/s]
+  2%|▏         | 1/48 [00:01<01:18,  1.66s/cell]
+  4%|▍         | 2/48 [00:03<01:09,  1.50s/cell]
+  6%|▋         | 3/48 [00:04<01:04,  1.44s/cell]
+  8%|▊         | 4/48 [00:05<01:03,  1.45s/cell]
+ 10%|█         | 5/48 [00:07<01:01,  1.43s/cell]
+ 12%|█▎        | 6/48 [00:08<00:59,  1.41s/cell]
+ 15%|█▍        | 7/48 [00:10<00:57,  1.40s/cell]
+ 17%|█▋        | 8/48 [00:11<00:55,  1.39s/cell]
+ 19%|█▉        | 9/48 [00:12<00:53,  1.38s/cell]
+ 21%|██        | 10/48 [00:14<00:52,  1.38s/cell]
+ 23%|██▎       | 11/48 [00:15<00:50,  1.38s/cell]
+ 25%|██▌       | 12/48 [00:16<00:49,  1.38s/cell]
+ 27%|██▋       | 13/48 [00:18<00:48,  1.37s/cell]
+ 29%|██▉       | 14/48 [00:19<00:46,  1.37s/cell]
+ 31%|███▏      | 15/48 [00:20<00:45,  1.37s/cell]
+ 33%|███▎      | 16/48 [00:22<00:43,  1.37s/cell]
+ 35%|███▌      | 17/48 [00:23<00:42,  1.37s/cell]
+ 38%|███▊      | 18/48 [00:25<00:41,  1.37s/cell]
+ 40%|███▉      | 19/48 [00:26<00:39,  1.37s/cell]
+ 42%|████▏     | 20/48 [00:27<00:38,  1.37s/cell]
+ 44%|████▍     | 21/48 [00:29<00:36,  1.37s/cell]
+ 46%|████▌     | 22/48 [00:30<00:36,  1.39s/cell]
+ 48%|████▊     | 23/48 [00:32<00:34,  1.40s/cell]
+ 50%|█████     | 24/48 [00:33<00:33,  1.41s/cell]
+ 52%|█████▏    | 25/48 [00:34<00:32,  1.40s/cell]
+ 54%|█████▍    | 26/48 [00:36<00:30,  1.39s/cell]
+ 56%|█████▋    | 27/48 [00:37<00:29,  1.38s/cell]
+ 58%|█████▊    | 28/48 [00:38<00:27,  1.38s/cell]
+ 60%|██████    | 29/48 [00:40<00:26,  1.38s/cell]
+ 62%|██████▎   | 30/48 [00:41<00:24,  1.38s/cell]
+ 65%|██████▍   | 31/48 [00:43<00:23,  1.38s/cell]
+ 67%|██████▋   | 32/48 [00:44<00:22,  1.38s/cell]
+ 69%|██████▉   | 33/48 [00:45<00:20,  1.36s/cell]
+ 71%|███████   | 34/48 [00:47<00:19,  1.37s/cell]
+ 73%|███████▎  | 35/48 [00:48<00:17,  1.37s/cell]
+ 75%|███████▌  | 36/48 [00:49<00:16,  1.37s/cell]
+ 77%|███████▋  | 37/48 [00:51<00:15,  1.37s/cell]
+ 79%|███████▉  | 38/48 [00:52<00:13,  1.37s/cell]
+ 81%|████████▏ | 39/48 [00:54<00:12,  1.39s/cell]
+ 83%|████████▎ | 40/48 [00:55<00:11,  1.38s/cell]
+ 85%|████████▌ | 41/48 [00:56<00:09,  1.37s/cell]
+ 88%|████████▊ | 42/48 [00:58<00:08,  1.37s/cell]
+ 90%|████████▉ | 43/48 [00:59<00:06,  1.37s/cell]
+ 92%|█████████▏| 44/48 [01:00<00:05,  1.37s/cell]
+ 94%|█████████▍| 45/48 [01:02<00:04,  1.38s/cell]
+ 96%|█████████▌| 46/48 [01:03<00:02,  1.37s/cell]
+ 98%|█████████▊| 47/48 [01:05<00:01,  1.37s/cell]
+100%|██████████| 48/48 [01:06<00:00,  1.38s/cell]
+100%|██████████| 48/48 [01:06<00:00,  1.38s/cell]
+wrote 480 generations to C:\Projects\Work\T-lab\01-mech-interp\results\dev\fsr_k0.3.jsonl in 1.1 min
+python.exe : Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher ra
+te limits and faster downloads.
+At C:\Projects\Work\T-lab\01-mech-interp\scripts\select_dev.ps1:15 char:5
++     & $py @a | Select-String -Pattern 'wrote|Error|Traceback'
++     ~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Warning: You ar...ster downloads.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+
+Loading weights:   0%|          | 0/148 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 148/148 [00:00<00:00, 8538.14it/s]
+C:\Projects\Work\T-lab\01-mech-interp\.venv\Lib\site-packages\sae_lens\saes\sae.py:254: UserWarning: 
+This SAE has non-empty model_from_pretrained_kwargs. 
+For optimal performance, load the model like so:
+model = HookedSAETransformer.from_pretrained_no_processing(..., **cfg.model_from_pretrained_kwargs)
+  warnings.warn(
+
+  0%|          | 0/48 [00:00<?, ?cell/s]
+  2%|▏         | 1/48 [00:01<01:17,  1.64s/cell]
+  4%|▍         | 2/48 [00:03<01:08,  1.49s/cell]
+  6%|▋         | 3/48 [00:04<01:04,  1.44s/cell]
+  8%|▊         | 4/48 [00:05<01:02,  1.42s/cell]
+ 10%|█         | 5/48 [00:07<01:00,  1.42s/cell]
+ 12%|█▎        | 6/48 [00:08<00:59,  1.42s/cell]
+ 15%|█▍        | 7/48 [00:10<00:58,  1.42s/cell]
+ 17%|█▋        | 8/48 [00:11<00:56,  1.40s/cell]
+ 19%|█▉        | 9/48 [00:12<00:54,  1.39s/cell]
+ 21%|██        | 10/48 [00:14<00:52,  1.38s/cell]
+ 23%|██▎       | 11/48 [00:15<00:50,  1.38s/cell]
+ 25%|██▌       | 12/48 [00:16<00:49,  1.38s/cell]
+ 27%|██▋       | 13/48 [00:18<00:48,  1.38s/cell]
+ 29%|██▉       | 14/48 [00:19<00:47,  1.40s/cell]
+ 31%|███▏      | 15/48 [00:21<00:46,  1.40s/cell]
+ 33%|███▎      | 16/48 [00:22<00:44,  1.39s/cell]
+ 35%|███▌      | 17/48 [00:23<00:42,  1.39s/cell]
+ 38%|███▊      | 18/48 [00:25<00:41,  1.38s/cell]
+ 40%|███▉      | 19/48 [00:26<00:39,  1.38s/cell]
+ 42%|████▏     | 20/48 [00:27<00:38,  1.38s/cell]
+ 44%|████▍     | 21/48 [00:29<00:37,  1.38s/cell]
+ 46%|████▌     | 22/48 [00:31<00:38,  1.48s/cell]
+ 48%|████▊     | 23/48 [00:32<00:36,  1.47s/cell]
+ 50%|█████     | 24/48 [00:33<00:34,  1.44s/cell]
+ 52%|█████▏    | 25/48 [00:35<00:32,  1.42s/cell]
+ 54%|█████▍    | 26/48 [00:36<00:30,  1.40s/cell]
+ 56%|█████▋    | 27/48 [00:38<00:29,  1.40s/cell]
+ 58%|█████▊    | 28/48 [00:39<00:27,  1.39s/cell]
+ 60%|██████    | 29/48 [00:40<00:26,  1.39s/cell]
+ 62%|██████▎   | 30/48 [00:42<00:24,  1.38s/cell]
+ 65%|██████▍   | 31/48 [00:43<00:23,  1.38s/cell]
+ 67%|██████▋   | 32/48 [00:44<00:22,  1.41s/cell]
+ 69%|██████▉   | 33/48 [00:46<00:20,  1.39s/cell]
+ 71%|███████   | 34/48 [00:47<00:19,  1.38s/cell]
+ 73%|███████▎  | 35/48 [00:49<00:17,  1.38s/cell]
+ 75%|███████▌  | 36/48 [00:50<00:16,  1.38s/cell]
+ 77%|███████▋  | 37/48 [00:51<00:15,  1.37s/cell]
+ 79%|███████▉  | 38/48 [00:53<00:13,  1.37s/cell]
+ 81%|████████▏ | 39/48 [00:54<00:12,  1.38s/cell]
+ 83%|████████▎ | 40/48 [00:55<00:10,  1.37s/cell]
+ 85%|████████▌ | 41/48 [00:57<00:09,  1.37s/cell]
+ 88%|████████▊ | 42/48 [00:58<00:08,  1.37s/cell]
+ 90%|████████▉ | 43/48 [01:00<00:06,  1.37s/cell]
+ 92%|█████████▏| 44/48 [01:01<00:05,  1.37s/cell]
+ 94%|█████████▍| 45/48 [01:02<00:04,  1.37s/cell]
+ 96%|█████████▌| 46/48 [01:04<00:02,  1.37s/cell]
+ 98%|█████████▊| 47/48 [01:05<00:01,  1.38s/cell]
+100%|██████████| 48/48 [01:06<00:00,  1.38s/cell]
+100%|██████████| 48/48 [01:06<00:00,  1.40s/cell]
+wrote 480 generations to C:\Projects\Work\T-lab\01-mech-interp\results\dev\fsr_k0.5.jsonl in 1.1 min
+python.exe : Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher ra
+te limits and faster downloads.
+At C:\Projects\Work\T-lab\01-mech-interp\scripts\select_dev.ps1:15 char:5
++     & $py @a | Select-String -Pattern 'wrote|Error|Traceback'
++     ~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Warning: You ar...ster downloads.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+
+Loading weights:   0%|          | 0/148 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 148/148 [00:00<00:00, 7024.52it/s]
+C:\Projects\Work\T-lab\01-mech-interp\.venv\Lib\site-packages\sae_lens\saes\sae.py:254: UserWarning: 
+This SAE has non-empty model_from_pretrained_kwargs. 
+For optimal performance, load the model like so:
+model = HookedSAETransformer.from_pretrained_no_processing(..., **cfg.model_from_pretrained_kwargs)
+  warnings.warn(
+
+  0%|          | 0/48 [00:00<?, ?cell/s]
+  2%|▏         | 1/48 [00:01<01:18,  1.67s/cell]
+  4%|▍         | 2/48 [00:03<01:09,  1.50s/cell]
+  6%|▋         | 3/48 [00:04<01:05,  1.45s/cell]
+  8%|▊         | 4/48 [00:05<01:02,  1.42s/cell]
+ 10%|█         | 5/48 [00:07<01:00,  1.40s/cell]
+ 12%|█▎        | 6/48 [00:08<00:59,  1.42s/cell]
+ 15%|█▍        | 7/48 [00:10<00:57,  1.41s/cell]
+ 17%|█▋        | 8/48 [00:11<00:55,  1.40s/cell]
+ 19%|█▉        | 9/48 [00:12<00:54,  1.39s/cell]
+ 21%|██        | 10/48 [00:14<00:52,  1.38s/cell]
+ 23%|██▎       | 11/48 [00:15<00:51,  1.38s/cell]
+ 25%|██▌       | 12/48 [00:16<00:49,  1.38s/cell]
+ 27%|██▋       | 13/48 [00:18<00:48,  1.38s/cell]
+ 29%|██▉       | 14/48 [00:19<00:47,  1.38s/cell]
+ 31%|███▏      | 15/48 [00:21<00:45,  1.38s/cell]
+ 33%|███▎      | 16/48 [00:22<00:44,  1.38s/cell]
+ 35%|███▌      | 17/48 [00:23<00:42,  1.37s/cell]
+ 38%|███▊      | 18/48 [00:25<00:41,  1.37s/cell]
+ 40%|███▉      | 19/48 [00:26<00:39,  1.37s/cell]
+ 42%|████▏     | 20/48 [00:27<00:38,  1.38s/cell]
+ 44%|████▍     | 21/48 [00:29<00:37,  1.38s/cell]
+ 46%|████▌     | 22/48 [00:30<00:36,  1.41s/cell]
+ 48%|████▊     | 23/48 [00:32<00:35,  1.40s/cell]
+ 50%|█████     | 24/48 [00:33<00:33,  1.42s/cell]
+ 52%|█████▏    | 25/48 [00:34<00:32,  1.41s/cell]
+ 54%|█████▍    | 26/48 [00:36<00:30,  1.39s/cell]
+ 56%|█████▋    | 27/48 [00:37<00:29,  1.39s/cell]
+ 58%|█████▊    | 28/48 [00:39<00:27,  1.38s/cell]
+ 60%|██████    | 29/48 [00:40<00:26,  1.38s/cell]
+ 62%|██████▎   | 30/48 [00:41<00:25,  1.39s/cell]
+ 65%|██████▍   | 31/48 [00:43<00:23,  1.41s/cell]
+ 67%|██████▋   | 32/48 [00:44<00:22,  1.39s/cell]
+ 69%|██████▉   | 33/48 [00:46<00:20,  1.39s/cell]
+ 71%|███████   | 34/48 [00:47<00:19,  1.39s/cell]
+ 73%|███████▎  | 35/48 [00:48<00:18,  1.39s/cell]
+ 75%|███████▌  | 36/48 [00:50<00:16,  1.39s/cell]
+ 77%|███████▋  | 37/48 [00:51<00:15,  1.38s/cell]
+ 79%|███████▉  | 38/48 [00:52<00:13,  1.37s/cell]
+ 81%|████████▏ | 39/48 [00:54<00:12,  1.40s/cell]
+ 83%|████████▎ | 40/48 [00:55<00:11,  1.40s/cell]
+ 85%|████████▌ | 41/48 [00:57<00:09,  1.40s/cell]
+ 88%|████████▊ | 42/48 [00:58<00:08,  1.39s/cell]
+ 90%|████████▉ | 43/48 [00:59<00:06,  1.38s/cell]
+ 92%|█████████▏| 44/48 [01:01<00:05,  1.38s/cell]
+ 94%|█████████▍| 45/48 [01:02<00:04,  1.38s/cell]
+ 96%|█████████▌| 46/48 [01:04<00:02,  1.38s/cell]
+ 98%|█████████▊| 47/48 [01:05<00:01,  1.38s/cell]
+100%|██████████| 48/48 [01:06<00:00,  1.38s/cell]
+100%|██████████| 48/48 [01:06<00:00,  1.39s/cell]
+wrote 480 generations to C:\Projects\Work\T-lab\01-mech-interp\results\dev\fsr_k0.7.jsonl in 1.1 min
+python.exe : Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher ra
+te limits and faster downloads.
+At C:\Projects\Work\T-lab\01-mech-interp\scripts\select_dev.ps1:15 char:5
++     & $py @a | Select-String -Pattern 'wrote|Error|Traceback'
++     ~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Warning: You ar...ster downloads.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+
+Loading weights:   0%|          | 0/148 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 148/148 [00:00<00:00, 7146.80it/s]
+C:\Projects\Work\T-lab\01-mech-interp\.venv\Lib\site-packages\sae_lens\saes\sae.py:254: UserWarning: 
+This SAE has non-empty model_from_pretrained_kwargs. 
+For optimal performance, load the model like so:
+model = HookedSAETransformer.from_pretrained_no_processing(..., **cfg.model_from_pretrained_kwargs)
+  warnings.warn(
+
+  0%|          | 0/48 [00:00<?, ?cell/s]
+  2%|▏         | 1/48 [00:01<01:18,  1.67s/cell]
+  4%|▍         | 2/48 [00:03<01:08,  1.49s/cell]
+  6%|▋         | 3/48 [00:04<01:04,  1.43s/cell]
+  8%|▊         | 4/48 [00:05<01:02,  1.41s/cell]
+ 10%|█         | 5/48 [00:07<01:00,  1.40s/cell]
+ 12%|█▎        | 6/48 [00:08<00:58,  1.39s/cell]
+ 15%|█▍        | 7/48 [00:09<00:57,  1.39s/cell]
+ 17%|█▋        | 8/48 [00:11<00:55,  1.39s/cell]
+ 19%|█▉        | 9/48 [00:12<00:53,  1.38s/cell]
+ 21%|██        | 10/48 [00:14<00:52,  1.38s/cell]
+ 23%|██▎       | 11/48 [00:15<00:50,  1.38s/cell]
+ 25%|██▌       | 12/48 [00:16<00:50,  1.40s/cell]
+ 27%|██▋       | 13/48 [00:18<00:50,  1.43s/cell]
+ 29%|██▉       | 14/48 [00:19<00:48,  1.41s/cell]
+ 31%|███▏      | 15/48 [00:21<00:46,  1.41s/cell]
+ 33%|███▎      | 16/48 [00:22<00:44,  1.40s/cell]
+ 35%|███▌      | 17/48 [00:23<00:42,  1.38s/cell]
+ 38%|███▊      | 18/48 [00:25<00:41,  1.38s/cell]
+ 40%|███▉      | 19/48 [00:26<00:39,  1.38s/cell]
+ 42%|████▏     | 20/48 [00:27<00:38,  1.38s/cell]
+ 44%|████▍     | 21/48 [00:29<00:38,  1.41s/cell]
+ 46%|████▌     | 22/48 [00:30<00:36,  1.41s/cell]
+ 48%|████▊     | 23/48 [00:32<00:35,  1.42s/cell]
+ 50%|█████     | 24/48 [00:33<00:34,  1.43s/cell]
+ 52%|█████▏    | 25/48 [00:35<00:32,  1.41s/cell]
+ 54%|█████▍    | 26/48 [00:36<00:30,  1.41s/cell]
+ 56%|█████▋    | 27/48 [00:37<00:29,  1.42s/cell]
+ 58%|█████▊    | 28/48 [00:39<00:28,  1.41s/cell]
+ 60%|██████    | 29/48 [00:40<00:26,  1.40s/cell]
+ 62%|██████▎   | 30/48 [00:42<00:25,  1.40s/cell]
+ 65%|██████▍   | 31/48 [00:43<00:23,  1.40s/cell]
+ 67%|██████▋   | 32/48 [00:44<00:22,  1.40s/cell]
+ 69%|██████▉   | 33/48 [00:46<00:20,  1.39s/cell]
+ 71%|███████   | 34/48 [00:47<00:19,  1.39s/cell]
+ 73%|███████▎  | 35/48 [00:49<00:18,  1.42s/cell]
+ 75%|███████▌  | 36/48 [00:50<00:17,  1.42s/cell]
+ 77%|███████▋  | 37/48 [00:52<00:15,  1.41s/cell]
+ 79%|███████▉  | 38/48 [00:53<00:14,  1.41s/cell]
+ 81%|████████▏ | 39/48 [00:54<00:12,  1.40s/cell]
+ 83%|████████▎ | 40/48 [00:56<00:11,  1.40s/cell]
+ 85%|████████▌ | 41/48 [00:57<00:09,  1.40s/cell]
+ 88%|████████▊ | 42/48 [00:58<00:08,  1.40s/cell]
+ 90%|████████▉ | 43/48 [01:00<00:07,  1.42s/cell]
+ 92%|█████████▏| 44/48 [01:01<00:05,  1.43s/cell]
+ 94%|█████████▍| 45/48 [01:03<00:04,  1.42s/cell]
+ 96%|█████████▌| 46/48 [01:04<00:02,  1.41s/cell]
+ 98%|█████████▊| 47/48 [01:06<00:01,  1.43s/cell]
+100%|██████████| 48/48 [01:07<00:00,  1.41s/cell]
+100%|██████████| 48/48 [01:07<00:00,  1.41s/cell]
+wrote 480 generations to C:\Projects\Work\T-lab\01-mech-interp\results\dev\fsr_k1.jsonl in 1.1 min
+python.exe : Traceback (most recent call last):
+At C:\Projects\Work\T-lab\01-mech-interp\scripts\select_dev.ps1:33 char:1
++ & $py metrics.py --gen gen_dev_all.jsonl --out scored_dev_all.csv --s ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Traceback (most recent call last)::String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+  File "C:\Projects\Work\T-lab\01-mech-interp\src\metrics.py", line 277, in <module>
+    main(ap.parse_args())
+  File "C:\Projects\Work\T-lab\01-mech-interp\src\metrics.py", line 231, in main
+    df = read_gen(RESULTS / args.gen)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Projects\Work\T-lab\01-mech-interp\src\metrics.py", line 48, in read_gen
+    rows = [json.loads(l) for l in path.open(encoding="utf-8")]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Projects\Work\T-lab\01-mech-interp\src\metrics.py", line 48, in <listcomp>
+    rows = [json.loads(l) for l in path.open(encoding="utf-8")]
+            ^^^^^^^^^^^^^
+  File "C:\Users\misha\AppData\Local\Programs\Python\Python311\Lib\json\__init__.py", line 335, in loads
+    raise JSONDecodeError("Unexpected UTF-8 BOM (decode using utf-8-sig)",
+json.decoder.JSONDecodeError: Unexpected UTF-8 BOM (decode using utf-8-sig): line 1 column 1 (char 0)
+python.exe : Traceback (most recent call last):
+At C:\Projects\Work\T-lab\01-mech-interp\scripts\select_dev.ps1:34 char:1
++ & $py pareto.py --scored scored_dev_all.csv --concept keyword_hit
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Traceback (most recent call last)::String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+  File "C:\Projects\Work\T-lab\01-mech-interp\src\pareto.py", line 226, in <module>
+    main(ap.parse_args())
+  File "C:\Projects\Work\T-lab\01-mech-interp\src\pareto.py", line 170, in main
+    df = pd.read_csv(RESULTS / args.scored)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Projects\Work\T-lab\01-mech-interp\.venv\Lib\site-packages\pandas\io\parsers\readers.py", line 873, in read_
+csv
+    return _read(filepath_or_buffer, kwds)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Projects\Work\T-lab\01-mech-interp\.venv\Lib\site-packages\pandas\io\parsers\readers.py", line 300, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Projects\Work\T-lab\01-mech-interp\.venv\Lib\site-packages\pandas\io\parsers\readers.py", line 1645, in __in
+it__
+    self._engine = self._make_engine(f, self.engine)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Projects\Work\T-lab\01-mech-interp\.venv\Lib\site-packages\pandas\io\parsers\readers.py", line 1904, in _mak
+e_engine
+    self.handles = get_handle(
+                   ^^^^^^^^^^^
+  File "C:\Projects\Work\T-lab\01-mech-interp\.venv\Lib\site-packages\pandas\io\common.py", line 930, in get_handle
+    handle = open(
+             ^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Projects\\Work\\T-lab\\01-mech-interp\\results\\scored_dev
+_all.csv'
+
+

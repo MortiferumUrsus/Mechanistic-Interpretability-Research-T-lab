@@ -44,8 +44,16 @@ On a scale from 0 to 9, how strongly does the TEXT express or reference the CONC
 Answer with a single digit and nothing else."""
 
 
-def read_gen(path: Path) -> pd.DataFrame:
-    rows = [json.loads(l) for l in path.open(encoding="utf-8")]
+def read_gen(spec: str) -> pd.DataFrame:
+    """Read one JSONL file or a glob of them. utf-8-sig tolerates a BOM from shell concatenation."""
+    paths = sorted(RESULTS.glob(spec)) if any(ch in spec for ch in "*?[") else [RESULTS / spec]
+    rows = []
+    for p in paths:
+        with p.open(encoding="utf-8-sig") as fh:
+            rows += [json.loads(l) for l in fh if l.strip()]
+    if not rows:
+        raise FileNotFoundError(f"no generations matched {spec}")
+    print(f"read {len(rows)} generations from {len(paths)} file(s)")
     return pd.DataFrame(rows)
 
 
@@ -228,7 +236,7 @@ def load_feature_meta(split: str) -> tuple[dict, dict]:
 
 
 def main(args) -> None:
-    df = read_gen(RESULTS / args.gen)
+    df = read_gen(args.gen)
     kw, concept = load_feature_meta(args.split)
     stages = args.stages.split(",")
 

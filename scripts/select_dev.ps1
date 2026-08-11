@@ -28,9 +28,9 @@ foreach ($d in @("mlp_mix_cond1_s0", "mlp_gauss_cond1_s0")) {
 foreach ($sh in @(0.01, 0.05, 0.2)) { Gen "mts" "mts_sh$sh" @("shrink=$sh") }
 foreach ($k in @(0.3, 0.5, 0.7, 1.0)) { Gen "fsr" "fsr_k$k" @("fsr_k=$k") }
 
-# one scoring pass over everything
-Get-Content (Get-ChildItem "$outdir\*.jsonl" | ForEach-Object { $_.FullName }) | Set-Content "..\results\gen_dev_all.jsonl" -Encoding utf8
-& $py metrics.py --gen gen_dev_all.jsonl --out scored_dev_all.csv --split dev --stages ppl,keyword,sae,dist
+# one scoring pass over everything; metrics.py reads the glob directly, since concatenating with
+# Set-Content would prepend a UTF-8 BOM that the JSON parser rejects
+& $py metrics.py --gen 'dev/*.jsonl' --out scored_dev_all.csv --split dev --stages ppl,keyword,sae,dist
 & $py pareto.py --scored scored_dev_all.csv --concept keyword_hit
 
 Pop-Location
