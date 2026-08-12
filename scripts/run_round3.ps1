@@ -15,7 +15,7 @@ $grid = "0,0.5,1.0,1.25,1.5,2.0,2.5,3.0"
 & $py pareto.py --scored scored_r3.csv --concept keyword_hit --prefix r3_
 & $py paired_at_strength.py --scored scored_r3.csv --out paired_r3.csv
 & $py control_specificity.py --gen gen_r3.jsonl --split test_r3 --out control_specificity_r3.csv
-& $py matched_coordinate.py --scored scored_r3.csv
+& $py matched_coordinate.py --scored scored_r3.csv --prefix r3_
 
 # the rotation control on a real test split, which round two only had on DEV
 & $py generate.py --split test_r3 --arms randrot --c-grid 0,1.0,1.5,2.0,3.0 --n-prompts 30 --out gen_r3_ctrl.jsonl

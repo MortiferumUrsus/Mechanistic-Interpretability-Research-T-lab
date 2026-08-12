@@ -105,7 +105,7 @@ def main(args) -> None:
                 }
             )
     cmp = pd.DataFrame(rows)
-    cmp.to_csv(RESULTS / "matched_coordinate_cells.csv", index=False)
+    cmp.to_csv(RESULTS / f"{args.prefix}matched_coordinate_cells.csv", index=False)
 
     def paired(logppl_col: str, concept_col: str, label: str) -> dict:
         d_ppl = cmp["fix_logppl"] - cmp[logppl_col]
@@ -140,8 +140,8 @@ def main(args) -> None:
         paired("matched_logppl", "matched_concept", "equal concept coordinate (naive at cos*c)"),
     ]
     table = pd.DataFrame(res)
-    table.to_csv(RESULTS / "matched_coordinate_summary.csv", index=False)
-    (RESULTS / "matched_coordinate_summary.json").write_text(
+    table.to_csv(RESULTS / f"{args.prefix}matched_coordinate_summary.csv", index=False)
+    (RESULTS / f"{args.prefix}matched_coordinate_summary.json").write_text(
         json.dumps({"cos_mean": float(np.mean(list(cosines.values()))), "results": res}, indent=2),
         encoding="utf-8",
     )
@@ -163,4 +163,7 @@ if __name__ == "__main__":
     ap.add_argument("--c-min", dest="c_min", type=float, default=1.0)
     ap.add_argument("--n-boot", dest="n_boot", type=int, default=2000)
     ap.add_argument("--seed", type=int, default=0)
+    # Fixed output names cost this study once already: pareto.py overwrote round one with round two
+    # and the endpoint table in the report went stale without anything failing. Same guard here.
+    ap.add_argument("--prefix", default="", help="prepended to output filenames, e.g. r3_")
     main(ap.parse_args())
