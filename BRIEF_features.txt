@@ -1,0 +1,83 @@
+Implement a single new file: C:\Projects\Work\T-lab\01-mech-interp\src\features.py
+
+Do not modify any other file. This task is design-neutral: if you hit a genuine design decision not covered below, stop and report instead of inventing one.
+
+ENVIRONMENT (exact)
+- Python interpreter to use for any test run: C:\Projects\Work\T-lab\01-mech-interp\.venv\Scripts\python.exe
+- Installed: torch 2.13.0+cu126, sae-lens 6.49.1, transformer-lens 3.7.0, transformers 5.15.0, numpy 2.0.2, datasets, tqdm, pandas, scipy, matplotlib, pyyaml may be missing - if `import yaml` fails, install it with that interpreter via `-m pip install pyyaml`.
+- GPU: NVIDIA GTX 1660 Ti, 6 GB VRAM total, roughly 5.2 GB free. Peak GPU memory of your script MUST stay under 4 GB. Compute capability 7.5, no bf16 - use float32 or float16 only.
+- Windows 10. Run commands from the src directory.
+
+EXISTING MODULE src/common.py (already written, import from it, do not change it)
+It exports: ROOT, DATA, RESULTS, CKPT (pathlib Paths; DATA = ROOT/"data", RESULTS = ROOT/"results"),
+MODEL_NAME="gpt2-small", SAE_RELEASE="gpt2-small-res-jb", SAE_ID="blocks.7.hook_resid_pre",
+HOOK="blocks.6.hook_resid_post", D_MODEL=768, N_LAYERS=12, SKIP_POS=2, DEVICE,
+seed_all(seed), load_model(device=DEVICE) -> HookedTransformer, load_sae(device=DEVICE) -> StandardSAE,
+class ActStats with fields mean [768] float32 tensor, cov [768,768] float32 tensor, median_norm float, n_tokens int,
+  classmethod ActStats.load(path=DATA/"act_stats.pt", device=DEVICE), method shrunk_cov(gamma) -> (1-gamma)*cov + gamma*(mean of diag)*I,
+open_memmap(path=DATA/"acts.f16", n=None, mode="r") -> numpy memmap float16 shape (N, 768) when mode="r".
+
+DATA ALREADY ON DISK
+- data/acts.f16 : float16 memmap, shape (N, 768), N = 1512000. Residual-stream activations of GPT-2 small at blocks.6.hook_resid_post, collected from OpenWebText with the first 2 token positions of every 128-token window excluded.
+- data/toks.i32 : int32 memmap, shape (N,), the GPT-2 token id of each corresponding row of acts.f16. Same order, one-to-one.
+- data/act_stats.pt : the ActStats blob (mean, cov, median_norm=88.2287, n_tokens).
+- data/prompts.json : list of 40 prompt strings (not needed here).
+
+SAE FACTS (verified)
+load_sae() returns a sae_lens StandardSAE with: sae.W_dec shape [24576, 768] (row f is the decoder direction of feature f), sae.W_enc shape [768, 24576], sae.b_enc, sae.b_dec, sae.cfg.d_sae = 24576, sae.cfg.apply_b_dec_to_input = True. sae.encode(x) accepts a float32 tensor with last dim 768 and returns feature activations with last dim 24576, already ReLU-ed (non-negative).
+
+WHAT features.py MUST DO
+
+Command line: `python features.py select --seed 0` (argparse, subcommand-style like the existing src/activations.py which uses `ap.add_argument("stage", choices=[...])` - match that style). Fully deterministic given the seed.
+
+Step 1. Streaming statistics pass.
+Iterate over data/acts.f16 in chunks of at most 4096 rows. For each chunk: move to GPU as float32, run sae.encode under torch.no_grad(). Accumulate per feature (all 24576):
+  - n_active: count of rows where activation > 0
+  - sum_active: sum of activations over rows where activation > 0
+  - a running top-K of the largest activations together with the token id that produced them, K = 256.
+Implement the running top-K by concatenating the current running values/tokens with the chunk's per-feature top-K and re-applying topk along the token axis, so memory stays O(K * 24576). Keep the running buffers on GPU as float32 values and int64 token ids. Free per-chunk tensors so peak memory stays under the 4 GB budget; reduce the chunk size if needed and say so in a comment. Show progress with tqdm.
+Derived: freq[f] = n_active[f] / N, mean_act[f] = sum_active[f] / max(n_active[f], 1).
+
+Step 2. Usable-feature filter.
+Keep features with 1e-4 <= freq <= 5e-2. Call this the surviving set.
+
+Step 3. Lexical coherence.
+For each surviving feature, take its top-256 (activation, token id) pairs. Group the activations by distinct token id and sum them. coherence[f] = (sum of the 10 largest per-token-id activation masses) / (total activation mass of the 256 entries). Range (0, 1]; higher means the feature fires on a small lexical set.
+
+Step 4. Geometry, computed from ActStats (float32 on GPU, or float64 on CPU if that is easier - state which).
+For each surviving feature, with v = sae.W_dec[f], v_hat = v / ||v||, Sigma = stats.cov:
+  - dec_norm[f] = ||v||
+  - var_along[f] = v_hat^T Sigma v_hat
+  - kappa_tilt[f] = || Sigma v_hat - (v_hat^T Sigma v_hat) * v_hat || / (v_hat^T Sigma v_hat)
+    (that is, the norm of the component of Sigma v_hat orthogonal to v_hat, divided by var_along)
+Do this as batched matrix algebra over the surviving features, not a Python loop over 24576 items.
+
+Step 5. Selection (seeded, reproducible).
+Take the 200 surviving features with the highest coherence as the candidate pool. Shuffle the pool with the given seed. Walk the shuffled pool and greedily accept a feature only if the absolute cosine similarity between its v_hat and the v_hat of every already-accepted feature is below 0.3. Accept the first 12 as TEST and the next 6 as DEV. If the pool is exhausted before 18 are accepted, raise a clear error naming how many were found.
+
+Step 6. FIT set.
+FIT = all feature indices in [0, 24576) that are (a) not in TEST or DEV, and (b) have absolute cosine similarity below 0.3 against every TEST and DEV direction. Save as a sorted int32 array to data/splits.npz together with the TEST and DEV index arrays (keys: "test", "dev", "fit"). Compute the cosine matrix in chunks to respect the memory budget.
+
+Step 7. Keyword sets and human-readable token lists.
+Use load_model().tokenizer (or model.to_string) to decode token ids. For each TEST and DEV feature:
+  - top_tokens: the 15 distinct token strings with the largest summed activation mass in the top-256, in descending order, with leading spaces preserved and shown explicitly, e.g. represent " Paris" as "_Paris" using a single leading underscore for a leading space so that YAML stays readable.
+  - keywords: take distinct token strings in descending mass order, accumulate until the cumulative mass reaches 80% of the total, then clean the list: strip whitespace, lowercase, drop entries shorter than 3 characters, drop entries that are entirely punctuation or entirely digits, deduplicate while preserving order. Keywords are stored without the underscore marker.
+
+Step 8. Outputs (create parent directories as needed).
+  a) configs/features.yaml - a YAML mapping with two top-level keys "test" and "dev", each a list of records with fields: index, freq, mean_act, coherence, dec_norm, var_along, kappa_tilt, top_tokens, keywords. Floats rounded to 6 significant digits. Must load cleanly with yaml.safe_load.
+  b) results/leakage.csv - one row per TEST and DEV feature: split, index, max_abs_cos_vs_fit, argmax_fit_index.
+  c) results/feature_stats.csv - one row per surviving feature: index, freq, mean_act, coherence, dec_norm, var_along, kappa_tilt.
+  d) data/splits.npz as described in step 6.
+Then print to stdout a compact table of the 12 TEST features: index, freq, coherence, var_along, kappa_tilt, and the first 8 top_tokens.
+
+CODE STYLE
+Match src/activations.py and src/common.py: `from __future__ import annotations`, module docstring one or two lines, type hints on function signatures, minimal comments (only where a reader would otherwise be confused), English identifiers, no emoji, no decorative banners, argparse at the bottom under `if __name__ == "__main__":`. Do not add a logging framework; print and tqdm are enough.
+
+ACCEPTANCE CRITERIA - verify all of these yourself before reporting done
+1. `python features.py select --seed 0` completes with exit code 0 in under 15 minutes.
+2. All four artifacts exist and are non-empty.
+3. `python -c "import yaml,sys;d=yaml.safe_load(open('../configs/features.yaml'));assert len(d['test'])==12 and len(d['dev'])==6;print('ok')"` prints ok.
+4. Running the command twice with the same seed produces byte-identical configs/features.yaml.
+5. Peak GPU memory stays under 4 GB - assert this in the script via torch.cuda.max_memory_allocated() at the end and print the value.
+6. TEST and DEV index sets are disjoint and neither intersects FIT.
+Report the printed TEST table and the peak memory figure in your final message.

@@ -194,17 +194,24 @@ def identity_check(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def main(args) -> None:
+    # Output names carry a prefix, because the two rounds analyse different scored files and a fixed name
+    # means the second run silently overwrites the first one's artefacts. That is exactly what happened
+    # once: the round-1 endpoint table was replaced by round 2's, leaving the reported numbers without a
+    # file behind them.
+    def out(name: str) -> Path:
+        return RESULTS / f"{args.prefix}{name}"
+
     df = pd.read_csv(RESULTS / args.scored)
     ident = identity_check(df)
     if not ident.empty:
-        ident.to_csv(RESULTS / "identity_at_zero.csv", index=False)
+        ident.to_csv(out("identity_at_zero.csv"), index=False)
         print("identity at zero strength (should be 1.0 for every arm)")
         print(ident.to_string(index=False), "\n")
     df = df.dropna(subset=["logppl", args.concept])
     cells = cell_means(df, args.concept)
-    cells.to_csv(RESULTS / "cells.csv", index=False)
+    cells.to_csv(out("cells.csv"), index=False)
     tbl = endpoint_table(cells)
-    tbl.to_csv(RESULTS / "endpoint_per_feature.csv", index=False)
+    tbl.to_csv(out("endpoint_per_feature.csv"), index=False)
 
     summary = (
         tbl.groupby("arm")["concept_at_budget"]
@@ -212,6 +219,20 @@ def main(args) -> None:
         .rename(columns={"mean": "endpoint_mean", "median": "endpoint_median", "count": "n_features"})
         .reset_index()
     )
+    # The endpoint mean above is per-arm; the paired delta below is on the features both arms define. When
+    # those supports differ, the delta is NOT the difference of the two endpoint means, and a reader who
+    # subtracts the columns gets a contradiction. So also report the endpoint restricted to common support.
+    common = set(tbl.loc[tbl["arm"] == REF_ARM, "feature"])
+    for arm, g in tbl.groupby("arm"):
+        common &= set(g.dropna(subset=["concept_at_budget"])["feature"])
+    on_common = (
+        tbl[tbl["feature"].isin(common)]
+        .groupby("arm")["concept_at_budget"]
+        .agg(["mean", "count"])
+        .rename(columns={"mean": "endpoint_on_common", "count": "n_common"})
+        .reset_index()
+    )
+    summary = summary.merge(on_common, on="arm", how="left")
     boot = bootstrap(df, args.concept, args.n_boot, args.seed).rename(
         columns={"mean": "boot_mean", "lo95": "boot_lo95", "hi95": "boot_hi95"}
     )
@@ -219,7 +240,7 @@ def main(args) -> None:
         columns={"lo95": "delta_lo95", "hi95": "delta_hi95"}
     )
     summary = summary.merge(boot, on="arm").merge(delta, on="arm")
-    summary.to_csv(RESULTS / "endpoint_summary.csv", index=False)
+    summary.to_csv(out("endpoint_summary.csv"), index=False)
     print(f"primary endpoint, budget = naive at c={REF_C}")
     print(summary.to_string(index=False))
 
@@ -242,10 +263,10 @@ def main(args) -> None:
         sec.append(m)
     if sec:
         secondary = pd.concat(sec, ignore_index=True)
-        secondary.to_csv(RESULTS / "endpoint_secondary.csv", index=False)
+        secondary.to_csv(out("endpoint_secondary.csv"), index=False)
         print("\nsecondary budgets")
         print(secondary.to_string(index=False))
-    (RESULTS / "endpoint_summary.json").write_text(
+    (out("endpoint_summary.json")).write_text(
         json.dumps(
             {
                 "concept_metric": args.concept,
@@ -266,4 +287,5 @@ if __name__ == "__main__":
     ap.add_argument("--concept", default="keyword_hit")
     ap.add_argument("--n-boot", dest="n_boot", type=int, default=2000)
     ap.add_argument("--seed", type=int, default=0)
+    ap.add_argument("--prefix", default="", help="prefix for output artefacts, so rounds do not overwrite each other")
     main(ap.parse_args())

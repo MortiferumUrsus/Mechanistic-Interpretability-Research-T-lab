@@ -1,8 +1,5 @@
-﻿.venv/
-data/
+.venv/
 __pycache__/
 *.pyc
-kb/pdf/
-results/**/*.png
-BRIEF_*.txt
-artifacts/*.pt
+wandb/
+data/

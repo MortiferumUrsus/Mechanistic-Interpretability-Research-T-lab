@@ -1,0 +1,8 @@
+arm,identical_at_zero,n
+cds,1.0,360
+clean,1.0,360
+denoise_naive,0.03333333333333333,360
+fsr,1.0,360
+mts,1.0,360
+naive,1.0,360
+norm_preserving,1.0,360
