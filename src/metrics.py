@@ -299,7 +299,7 @@ if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--gen", default="gen_test.jsonl")
     ap.add_argument("--out", default="scored_test.csv")
-    ap.add_argument("--split", default="test", choices=["test", "dev"])
+    ap.add_argument("--split", default="test", choices=["test", "dev", "test_r3"])
     ap.add_argument("--stages", default="ppl,keyword,sae,dist")
     ap.add_argument("--batch", type=int, default=32)
     ap.add_argument("--judge-batch", dest="judge_batch", type=int, default=16)

@@ -53,6 +53,6 @@ def main(args) -> None:
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--gen", default="gen_dev_r2.jsonl")
-    ap.add_argument("--split", default="dev", choices=["dev", "test"])
+    ap.add_argument("--split", default="test", choices=["test", "dev", "test_r3"])
     ap.add_argument("--out", default="control_specificity_dev.csv")
     main(ap.parse_args())

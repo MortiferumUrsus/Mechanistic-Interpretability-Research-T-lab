@@ -194,7 +194,7 @@ def run(args) -> None:
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
-    ap.add_argument("--split", default="test", choices=["test", "dev"])
+    ap.add_argument("--split", default="test", choices=["test", "dev", "test_r3"])
     ap.add_argument("--arms", default="clean,naive,norm_preserving,denoise_naive,cds,mts,fsr")
     # strength in units of the latent's own natural ceiling, not of the global activation norm
     ap.add_argument("--c-grid", dest="c_grid", default="0,0.5,1.0,1.5,2.0,3.0,4.0")
