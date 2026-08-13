@@ -1,0 +1,29 @@
+{
+  "cos_mean": 0.8184849818547567,
+  "results": [
+    {
+      "matching": "equal norm (same c)",
+      "d_logppl": -1.7523466432398118,
+      "logppl_lo95": -2.4930066996016023,
+      "logppl_hi95": -1.0618259047613379,
+      "d_concept": 0.20509259259259258,
+      "concept_lo95": -0.009259259259259252,
+      "concept_hi95": 0.42916666666666664,
+      "p_dominates": 0.97,
+      "n_cells": 72,
+      "n_features": 12
+    },
+    {
+      "matching": "equal concept coordinate (naive at cos*c)",
+      "d_logppl": -1.53555612470357,
+      "logppl_lo95": -2.1706725331638785,
+      "logppl_hi95": -0.9252478424208056,
+      "d_concept": 0.1662799001291946,
+      "concept_lo95": -0.045958427942047506,
+      "concept_hi95": 0.38215199266180944,
+      "p_dominates": 0.942,
+      "n_cells": 72,
+      "n_features": 12
+    }
+  ]
+}
