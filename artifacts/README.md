@@ -45,13 +45,29 @@ norm there is an outlier and distorts both statistics and interventions.
 
 ## Interface
 
-- Input: float32 tensor with last dimension 768, taken at `blocks.6.hook_resid_post`
-  (TransformerLens naming; bit-identical to `blocks.7.hook_resid_pre`).
-- Second input: the magnitude of the perturbation being shown, in activation-norm units. The model
-  is conditioned on it; passing zero tells it the input is clean.
+Two models ship here and they take different inputs. The headline one is the direction correction; the
+denoiser is kept for reproducibility of the first round and is not the recommended model.
+
+**`direction_correction.pt` — the direction correction.**
+
+- Input: a unit-norm steering direction, float32, shape `(..., 768)`. This is a *direction*, not an
+  activation: typically a row of an SAE decoder, normalised.
+- Output: a unit-norm direction of the same shape, `w(v) = normalise(v + A Bᵀ v)`, rank 64, 98k parameters.
+- Use: inject `h + s · w(v̂)` where you would have injected `h + s · v̂`. The perturbation norm is unchanged
+  by construction, so this is a rotation of the injected direction and not a change of strength.
+- The correction is trained for `c ∈ [0.5, 2.5]` in units of the feature's own activation ceiling; at
+  `c = 0.5` it is not an improvement and above `c ≈ 3` it is untested.
+
+**`denoiser.pt` — the residual-stream denoiser (first round, superseded).**
+
+- Input: float32 tensor with last dimension 768, taken at `blocks.6.hook_resid_post` (TransformerLens
+  naming; bit-identical to `blocks.7.hook_resid_pre`).
+- Second input: the magnitude of the perturbation being shown, in activation-norm units. The model is
+  conditioned on it; passing zero tells it the input is clean.
 - Output: same shape, the estimated clean activation.
-- The first two token positions of a sequence are excluded from the intervention in the reference
-  implementation: the residual norm there is an outlier and distorts both statistics and repair.
+
+In both cases the first two token positions of a sequence are excluded from the intervention in the
+reference implementation: the residual norm there is an outlier and distorts both statistics and repair.
 
 ## Training
 
