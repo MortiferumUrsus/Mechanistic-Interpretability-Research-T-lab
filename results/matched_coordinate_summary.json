@@ -1,27 +1,27 @@
 {
-  "cos_mean": 0.8720611135164896,
+  "cos_mean": 0.8720611234505972,
   "results": [
     {
       "matching": "equal norm (same c)",
-      "d_logppl": -0.7939343253633491,
-      "logppl_lo95": -1.7123204371326224,
-      "logppl_hi95": 0.09643516309283166,
-      "d_concept": 0.21250000000000002,
-      "concept_lo95": -0.02456018518518519,
-      "concept_hi95": 0.4444444444444444,
-      "p_dominates": 0.9245,
+      "d_logppl": -1.0934806822902625,
+      "logppl_lo95": -1.8843662628503863,
+      "logppl_hi95": -0.41049032336169944,
+      "d_concept": 0.3111111111111111,
+      "concept_lo95": 0.12451388888888891,
+      "concept_hi95": 0.5028009259259257,
+      "p_dominates": 0.9995,
       "n_cells": 72,
       "n_features": 12
     },
     {
       "matching": "equal concept coordinate (naive at cos*c)",
-      "d_logppl": -0.7461536930134505,
-      "logppl_lo95": -1.6437305395667567,
-      "logppl_hi95": 0.0763472261650012,
-      "d_concept": 0.19444375413435477,
-      "concept_lo95": -0.03038819175834457,
-      "concept_hi95": 0.4091973084397611,
-      "p_dominates": 0.9185,
+      "d_logppl": -1.0457182245602943,
+      "logppl_lo95": -1.8059578979311957,
+      "logppl_hi95": -0.42323003424386224,
+      "d_concept": 0.29305486908113515,
+      "concept_lo95": 0.12632888660662706,
+      "concept_hi95": 0.4650034919277661,
+      "p_dominates": 0.9995,
       "n_cells": 72,
       "n_features": 12
     }

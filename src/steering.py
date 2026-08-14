@@ -167,7 +167,14 @@ class RandomRotationArm:
         hit = self.cache.get(key)
         if hit is not None and hit[0] is v_hat:
             return hit[1]
-        g = torch.Generator(device=v_hat.device).manual_seed(self.seed)
+        # The seed is mixed with the direction itself. A single fixed seed drew one ambient Gaussian and
+        # reused it for every latent, so the "random axes" across features were all rotations of one draw --
+        # a control that shares its randomness is not twelve independent controls but one, repeated. Mixing
+        # in a checksum of the direction keeps the run reproducible while making the draws independent.
+        import zlib
+
+        salt = zlib.crc32(v_hat.detach().to(torch.float32).cpu().numpy().tobytes())
+        g = torch.Generator(device=v_hat.device).manual_seed((self.seed * 1_000_003 + salt) % (2**31 - 1))
         u = torch.randn(v_hat.shape, device=v_hat.device, generator=g)
         u = u - (u @ v_hat) * v_hat
         u = u / u.norm().clamp_min(1e-6)
