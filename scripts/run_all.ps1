@@ -17,18 +17,19 @@ Push-Location $src
 
 # E2 -- metric validation and frozen baselines on DEV
 & $py generate.py --split dev --arms clean,naive,norm_preserving --out gen_dev_base.jsonl
-& $py metrics.py --gen gen_dev_base.jsonl --out scored_dev_base.csv --split dev --stages ppl,keyword,sae,dist,judge
+& $py metrics.py --gen gen_dev_base.jsonl --out scored_dev_base.csv --split dev --stages ppl,keyword,sae,dist
 
-# E3 -- train denoisers on FIT directions only, pick knobs on DEV
-& $py train_denoiser.py --arch mlp --noise mix --cond 1 --seed 0
-& $py train_denoiser.py --arch mlp --noise gauss --cond 1 --seed 0
-& $py train_denoiser.py --arch linear --noise mix --cond 0 --seed 0
-& $py train_denoiser.py --arch mlp --noise mix --cond 1 --seed 1
+# E3 -- train denoisers on FIT directions only, pick knobs on DEV.
+# The budget is 60000 steps and it is not the default: the reported checkpoint is the gauss/cond1/seed0 one,
+# and omitting --steps here trains 12000 instead, which is a different model from the one the report measures.
+& $py train_denoiser.py --arch mlp --noise gauss --cond 1 --seed 0 --steps 60000
+& $py train_denoiser.py --arch mlp --noise mix --cond 1 --seed 0 --steps 60000
+& $py train_denoiser.py --arch linear --noise mix --cond 0 --seed 0 --steps 60000
+& $py train_denoiser.py --arch mlp --noise mix --cond 1 --seed 1 --steps 60000
 
 # E4 -- one pass on TEST with frozen knobs
 & $py generate.py --split test --arms clean,naive,norm_preserving,denoise_naive,cds,mts,fsr --out gen_test.jsonl
 & $py metrics.py --gen gen_test.jsonl --out scored_test.csv --split test --stages ppl,keyword,sae,dist
-& $py metrics.py --gen gen_test.jsonl --out scored_test.csv --split test --stages judge
 & $py pareto.py --scored scored_test.csv --concept keyword_hit
 
 # E5 -- mechanism
@@ -39,3 +40,9 @@ Push-Location $src
 & $py analysis.py predictors
 
 Pop-Location
+
+# E6 -- round two (direction correction) and round three (fresh feature set). Round three is a separate
+# script because its holdout must be selected and excluded from training BEFORE the correction is retrained;
+# see scripts/run_round3.ps1, which does the selection, and README for the required order.
+& "$PSScriptRoot\run_round2.ps1"
+& "$PSScriptRoot\run_round3.ps1"
