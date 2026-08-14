@@ -127,11 +127,21 @@ class CorrectedDirectionArm:
     cache: dict = field(default_factory=dict)
 
     def _w(self, v_hat: torch.Tensor) -> torch.Tensor:
+        # The cache holds the direction tensor alongside its correction, and the identity check below is
+        # not paranoia -- it is the fix for a real defect. Keying on `id(v_hat)` alone while storing only
+        # the result lets the tensor be freed the moment the caller moves to the next feature; CPython then
+        # hands the same address to a later feature, the lookup hits, and that feature is steered with an
+        # EARLIER feature's direction. Nothing errors and the numbers stay plausible. Keeping the tensor in
+        # the cache keeps its address alive, so the collision cannot arise; the `is` check makes the failure
+        # loud rather than silent if it somehow does.
         key = id(v_hat)
-        if key not in self.cache:
-            with torch.no_grad():
-                self.cache[key] = self.correction(v_hat.unsqueeze(0))[0]
-        return self.cache[key]
+        hit = self.cache.get(key)
+        if hit is not None and hit[0] is v_hat:
+            return hit[1]
+        with torch.no_grad():
+            w = self.correction(v_hat.unsqueeze(0))[0]
+        self.cache[key] = (v_hat, w)
+        return w
 
     def __call__(self, h: torch.Tensor, v_hat: torch.Tensor, s: float) -> torch.Tensor:
         if s == 0.0:
@@ -152,16 +162,20 @@ class RandomRotationArm:
     cache: dict = field(default_factory=dict)
 
     def _w(self, v_hat: torch.Tensor) -> torch.Tensor:
+        # Same cache discipline as CorrectedDirectionArm, and for the same reason: see the comment there.
         key = id(v_hat)
-        if key not in self.cache:
-            g = torch.Generator(device=v_hat.device).manual_seed(self.seed)
-            u = torch.randn(v_hat.shape, device=v_hat.device, generator=g)
-            u = u - (u @ v_hat) * v_hat
-            u = u / u.norm().clamp_min(1e-6)
-            k = float(self.cos_target)
-            w = k * v_hat + (1.0 - k * k) ** 0.5 * u
-            self.cache[key] = w / w.norm().clamp_min(1e-6)
-        return self.cache[key]
+        hit = self.cache.get(key)
+        if hit is not None and hit[0] is v_hat:
+            return hit[1]
+        g = torch.Generator(device=v_hat.device).manual_seed(self.seed)
+        u = torch.randn(v_hat.shape, device=v_hat.device, generator=g)
+        u = u - (u @ v_hat) * v_hat
+        u = u / u.norm().clamp_min(1e-6)
+        k = float(self.cos_target)
+        w = k * v_hat + (1.0 - k * k) ** 0.5 * u
+        w = w / w.norm().clamp_min(1e-6)
+        self.cache[key] = (v_hat, w)
+        return w
 
     def __call__(self, h: torch.Tensor, v_hat: torch.Tensor, s: float) -> torch.Tensor:
         if s == 0.0:

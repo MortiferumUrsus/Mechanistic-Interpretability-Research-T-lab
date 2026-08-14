@@ -107,3 +107,47 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
+
+def test_direction_cache_cannot_collide():
+    """The cache must not be able to serve one feature another feature's correction.
+
+    The original defect keyed the cache on `id(v_hat)` while storing only the result. `generate.py` binds a
+    fresh short-lived direction per feature, so CPython recycled the address and a later feature silently
+    got an earlier one's correction -- every number stayed finite and plausible.
+
+    Address reuse cannot be forced portably, so this checks the two things that make the collision
+    impossible rather than waiting for the allocator to cooperate: the cache keeps a reference to the
+    direction it was computed from (which is what stops the address from being recycled at all), and a
+    lookup that lands on a stale key recomputes instead of returning the wrong direction. The second is
+    tested by planting a collision by hand -- exactly what the allocator used to do by accident.
+    """
+    import torch
+
+    from steering import CorrectedDirectionArm
+
+    class Tag(torch.nn.Module):
+        """Returns a direction traceable to the input it was built from."""
+
+        def forward(self, x):
+            return x * 3.0
+
+    arm = CorrectedDirectionArm(correction=Tag())
+
+    a = torch.tensor([1.0, 0.0, 0.0])
+    w_a = arm._w(a)
+    assert torch.allclose(w_a, a * 3.0)
+
+    # The mechanism: the direction itself is retained, so its address cannot be handed to a later feature.
+    assert any(entry[0] is a for entry in arm.cache.values()), (
+        "the cache does not keep the direction alive, so its address can be recycled and a later feature "
+        "will hit this entry"
+    )
+
+    # The guard: plant the collision the allocator used to produce, and check it is caught.
+    b = torch.tensor([0.0, 2.0, 0.0])
+    arm.cache[id(b)] = (a, w_a)
+    assert torch.allclose(arm._w(b), b * 3.0), (
+        "a stale cache key returned another direction's correction instead of recomputing"
+    )
+    print("[ok ] the direction cache cannot serve one feature another feature's correction")

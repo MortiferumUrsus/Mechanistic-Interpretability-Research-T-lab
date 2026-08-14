@@ -40,8 +40,20 @@ def main(args) -> None:
     surv = pd.read_csv(stats_path)
 
     frozen = np.load(DATA / "splits.npz")
-    used = set(int(x) for x in frozen["test"]) | set(int(x) for x in frozen["dev"])
-    print(f"frozen features: {len(used)} (test {len(frozen['test'])}, dev {len(frozen['dev'])})")
+    # `fit` belongs in the exclusion set, and leaving it out was the whole point of failure: round 3 exists
+    # to be a set of features that nothing in this work has touched, and `fit` is exactly the pool the
+    # direction correction was TRAINED on. Excluding only test and dev produced twelve "fresh" features
+    # every one of which the correction had already seen, so the transfer claim it was meant to support was
+    # measuring memorisation. The assert below makes the omission impossible to repeat silently.
+    used = set()
+    for name in ("test", "dev", "fit"):
+        if name in frozen:
+            used |= set(int(x) for x in frozen[name])
+    for name in ("test", "dev", "fit"):
+        if name not in frozen:
+            raise SystemExit(f"splits.npz has no '{name}' split; round 3 cannot prove freshness without it")
+    print(f"frozen features: {len(used)} "
+          f"(test {len(frozen['test'])}, dev {len(frozen['dev'])}, fit {len(frozen['fit'])})")
 
     qualify = surv[
         (surv["n_distinct"] >= MIN_DISTINCT)
