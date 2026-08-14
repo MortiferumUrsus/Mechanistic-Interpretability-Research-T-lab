@@ -65,6 +65,26 @@ def train(args) -> None:
     ceilings = load_ceilings()
 
     fit = np.load(DATA / "splits.npz")["fit"]
+    # Round three needs features the correction has never seen, and there is no way to select them AFTER
+    # training: `fit` was defined as every latent decorrelated from test and dev, so anything outside it is
+    # by construction correlated with the very features rounds one and two used. Holding a slice of `fit`
+    # out here is the only construction that gives round three both properties at once -- unseen by the
+    # correction, and decorrelated from the earlier rounds. Excluding it is unconditional rather than a
+    # flag, so a checkpoint trained without the holdout cannot be produced by accident.
+    holdout_path = DATA / "splits_r3.npz"
+    if holdout_path.exists():
+        holdout = set(int(x) for x in np.load(holdout_path)["test_r3"])
+        keep = np.array([f for f in fit if int(f) not in holdout], dtype=fit.dtype)
+        if len(keep) == len(fit):
+            raise SystemExit(
+                f"{holdout_path.name} exists but none of its features are in `fit`; round three would not "
+                "be held out from this checkpoint. Re-select it from `fit`."
+            )
+        print(f"fit pool {len(fit)} minus the round-three holdout {len(fit) - len(keep)} -> {len(keep)}")
+        fit = keep
+    else:
+        print("no round-three holdout found; the correction trains on the whole fit pool")
+
     dirs = sae.W_dec[torch.as_tensor(fit, device=DEVICE, dtype=torch.long)].detach().float()
     dirs = dirs / dirs.norm(dim=-1, keepdim=True).clamp_min(1e-6)
     natural = torch.tensor(

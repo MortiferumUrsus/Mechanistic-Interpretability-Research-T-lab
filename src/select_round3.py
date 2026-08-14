@@ -40,20 +40,24 @@ def main(args) -> None:
     surv = pd.read_csv(stats_path)
 
     frozen = np.load(DATA / "splits.npz")
-    # `fit` belongs in the exclusion set, and leaving it out was the whole point of failure: round 3 exists
-    # to be a set of features that nothing in this work has touched, and `fit` is exactly the pool the
-    # direction correction was TRAINED on. Excluding only test and dev produced twelve "fresh" features
-    # every one of which the correction had already seen, so the transfer claim it was meant to support was
-    # measuring memorisation. The assert below makes the omission impossible to repeat silently.
-    used = set()
-    for name in ("test", "dev", "fit"):
-        if name in frozen:
-            used |= set(int(x) for x in frozen[name])
     for name in ("test", "dev", "fit"):
         if name not in frozen:
-            raise SystemExit(f"splits.npz has no '{name}' split; round 3 cannot prove freshness without it")
-    print(f"frozen features: {len(used)} "
-          f"(test {len(frozen['test'])}, dev {len(frozen['dev'])}, fit {len(frozen['fit'])})")
+            raise SystemExit(f"splits.npz has no '{name}' split; round three cannot be constructed")
+    # Round three is drawn FROM `fit`, not from what `fit` leaves over, and the reason is structural.
+    # `fit` was built as every latent whose decoder cosine against test and dev is below the same 0.3 gate
+    # this script applies. Its complement is therefore exactly the set of features that FAIL that gate: 558
+    # of them, minimum cosine 0.30006. Selecting round three "outside fit" is unsatisfiable by construction
+    # -- every candidate is disqualified by the decorrelation rule -- and relaxing the rule to get twelve
+    # would buy freshness at the price of entanglement with the very features rounds one and two used.
+    #
+    # So the split runs the other way: twelve features are reserved out of `fit` here, and
+    # `train_direction.py` removes them from its training pool. Round three is then unseen by the
+    # correction AND decorrelated from the earlier rounds, which is what the claim needs. The order matters
+    # -- this must run before the correction is trained, and the checkpoint used for round three must be one
+    # trained after it.
+    used = set(int(x) for x in frozen["test"]) | set(int(x) for x in frozen["dev"])
+    eligible = set(int(x) for x in frozen["fit"])
+    print(f"frozen: test {len(frozen['test'])}, dev {len(frozen['dev'])}, fit {len(frozen['fit'])}")
 
     qualify = surv[
         (surv["n_distinct"] >= MIN_DISTINCT)
@@ -61,7 +65,7 @@ def main(args) -> None:
         & (surv["content_mass"] >= MIN_CONTENT_MASS)
         & (~surv["blocked"].astype(bool))
     ]
-    pool = [int(x) for x in qualify["index"].to_numpy() if int(x) not in used]
+    pool = [int(x) for x in qualify["index"].to_numpy() if int(x) in eligible and int(x) not in used]
     print(f"qualifying under the same rule: {len(qualify)}; available after excluding the frozen: {len(pool)}")
 
     sae = load_sae(device="cpu")
@@ -90,7 +94,8 @@ def main(args) -> None:
         raise SystemExit(f"only {len(picked)} decorrelated fresh features found; lower --n or relax the rule")
 
     # Prove the two properties the round depends on, rather than assuming them.
-    assert not (set(picked) & used), "a round-three feature is already in the frozen splits"
+    assert not (set(picked) & used), "a round-three feature is already in the frozen test/dev splits"
+    assert set(picked) <= eligible, "a round-three feature is outside `fit`, so it cannot be held out of training"
     cross = np.abs(vh[np.asarray(picked)] @ vh[np.asarray(sorted(used))].T).max()
     within = 0.0
     if len(picked) > 1:

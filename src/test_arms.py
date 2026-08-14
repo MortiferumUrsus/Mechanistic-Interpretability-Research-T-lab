@@ -102,11 +102,8 @@ def main() -> None:
     with torch.no_grad():
         b = model.generate(toks, max_new_tokens=6, do_sample=False, stop_at_eos=False, verbose=False)
     check("zero-strength hook is a no-op end to end", torch.equal(a, b))
+    test_direction_cache_cannot_collide()
     print("all invariants hold")
-
-
-if __name__ == "__main__":
-    main()
 
 
 def test_direction_cache_cannot_collide():
@@ -151,3 +148,7 @@ def test_direction_cache_cannot_collide():
         "a stale cache key returned another direction's correction instead of recomputing"
     )
     print("[ok ] the direction cache cannot serve one feature another feature's correction")
+
+
+if __name__ == "__main__":
+    main()
