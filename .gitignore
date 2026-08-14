@@ -1,5 +1,8 @@
 .venv/
-__pycache__/
-*.pyc
-wandb/
 data/
+__pycache__/
+*.pt
+*.npy
+results/**/*.png
+!results/**/*.json
+.cache/
