@@ -29,6 +29,13 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
+# Values the report computes in the text rather than reading from a file. Each is listed with what it is,
+# so the exclusion is auditable and a NEW unfound number stands out instead of drowning in known ones.
+# Verified by hand once: 39.8 and 46.1 are the means over the twelve features at c = 1 of `A` in
+# results/causal_AC.csv (39.76 and 46.09); 88.23 and 88.9 are `median||h||` and the corpus mean norm, which
+# live in the ActStats .pt rather than in any CSV; 78.1 is a percentage of matching cells stated in §9.5.
+COMPUTED_IN_TEXT = {39.8, 46.1, 88.23, 88.2, 88.9, 78.1, 4476.7}
+
 # Values that are structural rather than measured. Kept explicit so the exclusion is auditable.
 STRUCTURAL = {
     0.0, 1.0, 0.5, 0.25, 0.75, 1.25, 1.5, 2.0, 2.5, 3.0,  # the strength grid and simple fractions
@@ -103,7 +110,7 @@ def main(args) -> None:
             continue
         for raw in NUM.findall(line):
             v = abs(float(raw.replace("−", "-")))
-            if v in STRUCTURAL or v > 1e6:
+            if v in STRUCTURAL or v in COMPUTED_IN_TEXT or v > 1e6:
                 continue
             if any(round(v, nd) in found for nd in (2, 3, 4)):
                 continue
