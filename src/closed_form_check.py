@@ -30,7 +30,11 @@ import pandas as pd
 from activations import ActStats
 from common import DATA, RESULTS, load_sae
 
-TOL = 0.005  # four decimals is what is observed; this is the loosest value that would still be a match
+# With the shrinkage matched to the measurement this is an algebraic identity of the linear denoiser, so
+# the residual is float32 rounding of the stored operator (~1e-7), not an approximation error. The old
+# tolerance of 0.005 was four orders of magnitude loose: it passed while the two scripts were using
+# different covariances, which is exactly the regression it was supposed to catch.
+TOL = 1e-4
 
 
 def main(args) -> None:
@@ -59,7 +63,27 @@ def main(args) -> None:
     s2 = sigma**2
     print(f"median_norm {float(stats.median_norm):.4f} -> sigma {sigma:.4f}, sigma^2 {s2:.4f} (not fitted)")
 
-    cov = stats.shrunk_cov(args.shrink).double().cpu().numpy()
+    # The shrinkage comes from the table being checked, never from a default here. Two hand-maintained
+    # defaults in two scripts is what produced the mismatch in the first place; `--shrink` is an override
+    # for deliberate experiments, and its absence from the table is a hard failure rather than a guess.
+    if "shrink" in rows.columns:
+        gammas = sorted(set(round(float(g), 12) for g in rows["shrink"]))
+        if len(gammas) != 1:
+            raise SystemExit(f"transmission.csv mixes shrinkage values {gammas}; cannot check against one")
+        shrink = gammas[0] if args.shrink is None else args.shrink
+        if args.shrink is not None and abs(args.shrink - gammas[0]) > 1e-12:
+            print(f"WARNING: overriding the table's shrinkage {gammas[0]} with {args.shrink}")
+    elif args.shrink is not None:
+        shrink = args.shrink
+        print(f"transmission.csv predates the shrink column; using the value passed in: {shrink}")
+    else:
+        raise SystemExit(
+            "transmission.csv has no `shrink` column, so the covariance it was measured with is unknown. "
+            "Re-run `analysis.py transmission` (it records it now), or pass --shrink explicitly if you "
+            "know the value it was produced with."
+        )
+    print(f"shrinkage taken from the measurement: {shrink}")
+    cov = stats.shrunk_cov(shrink).double().cpu().numpy()
     d = cov.shape[0]
     M = np.linalg.solve(cov + s2 * np.eye(d), cov)
 
@@ -116,5 +140,6 @@ def main(args) -> None:
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--denoiser", default="wiener:1.0")
-    ap.add_argument("--shrink", type=float, default=0.0)
+    ap.add_argument("--shrink", type=float, default=None,
+                    help="override the shrinkage recorded in transmission.csv; normally read from the table")
     main(ap.parse_args())

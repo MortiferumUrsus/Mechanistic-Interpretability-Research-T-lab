@@ -102,6 +102,14 @@ def transmission(args) -> None:
                         "denoiser": dname,
                         "feature": f,
                         "c": c,
+                        # Persisted, not remembered. The closed-form check in `closed_form_check.py`
+                        # rebuilds the same covariance to compare theory against this table, and it has to
+                        # use the SAME shrinkage: for a linear denoiser tau IS v.T A v exactly, so a
+                        # different gamma turns an algebraic identity into a residual that looks like the
+                        # theory being approximately right. That is what happened -- the check defaulted to
+                        # 0.0 while this ran at 0.05, and the "error" column of section 7.1 was the gap
+                        # between two covariances rather than anything about the theory.
+                        "shrink": float(args.shrink),
                         "tau": float(1.0 + (along / s).mean()),
                         "tau_sd": float((along / s).std()),
                         "erase": float(-(along / s).mean()),
