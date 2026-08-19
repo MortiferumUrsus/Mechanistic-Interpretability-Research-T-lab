@@ -36,8 +36,13 @@ Push-Location $src
 & $py analysis.py transmission --split test
 & $py analysis.py spectral --split test
 & $py analysis.py surgery --split test
-& $py analysis.py causal --split test
+& $py analysis.py causal --split test --lam 1.5 --shrink 0.01
 & $py analysis.py predictors
+
+# Last, and it exits non-zero: every number the report quotes must be in the artefact its paragraph cites.
+# Running it here is what stops a regenerated table from silently disagreeing with the text.
+& $py report_numbers_check.py
+if ($LASTEXITCODE -ne 0) { Write-Error "REPORT.md disagrees with results/; see above" }
 
 Pop-Location
 

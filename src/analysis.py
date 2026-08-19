@@ -244,6 +244,15 @@ def causal(args) -> None:
 
     import steering as S
 
+    correction = None
+    if args.direction:
+        from train_direction import load_correction
+
+        ckpt = ROOT / "checkpoints" / f"{args.direction}.pt"
+        if not ckpt.exists():
+            raise SystemExit(f"{ckpt} is missing; pass --direction '' to measure without it")
+        correction = load_correction(ckpt)
+
     z0 = suffix(h0)
     rows = []
     for f, v_hat, scale in feature_dirs(args.split, sae):
@@ -254,6 +263,11 @@ def causal(args) -> None:
             "cds": S.DenoiserArm(denoiser=D, mode="cds", lam=args.lam),
             "mts": S.TransportedArm(direction=transported_direction(stats, v_hat, args.shrink)),
         }
+        # Round two's arm belongs in this table too. Section 7.5's conclusion is a statement about how the
+        # correction sits on the A/C trade-off, and without this row that statement has no artefact behind
+        # it -- it was quoted from a pilot and could not be checked against anything.
+        if correction is not None:
+            arms["dirfix"] = S.CorrectedDirectionArm(correction=correction)
         eps = args.eps_c * scale
         g = (suffix(apply_masked(S.naive, h0, v_hat, eps)) - z0) / eps
         gn = (g**2).sum(-1).clamp_min(1e-9)
@@ -275,7 +289,13 @@ def causal(args) -> None:
                 )
     df = pd.DataFrame(rows)
     df.to_csv(RESULTS / "causal_AC.csv", index=False)
-    print(df.groupby(["arm", "c"])[["A", "C"]].mean().to_string())
+    # The report quotes the per-arm table, not the per-feature rows. A group mean is not recoverable from
+    # the raw file by any whole-column aggregate, so without this the quoted table has nothing to check
+    # against and can drift from the artefact it claims to summarise.
+    summary = df.groupby(["arm", "c"])[["A", "C"]].agg(["mean", "median"])
+    summary.columns = ["_".join(c) for c in summary.columns]
+    summary.reset_index().to_csv(RESULTS / "causal_AC_summary.csv", index=False)
+    print(summary.round(4).to_string())
 
 
 @torch.no_grad()
@@ -387,6 +407,12 @@ if __name__ == "__main__":
     ap.add_argument("--k", type=float, default=1.0)
     ap.add_argument("--exempt-cos", dest="exempt_cos", type=float, default=0.3)
     ap.add_argument("--eps-c", dest="eps_c", type=float, default=0.25)
+    # Round two's correction, for the causal stage. Defaults to the frozen choice so the A/C table and the
+    # generation runs describe the same arm; pass an empty string to measure the pre-round-two set only.
+    ap.add_argument(
+        "--direction",
+        default=yaml.safe_load((CONFIGS / "frozen.yaml").read_text(encoding="utf-8")).get("direction", ""),
+    )
     ap.add_argument("--seed", type=int, default=0)
     a = ap.parse_args()
     seed_all(a.seed)

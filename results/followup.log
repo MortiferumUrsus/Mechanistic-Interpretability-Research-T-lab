@@ -1,0 +1,45 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+C:\Projects\Work\T-lab\01-mech-interp\.venv\Lib\site-packages\sae_lens\saes\sae.py:254: UserWarning: 
+This SAE has non-empty model_from_pretrained_kwargs. 
+For optimal performance, load the model like so:
+model = HookedSAETransformer.from_pretrained_no_processing(..., **cfg.model_from_pretrained_kwargs)
+  warnings.warn(
+                             tau     erase  perp_frac
+denoiser           c                                 
+mlp_gauss_cond1_s0 0.5  0.760356  0.239644   0.778818
+                   1.0  0.654640  0.345360   0.647446
+                   1.5  0.563370  0.436630   0.525279
+                   2.0  0.487744  0.512256   0.427235
+                   3.0  0.376375  0.623625   0.293642
+mlp_mix_cond1_s0   0.5  0.753242  0.246758   0.805774
+                   1.0  0.614913  0.385087   0.645088
+                   1.5  0.503198  0.496802   0.507265
+                   2.0  0.414308  0.585692   0.400061
+                   3.0  0.289464  0.710536   0.257632
+wiener:1.0         0.5  0.438195  0.561805   0.100957
+                   1.0  0.438195  0.561805   0.100957
+                   1.5  0.438195  0.561805   0.100957
+                   2.0  0.438195  0.561805   0.100957
+                   3.0  0.438195  0.561805   0.100957
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+C:\Projects\Work\T-lab\01-mech-interp\.venv\Lib\site-packages\sae_lens\saes\sae.py:254: UserWarning: 
+This SAE has non-empty model_from_pretrained_kwargs. 
+For optimal performance, load the model like so:
+model = HookedSAETransformer.from_pretrained_no_processing(..., **cfg.model_from_pretrained_kwargs)
+  warnings.warn(
+wiener:1.0: 6 features, split ['dev']
+median_norm 88.2288 -> sigma 3.1837, sigma^2 10.1358 (not fitted)
+shrinkage taken from the measurement: 0.05
+
+ feature  measured  exact  shortcut  var_along  cos_sigma_v  err_exact  err_shortcut
+    1171    0.4473 0.4473    0.6051    15.5296       0.4865       -0.0        0.1577
+    8475    0.4280 0.4280    0.5849    14.2818       0.4270       -0.0        0.1569
+   10388    0.4346 0.4346    0.6512    18.9267       0.4285        0.0        0.2166
+   17242    0.4403 0.4403    0.6000    15.2010       0.5231        0.0        0.1596
+   21592    0.4366 0.4366    0.5206    11.0064       0.5947        0.0        0.0840
+   24487    0.4422 0.4422    0.5890    14.5242       0.4679       -0.0        0.1467
+
+measured mean 0.4382 | exact 0.4382 (max |err| 0.0000) | shortcut 0.5918 (max |err| 0.2166)
+cos(Sigma v, v) 0.427..0.595 -- an eigenvector, which the shortcut assumes, would give 1.000
+
+exact form reproduces the measurement; shortcut overstates it on every feature, as the algebra says

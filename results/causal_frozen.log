@@ -1,0 +1,40 @@
+C:\Projects\Work\T-lab\01-mech-interp\.venv\Lib\site-packages\sae_lens\saes\sae.py:254: UserWarning: 
+This SAE has non-empty model_from_pretrained_kwargs. 
+For optimal performance, load the model like so:
+model = HookedSAETransformer.from_pretrained_no_processing(..., **cfg.model_from_pretrained_kwargs)
+  warnings.warn(
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/148 [00:00<?, ?it/s]Loading weights: 100%|##########| 148/148 [00:00<00:00, 7224.66it/s]
+Loaded pretrained model gpt2-small into HookedTransformer
+                             A           C
+arm             c                         
+cds             0.5  25.400918    0.611440
+                1.0  44.826879    2.043991
+                1.5  46.454076    3.553288
+                2.0  46.629091    5.404185
+                3.0  49.698722    7.726912
+denoise_naive   0.5  16.995519    0.831807
+                1.0  31.716143    0.900419
+                1.5  40.211730    1.327727
+                2.0  42.875075    3.159477
+                3.0  41.624120    4.409290
+dirfix          0.5  17.849542    0.482286
+                1.0  38.059513    0.570791
+                1.5  54.889572    0.828339
+                2.0  65.806934    1.366877
+                3.0  76.217696    1.663041
+mts             0.5  25.436205  275.455080
+                1.0  34.776383    9.519049
+                1.5  38.383813    9.103473
+                2.0  40.209259   15.075637
+                3.0  44.646980   13.310280
+naive           0.5  20.472078    0.166552
+                1.0  39.044434    0.546511
+                1.5  49.817467    1.030064
+                2.0  54.530615    1.711760
+                3.0  58.095948    2.959553
+norm_preserving 0.5  20.390880    0.151232
+                1.0  39.237329    0.501896
+                1.5  50.183586    1.080844
+                2.0  54.087301    1.685853
+                3.0  54.028106    2.914364

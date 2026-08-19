@@ -13,7 +13,7 @@ Push-Location "$PSScriptRoot\..\src"
 & $py analysis.py surgery --split test
 
 # tangent-aligned versus off-tangent downstream response
-& $py analysis.py causal --split test
+& $py analysis.py causal --split test --lam 1.5 --shrink 0.01
 
 # how far generation-time activations drift from the training corpus
 & $py analysis.py rollout_shift --split test --max-features 4
@@ -21,7 +21,15 @@ Push-Location "$PSScriptRoot\..\src"
 # per-feature gain against the two registered geometric predictors
 & $py analysis.py predictors
 
+# Derived tables the report cites, so section 9.1 has an artefact rather than arithmetic in prose.
+& $py dirfix_vs_naive.py
+
 & $py plots.py --scored scored_test.csv --concept keyword_hit
 & $py make_html.py
+
+# Last, and it exits non-zero: every number the report quotes must be in the artefact its paragraph cites.
+# Running it here is what stops a regenerated table from silently disagreeing with the text.
+& $py report_numbers_check.py
+if ($LASTEXITCODE -ne 0) { Write-Error "REPORT.md disagrees with results/; see above" }
 
 Pop-Location

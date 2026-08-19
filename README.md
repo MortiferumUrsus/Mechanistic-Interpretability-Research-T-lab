@@ -93,8 +93,10 @@ python pareto.py --scored scored_test.csv --concept keyword_hit
 python analysis.py transmission
 python analysis.py spectral
 python analysis.py surgery
-python analysis.py causal
+python analysis.py causal --lam 1.5 --shrink 0.01
 python analysis.py predictors
+python dirfix_vs_naive.py       # сводит A/C и перплексию в одну таблицу, которую цитирует §9.1
+python report_numbers_check.py  # каждое число отчёта — в файле, на который ссылается его абзац
 ```
 
 У `metrics.py` есть стадия `judge` (LLM-судья Qwen2.5-1.5B-Instruct). Она **не запускалась**: колонки
