@@ -95,12 +95,6 @@ selection and for evaluation. Any latent with absolute cosine similarity 0.3 or 
 evaluation direction is excluded from the training dictionary; the measured maximum over all pairs
 is reported in the repository.
 
-## Leakage control
-
-The latents used for training are disjoint from those used for selection and evaluation, and any latent
-with absolute cosine similarity 0.3 or above to an evaluation direction is excluded from the training
-set. The measured maximum over all pairs is in the repository.
-
 ## Limitations
 
 - GPT-2 small only, one intervention site, one SAE release.
