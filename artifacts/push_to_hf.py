@@ -14,7 +14,6 @@ first -- it prints exactly what would be uploaded and where, and touches nothing
 from __future__ import annotations
 
 import argparse
-import shutil
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
@@ -52,18 +51,12 @@ def main() -> None:
 
     api = HfApi()
     api.create_repo(args.repo, private=args.private, exist_ok=True)
-    staging = HERE / "_upload"
-    staging.mkdir(exist_ok=True)
-    try:
-        for name, path in present:
-            shutil.copy2(path, staging / name)
-        api.upload_folder(
-            folder_path=str(staging),
-            repo_id=args.repo,
-            commit_message="steering direction correction and denoiser, T-Lab 2026 mech-interp track",
-        )
-    finally:
-        shutil.rmtree(staging, ignore_errors=True)
+    api.upload_folder(
+        folder_path=str(HERE),
+        repo_id=args.repo,
+        allow_patterns=list(FILES),
+        commit_message="steering direction correction and denoiser, T-Lab 2026 mech-interp track",
+    )
     print(f"\nhttps://huggingface.co/{args.repo}")
 
 

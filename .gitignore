@@ -3,6 +3,3 @@ __pycache__/
 *.pyc
 wandb/
 data/
-
-# песочница Codex, работавшая над треком 4; не часть этой работы
-lifelong-agents-fix/

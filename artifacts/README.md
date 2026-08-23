@@ -9,29 +9,25 @@ tags:
 library_name: pytorch
 ---
 
-# Steering-direction correction for SAE feature steering in GPT-2 small
+# Поправка направления стиринга для GPT-2 small
 
-A shared low-rank correction of SAE steering directions, `w(v) = normalise(v + A Bᵀ v)`, 98k
-parameters, for the residual stream of GPT-2 small after block 6. Injecting `h + s·w(v̂)` instead of
-`h + s·v̂` keeps the perturbation norm identical while producing higher target metrics and lower Pythia
-log-perplexity in this benchmark. A post-hoc blinded audit by one AI annotator confirms stronger target
-delivery but does not confirm better coherence or overall quality and finds more degeneration; it is not
-human evaluation.
+Этот репозиторий содержит два артефакта из исследования стиринга признаков SAE в residual stream
+GPT-2 small после шестого блока. Основной результат — обученная поправка направления
 
-The interesting part is what this implies: **the SAE decoder column is not the most effective injection
-direction for reproducing its own feature's downstream effect.** The correction is trained on one set of
-latents and transfers to latents it has never seen, so the improvement is a systematic property of the
-decoder basis rather than per-feature tuning.
+```text
+w(v) = normalise(v + A Bᵀv)
+```
 
-This repository also contains the residual-stream denoiser from the first round of the same study,
-which is kept for reproducibility. The report explains why the denoiser route does not work: it erases
-24–62% of the steering signal it is supposed to preserve.
+Матрицы имеют ранг 64, всего в модели 98 304 параметра. При интервенции `h + s·w(v̂)` норма
+возмущения совпадает с наивным вариантом `h + s·v̂`. Поэтому сравнение отражает изменение
+направления без скрытого увеличения силы стиринга.
 
-Built for the Mechanistic Interpretability track of the T-Lab 2026 selection. The exact public code
-commit and full report are supplied alongside this model repository in the T-Lab submission. The model
-card deliberately does not invent an account-specific URL before the owner publishes that commit.
+Автоматические метрики показывают более сильную доставку целевого признака и меньший Pythia
+log-perplexity. Дополнительная слепая разметка одним AI-аннотатором подтверждает усиление целевого
+признака, но не подтверждает улучшение связности или общего качества. У неё также больше случаев
+дегенерации. Человеческой разметки и второго независимого аннотатора в работе нет.
 
-## How to use it
+## Использование поправки
 
 ```python
 import torch
@@ -40,82 +36,63 @@ from model import load_direction_correction
 correction = load_direction_correction("direction_correction.pt")
 v_hat = torch.randn(768)
 v_hat = v_hat / v_hat.norm()
-w = correction(v_hat.unsqueeze(0))[0]     # unit norm by construction
-h_tilde = h + s * w                       # same perturbation norm as h + s * v_hat
+w = correction(v_hat.unsqueeze(0))[0]
+h_tilde = h + s * w
 ```
 
-`model.py` contains the complete 98k-parameter module definition and loader. The full experiment
-repository contains the hook logic that applies `h_tilde` only after the first two token positions.
+`model.py` содержит определение модуля и функцию загрузки. В полной реализации интервенция
+применяется ко всем позициям, кроме первых двух. На этих позициях норма residual stream является
+выбросом и искажает оценку масштаба.
 
-Strength `s` is expressed in units of the latent's own ceiling on real text, `s = c · max_activation ·
-‖W_dec[f]‖`, which is what makes one grid comparable across latents whose natural scales differ by a
-factor of six. The correction was trained for `c ∈ [0.5, 2.5]`; at `c = 0.5` it is not an improvement,
-and above `c ≈ 3` it is untested.
+Сила задаётся как `s = c · max_activation · ‖W_dec[f]‖`, то есть относительно естественного
+масштаба конкретного признака. Поправка обучалась для `c ∈ [0.5, 2.5]`. При `c = 0.5` улучшения
+нет, значения выше `c ≈ 3` не проверялись.
 
-The first two token positions of a sequence stay untouched in the reference implementation: the residual
-norm there is an outlier and distorts both statistics and interventions.
+## Состав
 
-## Interface
+- `direction_correction.pt` — основной артефакт, поправка направления ранга 64
+- `denoiser.pt` — денойзер residual stream из первого раунда экспериментов
+- `model.py` — автономное определение моделей и функции загрузки
+- `config.json` — архитектура и зафиксированные параметры
+- `README.md` — эта карточка модели
 
-Two models ship here and they take different inputs. The headline one is the direction correction; the
-denoiser is kept for reproducibility of the first round and is not the recommended model.
+`direction_correction.pt` принимает нормированное направление формы `(..., 768)` и возвращает
+направление той же формы с единичной нормой. `denoiser.pt` принимает активацию с последней
+размерностью 768 и величину возмущения.
 
-**`direction_correction.pt` — the direction correction.**
+## Обучение
 
-- Input: a unit-norm steering direction, float32, shape `(..., 768)`. This is a *direction*, not an
-  activation: typically a row of an SAE decoder, normalised.
-- Output: a unit-norm direction of the same shape, `w(v) = normalise(v + A Bᵀ v)`, rank 64, 98k parameters.
-- Use: inject `h + s · w(v̂)` where you would have injected `h + s · v̂`. The perturbation norm is unchanged
-  by construction, so this is a rotation of the injected direction and not a change of strength.
-- The correction is trained for `c ∈ [0.5, 2.5]` in units of the feature's own activation ceiling; at
-  `c = 0.5` it is not an improvement and above `c ≈ 3` it is untested.
+Поправка обучалась через зафиксированную верхнюю половину GPT-2. Для чистой активации `h`,
+направления `v` и силы `s` оптимизировался отклик финальных логитов:
 
-**`denoiser.pt` — the residual-stream denoiser (first round, superseded).**
-
-- Input: float32 tensor with last dimension 768, taken at `blocks.6.hook_resid_post` (TransformerLens
-  naming; bit-identical to `blocks.7.hook_resid_pre`).
-- Second input: the magnitude of the perturbation being shown, in activation-norm units. The model is
-  conditioned on it; passing zero tells it the input is clean.
-- Output: same shape, the estimated clean activation.
-
-In both cases the first two token positions of a sequence are excluded from the intervention in the
-reference implementation: the residual norm there is an outlier and distorts both statistics and repair.
-
-## Training
-
-The objective is measured through the frozen upper half of the network rather than in activation space.
-For a clean activation `h`, a training direction `v` and a strength `s`, with `A` the component of the
-final-logit response along the concept's small-signal causal direction and `C` the relative size of the
-nonlinear residue:
-
-```
-L = − A / A_naive  +  γ · relu(C / C_naive − 1)
+```text
+L = −A / A_naive + γ · relu(C / C_naive − 1)
 ```
 
-Both references are measured in the same batch with the uncorrected direction, which matters: without the
-matched reference the objective is minimised by pointing somewhere harmless, and the concept stops being
-delivered at all. Rank 64, 2000 steps, about 4.2 minutes on a GTX 1660 Ti (6 GB), excluding the earlier
-activation and feature-statistics preparation.
+`A` измеряет сохранённый отклик вдоль малосигнального причинного направления, а `C` — относительный
+размер нелинейной невязки. Референсные величины считаются в том же батче с исходным направлением.
+Так оптимизатор не может получить хороший loss простым уходом в безопасное направление без доставки
+признака. Обучение занимало около 4,2 минуты на GTX 1660 Ti с 6 ГБ памяти.
 
-The denoiser kept alongside was trained separately with `‖h − D(h + s·u)‖²` on OpenWebText activations,
-with perturbation magnitudes drawn from one distribution shared across all its ablations so that noise
-structure is not confounded with noise energy.
+Денойзер обучался отдельно на активациях OpenWebText с квадратичным loss
+`‖h − D(h + s·u)‖²`. Во всех абляциях использовалось одинаковое распределение энергии шума.
 
-## Leakage control
+## Контроль утечки
 
-The SAE latents used to build training perturbations are disjoint from the latents used for
-selection and for evaluation. Any latent with absolute cosine similarity 0.3 or above to any
-evaluation direction is excluded from the training dictionary; the measured maximum over all pairs
-is reported in the repository.
+Признаки SAE для обучения не пересекаются с признаками для выбора параметров и итоговой оценки.
+Из обучающего словаря исключены признаки с абсолютной косинусной близостью не меньше 0,3 к любому
+оценочному направлению. Поправка также проверялась на двенадцати признаках, исключённых из её
+обучающего пула до финального переобучения.
 
-## Limitations
+## Ограничения
 
-- GPT-2 small only, one intervention site, one SAE release.
-- No improvement at low strength (`c ≈ 0.5`), where the trade in response space goes the wrong way.
-- Evaluated on 12 latents selected by an objective lexical rule; the effect is a property of this
-  decoder basis and does not automatically transfer to other SAEs or layers.
-- A blinded post-hoc audit by one AI annotator supports stronger SAE-derived target delivery but finds
-  worse degeneration control; coherence and overall-quality intervals include zero. There are no human
-  labels, no second annotator, and no human inter-rater reliability.
-- The activations it sees at generation time drift away from the corpus as strength rises (norm 89 → 156
-  between `c = 0` and `c = 2`); the correction is a fixed linear map and does not model that drift.
+- Проверены только GPT-2 small, один слой интервенции и один релиз SAE.
+- Обучающий seed один, поэтому устойчивость к переобучению поправки не измерена.
+- Вывод основан на двенадцати признаках с объективным лексическим правилом отбора.
+- Автоматический выигрыш по perplexity не означает улучшения качества текста для человека.
+- При генерации распределение активаций сдвигается с ростом силы, а поправка остаётся фиксированной
+  линейной картой.
+- Перенос на другие модели, слои и SAE не проверялся.
+
+Полный экспериментальный протокол, таблицы, графики и анализ механизма находятся в GitHub-пакете,
+ссылка на который прикладывается к форме сдачи вместе с этим репозиторием модели.

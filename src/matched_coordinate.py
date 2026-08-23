@@ -163,7 +163,6 @@ if __name__ == "__main__":
     ap.add_argument("--c-min", dest="c_min", type=float, default=1.0)
     ap.add_argument("--n-boot", dest="n_boot", type=int, default=2000)
     ap.add_argument("--seed", type=int, default=0)
-    # Fixed output names cost this study once already: pareto.py overwrote round one with round two
-    # and the endpoint table in the report went stale without anything failing. Same guard here.
+    # Output names take a prefix so different rounds can never overwrite each other's tables.
     ap.add_argument("--prefix", default="", help="prepended to output filenames, e.g. r3_")
     main(ap.parse_args())

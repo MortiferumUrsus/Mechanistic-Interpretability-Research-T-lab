@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" font-family="Segoe UI, Arial, sans-serif">
+  <rect x="0" y="0" width="960" height="540" fill="#ffffff"/>
+  <defs>
+    <marker id="ar" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+      <path d="M0,0 L9,4.5 L0,9 z" fill="#666"/>
+    </marker>
+  </defs>
+
+  <!-- ===== splits ===== -->
+  <text x="30" y="34" font-size="17" font-weight="600" fill="#1a1a1a">Разбиение признаков SAE (24 576 латентов)</text>
+
+  <rect x="30" y="54" width="215" height="96" rx="8" fill="#eef3fb" stroke="#4a6fa5" stroke-width="1.5"/>
+  <text x="137" y="80" font-size="14.5" font-weight="600" text-anchor="middle" fill="#1a1a1a">FIT — 24 000</text>
+  <text x="45" y="102" font-size="12.5" fill="#444">только синтез обучающих</text>
+  <text x="45" y="119" font-size="12.5" fill="#444">возмущений и обучение</text>
+  <text x="45" y="136" font-size="12.5" fill="#444">поправки направления</text>
+
+  <rect x="265" y="54" width="200" height="96" rx="8" fill="#fdf3e7" stroke="#c07f2d" stroke-width="1.5"/>
+  <text x="365" y="80" font-size="14.5" font-weight="600" text-anchor="middle" fill="#1a1a1a">DEV — 6</text>
+  <text x="280" y="102" font-size="12.5" fill="#444">выбор всех инференс-ручек,</text>
+  <text x="280" y="119" font-size="12.5" fill="#444">заморозка в frozen.yaml</text>
+  <text x="280" y="136" font-size="12.5" fill="#444">до первого прогона TEST</text>
+
+  <rect x="485" y="54" width="200" height="96" rx="8" fill="#e8f4ea" stroke="#3d8b4f" stroke-width="1.5"/>
+  <text x="585" y="80" font-size="14.5" font-weight="600" text-anchor="middle" fill="#1a1a1a">TEST — 12</text>
+  <text x="500" y="102" font-size="12.5" fill="#444">один проход на раунд,</text>
+  <text x="500" y="119" font-size="12.5" fill="#444">меняется только сила c,</text>
+  <text x="500" y="136" font-size="12.5" fill="#444">буфер |cos| &#8805; 0.3 в FIT</text>
+
+  <rect x="705" y="54" width="225" height="96" rx="8" fill="#f7f0f7" stroke="#8b5a8b" stroke-width="1.5"/>
+  <text x="817" y="80" font-size="14.5" font-weight="600" text-anchor="middle" fill="#1a1a1a">test_r3 — 12</text>
+  <text x="720" y="102" font-size="12.5" fill="#444">резерв из FIT для раунда 3,</text>
+  <text x="720" y="119" font-size="12.5" fill="#444">поправка переобучена</text>
+  <text x="720" y="136" font-size="12.5" fill="#444">без этих признаков</text>
+
+  <!-- ===== rounds timeline ===== -->
+  <text x="30" y="205" font-size="17" font-weight="600" fill="#1a1a1a">Три раунда эксперимента</text>
+
+  <rect x="30" y="228" width="280" height="130" rx="8" fill="#f4f4f2" stroke="#999" stroke-width="1.2"/>
+  <text x="170" y="254" font-size="14.5" font-weight="600" text-anchor="middle" fill="#1a1a1a">Раунд 1</text>
+  <text x="45" y="278" font-size="12.5" fill="#444">7 плеч, объявлены до запусков:</text>
+  <text x="45" y="295" font-size="12.5" fill="#444">денойзер задания, CDS, MTS, FSR,</text>
+  <text x="45" y="312" font-size="12.5" fill="#444">сохранение нормы и контроли.</text>
+  <text x="45" y="336" font-size="12.5" font-style="italic" fill="#7a3b3b">итог: ни одно плечо не лучше наивного</text>
+
+  <rect x="340" y="228" width="280" height="130" rx="8" fill="#f4f4f2" stroke="#999" stroke-width="1.2"/>
+  <text x="480" y="254" font-size="14.5" font-weight="600" text-anchor="middle" fill="#1a1a1a">Раунд 2 — поправка направления</text>
+  <text x="355" y="278" font-size="12.5" fill="#444">метод выбран после раунда 1,</text>
+  <text x="355" y="295" font-size="12.5" fill="#444">обучение только на FIT, ручки с DEV.</text>
+  <text x="355" y="312" font-size="12.5" fill="#444">TEST при этом открыт второй раз,</text>
+  <text x="355" y="329" font-size="12.5" fill="#444">и статус раунда честно понижен.</text>
+
+  <rect x="650" y="228" width="280" height="130" rx="8" fill="#e8f4ea" stroke="#3d8b4f" stroke-width="1.8"/>
+  <text x="790" y="254" font-size="14.5" font-weight="600" text-anchor="middle" fill="#1a1a1a">Раунд 3 — свежий holdout</text>
+  <text x="665" y="278" font-size="12.5" fill="#444">12 признаков, которых не видел</text>
+  <text x="665" y="295" font-size="12.5" fill="#444">ни выбор метода, ни обучение.</text>
+  <text x="665" y="312" font-size="12.5" fill="#444">Полный повтор протокола раунда 2</text>
+  <text x="665" y="329" font-size="12.5" fill="#444">плюс контроль случайного поворота.</text>
+
+  <path d="M 310 293 L 340 293" stroke="#666" stroke-width="1.6" fill="none" marker-end="url(#ar)"/>
+  <path d="M 620 293 L 650 293" stroke="#666" stroke-width="1.6" fill="none" marker-end="url(#ar)"/>
+
+  <!-- ===== freeze bar ===== -->
+  <rect x="30" y="400" width="900" height="108" rx="8" fill="#fbfbf9" stroke="#c3c2b7" stroke-width="1.2"/>
+  <text x="45" y="428" font-size="14" font-weight="600" fill="#1a1a1a">Контроль утечки и заморозка</text>
+  <text x="45" y="452" font-size="12.5" fill="#444">Из FIT исключён любой признак с |cos| &#8805; 0.3 к DEV и TEST. Все ручки методов фиксируются на DEV и записываются</text>
+  <text x="45" y="469" font-size="12.5" fill="#444">в configs/frozen.yaml до первого запуска на TEST. Предсказания P1–P7 записаны до открытия TEST.</text>
+  <text x="45" y="493" font-size="12.5" fill="#8a5a00" font-style="italic">Известная слабость протокола: промпты DEV входят в промпты TEST, разделены только признаки.</text>
+</svg>

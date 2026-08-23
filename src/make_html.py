@@ -49,8 +49,9 @@ def embed_images(html: str, base: Path) -> str:
         if not p.exists():
             return m.group(0)
         data = base64.b64encode(p.read_bytes()).decode()
+        mime = "image/svg+xml" if p.suffix.lower() == ".svg" else "image/png"
         return (
-            f'<figure><img alt="{alt}" src="data:image/png;base64,{data}">'
+            f'<figure><img alt="{alt}" src="data:{mime};base64,{data}">'
             f"<figcaption>{alt}</figcaption></figure>"
         )
 

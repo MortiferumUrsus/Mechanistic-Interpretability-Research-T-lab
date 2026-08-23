@@ -1,0 +1,10 @@
+* text=auto
+# The annotation package is covered by SHA256SUMS.txt computed over exact bytes;
+# it must survive any clone byte for byte, so no end-of-line conversion is allowed.
+evaluation/ai_annotation/** -text
+# These two files are frozen records. Keep their exact bytes in every clone.
+TASK.md -text
+PLAN.md -text
+*.pt -text
+*.png -text
+*.pdf -text

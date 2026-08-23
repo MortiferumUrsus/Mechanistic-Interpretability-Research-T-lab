@@ -262,7 +262,7 @@ def load_correction(path):
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("stage", nargs="?", default="train", choices=["train", "eval"])
-    ap.add_argument("--checkpoints", default="dir_smoke,dir_hot")
+    ap.add_argument("--checkpoints", default="dir_hot")
     ap.add_argument("--split", default="dev", choices=["dev", "test"])
     ap.add_argument("--n-prompts", dest="n_prompts", type=int, default=12)
     ap.add_argument("--rank", type=int, default=32)

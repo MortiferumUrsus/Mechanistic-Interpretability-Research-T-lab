@@ -1,14 +1,14 @@
 """Every number the report quotes must be findable in an artefact, and the artefact must be current.
 
-Two failure modes this catches, both of which have already happened here:
+Two failure modes this catches:
 
-- the report cites a value that no current artefact contains, because the artefact was regenerated and the
-  text was not (section 9.9 quoted -1.093 for a paired difference the current table gives as -1.349);
+- the report cites a value that no current artefact contains, because an artefact was regenerated and the
+  text was not;
 - the report cites a value from a file that is *older* than the file it is derived from, so the number is
-  arithmetically consistent with nothing (`scored_test_r2.csv` was once older than the generations it
-  scores, because a re-scoring died half way).
+  arithmetically consistent with nothing.
 
-Neither raises anything. Both produce a report full of finite, plausible, mutually inconsistent numbers.
+Neither raises anything by itself. Both would produce a report full of finite, plausible, mutually
+inconsistent numbers.
 
 There are two checks, and the second is the one that earns its keep.
 
@@ -18,10 +18,9 @@ A number found nowhere is stale, hand-computed, or a typo -- all three worth a h
 The strong check uses the fact that a sentence naming an artefact promises more than existence: it promises
 the number is in THAT file. Every paragraph's citations are collected, and each number in it must appear in
 one of them -- as a cell, or as a column aggregate (mean, median, min, max, sd), since quoting the mean of a
-column is normal and honest. This is the check that matters, because the weak one passes on coincidence: an
-entire section of superseded headline numbers once passed clean, since every stale value happened to exist
-in some other file. Numbers compared at the precision the report itself used, so "11.0" matches 11.006 while
-"0.752" does not match 0.776.
+column is normal and honest. This is the check that matters, because the weak one can pass on coincidence:
+a stale value may happen to exist in some other file. Numbers are compared at the precision the report
+itself used, so "11.0" matches 11.006 while "0.752" does not match 0.776.
 
 Numbers that are not measurements (section references, the strength grid, alpha levels) are skipped by a
 stated rule rather than silently, and values genuinely derived in the text are listed one by one with their
@@ -65,17 +64,15 @@ import pandas as pd
 # Verified by hand:
 #   88.23 / 88.2 / 88.9  `median||h||` and the corpus mean norm -- they live in the ActStats .pt, not a CSV
 #   1.512                millions of activations behind that median, stated in §3
-#   78.1                 a percentage of matching cells, stated in §9.5
 #   4476.7               the corpus token count quoted in §3
 #   6.3 / 7.94 / 2.6     ratios over `natural_c_in_hnorm` in feature_scales.csv: max/min = 6.35, 1/min =
 #                        7.94, and mean(1/x) = 2.57 -- derived columns, not stored ones
 #   10.136               sigma^2 for the `wiener:1.0` arm = median||h||^2 / d = 88.23^2 / 768, by the
 #                        definition in denoiser.py; it is a parameter of the arm, never a fitted output
 #   0.4382               the mean of the `measured` column in closed_form_wiener_1.0.csv
-#   7.8                  a superseded pilot value, quoted in §9.6 as history and labelled as such
-#   7.9                  the `s` that would make the shortcut match the measurement, i.e. the solution of
-#                        s/(s+sigma^2) = 0.4382 at sigma^2 = 10.136; §7.1 quotes it to show it is out of range
-COMPUTED_IN_TEXT = {88.23, 88.2, 88.9, 78.1, 4476.7, 1.512, 6.3, 7.94, 2.6, 10.136, 0.4382, 7.8, 7.9}
+#   7.8                  the pilot value measured in the old strength scale, quoted in §5 and §7.4 with
+#                        its provenance stated there
+COMPUTED_IN_TEXT = {88.23, 88.2, 88.9, 4476.7, 1.512, 6.3, 7.94, 2.6, 10.136, 0.4382, 7.8}
 
 # Values that are structural rather than measured. Kept explicit so the exclusion is auditable.
 STRUCTURAL = {
@@ -94,9 +91,8 @@ SECTION = re.compile(r"§\s*\d+(?:\.\d+)?[а-яa-z]?")
 CITATION_ID = re.compile(r"(?:arXiv|arxiv|doi)\s*:\s*[\d./v-]+", re.I)
 
 # A sentence that names an artefact makes a stronger promise than "this number exists somewhere": it says
-# the number is in THAT file. Checking only the weak promise is how a whole section of stale headline
-# numbers passed clean -- 0.752 was absent from the endpoint table the sentence cited, but present by
-# coincidence elsewhere under results/, so the weak check was satisfied and the report stayed wrong.
+# the number is in THAT file. Checking only the weak promise would let a stale headline through: a value
+# absent from the file its own sentence cites can still exist by coincidence elsewhere under results/.
 # The lookahead matters: without it `results/local_rl.jsonl` matches as `local_rl.json`, and the
 # checker then reports a missing artefact that the report never cited.
 CITED = re.compile(r"results/([A-Za-z0-9_.-]+\.(?:csv|jsonl|json))(?![A-Za-z0-9_.-])")
@@ -263,9 +259,9 @@ def citation_scope(lines: list[str]) -> dict[int, set[str]]:
             start = i + 1
 
     # Markdown requires a blank line before a table, so a table is always its own paragraph and its citing
-    # sentence is always in the neighbouring one. Scoping strictly by paragraph therefore left every table
-    # uncited -- and tables are where the numbers are. This was the exact blind spot that let a section of
-    # stale headline tables pass. Inheritance is BACKWARDS only: a table's citing sentence introduces it,
+    # sentence is always in the neighbouring one. Scoping strictly by paragraph would therefore leave every
+    # table uncited -- and tables are where the numbers are. Inheritance is BACKWARDS only: a table's citing
+    # sentence introduces it,
     # while the paragraph after a table discusses it and routinely names a different, narrower artefact.
     def is_table(a: int, b: int) -> bool:
         body = [ln for ln in lines[a:b] if ln.strip()]
@@ -285,8 +281,7 @@ def self_test(args) -> int:
 
     A verifier that silently stops verifying is worse than none, because the clean run is then read as
     evidence. Both failure modes are exercised against the real report: a value in no artefact at all, and
-    a value that exists under results/ but not in the file its own paragraph cites -- the second is the one
-    that a whole section of stale numbers once slipped through.
+    a value that exists under results/ but not in the file its own paragraph cites.
     """
     import subprocess
 
@@ -295,8 +290,8 @@ def self_test(args) -> int:
     me = [sys.executable, str(Path(__file__).resolve())]
     argv = ["--report", str(report), "--results", str(args.results)]
 
-    # This test edits the report in place, so a kill between the write and the restore leaves a planted
-    # number sitting in it -- which has happened, and is a far worse outcome than the test not running.
+    # This test edits the report in place, so a kill between the write and the restore would leave a
+    # planted number sitting in it -- a far worse outcome than the test not running.
     # The pristine copy goes to disk FIRST, and a stale copy on the next run means the last one died.
     backup = report.with_suffix(report.suffix + ".selftest-backup")
     if backup.exists():

@@ -1,6 +1,6 @@
-# Round three: a feature set that nothing in this work has looked at, to remove the caveat that TEST was
+# Round three: a feature set that nothing in this work has looked at, to address the caveat that TEST was
 # opened twice. Only the two arms that matter are run -- naive steering and the direction correction -- and
-# the random-rotation control, which was previously only measured on DEV.
+# the random-rotation control, which round two only had on DEV.
 $ErrorActionPreference = "Stop"
 $py = "$PSScriptRoot\..\.venv\Scripts\python.exe"
 Push-Location "$PSScriptRoot\..\src"
@@ -11,8 +11,7 @@ $grid = "0,0.5,1.0,1.25,1.5,2.0,2.5,3.0"
 
 # Retrain the correction with the holdout excluded. This step is not optional and it must come here:
 # run_round2.ps1 trains dir_hot BEFORE these twelve features exist, so without retraining the round-three
-# evaluation would run a correction that was trained on its own holdout. That is the exact defect the first
-# attempt at this round had, and it invalidated it.
+# evaluation would run a correction that was trained on its own holdout, and the round would prove nothing.
 & $py train_direction.py train --rank 64 --gamma 1.0 --lr 3e-3 --steps 2000 --name dir_hot
 
 # one pass, two arms; nothing here is tuned, every knob comes from configs/frozen.yaml

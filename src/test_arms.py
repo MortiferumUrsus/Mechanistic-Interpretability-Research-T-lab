@@ -109,15 +109,15 @@ def main() -> None:
 def test_direction_cache_cannot_collide():
     """The cache must not be able to serve one feature another feature's correction.
 
-    The original defect keyed the cache on `id(v_hat)` while storing only the result. `generate.py` binds a
-    fresh short-lived direction per feature, so CPython recycled the address and a later feature silently
-    got an earlier one's correction -- every number stayed finite and plausible.
+    A cache keyed on `id(v_hat)` that stores only the result would be a trap. `generate.py` binds a
+    fresh short-lived direction per feature, CPython recycles addresses, and a later feature could silently
+    get an earlier one's correction, with every number staying finite and plausible.
 
     Address reuse cannot be forced portably, so this checks the two things that make the collision
     impossible rather than waiting for the allocator to cooperate: the cache keeps a reference to the
     direction it was computed from (which is what stops the address from being recycled at all), and a
     lookup that lands on a stale key recomputes instead of returning the wrong direction. The second is
-    tested by planting a collision by hand -- exactly what the allocator used to do by accident.
+    tested by planting a collision by hand.
     """
     import torch
 
@@ -141,7 +141,7 @@ def test_direction_cache_cannot_collide():
         "will hit this entry"
     )
 
-    # The guard: plant the collision the allocator used to produce, and check it is caught.
+    # The guard: plant the collision by hand and check it is caught.
     b = torch.tensor([0.0, 2.0, 0.0])
     arm.cache[id(b)] = (a, w_a)
     assert torch.allclose(arm._w(b), b * 3.0), (

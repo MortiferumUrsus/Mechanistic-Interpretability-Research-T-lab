@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 430" font-family="Segoe UI, Arial, sans-serif">
+  <rect x="0" y="0" width="960" height="430" fill="#ffffff"/>
+  <defs>
+    <marker id="an" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#4a6fa5"/>
+    </marker>
+    <marker id="ag" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#3d8b4f"/>
+    </marker>
+    <marker id="ah" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#555"/>
+    </marker>
+  </defs>
+
+  <text x="30" y="36" font-size="17" font-weight="600" fill="#1a1a1a">Поправка направления: та же норма возмущения, другое направление</text>
+
+  <!-- geometry -->
+  <g>
+    <path d="M 90 310 L 260 310" stroke="#555" stroke-width="2.4" fill="none" marker-end="url(#ah)"/>
+    <text x="175" y="332" font-size="13.5" text-anchor="middle" fill="#333">h — активация резидуала</text>
+
+    <!-- naive: s * v_hat -->
+    <path d="M 260 310 L 352 120" stroke="#4a6fa5" stroke-width="2.4" fill="none" marker-end="url(#an)"/>
+    <text x="352" y="105" font-size="13" text-anchor="middle" fill="#4a6fa5">s·v&#770;</text>
+
+    <!-- corrected: s * w(v_hat) -->
+    <path d="M 260 310 L 470 190" stroke="#3d8b4f" stroke-width="2.4" fill="none" marker-end="url(#ag)"/>
+    <text x="492" y="186" font-size="13" fill="#3d8b4f">s·w(v&#770;)</text>
+
+    <!-- angle arc -->
+    <path d="M 296 236 A 82 82 0 0 1 331 269" stroke="#8a5a00" stroke-width="1.6" fill="none"/>
+    <text x="342" y="258" font-size="12.5" fill="#8a5a00">cos &#8776; 0.87</text>
+
+    <!-- equal norm arc -->
+    <path d="M 352 120 A 211 211 0 0 1 470 190" stroke="#bbb" stroke-width="1.2" stroke-dasharray="5 4" fill="none"/>
+    <text x="425" y="118" font-size="12" fill="#999">равная норма</text>
+
+    <!-- legend -->
+    <rect x="90" y="360" width="12" height="12" fill="#4a6fa5"/>
+    <text x="110" y="371" font-size="12.5" fill="#333">наивный стиринг: вдоль столбца декодера SAE</text>
+    <rect x="90" y="384" width="12" height="12" fill="#3d8b4f"/>
+    <text x="110" y="395" font-size="12.5" fill="#333">поправленное направление при той же евклидовой норме возмущения</text>
+  </g>
+
+  <!-- how w is built -->
+  <rect x="620" y="70" width="310" height="150" rx="8" fill="#eef3fb" stroke="#4a6fa5" stroke-width="1.5"/>
+  <text x="775" y="98" font-size="14" font-weight="600" text-anchor="middle" fill="#1a1a1a">Как строится w</text>
+  <text x="638" y="126" font-size="13.5" font-family="Consolas, monospace" fill="#333">w(v) = normalise(v + A B&#7488; v)</text>
+  <text x="638" y="152" font-size="12.5" fill="#444">низкоранговая поправка, rank 64,</text>
+  <text x="638" y="169" font-size="12.5" fill="#444">98 304 параметра на все признаки сразу.</text>
+  <text x="638" y="192" font-size="12.5" fill="#444">Обучение только на FIT-направлениях,</text>
+  <text x="638" y="209" font-size="12.5" fill="#444">применение к признакам, которых не видела.</text>
+
+  <!-- objective -->
+  <rect x="620" y="240" width="310" height="128" rx="8" fill="#fbfbf9" stroke="#c3c2b7" stroke-width="1.2"/>
+  <text x="775" y="268" font-size="14" font-weight="600" text-anchor="middle" fill="#1a1a1a">Чему учится</text>
+  <text x="638" y="294" font-size="12.5" fill="#444">Цель считается через замороженные слои 7–11:</text>
+  <text x="638" y="312" font-size="12.5" fill="#444">больше концепт-согласованного отклика A</text>
+  <text x="638" y="330" font-size="12.5" fill="#444">при не худшем нелинейном повреждении C,</text>
+  <text x="638" y="348" font-size="12.5" fill="#444">с матчингом к наивному плечу в том же батче.</text>
+</svg>

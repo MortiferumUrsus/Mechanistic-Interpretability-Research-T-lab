@@ -1,6 +1,3 @@
-import sys
-
-sys.path.insert(0, r"C:\Projects\Work\T-lab\01-mech-interp\src")
 import torch
 import yaml
 
