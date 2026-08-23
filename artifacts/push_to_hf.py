@@ -7,7 +7,7 @@ is an outward-facing action under someone's account, so it stays a deliberate ma
 first -- it prints exactly what would be uploaded and where, and touches nothing.
 
     python push_to_hf.py --repo <user>/gpt2-small-steering-direction-correction --dry-run
-    huggingface-cli login
+    hf auth login
     python push_to_hf.py --repo <user>/gpt2-small-steering-direction-correction
 """
 
@@ -21,7 +21,7 @@ HERE = Path(__file__).resolve().parent
 
 # direction_correction.pt is the round-2 method and the best artefact; the denoiser is included because the
 # round-1 arms are reported against it and the card describes both.
-FILES = ("direction_correction.pt", "denoiser.pt", "README.md", "config.json")
+FILES = ("direction_correction.pt", "denoiser.pt", "model.py", "README.md", "config.json")
 
 
 def main() -> None:
@@ -39,7 +39,7 @@ def main() -> None:
     for name, path in present:
         print(f"  {name:28s} {path.stat().st_size / 1e6:8.2f} MB")
     if missing:
-        print(f"  missing, will be skipped: {', '.join(missing)}")
+        raise SystemExit(f"required publication files are missing: {', '.join(missing)}")
     print(f"  total {total / 1e6:.2f} MB")
 
     if args.dry_run:

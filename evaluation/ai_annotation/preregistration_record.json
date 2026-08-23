@@ -1,0 +1,8 @@
+{
+  "annotator": "one AI subagent in a separate agent context; not human",
+  "human_inter_rater_reliability": null,
+  "external_registry": false,
+  "protocol_locally_prespecified_and_frozen_before_method_mapping_inspection": true,
+  "protocol_sha256_at_preregistration": "66b98ebde025939b0290d19a0e2c8e8c39ac0058641d514810a36dd0fbd2b0b0",
+  "timestamp_local": "2026-08-23T19:51:43+03:00"
+}

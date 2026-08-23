@@ -1,0 +1,4 @@
+﻿dimension,matched_cell_n,dirfix_wins,naive_wins,ties,decisive_n,dirfix_win_share_among_decisive,cluster_bootstrap_ci95_low,cluster_bootstrap_ci95_high,bootstrap_seed,bootstrap_reps,note
+overall,180,43,24,113,67,0.641791,0.449275,0.815385,20260823,20000,derived mechanically from blind item scores; not direct pair judgments
+fluency,180,32,56,92,88,0.363636,0.21978,0.545455,20260823,20000,derived mechanically from blind item scores; not direct pair judgments
+concept,180,91,12,77,103,0.883495,0.783505,0.947368,20260823,20000,derived mechanically from blind item scores; not direct pair judgments

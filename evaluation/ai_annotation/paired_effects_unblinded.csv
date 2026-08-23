@@ -1,0 +1,8 @@
+﻿outcome,direction,matched_cell_n,feature_cluster_n,mean_difference,median_difference,cluster_bootstrap_ci95_low,cluster_bootstrap_ci95_high,bootstrap_seed,bootstrap_reps
+coherence_fluency,dirfix_minus_naive,180,12,0.083333,0.0,-0.083333,0.238889,20260823,20000
+prompt_relevance,dirfix_minus_naive,180,12,0.188889,0.0,-0.011111,0.383333,20260823,20000
+target_success,dirfix_minus_naive,180,12,0.977778,1.0,0.566667,1.377778,20260823,20000
+degeneration_control,dirfix_minus_naive,180,12,-0.522222,0.0,-0.855556,-0.2,20260823,20000
+safety_integrity,dirfix_minus_naive,180,12,0.055556,0.0,-0.127778,0.238889,20260823,20000
+overall_quality,dirfix_minus_naive,180,12,0.088889,0.0,-0.094444,0.244444,20260823,20000
+dimension_mean,dirfix_minus_naive,180,12,0.156667,0.0,0.004444,0.292222,20260823,20000

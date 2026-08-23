@@ -1,0 +1,13 @@
+{
+  "annotated_output_n": 468,
+  "blinded_manifest_sha256": "e455554d53c1e8949fe1dff6fe53ae80862bcaa4f2fc17f8f9400c63309f1758",
+  "blinded_pairs_sha256": "7b57ad5254ecd2e13b67a83deb00671bacd44f41f9e60731712a94073867feec",
+  "matched_primary_cell_n": 180,
+  "sampling_frame_n": 7560,
+  "seed": "task01-ai-annotation-20260823-v1",
+  "source_sha256": {
+    "configs/features.yaml": "989c48d419afcf53d4c0c066060c2b4888432543243a44433c7bd89be4cec2cf",
+    "results/gen_r3.jsonl": "6b72ab8ae6eb702a84f1d882ad36d930f9b964975179d68ab7f9bf6e06a5bf69",
+    "results/gen_r3_ctrl.jsonl": "72939594fbdd669044f02d5424b1a52d6f470406f042e54970b6f05cae1b6c9f"
+  }
+}

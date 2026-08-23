@@ -1,0 +1,6 @@
+{
+  "annotation_dir_absolute": null,
+  "task_repo_absolute": null,
+  "warning": "Machine-local absolute paths are intentionally omitted from the public release copy",
+  "workspace_absolute": null
+}

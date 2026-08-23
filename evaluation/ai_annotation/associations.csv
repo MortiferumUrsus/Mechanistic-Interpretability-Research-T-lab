@@ -1,0 +1,13 @@
+﻿group,n,x,y,spearman_rho,feature_cluster_bootstrap_ci95_low,feature_cluster_bootstrap_ci95_high,bootstrap_seed,bootstrap_reps,note
+ALL,468,target_success,coherence_fluency,-0.097966,-0.23727,0.059707,20260823,5000,exploratory; condition-balanced dependent sample
+ALL,468,target_success,prompt_relevance,-0.111452,-0.260217,0.058054,20260823,5000,exploratory; condition-balanced dependent sample
+ALL,468,target_success,degeneration_control,-0.231687,-0.424951,-0.00458,20260823,5000,exploratory; condition-balanced dependent sample
+dirfix,180,target_success,coherence_fluency,-0.233164,-0.444726,-0.054409,20260823,5000,exploratory; condition-balanced dependent sample
+dirfix,180,target_success,prompt_relevance,-0.17257,-0.381805,0.012202,20260823,5000,exploratory; condition-balanced dependent sample
+dirfix,180,target_success,degeneration_control,-0.332109,-0.567496,-0.092022,20260823,5000,exploratory; condition-balanced dependent sample
+naive,180,target_success,coherence_fluency,-0.002378,-0.173947,0.174115,20260823,5000,exploratory; condition-balanced dependent sample
+naive,180,target_success,prompt_relevance,-0.048908,-0.221566,0.135918,20260823,5000,exploratory; condition-balanced dependent sample
+naive,180,target_success,degeneration_control,-0.049524,-0.283097,0.177706,20260823,5000,exploratory; condition-balanced dependent sample
+randrot,108,target_success,coherence_fluency,-0.049453,-0.214,0.115803,20260823,5000,exploratory; condition-balanced dependent sample
+randrot,108,target_success,prompt_relevance,-0.205198,-0.388575,0.006375,20260823,5000,exploratory; condition-balanced dependent sample
+randrot,108,target_success,degeneration_control,-0.11035,-0.321205,0.134872,20260823,5000,exploratory; condition-balanced dependent sample

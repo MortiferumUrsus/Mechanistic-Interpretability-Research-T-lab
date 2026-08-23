@@ -1,0 +1,98 @@
+{
+  "annotator_disclosure": {
+    "agent_context": "/root/task01_ai_annotator",
+    "human_annotator_count": 0,
+    "human_inter_rater_reliability": null,
+    "identity": "one AI subagent in a separate agent context",
+    "is_human": false,
+    "runtime_backend_model_identifier": "not exposed to the annotator"
+  },
+  "blinding": {
+    "automatic_score_files_not_used_for_item_judgments": true,
+    "hypothesis_and_result_blind": false,
+    "item_to_arm_mapping_hidden_during_all_468_item judgments": true,
+    "limitation": "The current README/REPORT were read as instructed before candidate scoring, so the annotator knew the claimed method-level hypothesis/results but not which randomized item belonged to which arm."
+  },
+  "created_utc": "2026-08-23T17:36:56.189632+00:00",
+  "independence_limits": [
+    "The target keyword/top-token lists are SAE-derived and are not independent concept ground truth.",
+    "Fluency and prompt relevance are more external linguistic checks, but still come from one AI judge.",
+    "No human labels, human inter-rater reliability, or human-AI agreement are available.",
+    "The deterministic manifest and aggregation are reproducible; interactive AI judgments are not claimed deterministic."
+  ],
+  "paired_analysis": "180 matched cells mechanically derived from blind item scores; no direct pair-annotation pass and no pair-specific rationales",
+  "rubric_freeze": {
+    "before_method_mapping_inspection": true,
+    "kind": "local timestamp-and-hash freeze; not an external registry",
+    "protocol_sha256": "66b98ebde025939b0290d19a0e2c8e8c39ac0058641d514810a36dd0fbd2b0b0",
+    "timestamp_local": "2026-08-23T19:51:43+03:00"
+  },
+  "sampling": {
+    "annotated_output_n": 468,
+    "features": 12,
+    "frame": "all current non-stale rows in results/gen_r3.jsonl and results/gen_r3_ctrl.jsonl",
+    "frame_n": 7560,
+    "manifest_sha256": "e455554d53c1e8949fe1dff6fe53ae80862bcaa4f2fc17f8f9400c63309f1758",
+    "matched_primary_cell_n": 180,
+    "pair_manifest_sha256": "7b57ad5254ecd2e13b67a83deb00671bacd44f41f9e60731712a94073867feec",
+    "seed": "task01-ai-annotation-20260823-v1"
+  },
+  "source_files": [
+    {
+      "bytes": 2014847,
+      "line_count": 5760,
+      "path": "results/gen_r3.jsonl",
+      "path_scope": "task_repo_relative",
+      "role": "current round-3 primary generated outputs",
+      "sha256": "6b72ab8ae6eb702a84f1d882ad36d930f9b964975179d68ab7f9bf6e06a5bf69"
+    },
+    {
+      "bytes": 591890,
+      "line_count": 1800,
+      "path": "results/gen_r3_ctrl.jsonl",
+      "path_scope": "task_repo_relative",
+      "role": "current round-3 random-rotation control outputs",
+      "sha256": "72939594fbdd669044f02d5424b1a52d6f470406f042e54970b6f05cae1b6c9f"
+    },
+    {
+      "bytes": 15152,
+      "line_count": 1026,
+      "path": "configs/features.yaml",
+      "path_scope": "task_repo_relative",
+      "role": "test_r3 SAE feature target lists",
+      "sha256": "989c48d419afcf53d4c0c066060c2b4888432543243a44433c7bd89be4cec2cf"
+    },
+    {
+      "bytes": 16427,
+      "line_count": 198,
+      "path": "evaluation/ai_annotation/source_snapshot_task_README_before_annotation.md",
+      "path_scope": "task_repo_relative",
+      "role": "exact snapshot of Task 1 repository overview read before annotation",
+      "sha256": "d7e98aec1ef8e00e152f97bc4d26b641601d3eea1126e49ce7a6bc7491143a02"
+    },
+    {
+      "bytes": 133584,
+      "line_count": 1224,
+      "path": "evaluation/ai_annotation/source_snapshot_task_REPORT_before_annotation.md",
+      "path_scope": "task_repo_relative",
+      "role": "exact snapshot of Task 1 report read before annotation",
+      "sha256": "828a85ae9420b067e6bd344808c538acf809c5763fd080b511bc8a36391c1d98"
+    },
+    {
+      "bytes": 10718,
+      "line_count": 87,
+      "path": "evaluation/ai_annotation/source_snapshot_workspace_README_before_annotation.md",
+      "path_scope": "task_repo_relative",
+      "role": "exact snapshot of workspace overview read before annotation",
+      "sha256": "064f35700695603674a21477f0af877efed740c68d61ea6539ad97e5efe921f0"
+    },
+    {
+      "bytes": 7727,
+      "line_count": 106,
+      "path": "TASK.md",
+      "path_scope": "task_repo_relative",
+      "role": "official Task 1 statement",
+      "sha256": "323923b6f2fb96a2975aec957da1af6246d99795cb09cd71dceb74407f364556"
+    }
+  ]
+}

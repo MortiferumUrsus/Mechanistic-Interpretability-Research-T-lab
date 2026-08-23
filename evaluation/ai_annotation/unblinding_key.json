@@ -1,0 +1,23 @@
+{
+  "arm_to_masked_alias": {
+    "dirfix": "MASK_A",
+    "naive": "MASK_C",
+    "randrot": "MASK_B"
+  },
+  "feature_to_opaque_code": {
+    "1344": "F10",
+    "14891": "F08",
+    "15507": "F12",
+    "15664": "F06",
+    "17102": "F09",
+    "23257": "F04",
+    "359": "F05",
+    "4317": "F03",
+    "4398": "F01",
+    "6587": "F07",
+    "6911": "F11",
+    "7848": "F02"
+  },
+  "note": "Created before scoring; do not inspect during item or pair annotation.",
+  "seed": "task01-ai-annotation-20260823-v1"
+}

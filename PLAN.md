@@ -1,7 +1,7 @@
 # Трек 1 (Mechanistic Interpretability): план решения
 
 Версия 2. Учтены ревью Fable 5 и GPT-5.6-sol ([reviews/](reviews/)); v1 сохранена в git-истории.
-Задание: [tasks/01-mechanistic-interpretability.md](../tasks/01-mechanistic-interpretability.md)
+Задание: [TASK.md](TASK.md)
 
 ---
 

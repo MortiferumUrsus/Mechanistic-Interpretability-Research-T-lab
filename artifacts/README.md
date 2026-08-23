@@ -13,8 +13,10 @@ library_name: pytorch
 
 A shared low-rank correction of SAE steering directions, `w(v) = normalise(v + A Bᵀ v)`, 98k
 parameters, for the residual stream of GPT-2 small after block 6. Injecting `h + s·w(v̂)` instead of
-`h + s·v̂` keeps the perturbation norm identical while producing more of the target feature's effect and
-less damage to the text.
+`h + s·v̂` keeps the perturbation norm identical while producing higher target metrics and lower Pythia
+log-perplexity in this benchmark. A post-hoc blinded audit by one AI annotator confirms stronger target
+delivery but does not confirm better coherence or overall quality and finds more degeneration; it is not
+human evaluation.
 
 The interesting part is what this implies: **the SAE decoder column is not the most effective injection
 direction for reproducing its own feature's downstream effect.** The correction is trained on one set of
@@ -25,15 +27,25 @@ This repository also contains the residual-stream denoiser from the first round 
 which is kept for reproducibility. The report explains why the denoiser route does not work: it erases
 24–62% of the steering signal it is supposed to preserve.
 
-Built for the Mechanistic Interpretability track of the T-Lab 2026 selection. Code, protocol and full
-report: see the repository linked below.
+Built for the Mechanistic Interpretability track of the T-Lab 2026 selection. The exact public code
+commit and full report are supplied alongside this model repository in the T-Lab submission. The model
+card deliberately does not invent an account-specific URL before the owner publishes that commit.
 
 ## How to use it
 
 ```python
+import torch
+from model import load_direction_correction
+
+correction = load_direction_correction("direction_correction.pt")
+v_hat = torch.randn(768)
+v_hat = v_hat / v_hat.norm()
 w = correction(v_hat.unsqueeze(0))[0]     # unit norm by construction
 h_tilde = h + s * w                       # same perturbation norm as h + s * v_hat
 ```
+
+`model.py` contains the complete 98k-parameter module definition and loader. The full experiment
+repository contains the hook logic that applies `h_tilde` only after the first two token positions.
 
 Strength `s` is expressed in units of the latent's own ceiling on real text, `s = c · max_activation ·
 ‖W_dec[f]‖`, which is what makes one grid comparable across latents whose natural scales differ by a
@@ -82,7 +94,8 @@ L = − A / A_naive  +  γ · relu(C / C_naive − 1)
 
 Both references are measured in the same batch with the uncorrected direction, which matters: without the
 matched reference the objective is minimised by pointing somewhere harmless, and the concept stops being
-delivered at all. Rank 64, 2000 steps, one GPU-hour on a 6 GB card.
+delivered at all. Rank 64, 2000 steps, about 4.2 minutes on a GTX 1660 Ti (6 GB), excluding the earlier
+activation and feature-statistics preparation.
 
 The denoiser kept alongside was trained separately with `‖h − D(h + s·u)‖²` on OpenWebText activations,
 with perturbation magnitudes drawn from one distribution shared across all its ablations so that noise
@@ -101,5 +114,8 @@ is reported in the repository.
 - No improvement at low strength (`c ≈ 0.5`), where the trade in response space goes the wrong way.
 - Evaluated on 12 latents selected by an objective lexical rule; the effect is a property of this
   decoder basis and does not automatically transfer to other SAEs or layers.
+- A blinded post-hoc audit by one AI annotator supports stronger SAE-derived target delivery but finds
+  worse degeneration control; coherence and overall-quality intervals include zero. There are no human
+  labels, no second annotator, and no human inter-rater reliability.
 - The activations it sees at generation time drift away from the corpus as strength rises (norm 89 → 156
   between `c = 0` and `c = 2`); the correction is a fixed linear map and does not model that drift.
