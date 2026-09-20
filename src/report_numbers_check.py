@@ -72,7 +72,20 @@ import pandas as pd
 #   0.4382               the mean of the `measured` column in closed_form_wiener_1.0.csv
 #   7.8                  the pilot value measured in the old strength scale, quoted in §5 and §7.4 with
 #                        its provenance stated there
-COMPUTED_IN_TEXT = {88.23, 88.2, 88.9, 4476.7, 1.512, 6.3, 7.94, 2.6, 10.136, 0.4382, 7.8}
+#   0.022 / 0.02        1/sqrt(2000) = 0.0224, the pairwise cosine independent directions would give (section 10.2)
+COMPUTED_IN_TEXT = {88.23, 88.2, 88.9, 4476.7, 1.512, 6.3, 7.94, 2.6, 10.136, 0.4382, 7.8, 0.022, 0.02}
+
+# Values quoted from the exploratory round-four analysis whose table was not archived. The report says so
+# where it quotes them (sections 10.2 and 10.3); they are listed here so that the check stays explicit about
+# what it cannot verify instead of failing on a known gap. Regenerate: anatomy.py over checkpoints/seeds/
+# (the cross-seed cosines of d_bar) and direction_report.py (the d_bar-alone unembedding rows).
+#   0.970 / 0.931 / 0.804   within-group cosine of d_bar across five seeds, ranks 8 / 64 / 256
+#   0.875 / 0.991           range of cosines of the fifteen d_bar vectors with dir_hot's, ranks 8 and 64
+#   0.80 / 0.51             weak-half unembedding energy of d_bar and of a random direction
+#   21.4 / 35.4             logit reach of d_bar and of a random direction
+#   0.078 / 0.112           correlation of the logit shift with log token frequency, d_bar and decoder column
+UNARCHIVED_EXPLORATORY = {0.970, 0.931, 0.804, 0.875, 0.991, 0.80, 0.51, 21.4, 35.4, 0.078, 0.112}
+COMPUTED_IN_TEXT |= UNARCHIVED_EXPLORATORY
 
 # Values that are structural rather than measured. Kept explicit so the exclusion is auditable.
 STRUCTURAL = {
@@ -85,7 +98,10 @@ NUM = re.compile(r"[+−-]?\d+\.\d+")
 # Five decimals matter: 0.77637 and 0.77639 are different renderings of one stored value, and
 # capping at four made them interchangeable.
 PRECISIONS = (1, 2, 3, 4, 5)
-SECTION = re.compile(r"§\s*\d+(?:\.\d+)?[а-яa-z]?")
+# "§9.10a" in the Russian report, "section 9.10a" / "sections 10.6, 10.7" / "sections 2 to 8" in the English one.
+SECTION = re.compile(
+    r"(?:§|[Ss]ections?)\s*\d+(?:\.\d+)?[а-яa-z]?(?:\s*(?:,|and|to|–|-)\s*\d+(?:\.\d+)?[а-яa-z]?)*"
+)
 # Bibliography identifiers are not measurements. "arXiv:2403.13091" would otherwise be reported as a
 # number found in no artefact -- true, useless, and it buries the real findings under the reference list.
 CITATION_ID = re.compile(r"(?:arXiv|arxiv|doi)\s*:\s*[\d./v-]+", re.I)
@@ -95,7 +111,8 @@ CITATION_ID = re.compile(r"(?:arXiv|arxiv|doi)\s*:\s*[\d./v-]+", re.I)
 # absent from the file its own sentence cites can still exist by coincidence elsewhere under results/.
 # The lookahead matters: without it `results/local_rl.jsonl` matches as `local_rl.json`, and the
 # checker then reports a missing artefact that the report never cited.
-CITED = re.compile(r"results/([A-Za-z0-9_.-]+\.(?:csv|jsonl|json))(?![A-Za-z0-9_.-])")
+# Subdirectories are allowed (results/kaggle_runs/<kernel>/x.json); artefacts are indexed by file name.
+CITED = re.compile(r"results/((?:[A-Za-z0-9_.-]+/)*[A-Za-z0-9_.-]+\.(?:csv|jsonl|json))(?![A-Za-z0-9_.-])")
 
 # Columns that index an experiment rather than measure it. Only these (and string columns) may be used as
 # group keys when building the aggregate index -- see load_aggregates for why that restriction matters.
@@ -255,7 +272,7 @@ def citation_scope(lines: list[str]) -> dict[int, set[str]]:
     for i in range(len(lines) + 1):
         if i == len(lines) or not lines[i].strip():
             if i > start:
-                paras.append((start, i, {m for ln in lines[start:i] for m in CITED.findall(ln)}))
+                paras.append((start, i, {m.rsplit("/", 1)[-1] for ln in lines[start:i] for m in CITED.findall(ln)}))
             start = i + 1
 
     # Markdown requires a blank line before a table, so a table is always its own paragraph and its citing

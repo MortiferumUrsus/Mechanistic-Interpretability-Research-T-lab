@@ -4,7 +4,7 @@
 evaluation/ai_annotation/** -text
 # These two files are frozen records. Keep their exact bytes in every clone.
 TASK.md -text
-PLAN.md -text
+PLAN.ru.md -text
 *.pt -text
 *.png -text
 *.pdf -text

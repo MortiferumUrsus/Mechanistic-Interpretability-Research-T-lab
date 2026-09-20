@@ -9,25 +9,43 @@ tags:
 library_name: pytorch
 ---
 
-# Поправка направления стиринга для GPT-2 small
+# Steering direction correction for GPT-2 small
 
-Этот репозиторий содержит два артефакта из исследования стиринга признаков SAE в residual stream
-GPT-2 small после шестого блока. Основной результат — обученная поправка направления
+This repository contains artifacts from a study of SAE feature steering in the residual stream of
+GPT-2 small after block six. The main artifact is a learned direction correction
 
 ```text
 w(v) = normalise(v + A Bᵀv)
 ```
 
-Матрицы имеют ранг 64, всего в модели 98 304 параметра. При интервенции `h + s·w(v̂)` норма
-возмущения совпадает с наивным вариантом `h + s·v̂`. Поэтому сравнение отражает изменение
-направления без скрытого увеличения силы стиринга.
+The matrices have rank 64, for a total of 98,304 parameters. Under the intervention `h + s·w(v̂)`
+the norm of the perturbation matches that of the naive variant `h + s·v̂`, so the comparison
+reflects a change of direction without a hidden increase in steering strength.
 
-Автоматические метрики показывают более сильную доставку целевого признака и меньший Pythia
-log-perplexity. Дополнительная слепая разметка одним AI-аннотатором подтверждает усиление целевого
-признака, но не подтверждает улучшение связности или общего качества. У неё также больше случаев
-дегенерации. Человеческой разметки и второго независимого аннотатора в работе нет.
+## What it does and what it does not do
 
-## Использование поправки
+On held-out SAE features the correction delivers more of the target feature than the decoder column
+at the same perturbation norm: the keyword hit rate of the feature's own vocabulary rises by about
+0.3 to 0.4 at matched strength, on the original test set, on twelve features held out of training,
+and on 48 fresh features. It also lowers the Pythia log-perplexity of the generated text by about 1.1
+to 1.4 nats.
+
+The perplexity gain should not be read as a fluency gain. About half of what the correction adds to
+any feature is a single shared direction that lowers the model's next-token entropy; injected on its
+own, that direction lowers generation perplexity more than the full correction does, with no concept
+delivered, while making the model predict real text worse. A blind audit of generations by a single LLM annotator likewise
+confirms the concept gain but finds more degeneration and no improvement in coherence. Measured on
+held-out real text at matched concept delivery, the correction reduces the damage of steering,
+because it delivers the concept at a lower strength; the size of that reduction (0.1 to 0.6 nats of
+teacher-forced negative log-likelihood) is uncertain, since the capability measurement covers only
+four features. The full analysis is in the GitHub repository's report, section 10.
+
+`dir_ent.pt` is the same architecture trained with an additional penalty on the change in next-token
+entropy. It has about half of the shared component removed and the same real-text comparison at matched
+concept delivery;
+it delivers less concept per unit of strength than `direction_correction.pt`.
+
+## Using the correction
 
 ```python
 import torch
@@ -40,59 +58,64 @@ w = correction(v_hat.unsqueeze(0))[0]
 h_tilde = h + s * w
 ```
 
-`model.py` содержит определение модуля и функцию загрузки. В полной реализации интервенция
-применяется ко всем позициям, кроме первых двух. На этих позициях норма residual stream является
-выбросом и искажает оценку масштаба.
+`model.py` contains the module definition and the loading function. In the full implementation the
+intervention is applied at all positions except the first two, where the norm of the residual stream
+is an outlier that distorts the scale estimate.
 
-Сила задаётся как `s = c · max_activation · ‖W_dec[f]‖`, то есть относительно естественного
-масштаба конкретного признака. Поправка обучалась для `c ∈ [0.5, 2.5]`. При `c = 0.5` улучшения
-нет, значения выше `c ≈ 3` не проверялись.
+The strength is set as `s = c · max_activation · ‖W_dec[f]‖`, that is, relative to the natural scale
+of the specific feature. The correction was trained for `c ∈ [0.5, 2.5]`. At `c = 0.5` there is no
+improvement; values above `c ≈ 3` were not tested.
 
-## Состав
+## Contents
 
-- `direction_correction.pt` — основной артефакт, поправка направления ранга 64
-- `denoiser.pt` — денойзер residual stream из первого раунда экспериментов
-- `model.py` — автономное определение моделей и функции загрузки
-- `config.json` — архитектура и зафиксированные параметры
-- `README.md` — эта карточка модели
+- `direction_correction.pt` — the main artifact, the rank-64 direction correction (identical to `checkpoints/dir_hot.pt` in the repository)
+- `dir_ent.pt` — the entropy-penalised variant
+- `denoiser.pt` — the residual stream denoiser from the first round of experiments
+- `model.py` — standalone model definitions and loading functions
+- `config.json` — architecture and frozen parameters
+- `README.md` — this model card (Russian: `README.ru.md`)
 
-`direction_correction.pt` принимает нормированное направление формы `(..., 768)` и возвращает
-направление той же формы с единичной нормой. `denoiser.pt` принимает активацию с последней
-размерностью 768 и величину возмущения.
+`direction_correction.pt` and `dir_ent.pt` take a normalised direction of shape `(..., 768)` and
+return a direction of the same shape with unit norm. `denoiser.pt` takes an activation whose last
+dimension is 768 and the magnitude of the perturbation.
 
-## Обучение
+## Training
 
-Поправка обучалась через зафиксированную верхнюю половину GPT-2. Для чистой активации `h`,
-направления `v` и силы `s` оптимизировался отклик финальных логитов:
+The correction was trained through the frozen upper half of GPT-2. For a clean activation `h`, a
+direction `v` and a strength `s`, the response of the final logits was optimised:
 
 ```text
 L = −A / A_naive + γ · relu(C / C_naive − 1)
 ```
 
-`A` измеряет сохранённый отклик вдоль малосигнального причинного направления, а `C` — относительный
-размер нелинейной невязки. Референсные величины считаются в том же батче с исходным направлением.
-Так оптимизатор не может получить хороший loss простым уходом в безопасное направление без доставки
-признака. Обучение занимало около 4,2 минуты на GTX 1660 Ti с 6 ГБ памяти.
+`A` measures the preserved response along a low-signal causal direction, and `C` the relative size
+of the nonlinear residual. The reference values are computed in the same batch with the original
+direction, so the optimiser cannot obtain a good loss simply by drifting into a safe direction without
+delivering the feature. Training took about 4.2 minutes on a GTX 1660 Ti with 6 GB of memory.
+`dir_ent.pt` adds `+ 1.0 · mean |H(steered) − H(clean)|`, the change in next-token entropy through
+the same frozen suffix.
 
-Денойзер обучался отдельно на активациях OpenWebText с квадратичным loss
-`‖h − D(h + s·u)‖²`. Во всех абляциях использовалось одинаковое распределение энергии шума.
+The denoiser was trained separately on OpenWebText activations with the squared loss
+`‖h − D(h + s·u)‖²`. All ablations used the same noise energy distribution.
 
-## Контроль утечки
+## Leakage control
 
-Признаки SAE для обучения не пересекаются с признаками для выбора параметров и итоговой оценки.
-Из обучающего словаря исключены признаки с абсолютной косинусной близостью не меньше 0,3 к любому
-оценочному направлению. Поправка также проверялась на двенадцати признаках, исключённых из её
-обучающего пула до финального переобучения.
+The SAE features used for training do not overlap with the features used for parameter selection and
+final evaluation. Features with absolute cosine similarity of at least 0.3 to any evaluation
+direction were excluded from the training dictionary. The correction was also tested on twelve
+features excluded from its training pool before the final retraining, and on 48 further features
+excluded, together with their cosine neighbours, from a retrained checkpoint.
 
-## Ограничения
+## Limitations
 
-- Проверены только GPT-2 small, один слой интервенции и один релиз SAE.
-- Обучающий seed один, поэтому устойчивость к переобучению поправки не измерена.
-- Вывод основан на двенадцати признаках с объективным лексическим правилом отбора.
-- Автоматический выигрыш по perplexity не означает улучшения качества текста для человека.
-- При генерации распределение активаций сдвигается с ростом силы, а поправка остаётся фиксированной
-  линейной картой.
-- Перенос на другие модели, слои и SAE не проверялся.
+- Only GPT-2 small and a single SAE release were tested; a replication at a second layer (block 10)
+  finds the same shared direction, with a weaker concept gain.
+- The published checkpoint has one training seed. Across five seeds at rank 64 the concept gain is
+  stable (0.39 to 0.46) and the perplexity gain varies (−1.1 to −2.1 nats).
+- The evaluation rests on twelve to 48 features selected by an objective lexical rule.
+- The perplexity gain on generated text is largely a confidence artifact, not improved text quality.
+- During generation the activation distribution shifts as the strength grows, while the correction
+  remains a fixed linear map.
+- Transfer to other models and SAEs was not tested.
 
-Полный экспериментальный протокол, таблицы, графики и анализ механизма находятся в GitHub-пакете,
-ссылка на который прикладывается к форме сдачи вместе с этим репозиторием модели.
+The full experimental protocol, tables, plots and mechanism analysis are in the GitHub repository.
