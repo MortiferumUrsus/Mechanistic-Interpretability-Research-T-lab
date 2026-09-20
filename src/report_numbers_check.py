@@ -72,8 +72,9 @@ import pandas as pd
 #   0.4382               the mean of the `measured` column in closed_form_wiener_1.0.csv
 #   7.8                  the pilot value measured in the old strength scale, quoted in §5 and §7.4 with
 #                        its provenance stated there
-#   0.022 / 0.02        1/sqrt(2000) = 0.0224, the pairwise cosine independent directions would give (section 10.2)
-COMPUTED_IN_TEXT = {88.23, 88.2, 88.9, 4476.7, 1.512, 6.3, 7.94, 2.6, 10.136, 0.4382, 7.8, 0.022, 0.02}
+#   0.022 / 0.02        1/sqrt(2000) = 0.0224, the norm ratio independent directions would give (section 10.2)
+#   0.04                 1/sqrt(768) = 0.036, the s.d. of a pairwise cosine between random directions (section 10.2)
+COMPUTED_IN_TEXT = {88.23, 88.2, 88.9, 4476.7, 1.512, 6.3, 7.94, 2.6, 10.136, 0.4382, 7.8, 0.022, 0.02, 0.04}
 
 # Values quoted from the exploratory round-four analysis whose table was not archived. The report says so
 # where it quotes them (sections 10.2 and 10.3); they are listed here so that the check stays explicit about

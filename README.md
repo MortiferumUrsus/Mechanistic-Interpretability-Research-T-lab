@@ -10,7 +10,7 @@ what the learned correction actually does. Report: [`REPORT.md`](REPORT.md) (Rus
 [`TASK.en.md`](TASK.en.md)).
 
 This started as a solution to the T-Lab 2026 test assignment (Mechanistic Interpretability track);
-round four was added after the submission.
+round four was added after submission.
 
 ## Results in four lines
 
@@ -18,20 +18,22 @@ round four was added after the submission.
    manifold removes 24 to 62% of the steering vector, in agreement with a closed-form prediction, and
    every post-hoc repair of the activation increases the nonlinear part of the downstream response.
    No repair beats naive steering (report, sections 2 to 8).
-2. **A learned direction correction delivers more concept.** A rank-64 map `w(v) = normalise(v + M v)`
+2. **A learned direction correction delivers more concept.** A rank-64 map `w(v) = normalize(v + M v)`
    (98k parameters), trained on one set of features and applied to others at the same perturbation
    norm, raises the preregistered endpoint on TEST from 0.534 to 0.776 and replicates on 12 held-out
    features and on 48 fresh ones (sections 9, 10.8).
-3. **Its perplexity gain on generated text is largely an artefact.** Half of the correction is one
-   shared direction that lowers the model's next-token entropy. Injected alone it reproduces the
-   whole Pythia log-PPL gain at zero concept while making the model predict real text worse.
+3. **Its perplexity gain on generated text is largely an artifact.** Half of the correction is one
+   shared direction that lowers the model's next-token entropy. Injected alone it lowers Pythia
+   log-PPL more than the full correction does, at zero concept, while making the model predict real
+   text worse; attached to the decoder column without any training it delivers as much concept as
+   the learned correction or more.
    Generation perplexity under an external scorer is not a fluency measure once the intervention can
    change the model's confidence (sections 10.2 to 10.6).
 4. **On real text at matched concept delivery the learned correction still costs less than naive
-   steering**, by 0.1 to 0.6 nats of teacher-forced negative log-likelihood depending on how the two
+   steering**, by 0.07 to 0.6 nats of teacher-forced negative log-likelihood depending on how the two
    curves are joined, with wide intervals: the measurement (four features) establishes the sign, not
-   the size. An entropy-penalised variant halves the confidence component and leaves that comparison
-   unchanged (sections 10.6, 10.7).
+   the size. An entropy-penalized variant reduces the shared component and leaves that comparison
+   within noise (sections 10.6, 10.7).
 
 ## Setup
 
@@ -40,7 +42,7 @@ identical to `blocks.7.hook_resid_pre`, on which the `gpt2-small-res-jb` SAEs ar
 columns are steering directions in the intervention basis without any change of basis
 (`activations.py verify` checks the identity).
 
-Strength is parameterised as the increment of the concept coordinate `s = c · natural_s(f)`, where
+Strength is parameterized as the increment of the concept coordinate `s = c · natural_s(f)`, where
 `natural_s(f) = ceiling_f · ‖W_dec[f]‖` is the feature's own strongest activation on the corpus
 (`src/common.py`, `natural_strength`). Natural scales differ by a factor of 6.3 across features
 (`natural_s` = 11.12 to 70.60, `results/feature_scales.csv`), which a global unit such as
@@ -67,7 +69,7 @@ top-1 accuracy on held-out documents under the same steering hook (`src/capabili
 | `fsr` | clamps non-target SAE latents to their corpus ceiling | — |
 | `dirfix` | `h + s·w(v̂)`, learned direction correction at the naive norm | direction correction (round 2) |
 | `randrot` | control: rotation of `v̂` by the same angle in a random direction | — |
-| `shared` | `h + s·normalise(v̂ + κ·d̄)`, `d̄` = shared component of the learned correction | — (round 4) |
+| `shared` | `h + s·normalize(v̂ + κ·d̄)`, `d̄` = shared component of the learned correction | — (round 4) |
 | `shared_only` | control: `h + s·d̄`, no feature direction | — |
 | `residual`, `purified`, `centred`, `diffmeans`, `diffmeans_purified`, `antimanifold`, `rotate` | round-4 direction families, see report section 10.1 | — |
 | `cond_wiener`, `cond_denoise` | conditional denoisers pulling toward the concept's own manifold (failed, section 10.9) | conditional denoiser |
@@ -77,7 +79,7 @@ one was seen and declared as such. The correction is trained only on FIT feature
 features it never saw; its perturbation norm equals the naive one by construction. Round three is
 the same arm on twelve fresh features (`test_r3`) held out of the correction's training, plus the
 random-rotation control. Round four is the set of arms below `randrot` in the table, the
-entropy-penalised checkpoint `dir_ent`, the real-text capability sweep, seed and rank sweeps, 48
+entropy-penalized checkpoint `dir_ent`, the real-text capability sweep, seed and rank sweeps, 48
 fresh features (`test_r4`) and a replication at layer 10.
 
 ## Installation
@@ -116,7 +118,7 @@ cd src
 python activations.py verify
 python activations.py dump --n-tokens 2000000 --batch-size 16
 python activations.py prompts --n-prompts 40 --prompt-len 8
-python sae_stats.py --chunk 2048
+python sae_stats.py --chunk 4096
 
 # feature selection and the FIT / DEV / TEST split
 python features.py select --seed 0
@@ -128,6 +130,7 @@ python train_denoiser.py --arch linear --noise mix --cond 0 --seed 0 --steps 600
 
 # every inference hyperparameter is chosen on DEV, without generation
 python sweep_dev.py
+python select_from_dev.py         # writes configs/frozen.yaml from the DEV scores; TEST is generated only after this
 
 # one pass on TEST with frozen hyperparameters
 python generate.py --split test --out gen_test.jsonl
@@ -140,6 +143,8 @@ python analysis.py spectral
 python analysis.py surgery
 python analysis.py causal --lam 1.5 --shrink 0.01
 python analysis.py predictors
+python plots.py --scored scored_test.csv --concept keyword_hit   # results/fig_*.png, embedded in the report
+python make_html.py                                             # REPORT.md -> report.html
 python dirfix_vs_naive.py       # A/C and perplexity in one table, cited by report section 9.1
 python report_numbers_check.py  # every number in the report must be in the file its paragraph cites
 ```
@@ -152,7 +157,7 @@ would train the correction on its own holdout.
 **Round four** was run on Kaggle through the drivers in `scripts/run_exp*.py` and
 `scripts/run_layer.py` (stages selectable with `--stages`; each stage is wrapped so that one failure
 does not stop the queue, which also means a green queue summary is not proof that a stage produced its
-artefact). The Kaggle scaffolding is in `kaggle/` (see `kaggle/SMOKE.md`). The same stages run locally
+artifact). The Kaggle scaffolding is in `kaggle/` (see `kaggle/SMOKE.md`). The same stages run locally
 from `src/`:
 
 ```
@@ -160,14 +165,22 @@ cd src
 python anatomy.py --ckpt dir_hot                # shared direction d̄ -> checkpoints/shared_direction.pt, anatomy tables
 python direction_report.py                      # unembedding diagnostics per direction family
 python qq_test.py --n-docs 500 --ctx 512 --c 1.0 --features 3 --split test_r3 --out-prefix qq
-python generate.py --split test_r3 --arms naive,dirfix,shared,shared_only,residual,antimanifold --out gen_expA_r3.jsonl
-python generate.py --split test_r3 --arms naive,dirfix,shared,diffmeans,centred,purified,diffmeans_purified,rotate --out gen_expF_r3.jsonl
-python capability_sweep.py                      # real-text NLL and top-1 under the steering hook
-python matched_concept_capability.py            # real-text damage at matched concept delivery
+python generate.py --split test_r3 --arms naive,dirfix,shared,shared_only,residual,antimanifold --c-grid 0,0.5,1.0,1.5,2.0,3.0,4.0,5.0 --out gen_expA_r3.jsonl
+python concept_data.py mine                     # data/concept_positions.npz
+python concept_data.py stats                    # data/concept_stats.pt, required by the diffmeans arms
+python generate.py --split test_r3 --arms naive,dirfix,shared,diffmeans,centred,purified,diffmeans_purified,rotate --c-grid 0,0.5,1.0,1.5,2.0,3.0 --out gen_expF_r3.jsonl
+python capability_sweep.py                      # real-text NLL and top-1 under the steering hook -> capability_sweep.csv
+python capability_sweep.py --set direction=dir_ent --out capability_ent.csv
+python capability_sweep.py --arms shared --out capability_kappa_0.25.csv   # after setting kappa_shared: 0.25 in configs/expA.yaml (and 0.5 likewise)
+python matched_concept_capability.py --bootstrap 2000            # real-text damage at matched concept delivery
+python matched_concept_capability.py --first-n-features 4 --bootstrap 2000 --out matched_concept_capability_4feat.csv
+python matched_concept_capability.py --scored scored_expF_ent_clean.csv --capability capability_ent.csv --arm-map dirfix=dir_ent --bootstrap 2000 --out matched_concept_capability_ent.csv
+python paired_by_strength.py --scored scored_expA_r3.csv --out paired_expA_r3_by_strength.csv
+python dbar_cosines.py                          # results/shared_direction_cosines.csv
 python matched_repetition.py --scored scored_expF_r3.csv --out-prefix matchedF
 python feature_distribution.py --scored scored_expF_r3.csv --out-prefix featdistF
 python layer_profile.py                         # per-layer norm, projection on d̄, final entropy
-python train_direction_ent.py train --rank 64 --steps 2000 --name dir_ent --ent-weight 1.0
+python train_direction_ent.py train --rank 64 --gamma 1.0 --lr 3e-3 --steps 2000 --name dir_ent --ent-weight 1.0
 python anatomy.py --ckpt dir_ent --tag _ent
 python select_round4.py --seed 4242 --n 48      # writes configs/features_r4.yaml; features.yaml is frozen
 python train_direction.py train --rank 64 --gamma 1.0 --lr 3e-3 --steps 2000 --name dir_r4 --exclude-r4
@@ -176,14 +189,15 @@ python train_direction.py train --rank 64 --gamma 1.0 --lr 3e-3 --steps 2000 --n
 `TLAB_LAYER=10` moves the whole pipeline to the SAE at `blocks.10.hook_resid_pre`
 (`scripts/run_layer.py --layer 10` does the full chain on a throwaway checkout).
 
-Checks that do not need a GPU: `python test_arms.py` and `python test_pareto.py` (invariants of the
-arms and of the front machinery), `python report_numbers_check.py` (every decimal in the report is in
-the artefact its paragraph cites), and the annotation-package validator below.
+Checks that run without a GPU on a fresh clone: `python test_pareto.py` (invariants of the front
+machinery), `python report_numbers_check.py` (every decimal in the report is in the artifact its
+paragraph cites), and the annotation-package validator below. `python test_arms.py` checks the arm
+invariants but needs `data/act_stats.pt`, so it runs only after `activations.py dump`.
 
 ## Leakage control
 
 SAE feature indices are split into three disjoint sets. `FIT` (24000 features) is used only to
-synthesise training perturbations, `DEV` (6) for every hyperparameter, `TEST` (12) is opened once.
+synthesize training perturbations, `DEV` (6) for every hyperparameter, `TEST` (12) is opened once.
 Any feature with `|cos| ≥ 0.3` to any `DEV ∪ TEST` direction is excluded from `FIT`; the actual
 maximum over all pairs is in [`results/leakage.csv`](results/leakage.csv). The twelve round-three
 features are additionally excluded from `FIT` and the correction retrained without them; the 48
@@ -259,20 +273,22 @@ Round-four result files and what they hold:
 | `results/scored_expF_kappa.csv`, `capability_kappa_*.csv` | the `κ` sweep for `shared` |
 | `results/capability_sweep.csv`, `capability_ent.csv` | real-text NLL and top-1 versus strength |
 | `results/matched_concept_capability.csv`, `_ent.csv` | real-text damage at matched concept delivery |
-| `results/scored_expF_ent_clean.csv`, `paired_expF_ent.csv` | the entropy-penalised correction `dir_ent` |
+| `results/scored_expF_ent_clean.csv`, `paired_expF_ent.csv` | the entropy-penalized correction `dir_ent` |
 | `results/matchedA_*.csv`, `matchedF_*.csv`, `featdist*_*.csv` | matched-repetition and per-feature distribution checks |
 | `results/scored_layer10.csv`, `paired_layer10.csv` | the layer-10 replication |
 | `results/r4_identity_at_zero.csv` | every round-four arm is the identity at `c = 0` |
 | `results/kaggle_runs/tlab-mi-a-d/` | seed and rank sweep (`expD_eval_dev.csv`, training logs) and the `dir_hot` anatomy |
 | `results/kaggle_runs/tlab-mi-e4-score/` | the 48-feature run: endpoint summary and paired table |
 | `results/kaggle_runs/tlab-mi-g-e/` | the conditional-denoiser run |
+| `results/kaggle_runs/tlab-mi-layer10/` | the layer-10 replication: anatomy at layer 10 and its `d̄` cosine against layer 7 |
+| `results/kaggle_runs/tlab-mi-e3/` | the round-four feature selection and the first `dir_r4` training log |
 | `results/kaggle_runs/tlab-mi-layer4/` | the diverged layer-4 run |
 
 ## Publishing the checkpoint
 
 `artifacts/` holds `direction_correction.pt` (the round-2 correction, identical to
-`checkpoints/dir_hot.pt`), `denoiser.pt`, `config.json`, `model.py` (a standalone loader) and the
-model card. Publishing to Hugging Face is a manual step under the owner's account:
+`checkpoints/dir_hot.pt`), `dir_ent.pt` (the entropy-penalized variant), `denoiser.pt`,
+`config.json`, `model.py` (a standalone loader) and the model card. Publishing to Hugging Face is a manual step under the owner's account:
 
 ```
 hf auth login
