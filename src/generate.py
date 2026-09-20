@@ -21,8 +21,10 @@ from common import (
     HOOK,
     RESULTS,
     ROOT,
+    SHARED_DIRECTION,
     ActStats,
     load_ceilings,
+    load_features,
     load_model,
     load_sae,
     natural_strength,
@@ -40,6 +42,35 @@ def load_prompts(model, path: Path = DATA / "prompts.json", want_len: int = 8) -
     if not keep:
         raise RuntimeError("no prompt round-trips to the requested token length")
     return keep
+
+
+def load_expA_config() -> dict:
+    """expA.yaml hyper-parameters, with defaults when the sweep hasn't written it yet."""
+    path = CONFIGS / "expA.yaml"
+    cfg = yaml.safe_load(path.read_text(encoding="utf-8")) if path.exists() else None
+    cfg = dict(cfg or {})
+    cfg.setdefault("kappa_shared", 1.0)
+    cfg.setdefault("kappa_anti", 1.0)
+    return cfg
+
+
+def lookup_concept_mu(blob: dict, feat_idx: int) -> torch.Tensor:
+    """mu_f for a feature: eval_mu if it was mined as a held-out eval latent, else the fit-pool mu.
+
+    Same fallback order as denoiser_cond._lookup_mu.
+    """
+    eval_features = blob["eval_features"]
+    hit = (eval_features == feat_idx).nonzero(as_tuple=True)[0]
+    if hit.numel() > 0:
+        return blob["eval_mu"][hit[0]]
+    features = blob["features"]
+    hit = (features == feat_idx).nonzero(as_tuple=True)[0]
+    if hit.numel() > 0:
+        return blob["mu"][hit[0]]
+    raise ValueError(
+        f"feature {feat_idx} has no mu_f in data/concept_stats.pt (checked eval_features and "
+        "features); mine it with concept_data.py or add the feature to configs/features.yaml first"
+    )
 
 
 def build_arms(names: list[str], model, sae, stats: ActStats, frozen: dict) -> dict:
@@ -89,6 +120,34 @@ def build_arms(names: list[str], model, sae, stats: ActStats, frozen: dict) -> d
             arms[name] = ("per_feature", "mts")
         elif name == "fsr":
             arms[name] = ("per_feature", "fsr")
+        elif name in ("diffmeans", "diffmeans_purified"):
+            arms[name] = ("per_feature", name)
+        elif name == "rotate":
+            arms[name] = S.RotateArm()
+        elif name in ("shared", "residual", "antimanifold", "shared_only", "centred", "purified"):
+            expA = load_expA_config()
+            d_bar = torch.load(SHARED_DIRECTION, map_location=DEVICE)["d_bar"].to(DEVICE).float()
+            if name == "shared":
+                arms[name] = S.SharedDirectionArm(d_bar=d_bar, kappa=float(expA["kappa_shared"]))
+            elif name == "shared_only":
+                arms[name] = S.SharedOnlyArm(d_bar=d_bar)
+            elif name == "purified":
+                arms[name] = S.PurifiedArm(d_bar=d_bar)
+            elif name == "centred":
+                arms[name] = S.CentredArm(mu_hat=stats.mean / stats.mean.norm().clamp_min(1e-6))
+            elif name == "residual":
+                from train_direction import load_correction
+
+                arms[name] = S.ResidualDirectionArm(
+                    correction=load_correction(ROOT / "checkpoints" / f"{frozen['direction']}.pt"),
+                    d_bar=d_bar,
+                )
+            else:  # antimanifold
+                arms[name] = S.AntiManifoldArm(
+                    cov=stats.shrunk_cov(frozen["shrink"]).to(DEVICE), kappa=float(expA["kappa_anti"])
+                )
+        elif name in ("cond_wiener", "cond_denoise"):
+            arms[name] = ("per_feature", name)
         else:
             raise ValueError(name)
     return arms
@@ -107,6 +166,35 @@ def resolve_per_feature(tag: str, sae, stats, frozen, v_hat, feat_idx):
         exempt = (w @ v_hat).abs() > frozen["fsr_exempt_cos"]
         exempt[feat_idx] = True
         return S.FeatureSurgeryArm(sae=sae, ceiling=ceiling, exempt=exempt, k=frozen["fsr_k"])
+    if tag == "cond_wiener":
+        from denoiser_cond import ConditionalWienerArm
+
+        return ConditionalWienerArm.load(DATA / "concept_stats.pt", stats, feat_idx, v_hat, lam=frozen.get("cond_lam", 1.0))
+    if tag == "cond_denoise":
+        from denoiser_cond import ConditionalDenoiserArm
+
+        return ConditionalDenoiserArm.load(
+            ROOT / "checkpoints" / f"{frozen.get('cond_denoiser', 'cond_mlp_s0')}.pt",
+            stats,
+            feat_idx,
+            v_hat,
+            eta=frozen.get("cond_eta", 1.0),
+        )
+    if tag == "diffmeans":
+        blob = torch.load(DATA / "concept_stats.pt", map_location=DEVICE)
+        mu_f = lookup_concept_mu(blob, feat_idx).to(device=DEVICE, dtype=torch.float32)
+        u = mu_f - stats.mean
+        u = u / u.norm().clamp_min(1e-6)
+        return S.DiffMeansArm(u=u)
+    if tag == "diffmeans_purified":
+        blob = torch.load(DATA / "concept_stats.pt", map_location=DEVICE)
+        mu_f = lookup_concept_mu(blob, feat_idx).to(device=DEVICE, dtype=torch.float32)
+        u_dm = mu_f - stats.mean
+        u_dm = u_dm / u_dm.norm().clamp_min(1e-6)
+        d_bar = torch.load(SHARED_DIRECTION, map_location=DEVICE)["d_bar"].to(DEVICE).float()
+        u = u_dm - (u_dm @ d_bar) * d_bar
+        u = u / u.norm().clamp_min(1e-6)
+        return S.DiffMeansPurifiedArm(u=u)
     raise ValueError(tag)
 
 
@@ -120,11 +208,11 @@ def run(args) -> None:
     for kv in args.set or []:
         k, v = kv.split("=", 1)
         frozen[k] = yaml.safe_load(v)
-    feats = yaml.safe_load((CONFIGS / "features.yaml").read_text(encoding="utf-8"))[args.split]
+    feats = load_features(args.split)
     if args.max_features:
         feats = feats[: args.max_features]
 
-    prompts = load_prompts(model)[: args.n_prompts]
+    prompts = load_prompts(model, path=Path(args.prompts))[: args.n_prompts]
     grid = [float(c) for c in args.c_grid.split(",")]
     arms = build_arms(args.arms.split(","), model, sae, stats, frozen)
     state = HookState()
@@ -194,7 +282,7 @@ def run(args) -> None:
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
-    ap.add_argument("--split", default="test", choices=["test", "dev", "test_r3"])
+    ap.add_argument("--split", default="test", choices=["test", "dev", "test_r3", "test_r4"])
     ap.add_argument("--arms", default="clean,naive,norm_preserving,denoise_naive,cds,mts,fsr")
     # strength in units of the latent's own natural ceiling, not of the global activation norm
     ap.add_argument("--c-grid", dest="c_grid", default="0,0.5,1.0,1.5,2.0,3.0,4.0")
@@ -206,6 +294,7 @@ if __name__ == "__main__":
     ap.add_argument("--max-features", dest="max_features", type=int, default=0)
     ap.add_argument("--seed", type=int, default=0)
     ap.add_argument("--out", default="gen_test.jsonl")
+    ap.add_argument("--prompts", default=str(DATA / "prompts.json"))
     ap.add_argument(
         "--set",
         action="append",

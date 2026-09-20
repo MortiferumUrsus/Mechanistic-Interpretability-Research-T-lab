@@ -18,9 +18,9 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 
-# direction_correction.pt is the round-2 method and the best artefact; the denoiser is included because the
-# round-1 arms are reported against it and the card describes both.
-FILES = ("direction_correction.pt", "denoiser.pt", "model.py", "README.md", "config.json")
+# direction_correction.pt is the round-2 method and the published artefact; dir_ent.pt is its entropy-penalised
+# variant (round 4); the denoiser is included because the round-1 arms are reported against it and the card describes all three.
+FILES = ("direction_correction.pt", "dir_ent.pt", "denoiser.pt", "model.py", "README.md", "README.ru.md", "config.json")
 
 
 def main() -> None:

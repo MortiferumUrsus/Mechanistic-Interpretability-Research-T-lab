@@ -24,7 +24,8 @@ import torch.nn.functional as F
 
 from common import CKPT, DATA, DEVICE, HOOK, RESULTS, ActStats, load_model, load_sae, seed_all
 
-LAYER = 6  # intervention after block 6; the frozen suffix is blocks 7..11
+from common import HOOK as _HOOK
+LAYER = int(_HOOK.split(".")[1])  # intervention after this block; the frozen suffix is the blocks after it
 
 
 class Repair(nn.Module):

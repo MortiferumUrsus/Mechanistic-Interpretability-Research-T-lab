@@ -1,0 +1,67 @@
+{
+ "queue": [
+  {
+   "item": "expG:mine",
+   "status": "ok",
+   "minutes": 1.64
+  },
+  {
+   "item": "expG:pairs_check",
+   "status": "ok",
+   "minutes": 0.34
+  },
+  {
+   "item": "expG:wiener",
+   "status": "ok",
+   "minutes": 4.75
+  },
+  {
+   "item": "expG:train",
+   "status": "ok",
+   "minutes": 5.59
+  },
+  {
+   "item": "expG:learned",
+   "status": "ok",
+   "minutes": 4.67
+  },
+  {
+   "item": "expG:note",
+   "status": "ok",
+   "minutes": 0.05
+  },
+  {
+   "item": "expE:prompts",
+   "status": "ok",
+   "minutes": 0.45
+  },
+  {
+   "item": "expE:select",
+   "status": "ok",
+   "minutes": 0.05
+  },
+  {
+   "item": "expE:retrain",
+   "status": "ok",
+   "minutes": 5.1
+  },
+  {
+   "item": "expE:gen",
+   "status": "ok",
+   "minutes": 0.42
+  },
+  {
+   "item": "expE:score",
+   "status": "ok",
+   "minutes": 0.0
+  },
+  {
+   "item": "expE:note",
+   "status": "ok",
+   "minutes": 0.01
+  }
+ ],
+ "total_minutes": 23.07,
+ "total_hours": 0.38,
+ "session_limit_hours": 12.0
+}

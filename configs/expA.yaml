@@ -1,0 +1,8 @@
+# Blend weights of the `shared` arm (normalise(v_hat + kappa_shared * d_bar)) and of the `antimanifold` arm.
+# Provenance: the DEV sweep in scripts/run_expA.py chose 0.75 for both, and the run that produced
+# results/scored_expA_r3.csv, results/direction_report.csv and results/qq_*.csv used 0.75. The later run
+# behind results/scored_expF_r3.csv, capability_sweep.csv and layer_profile.csv ran with the defaults
+# below (1.0), because the sweep's choice lived only in that kernel's output. The report states the value
+# next to every table; results/scored_expF_kappa.csv shows the dependence on kappa for the `shared` arm.
+kappa_shared: 1.0
+kappa_anti: 1.0

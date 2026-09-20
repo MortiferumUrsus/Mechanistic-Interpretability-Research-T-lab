@@ -1,0 +1,52 @@
+{
+ "queue": [
+  {
+   "item": "layer:prep",
+   "status": "ok",
+   "minutes": 0.11
+  },
+  {
+   "item": "layer:verify",
+   "status": "ok",
+   "minutes": 1.64
+  },
+  {
+   "item": "layer:dump",
+   "status": "ok",
+   "minutes": 4.23
+  },
+  {
+   "item": "layer:prompts",
+   "status": "ok",
+   "minutes": 0.0
+  },
+  {
+   "item": "layer:select",
+   "status": "ok",
+   "minutes": 1.38
+  },
+  {
+   "item": "layer:train_dir",
+   "status": "ok",
+   "minutes": 5.41
+  },
+  {
+   "item": "layer:anatomy",
+   "status": "ok",
+   "minutes": 0.26
+  },
+  {
+   "item": "layer:gen",
+   "status": "ok",
+   "minutes": 0.48
+  },
+  {
+   "item": "layer:note",
+   "status": "ok",
+   "minutes": 0.01
+  }
+ ],
+ "total_minutes": 13.52,
+ "total_hours": 0.23,
+ "session_limit_hours": 12.0
+}

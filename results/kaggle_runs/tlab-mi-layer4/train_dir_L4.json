@@ -1,0 +1,63 @@
+{
+  "name": "dir_L4",
+  "n_params": 98304,
+  "minutes": 4.95,
+  "log": [
+    {
+      "step": 250,
+      "loss": NaN,
+      "a_rel": NaN,
+      "c_rel": NaN,
+      "cos": NaN
+    },
+    {
+      "step": 500,
+      "loss": NaN,
+      "a_rel": NaN,
+      "c_rel": NaN,
+      "cos": NaN
+    },
+    {
+      "step": 750,
+      "loss": NaN,
+      "a_rel": NaN,
+      "c_rel": NaN,
+      "cos": NaN
+    },
+    {
+      "step": 1000,
+      "loss": NaN,
+      "a_rel": NaN,
+      "c_rel": NaN,
+      "cos": NaN
+    },
+    {
+      "step": 1250,
+      "loss": NaN,
+      "a_rel": NaN,
+      "c_rel": NaN,
+      "cos": NaN
+    },
+    {
+      "step": 1500,
+      "loss": NaN,
+      "a_rel": NaN,
+      "c_rel": NaN,
+      "cos": NaN
+    },
+    {
+      "step": 1750,
+      "loss": NaN,
+      "a_rel": NaN,
+      "c_rel": NaN,
+      "cos": NaN
+    },
+    {
+      "step": 2000,
+      "loss": NaN,
+      "a_rel": NaN,
+      "c_rel": NaN,
+      "cos": NaN
+    }
+  ]
+}

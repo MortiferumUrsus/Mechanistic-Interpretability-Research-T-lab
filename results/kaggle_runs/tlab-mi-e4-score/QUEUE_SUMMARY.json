@@ -1,0 +1,17 @@
+{
+ "queue": [
+  {
+   "item": "expE:score",
+   "status": "ok",
+   "minutes": 25.5
+  },
+  {
+   "item": "expE:note",
+   "status": "ok",
+   "minutes": 0.01
+  }
+ ],
+ "total_minutes": 25.51,
+ "total_hours": 0.43,
+ "session_limit_hours": 12.0
+}

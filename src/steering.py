@@ -226,6 +226,192 @@ class FeatureSurgeryArm:
         }
 
 
+@dataclass
+class SharedDirectionArm:
+    """Blend the feature direction with one direction shared across every FIT latent.
+
+    `d_bar` is the mean, over all FIT features, of how the trained direction correction nudges v_hat
+    (see anatomy.py, checkpoints/shared_direction.pt). Injecting `normalize(v_hat + kappa * d_bar)` at the naive
+    norm asks how much of the correction's benefit, if any, is explained by that single shared component
+    rather than by a per-feature adjustment.
+    """
+
+    d_bar: torch.Tensor
+    kappa: float = 1.0
+
+    def __call__(self, h: torch.Tensor, v_hat: torch.Tensor, s: float) -> torch.Tensor:
+        w = v_hat + self.kappa * self.d_bar
+        w = w / w.norm().clamp_min(1e-6)
+        return h + s * w
+
+
+@dataclass
+class ResidualDirectionArm:
+    """The trained correction with its shared component removed, isolating the per-feature part.
+
+    `delta = M v_hat` is what the trained correction would add to v; subtracting its projection onto
+    `d_bar` leaves only the part of the correction specific to this feature. Comparing this arm to
+    `shared` and to `dirfix` (CorrectedDirectionArm) separates how much of the correction's effect is the
+    shared direction versus a genuinely per-feature one.
+    """
+
+    correction: torch.nn.Module
+    d_bar: torch.Tensor
+    cache: dict = field(default_factory=dict)
+
+    def _w(self, v_hat: torch.Tensor) -> torch.Tensor:
+        # Same cache discipline as CorrectedDirectionArm, and for the same reason: see the comment there.
+        key = id(v_hat)
+        hit = self.cache.get(key)
+        if hit is not None and hit[0] is v_hat:
+            return hit[1]
+        with torch.no_grad():
+            delta = self.correction.up(self.correction.down(v_hat))
+        delta_perp = delta - (delta @ self.d_bar) * self.d_bar
+        w = v_hat + delta_perp
+        w = w / w.norm().clamp_min(1e-6)
+        self.cache[key] = (v_hat, w)
+        return w
+
+    def __call__(self, h: torch.Tensor, v_hat: torch.Tensor, s: float) -> torch.Tensor:
+        if s == 0.0:
+            return h
+        return h + s * self._w(v_hat)
+
+
+@dataclass
+class AntiManifoldArm:
+    """Steer along the direction the inverse activation covariance assigns to v_hat.
+
+    `u = normalize(Sigma^-1 v_hat)` weights components inversely to how much the activation distribution
+    varies along them -- the opposite emphasis from TransportedArm's `Sigma v` (which leans into
+    high-variance directions to match the concept coordinate cheaply). Blending it in at weight `kappa` is
+    a control for whether pointing away from the natural activation manifold helps or hurts.
+    """
+
+    cov: torch.Tensor  # already shrunk, [d_model, d_model]
+    kappa: float = 1.0
+    cache: dict = field(default_factory=dict)
+
+    def _w(self, v_hat: torch.Tensor) -> torch.Tensor:
+        # Same cache discipline as CorrectedDirectionArm, and for the same reason: see the comment there.
+        key = id(v_hat)
+        hit = self.cache.get(key)
+        if hit is not None and hit[0] is v_hat:
+            return hit[1]
+        sol = torch.linalg.solve(self.cov.double(), v_hat.double())
+        u = (sol / sol.norm().clamp_min(1e-9)).float()
+        w = v_hat + self.kappa * u
+        w = w / w.norm().clamp_min(1e-6)
+        self.cache[key] = (v_hat, w)
+        return w
+
+    def __call__(self, h: torch.Tensor, v_hat: torch.Tensor, s: float) -> torch.Tensor:
+        if s == 0.0:
+            return h
+        return h + s * self._w(v_hat)
+
+
+@dataclass
+class SharedOnlyArm:
+    """Control: inject the shared direction alone, with no feature direction at all.
+
+    Isolates how much of any `shared`/`residual` gain comes from d_bar by itself versus from combining
+    it with the feature's own direction.
+    """
+
+    d_bar: torch.Tensor
+
+    def __call__(self, h: torch.Tensor, v_hat: torch.Tensor, s: float) -> torch.Tensor:
+        return h + s * self.d_bar
+
+
+@dataclass
+class DiffMeansArm:
+    """Difference-of-means direction: normalize(mu_f - mu) for one feature.
+
+    `mu_f` is the mean activation while the feature is active (data/concept_stats.pt, mined by
+    concept_data.py); `mu` is the corpus-wide mean (ActStats.mean). This is the standard
+    "diff-of-means" direction used in Persona Vectors / CAA, as an alternative to the SAE decoder
+    column. `u` is fixed per feature and computed by the caller (generate.py), so this arm ignores
+    the `v_hat` passed at call time.
+    """
+
+    u: torch.Tensor  # unit direction, precomputed per feature
+
+    def __call__(self, h: torch.Tensor, v_hat: torch.Tensor, s: float) -> torch.Tensor:
+        return h + s * self.u
+
+
+@dataclass
+class CentredArm:
+    """Decoder direction with its component along the mean activation removed.
+
+    u = normalize(v_hat - (v_hat . mu_hat) mu_hat), mu_hat = normalize(ActStats.mean). The
+    mean-centring motif from Jorgensen et al. 2023, applied to the SAE decoder column. Recomputed
+    from `v_hat` on every call since one arm instance is reused across every feature in a run.
+    """
+
+    mu_hat: torch.Tensor  # unit corpus-mean direction
+
+    def __call__(self, h: torch.Tensor, v_hat: torch.Tensor, s: float) -> torch.Tensor:
+        u = v_hat - (v_hat @ self.mu_hat) * self.mu_hat
+        u = u / u.norm().clamp_min(1e-6)
+        return h + s * u
+
+
+@dataclass
+class PurifiedArm:
+    """Decoder direction with its component along the shared confidence direction removed.
+
+    u = normalize(v_hat - (v_hat . d_bar) d_bar). `d_bar` is the shared component of the trained
+    direction correction (anatomy.py, checkpoints/shared_direction.pt), identified as a confidence
+    regulator rather than a concept-specific direction; this strips it out of the raw decoder
+    column instead of blending it in (contrast with SharedDirectionArm).
+    """
+
+    d_bar: torch.Tensor
+
+    def __call__(self, h: torch.Tensor, v_hat: torch.Tensor, s: float) -> torch.Tensor:
+        u = v_hat - (v_hat @ self.d_bar) * self.d_bar
+        u = u / u.norm().clamp_min(1e-6)
+        return h + s * u
+
+
+@dataclass
+class DiffMeansPurifiedArm:
+    """Diff-of-means direction with its shared confidence component removed.
+
+    u = normalize(u_dm - (u_dm . d_bar) d_bar), where u_dm is the DiffMeansArm direction for this
+    feature. Same purification as PurifiedArm, applied to the diff-of-means direction instead of
+    the decoder column. `u` is precomputed per feature by the caller.
+    """
+
+    u: torch.Tensor  # already-purified unit direction, precomputed per feature
+
+    def __call__(self, h: torch.Tensor, v_hat: torch.Tensor, s: float) -> torch.Tensor:
+        return h + s * self.u
+
+
+@dataclass
+class RotateArm:
+    """Norm-preserving rotation instead of additive injection.
+
+    Rotates h within the plane spanned by h and v_hat, by exactly the angle that makes the chord
+    length ||h' - h|| equal to s -- so this arm is comparable to the additive arms at matched
+    perturbation norm, without ever changing ||h||. Per-row: broadcasts over any leading
+    batch/seq axes, the last axis is d_model.
+    """
+
+    def __call__(self, h: torch.Tensor, v_hat: torch.Tensor, s: float) -> torch.Tensor:
+        h_norm = h.norm(dim=-1, keepdim=True)
+        h_hat = h / h_norm.clamp_min(1e-6)
+        v_perp = v_hat - (h_hat * v_hat).sum(-1, keepdim=True) * h_hat
+        v_perp = v_perp / v_perp.norm(dim=-1, keepdim=True).clamp_min(1e-6)
+        theta = 2.0 * torch.asin((s / (2.0 * h_norm.clamp_min(1e-6))).clamp(0.0, 1.0))
+        return h_norm * (torch.cos(theta) * h_hat + torch.sin(theta) * v_perp)
+
+
 def apply_masked(fn: Intervention, h: torch.Tensor, v_hat: torch.Tensor, s: float) -> torch.Tensor:
     """Apply an arm to a [batch, seq, d] tensor, leaving the first SKIP_POS positions alone.
 

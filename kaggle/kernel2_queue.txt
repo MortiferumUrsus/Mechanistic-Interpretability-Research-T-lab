@@ -1,0 +1,1 @@
+expG:mine,expG:pairs_check,expG:wiener,expG:train,expG:learned,expG:note,expE:prompts,expE:select,expE:retrain,expE:gen,expE:score,expE:note

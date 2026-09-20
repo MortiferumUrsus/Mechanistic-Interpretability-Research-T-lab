@@ -1,0 +1,3 @@
+arm,n_cells,n_features,d_logppl,logppl_lo95,logppl_hi95,d_concept,concept_lo95,concept_hi95,p_dominates
+shared,192,48,-2.474,-2.839,-2.09,0.4112,0.3194,0.4993,1
+dirfix,192,48,-1.235,-1.599,-0.896,0.3149,0.2335,0.3999,1
