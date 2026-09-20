@@ -24,15 +24,16 @@
    до 0.776 и воспроизводится на 12 отложенных признаках и на 48 свежих (§9, §10.8).
 3. **Её выигрыш по перплексии на сгенерированном тексте в основном артефакт.** Половина поправки —
    одно общее направление, которое снижает энтропию следующего токена модели. Инжектированное
-   отдельно, оно воспроизводит весь выигрыш по Pythia log-PPL при нулевом концепте и при этом
-   ухудшает предсказание настоящего текста моделью. Перплексия генераций под внешней
-   моделью-оценщиком не является мерой связности, если интервенция способна менять уверенность
-   модели (§10.2–§10.6).
+   отдельно, оно снижает Pythia log-PPL сильнее, чем полная поправка, при нулевом концепте и при
+   этом ухудшает предсказание настоящего текста моделью; приставленное к столбцу декодера вообще
+   без обучения, оно доставляет столько же концепта, сколько обученная поправка, или больше.
+   Перплексия генераций под внешней моделью-оценщиком не является мерой связности, если интервенция
+   способна менять уверенность модели (§10.2–§10.6).
 4. **На настоящем тексте при равной доставке концепта обученная поправка всё же стоит дешевле
-   наивного стиринга** — на 0.1–0.6 ната NLL при teacher forcing, в зависимости от того, как сшиты
+   наивного стиринга** — на 0.07–0.6 ната NLL при teacher forcing, в зависимости от того, как сшиты
    две кривые, и с широкими интервалами: измерение (четыре признака) устанавливает знак, а не
-   величину. Вариант со штрафом на энтропию вдвое уменьшает компоненту уверенности и это сравнение
-   не меняет (§10.6, §10.7).
+   величину. Вариант со штрафом на энтропию уменьшает общую компоненту и оставляет это сравнение в
+   пределах шума (§10.6, §10.7).
 
 ## Постановка
 
@@ -117,7 +118,7 @@ cd src
 python activations.py verify
 python activations.py dump --n-tokens 2000000 --batch-size 16
 python activations.py prompts --n-prompts 40 --prompt-len 8
-python sae_stats.py --chunk 2048
+python sae_stats.py --chunk 4096
 
 # отбор признаков и разбиение FIT / DEV / TEST
 python features.py select --seed 0
@@ -129,6 +130,7 @@ python train_denoiser.py --arch linear --noise mix --cond 0 --seed 0 --steps 600
 
 # все инференс-ручки выбираются на DEV, без генерации
 python sweep_dev.py
+python select_from_dev.py         # пишет configs/frozen.yaml по DEV-оценкам; TEST генерируется только после этого
 
 # один проход на TEST с замороженными ручками
 python generate.py --split test --out gen_test.jsonl
@@ -141,6 +143,8 @@ python analysis.py spectral
 python analysis.py surgery
 python analysis.py causal --lam 1.5 --shrink 0.01
 python analysis.py predictors
+python plots.py --scored scored_test.csv --concept keyword_hit   # results/fig_*.png, встроены в отчёт
+python make_html.py                                             # REPORT.md -> report.html
 python dirfix_vs_naive.py       # A/C и перплексия в одной таблице, её цитирует §9.1 отчёта
 python report_numbers_check.py  # каждое число отчёта должно быть в файле, на который ссылается его абзац
 ```
@@ -161,14 +165,22 @@ cd src
 python anatomy.py --ckpt dir_hot                # общее направление d̄ -> checkpoints/shared_direction.pt, таблицы анатомии
 python direction_report.py                      # диагностика по развёртке для каждого семейства направлений
 python qq_test.py --n-docs 500 --ctx 512 --c 1.0 --features 3 --split test_r3 --out-prefix qq
-python generate.py --split test_r3 --arms naive,dirfix,shared,shared_only,residual,antimanifold --out gen_expA_r3.jsonl
-python generate.py --split test_r3 --arms naive,dirfix,shared,diffmeans,centred,purified,diffmeans_purified,rotate --out gen_expF_r3.jsonl
-python capability_sweep.py                      # NLL и top-1 на настоящем тексте под стиринг-хуком
-python matched_concept_capability.py            # повреждение настоящего текста при равной доставке концепта
+python generate.py --split test_r3 --arms naive,dirfix,shared,shared_only,residual,antimanifold --c-grid 0,0.5,1.0,1.5,2.0,3.0,4.0,5.0 --out gen_expA_r3.jsonl
+python concept_data.py mine                     # data/concept_positions.npz
+python concept_data.py stats                    # data/concept_stats.pt, нужен плечам diffmeans
+python generate.py --split test_r3 --arms naive,dirfix,shared,diffmeans,centred,purified,diffmeans_purified,rotate --c-grid 0,0.5,1.0,1.5,2.0,3.0 --out gen_expF_r3.jsonl
+python capability_sweep.py                      # NLL и top-1 на настоящем тексте под стиринг-хуком -> capability_sweep.csv
+python capability_sweep.py --set direction=dir_ent --out capability_ent.csv
+python capability_sweep.py --arms shared --out capability_kappa_0.25.csv   # после установки kappa_shared: 0.25 в configs/expA.yaml (и так же для 0.5)
+python matched_concept_capability.py --bootstrap 2000            # повреждение настоящего текста при равной доставке концепта
+python matched_concept_capability.py --first-n-features 4 --bootstrap 2000 --out matched_concept_capability_4feat.csv
+python matched_concept_capability.py --scored scored_expF_ent_clean.csv --capability capability_ent.csv --arm-map dirfix=dir_ent --bootstrap 2000 --out matched_concept_capability_ent.csv
+python paired_by_strength.py --scored scored_expA_r3.csv --out paired_expA_r3_by_strength.csv
+python dbar_cosines.py                          # results/shared_direction_cosines.csv
 python matched_repetition.py --scored scored_expF_r3.csv --out-prefix matchedF
 python feature_distribution.py --scored scored_expF_r3.csv --out-prefix featdistF
 python layer_profile.py                         # норма по слоям, проекция на d̄, энтропия на выходе
-python train_direction_ent.py train --rank 64 --steps 2000 --name dir_ent --ent-weight 1.0
+python train_direction_ent.py train --rank 64 --gamma 1.0 --lr 3e-3 --steps 2000 --name dir_ent --ent-weight 1.0
 python anatomy.py --ckpt dir_ent --tag _ent
 python select_round4.py --seed 4242 --n 48      # пишет configs/features_r4.yaml; features.yaml заморожен
 python train_direction.py train --rank 64 --gamma 1.0 --lr 3e-3 --steps 2000 --name dir_r4 --exclude-r4
@@ -177,9 +189,10 @@ python train_direction.py train --rank 64 --gamma 1.0 --lr 3e-3 --steps 2000 --n
 `TLAB_LAYER=10` переводит весь конвейер на SAE в `blocks.10.hook_resid_pre`
 (`scripts/run_layer.py --layer 10` проходит всю цепочку на одноразовой копии репозитория).
 
-Проверки, которым не нужен GPU: `python test_arms.py` и `python test_pareto.py` (инварианты плеч и
-машинерии фронта), `python report_numbers_check.py` (каждое число отчёта есть в артефакте, на
-который ссылается его абзац) и валидатор пакета разметки ниже.
+Проверки, которые проходят без GPU на свежем клоне: `python test_pareto.py` (инварианты машинерии
+фронта), `python report_numbers_check.py` (каждое число отчёта есть в артефакте, на который
+ссылается его абзац) и валидатор пакета разметки ниже. `python test_arms.py` проверяет инварианты
+плеч, но ему нужен `data/act_stats.pt`, поэтому он запускается только после `activations.py dump`.
 
 ## Контроль утечки
 
@@ -268,13 +281,16 @@ reviews/                        внешние рецензии на план v1
 | `results/kaggle_runs/tlab-mi-a-d/` | свип по сидам и рангам (`expD_eval_dev.csv`, логи обучения) и анатомия `dir_hot` |
 | `results/kaggle_runs/tlab-mi-e4-score/` | прогон на 48 признаках: сводка по endpoint и парная таблица |
 | `results/kaggle_runs/tlab-mi-g-e/` | прогон условного денойзера |
+| `results/kaggle_runs/tlab-mi-layer10/` | воспроизведение на слое 10: анатомия на слое 10 и косинус её `d̄` с `d̄` слоя 7 |
+| `results/kaggle_runs/tlab-mi-e3/` | отбор признаков раунда 4 и первый лог обучения `dir_r4` |
 | `results/kaggle_runs/tlab-mi-layer4/` | разошедшийся прогон на слое 4 |
 
 ## Публикация чекпойнта
 
 В `artifacts/` лежат `direction_correction.pt` (поправка раунда 2, идентична
-`checkpoints/dir_hot.pt`), `denoiser.pt`, `config.json`, `model.py` (автономный loader) и карточка
-модели. Публикация на Hugging Face — ручной шаг под учётной записью владельца:
+`checkpoints/dir_hot.pt`), `dir_ent.pt` (вариант со штрафом на энтропию), `denoiser.pt`,
+`config.json`, `model.py` (автономный loader) и карточка модели. Публикация на Hugging Face —
+ручной шаг под учётной записью владельца:
 
 ```
 hf auth login
