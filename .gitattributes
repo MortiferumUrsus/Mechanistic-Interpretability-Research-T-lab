@@ -8,3 +8,8 @@ PLAN.md -text
 *.pt -text
 *.png -text
 *.pdf -text
+# The annotation validator hashes these three files as critical sources with the exact bytes they had
+# when the package was frozen (CRLF line endings). Keep them byte-identical on every platform.
+configs/features.yaml -text
+results/gen_r3.jsonl -text
+results/gen_r3_ctrl.jsonl -text
