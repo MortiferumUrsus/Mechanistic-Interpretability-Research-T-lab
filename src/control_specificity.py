@@ -15,7 +15,7 @@ import json
 import pandas as pd
 import yaml
 
-from common import RESULTS, ROOT
+from common import RESULTS, ROOT, load_features
 
 
 def hit(text: str, prompt: str, keywords: list[str]) -> float:
@@ -25,7 +25,7 @@ def hit(text: str, prompt: str, keywords: list[str]) -> float:
 
 
 def main(args) -> None:
-    recs = yaml.safe_load((ROOT / "configs" / "features.yaml").read_text(encoding="utf-8"))[args.split]
+    recs = load_features(args.split)
     kw = {int(r["index"]): [k.lower() for k in r["keywords"]] for r in recs}
     rows = [json.loads(l) for l in (RESULTS / args.gen).open(encoding="utf-8-sig") if l.strip()]
 
@@ -53,6 +53,6 @@ def main(args) -> None:
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--gen", default="gen_dev_r2.jsonl")
-    ap.add_argument("--split", default="test", choices=["test", "dev", "test_r3"])
+    ap.add_argument("--split", default="test", choices=["test", "dev", "test_r3", "test_r4"])
     ap.add_argument("--out", default="control_specificity_dev.csv")
     main(ap.parse_args())

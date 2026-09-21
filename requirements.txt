@@ -1,0 +1,34 @@
+# Runtime dependencies for the SAE-steering pipeline (GPT-2 small).
+#
+# Pins are the versions the reported Kaggle runs installed
+# (see the PIP_INSTALL cell in kaggle/make_kernel.py); the rest follow README.md's
+# install section, which did not pin them. No exact dependency lock was kept, so this
+# is a working recipe, not a bit-for-bit reproduction of the original environment.
+#
+# Install order matters: transformer-lens and sae-lens can replace a CUDA torch build
+# with the CPU one, so install the CUDA build LAST, from the PyTorch index, e.g.
+#   pip install -r requirements.txt
+#   pip install --force-reinstall --no-deps torch torchvision --index-url https://download.pytorch.org/whl/cu126
+# (README.md; the reported runs used a GTX 1660 Ti, sm_75, with the cu126 wheels.)
+
+numpy<2.1
+sae-lens==6.49.1
+transformer-lens==3.7.0
+transformers==5.15.0
+datasets==5.0.1
+matplotlib
+pandas
+scipy
+tqdm
+pyyaml
+
+# torch is intentionally unpinned: install the CUDA build last, from the PyTorch index
+# (see the note above and README.md). On Kaggle the image's own torch is used as-is.
+torch
+
+# Only used by artifacts/push_to_hf.py, to publish the checkpoint to Hugging Face.
+huggingface_hub
+
+# Optional extras, not needed for the pipeline itself:
+#   markdown   # src/make_html.py, to render REPORT.md into report.html
+#   kaggle     # only for kaggle/ (build_payload.py, push.py call `python -m kaggle`)

@@ -10,6 +10,7 @@ import torch
 from tqdm import tqdm
 
 from common import (
+    SAE_ID,
     DATA,
     D_MODEL,
     DEVICE,
@@ -147,9 +148,9 @@ def verify_identity() -> None:
     toks = model.to_tokens(["The Eiffel Tower stands in the heart of the French capital"])
     with torch.no_grad():
         _, cache = model.run_with_cache(
-            toks, names_filter=["blocks.6.hook_resid_post", "blocks.7.hook_resid_pre"]
+            toks, names_filter=[HOOK, SAE_ID]
         )
-    a, b = cache["blocks.6.hook_resid_post"], cache["blocks.7.hook_resid_pre"]
+    a, b = cache[HOOK], cache[SAE_ID]
     print("max abs diff:", (a - b).abs().max().item())
     assert torch.equal(a, b), "hook identity broken"
     print("identity holds")

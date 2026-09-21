@@ -26,7 +26,7 @@ import pandas as pd
 import torch
 from tqdm import tqdm
 
-from common import DEVICE, HOOK, RESULTS, ROOT, load_model, load_sae
+from common import DEVICE, HOOK, RESULTS, ROOT, load_features, load_model, load_sae
 
 SCORER = "EleutherAI/pythia-410m"
 SCORER_ALT = "Qwen/Qwen2.5-0.5B"
@@ -245,7 +245,7 @@ def score_keywords(df: pd.DataFrame, keywords: dict[int, list[str]]) -> np.ndarr
 def load_feature_meta(split: str) -> tuple[dict, dict]:
     import yaml
 
-    recs = yaml.safe_load((ROOT / "configs" / "features.yaml").read_text(encoding="utf-8"))[split]
+    recs = load_features(split)
     kw = {int(r["index"]): [k.lower() for k in r["keywords"]] for r in recs}
     concept = {int(r["index"]): r.get("concept") or ", ".join(r["keywords"][:6]) for r in recs}
     return kw, concept
@@ -299,7 +299,7 @@ if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--gen", default="gen_test.jsonl")
     ap.add_argument("--out", default="scored_test.csv")
-    ap.add_argument("--split", default="test", choices=["test", "dev", "test_r3"])
+    ap.add_argument("--split", default="test", choices=["test", "dev", "test_r3", "test_r4"])
     ap.add_argument("--stages", default="ppl,keyword,sae,dist")
     ap.add_argument("--batch", type=int, default=32)
     ap.add_argument("--judge-batch", dest="judge_batch", type=int, default=16)

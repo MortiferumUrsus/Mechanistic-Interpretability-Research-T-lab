@@ -69,8 +69,10 @@ def main(args) -> None:
     body = embed_images(body, src.parent)
     title = next((l.lstrip("# ").strip() for l in text.splitlines() if l.startswith("# ")), args.src)
     out = ROOT / args.out
+    # The language attribute follows the source file: REPORT.ru.md -> ru, everything else -> en.
+    lang = "ru" if Path(args.src).name.endswith(".ru.md") else "en"
     out.write_text(
-        "<!doctype html><html lang=ru><head><meta charset=utf-8>"
+        f"<!doctype html><html lang={lang}><head><meta charset=utf-8>"
         '<meta name=viewport content="width=device-width,initial-scale=1">'
         f"<title>{title}</title><style>{CSS}</style></head><body><main>{body}</main></body></html>",
         encoding="utf-8",

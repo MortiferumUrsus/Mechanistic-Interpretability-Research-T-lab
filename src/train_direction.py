@@ -33,6 +33,7 @@ from common import (
     SKIP_POS,
     ActStats,
     load_ceilings,
+    load_features,
     load_model,
     load_sae,
     natural_strength,
@@ -84,6 +85,51 @@ def train(args) -> None:
         fit = keep
     else:
         print("no round-three holdout found; the correction trains on the whole fit pool")
+
+    # Round four is 48 fresh features on disjoint prompts (see select_round4.py); the same
+    # unconditional-exclusion argument as round three applies, plus a buffer: any remaining FIT
+    # direction whose decoder cosine to ANY round-four direction is >= 0.3 is dropped too, the same
+    # gate `features.fit_indices` applies for test/dev, so the pool stays decorrelated from the new
+    # split and not just disjoint from it. Computed in chunks so the (|fit| x |test_r4|) cosine
+    # matrix is never materialised in one shot.
+    # The exclusion is opt-in (`--exclude-r4`): round two and round three checkpoints (dir_hot) were
+    # trained before round four existed, and re-running their scripts must keep reproducing them even
+    # though configs/features_r4.yaml is now present. The indices come from data/splits_r4.npz when
+    # select_round4.py has just written it, and from configs/features_r4.yaml otherwise.
+    r4_path = DATA / "splits_r4.npz"
+    if args.exclude_r4:
+        if r4_path.exists():
+            r4_holdout = sorted(int(x) for x in np.load(r4_path)["test_r4"])
+        else:
+            r4_holdout = sorted(int(rec["index"]) for rec in load_features().get("test_r4", []))
+            if not r4_holdout:
+                raise SystemExit("--exclude-r4 given but neither data/splits_r4.npz nor configs/features_r4.yaml defines test_r4")
+        keep = np.array([f for f in fit if int(f) not in r4_holdout], dtype=fit.dtype)
+        if len(keep) == len(fit):
+            raise SystemExit(
+                f"{r4_path.name} exists but none of its features are in `fit`; round four would not "
+                "be held out from this checkpoint. Re-select it from `fit`."
+            )
+        print(f"fit pool {len(fit)} minus the round-four holdout {len(fit) - len(keep)} -> {len(keep)}")
+
+        w_dec = sae.W_dec.detach().float()
+        vh = w_dec / w_dec.norm(dim=-1, keepdim=True).clamp_min(1e-6)
+        r4_v = vh[torch.as_tensor(r4_holdout, device=DEVICE, dtype=torch.long)]
+        keep_t = torch.as_tensor(keep, device=DEVICE, dtype=torch.long)
+        keep_mask = torch.zeros(keep_t.shape[0], dtype=torch.bool, device=DEVICE)
+        buffer_chunk = 2048
+        for i in range(0, keep_t.shape[0], buffer_chunk):
+            block = vh[keep_t[i : i + buffer_chunk]]
+            cos = (block @ r4_v.T).abs().max(dim=1).values
+            keep_mask[i : i + buffer_chunk] = cos < 0.3
+        n_before = keep_t.shape[0]
+        fit = keep_t[keep_mask].cpu().numpy().astype(fit.dtype)
+        print(
+            f"fit pool {n_before} minus {n_before - fit.shape[0]} within |cos| >= 0.3 of the "
+            f"round-four set -> {fit.shape[0]} directions remain in the training pool"
+        )
+    else:
+        print("round-four holdout not excluded (pass --exclude-r4 to hold out test_r4 and its cosine buffer)")
 
     dirs = sae.W_dec[torch.as_tensor(fit, device=DEVICE, dtype=torch.long)].detach().float()
     dirs = dirs / dirs.norm(dim=-1, keepdim=True).clamp_min(1e-6)
@@ -204,7 +250,7 @@ def evaluate(args) -> None:
     del cache
     z0 = suffix(h)[:, SKIP_POS:]
 
-    recs = yaml.safe_load((ROOT / "configs" / "features.yaml").read_text(encoding="utf-8"))[args.split]
+    recs = load_features(args.split)
     rows = []
     for name in args.checkpoints.split(","):
         corr = load_correction(CKPT / f"{name}.pt")
@@ -279,6 +325,13 @@ if __name__ == "__main__":
     ap.add_argument("--log-every", dest="log_every", type=int, default=250)
     ap.add_argument("--seed", type=int, default=0)
     ap.add_argument("--name", default=None)
+    ap.add_argument(
+        "--exclude-r4",
+        dest="exclude_r4",
+        action="store_true",
+        help="hold out the round-four features (configs/features_r4.yaml or data/splits_r4.npz) and their "
+        "|cos| >= 0.3 buffer from the training pool; used to train dir_r4",
+    )
     a = ap.parse_args()
     if a.stage == "eval":
         evaluate(a)

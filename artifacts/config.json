@@ -28,5 +28,18 @@
   "model": "gpt2-small",
   "hook": "blocks.6.hook_resid_post",
   "sae": "gpt2-small-res-jb/blocks.7.hook_resid_pre",
-  "skip_positions": 2
+  "skip_positions": 2,
+  "direction_correction_entropy_penalised": {
+    "file": "dir_ent.pt",
+    "rank": 64,
+    "gamma": 1.0,
+    "ent_weight": 1.0,
+    "n_params": 98304,
+    "steps": 2000,
+    "c_range": [
+      0.5,
+      2.5
+    ],
+    "eps_c": 0.25
+  }
 }

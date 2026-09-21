@@ -1,0 +1,47 @@
+{
+ "queue": [
+  {
+   "item": "expA:anatomy",
+   "status": "ok",
+   "minutes": 0.62
+  },
+  {
+   "item": "expA:sweep",
+   "status": "ok",
+   "minutes": 10.35
+  },
+  {
+   "item": "expA:r3",
+   "status": "ok",
+   "minutes": 16.08
+  },
+  {
+   "item": "expA:note",
+   "status": "ok",
+   "minutes": 0.01
+  },
+  {
+   "item": "expD:train",
+   "status": "ok",
+   "minutes": 75.35
+  },
+  {
+   "item": "expD:eval_dev",
+   "status": "ok",
+   "minutes": 0.57
+  },
+  {
+   "item": "expD:gen_r3",
+   "status": "ok",
+   "minutes": 17.27
+  },
+  {
+   "item": "expD:note",
+   "status": "ok",
+   "minutes": 0.01
+  }
+ ],
+ "total_minutes": 120.26,
+ "total_hours": 2.0,
+ "session_limit_hours": 12.0
+}

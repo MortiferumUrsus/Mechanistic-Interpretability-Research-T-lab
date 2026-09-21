@@ -1,0 +1,40 @@
+=== feature 20875 (||W_dec||=1.0000) ===
+  pos 547118: context=' qualcuno butta nel' target_token='el' a_f=36.2087 ||h+||=80.462 ||h-||=69.446 cos(delta,W_dec[f])=1.000000 frac_norm_removed=0.4500
+  pos 1221136: context=' pianeta rosso nel' target_token='el' a_f=35.5995 ||h+||=78.635 ||h-||=68.395 cos(delta,W_dec[f])=1.000000 frac_norm_removed=0.4527
+  pos 93108: context=' lies Saint Pierre and Miquel' target_token='el' a_f=34.5198 ||h+||=78.707 ||h-||=68.191 cos(delta,W_dec[f])=1.000000 frac_norm_removed=0.4386
+  pos 877234: context=' JACQUES MARTEL' target_token='EL' a_f=36.0111 ||h+||=81.848 ||h-||=70.724 cos(delta,W_dec[f])=1.000000 frac_norm_removed=0.4400
+=== feature 1773 (||W_dec||=1.0001) ===
+  pos 706919: context=' have complained about people sitting and lying' target_token=' lying' a_f=9.4732 ||h+||=104.945 ||h-||=103.351 cos(delta,W_dec[f])=1.000000 frac_norm_removed=0.0903
+  pos 450015: context=' has come, the Founders have laid' target_token=' laid' a_f=59.8446 ||h+||=90.741 ||h-||=67.432 cos(delta,W_dec[f])=1.000000 frac_norm_removed=0.6596
+  pos 725757: context=' past few years, the geographical lay' target_token=' lay' a_f=29.4222 ||h+||=89.098 ||h-||=76.947 cos(delta,W_dec[f])=1.000000 frac_norm_removed=0.3303
+  pos 1245025: context='�ll fight any move to lay' target_token=' lay' a_f=46.5549 ||h+||=87.919 ||h-||=71.666 cos(delta,W_dec[f])=1.000000 frac_norm_removed=0.5296
+=== feature 321 (||W_dec||=1.0000) ===
+  pos 683240: context=', että sisä' target_token='ä' a_f=47.1365 ||h+||=82.731 ||h-||=66.124 cos(delta,W_dec[f])=1.000000 frac_norm_removed=0.5698
+  pos 1455581: context='형은 �' target_token='�' a_f=2.7183 ||h+||=98.752 ||h-||=98.256 cos(delta,W_dec[f])=1.000000 frac_norm_removed=0.0275
+  pos 1072816: context='KiK Headquarters in Bö' target_token='ö' a_f=3.3170 ||h+||=104.432 ||h-||=103.557 cos(delta,W_dec[f])=1.000000 frac_norm_removed=0.0318
+  pos 431085: context=' hockey star Mathias Tjä' target_token='ä' a_f=53.5646 ||h+||=94.088 ||h-||=71.995 cos(delta,W_dec[f])=1.000000 frac_norm_removed=0.5693
+=== feature 12613 (||W_dec||=1.0001) ===
+  pos 381851: context=' the club.\n\nThe dich' target_token=' dich' a_f=6.9517 ||h+||=99.840 ||h-||=98.487 cos(delta,W_dec[f])=1.000000 frac_norm_removed=0.0696
+  pos 1132222: context=' Wellington St., Ottawa by Ross Dunn' target_token=' Dunn' a_f=6.5706 ||h+||=99.256 ||h-||=97.830 cos(delta,W_dec[f])=1.000000 frac_norm_removed=0.0662
+  pos 1237457: context=" this device Murray's tears at Dun" target_token=' Dun' a_f=56.1947 ||h+||=93.882 ||h-||=70.531 cos(delta,W_dec[f])=1.000000 frac_norm_removed=0.5987
+  pos 1437919: context='ne, Founder & CEO – Dw' target_token=' Dw' a_f=8.4224 ||h+||=98.735 ||h-||=96.482 cos(delta,W_dec[f])=1.000000 frac_norm_removed=0.0853
+=== feature 7620 (||W_dec||=1.0000) ===
+  pos 8468: context=' 1934 Roy Johnson 1936 Frank Crosett' target_token='sett' a_f=8.7517 ||h+||=79.630 ||h-||=77.889 cos(delta,W_dec[f])=1.000000 frac_norm_removed=0.1099
+  pos 1161900: context=' professional writers and people trying to settle' target_token=' settle' a_f=48.4499 ||h+||=88.533 ||h-||=68.257 cos(delta,W_dec[f])=1.000000 frac_norm_removed=0.5473
+  pos 224420: context=' fully repeal and replace Obamacare is settling' target_token=' settling' a_f=44.5701 ||h+||=89.168 ||h-||=72.736 cos(delta,W_dec[f])=1.000000 frac_norm_removed=0.4999
+  pos 1184412: context=' Systems say they have nearly settled a' target_token=' a' a_f=5.0465 ||h+||=82.800 ||h-||=82.121 cos(delta,W_dec[f])=1.000000 frac_norm_removed=0.0610
+=== feature 6707 (||W_dec||=1.0000) ===
+  pos 948698: context=' بنيام م' target_token=' م' a_f=8.2580 ||h+||=98.607 ||h-||=96.462 cos(delta,W_dec[f])=1.000000 frac_norm_removed=0.0837
+  pos 113227: context=', an ally of the Bharati' target_token='ati' a_f=4.9193 ||h+||=91.374 ||h-||=90.523 cos(delta,W_dec[f])=1.000000 frac_norm_removed=0.0538
+  pos 1423656: context='�ی ترب' target_token='ب' a_f=7.3802 ||h+||=95.391 ||h-||=93.707 cos(delta,W_dec[f])=1.000000 frac_norm_removed=0.0774
+  pos 1100744: context=' Friday said Republicans should just repeal ObamaCare' target_token=' ObamaCare' a_f=3.5303 ||h+||=111.090 ||h-||=110.834 cos(delta,W_dec[f])=1.000000 frac_norm_removed=0.0318
+=== feature 850 (||W_dec||=1.0002) ===
+  pos 1237790: context=', no small burden on school districts' target_token=' districts' a_f=22.3488 ||h+||=96.331 ||h-||=89.446 cos(delta,W_dec[f])=1.000000 frac_norm_removed=0.2320
+  pos 1401312: context='on village in Ahmednagar district' target_token=' district' a_f=29.4895 ||h+||=96.448 ||h-||=86.109 cos(delta,W_dec[f])=1.000000 frac_norm_removed=0.3058
+  pos 808289: context='– for armed formations of particular districts' target_token=' districts' a_f=26.8312 ||h+||=96.332 ||h-||=87.255 cos(delta,W_dec[f])=1.000000 frac_norm_removed=0.2786
+  pos 6730: context=' BSF have been deployed in districts' target_token=' districts' a_f=29.5609 ||h+||=97.772 ||h-||=87.203 cos(delta,W_dec[f])=1.000000 frac_norm_removed=0.3024
+=== feature 15645 (||W_dec||=1.0001) ===
+  pos 322729: context=' made him a full-frontal' target_token='al' a_f=14.5844 ||h+||=77.155 ||h-||=73.736 cos(delta,W_dec[f])=1.000000 frac_norm_removed=0.1890
+  pos 458145: context='saric_Spiral' target_token='al' a_f=10.6952 ||h+||=87.417 ||h-||=84.765 cos(delta,W_dec[f])=1.000000 frac_norm_removed=0.1224
+  pos 1488447: context=' the Class of 2017 Senior Formal' target_token='al' a_f=22.1957 ||h+||=80.072 ||h-||=73.949 cos(delta,W_dec[f])=1.000000 frac_norm_removed=0.2772
+  pos 387494: context=' club.\n\nFutsal' target_token='al' a_f=12.2058 ||h+||=82.933 ||h-||=79.884 cos(delta,W_dec[f])=1.000000 frac_norm_removed=0.1472
