@@ -22,18 +22,18 @@ round four was added after submission.
    (98k parameters), trained on one set of features and applied to others at the same perturbation
    norm, raises the preregistered endpoint on TEST from 0.534 to 0.776 and replicates on 12 held-out
    features and on 48 fresh ones (sections 9, 10.8).
-3. **Its perplexity gain on generated text is largely an artifact.** Half of the correction is one
+3. **Its perplexity gain on generated text is largely an artifact.** Half of the correction, averaged over features, is one
    shared direction that lowers the model's next-token entropy. Injected alone it lowers Pythia
-   log-PPL more than the full correction does, at zero concept, while making the model predict real
-   text worse; attached to the decoder column without any training it delivers as much concept as
+   log-PPL more than the full correction does at strengths up to `c = 2`, with no concept delivered,
+   while making the model predict real text worse; attached to the decoder column without any training it delivers as much concept as
    the learned correction or more.
    Generation perplexity under an external scorer is not a fluency measure once the intervention can
    change the model's confidence (sections 10.2 to 10.6).
 4. **On real text at matched concept delivery the learned correction still costs less than naive
    steering**, by 0.07 to 0.6 nats of teacher-forced negative log-likelihood depending on how the two
    curves are joined, with wide intervals: the measurement (four features) establishes the sign, not
-   the size. An entropy-penalized variant reduces the shared component and leaves that comparison
-   within noise (sections 10.6, 10.7).
+   the size. An entropy-penalized variant reduces the mean shared component and keeps the sign of that
+   comparison (sections 10.6, 10.7).
 
 ## Setup
 

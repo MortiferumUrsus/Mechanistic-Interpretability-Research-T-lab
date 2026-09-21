@@ -30,10 +30,10 @@ at the same perturbation norm: the keyword hit rate of the feature's own vocabul
 and on 48 fresh features. It also lowers the Pythia log-perplexity of the generated text by about 1.1
 to 1.4 nats.
 
-The perplexity gain should not be read as a fluency gain. About half of what the correction adds to
-any feature is a single shared direction that lowers the model's next-token entropy; injected on its
-own, that direction lowers generation perplexity more than the full correction does, with no concept
-delivered, while making the model predict real text worse. A blind audit of generations by a single LLM annotator likewise
+The perplexity gain should not be read as a fluency gain. About half of what the correction adds, averaged over features, is a single shared direction that
+lowers the model's next-token entropy; injected on its own, that direction lowers generation
+perplexity more than the full correction does at strengths up to `c = 2`, with no concept delivered,
+while making the model predict real text worse. A blind audit of generations by a single LLM annotator likewise
 confirms the concept gain but finds more degeneration and no improvement in coherence. Measured on
 held-out real text at matched concept delivery, the correction reduces the damage of steering,
 because it delivers the concept at a lower strength; the size of that reduction (0.07 to 0.6 nats of
@@ -65,8 +65,8 @@ intervention is applied at all positions except the first two, where the norm of
 is an outlier that distorts the scale estimate.
 
 The strength is set as `s = c · max_activation · ‖W_dec[f]‖`, that is, relative to the natural scale
-of the specific feature. The correction was trained for `c ∈ [0.5, 2.5]`. At `c = 0.5` there is no
-improvement; values above `c ≈ 3` were not tested.
+of the specific feature. The correction was trained for `c ∈ [0.5, 2.5]`. At `c = 0.5` there is no improvement; strengths above `c = 3` were tested only in round four (to
+`c = 5`), where every arm's text has degraded.
 
 ## Contents
 

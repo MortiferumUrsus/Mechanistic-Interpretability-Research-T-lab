@@ -50,18 +50,18 @@ random rotation by the same angle does neither (section 9). <strong>Round three<
 12 features held out of the correction's training, and a blind audit by a single LLM annotator
 confirms the concept gain but finds more degeneration and no gain in coherence (sections 9.10 to
 9.10b).</p>
-<p><strong>Round four</strong> takes the correction apart. Half of what it adds, averaged over features, is one shared direction that regulates the model's
-confidence: it lowers next-token entropy, collapses the
+<p><strong>Round four</strong> takes the correction apart. Half of what it adds, averaged over features, is one
+shared direction that regulates the model's confidence: it lowers next-token entropy, collapses the
 final-layer residual norm, and helps the same tokens on real text whichever feature it is attached
-to. Injected on its own it lowers the generation perplexity more than the full correction does, at
-zero concept, and makes the model predict real text worse. Pythia log-PPL of generated text is therefore not a fluency measure in this
-setting, and the round-2 and round-3 controls could not have caught that. What survives is measured
-on text the model did not write. At matched concept delivery the learned correction damages
-real-text prediction less than naive steering, by 0.07 to 0.6 nats depending on how the two curves
-are joined, with wide intervals and only four features on the capability side. The concept gain
-replicates on 48 fresh features and, smaller and feature-dependent, on a second layer, and a
-correction trained with an entropy penalty reduces the shared component and leaves the real-text
-comparison within noise (section 10).</p>
+to. Injected on its own it lowers the generation perplexity more than the full correction does at
+strengths up to <code>c = 2</code>, with no concept delivered, and makes the model predict real text worse.
+Pythia log-PPL of generated text is therefore not a fluency measure in this setting, and the round-2
+and round-3 controls could not have caught that. What survives is measured on text the model did not
+write. At matched concept delivery the learned correction damages real-text prediction less than
+naive steering, by 0.07 to 0.6 nats depending on how the two curves are joined, with wide intervals
+and only four features on the capability side. The concept gain replicates on 48 fresh features and,
+smaller and feature-dependent, on a second layer, and a correction trained with an entropy penalty
+reduces the mean shared component and keeps the sign of the real-text comparison (section 10).</p>
 <hr />
 <h2>1. Problem setup</h2>
 <p>Steering along a direction <code>v</code> from the SAE decoder amplifies a desired property of the model:</p>
@@ -1886,12 +1886,13 @@ continuations in all four runs (<a href="results/r4_identity_at_zero.csv"><code>
 <code>scripts/run_layer.py</code>, kernel scaffolding in <code>kaggle/</code>). Per-kernel logs and queue summaries are in
 <code>results/kaggle_runs/</code>. Two properties of that pipeline affect the results below. First, the drivers
 wrap every stage in <code>try/except</code> so that one failure does not stop a twelve-hour queue; the price is
-that a queue summary can report <code>ok</code> for a stage that produced nothing, which happened twice
-(section 10.9). Second, the <code>shared</code> arm's blend weight <code>κ</code> is not the same across runs: the run
+that a queue summary can report <code>ok</code> for a stage that produced nothing, which happened in two of the three failed attempts of section 10.9. Second, the <code>shared</code> arm's blend weight <code>κ</code> is not the same across runs: the run
 that selected it on DEV and used it for the Q-Q and direction-report diagnostics has <code>κ = 0.75</code>,
 while the later run with the new direction families, the capability sweep and the layer profile has
-<code>κ = 1.0</code>. Every table below states which value it uses; the sweep in section 10.6 shows that the
-conclusions do not depend on the choice.</p>
+<code>κ = 1.0</code>. Every table below states which value it uses; on generated text the two values behave alike
+(<a href="results/scored_expF_kappa.csv"><code>results/scored_expF_kappa.csv</code></a>: at <code>c = 1</code>, log-PPL 3.69 and hit rate
+0.72 for <code>κ = 0.75</code> against 3.36 and 0.73 for <code>κ = 1.0</code>), and no real-text reading exists for
+<code>κ = 0.75</code>.</p>
 <h3>10.1 New arms</h3>
 <p>All arms inject at the naive norm, <code>h + s·u</code> with <code>‖u‖ = 1</code>, so they differ only in <code>u</code>:</p>
 <table>
@@ -1998,14 +1999,14 @@ different features point largely the same way. On the first 2000 FIT directions
 </tr>
 </tbody>
 </table>
-<p>So roughly half of what the correction adds to any feature is one fixed vector, <code>d̄</code>, and the other
-half is feature-specific. The same structure appears in every retraining: the checkpoint retrained
+<p>So roughly half of what the correction adds, averaged over features, is one fixed vector, <code>d̄</code>, and the
+other half is feature-specific. The same structure appears in every retraining: the checkpoint retrained
 without the 48 round-four features gives 0.259 and 0.510
 (<a href="results/anatomy_summary_r4.json"><code>results/anatomy_summary_r4.json</code></a>), and the fifteen checkpoints
 of the seed and rank sweep (section 10.8, <code>checkpoints/seeds/</code>) converge on essentially the same
 <code>d̄</code>: within-group cosines of 0.970 at rank 8, 0.931 at rank 64 and 0.804 at rank 256, and 0.875 to
-0.991 against the published <code>dir_hot</code> for ranks 8 and 64. The last two sentences come from the
-exploratory analysis; its cosine table was not archived, and the checkpoints are kept so that
+0.991 against the published <code>dir_hot</code> for ranks 8 and 64. The cross-seed cosines in the last sentence come from the exploratory analysis; the cosine table was
+not archived, and the checkpoints are kept so that
 <code>anatomy.py</code> can regenerate it.</p>
 <h3>10.3 The shared direction is a confidence regulator, not a concept direction</h3>
 <p>Three measurements, none of which involves generated text, say what <code>d̄</code> does. The methodology
@@ -2129,7 +2130,8 @@ more confident: the entropy halves at <code>c = 2</code>. The clean model's resi
 after block 10 to 414.3 after block 11; under <code>shared_only</code> it goes from 205 after block 10 to 249
 after block 11, that is, the final-block growth is gone. Relative to naive steering at the same
 strength, the norm under <code>d̄</code> is 7% lower at block 6, 14 to 18% lower through blocks 7 to 10 and 41%
-lower after block 11 (at <code>c = 2</code>: 130 → 205 → 249 against 151 → 250 → 422); the collapse proper is
+lower after block 11 (at <code>c = 2</code>: 130 → 205 → 249 against
+139 → 250 → 422); the collapse proper is
 in block 11, and a smaller reduction is present from the injection on. The clean model's own
 residual has a negative component along <code>d̄</code> that grows with depth, from −10.7 after block 6 to
 −42.1 after block 10 (−35.9 after block 11; cosine −0.11 to −0.18); the injection reverses its sign.</p>
@@ -2166,8 +2168,8 @@ generation perplexity and deliver nothing. It does
 <tr>
 <td>0</td>
 <td>3.560 / 0.056 / 0.005 / 0.686</td>
-<td>same</td>
-<td>same</td>
+<td>3.560 / 0.056 / 0.005 / 0.656</td>
+<td>3.560 / 0.056 / 0.005 / 0.618</td>
 </tr>
 <tr>
 <td>0.5</td>
@@ -2213,10 +2215,11 @@ generation perplexity and deliver nothing. It does
 </tr>
 </tbody>
 </table>
-<p>The shared direction alone delivers no concept at any strength (keyword hit rate never above 0.058,
-against 0.056 unsteered) and lowers Pythia log-PPL relative to naive steering by 1.0 nats at <code>c = 0.5</code> and by
-2.6 to 4.5 nats at <code>c = 1</code> to <code>2</code>, more than the full <code>shared</code> arm at the same strengths (1.3 to 2.4
-nats; <a href="results/paired_expA_r3_by_strength.csv"><code>results/paired_expA_r3_by_strength.csv</code></a>). From <code>c = 0.5</code> to <code>c = 3</code> the external scorer finds its output <em>more predictable than the unsteered
+<p>At <code>c = 0</code> the three arms share the same continuations; only the prompt-dependence column differs,
+because the shuffled-prompt subsample is drawn per arm. The shared direction alone delivers no concept
+at any strength (keyword hit rate never above 0.058, against 0.056 unsteered) and lowers Pythia log-PPL relative to naive steering by 1.0 nats at <code>c = 0.5</code> and by
+2.6 to 4.5 nats at <code>c = 1</code> to <code>2</code>, more than the full <code>shared</code> arm at the same strengths (1.3 to 2.4 nats) and than the learned correction (0.7 to 1.3 nats at the same strengths; pooled over
+<code>c ≥ 1</code>, −1.99 against −1.17; <a href="results/paired_expA_r3_by_strength.csv"><code>results/paired_expA_r3_by_strength.csv</code></a>). From <code>c = 0.5</code> to <code>c = 3</code> the external scorer finds its output <em>more predictable than the unsteered
 model's own output</em> (3.56); at <code>c = 4</code> and <code>c = 5</code> the text collapses and the perplexity rises to 3.80
 and 7.10. Pooled over <code>c ≥ 1</code>, as <a href="results/paired_expA_r3.csv"><code>results/paired_expA_r3.csv</code></a> does, the
 two arms happen to give the same mean (−1.985 [−3.009, −0.721] and −1.980 [−2.618, −1.360] nats);
@@ -2233,7 +2236,7 @@ and a worse text axis. Whether the keyword-hit gain of <code>v̂ + d̄</code> is
 metrics; the real-text comparison in section 10.6 is the one that does not depend on them.</p>
 <p>Two of the existing guard metrics do not see this. Prompt dependence, the log-PPL penalty from
 shuffling the prompt, is <em>higher</em> for <code>shared_only</code> than for naive steering at every strength from <code>c = 0.5</code> to <code>c = 4</code>
-(0.610 against 0.318 at <code>c = 1</code>; the two meet at <code>c = 3</code> and cross at <code>c = 5</code>): a more confident model is also more sensitive to its prompt, so the guard
+(0.610 against 0.318 at <code>c = 1</code>; the two nearly meet at <code>c = 3</code>, 0.051 against 0.048, and cross at <code>c = 5</code>): a more confident model is also more sensitive to its prompt, so the guard
 rewards the artifact. The repeated-4-gram fraction flags the arm from <code>c = 1</code> (0.251 against 0.005)
 but not at <code>c = 0.5</code>, where the vector already buys a full nat of generation perplexity while raising
 the real-text NLL (section 10.6). Only a measurement on text the model did not write separates the
@@ -2254,7 +2257,7 @@ largest magnitude 0.106, <code>decoder</code> family in <a href="results/directi
 so removing the <code>d̄</code> component from them is a near-identity operation and, as expected, changes
 almost nothing: <code>purified</code> differs from naive steering by +0.09 nats on the text axis
 ([+0.006, +0.192]) and not at all on concept (−0.008 [−0.021, +0.006]). The learned map, by contrast, adds the
-component with a consistent sign: over the same 30 features <code>cos(w(v̂), d̄)</code> for the <code>learned</code> family
+component with a mostly consistent sign: over the same 30 features <code>cos(w(v̂), d̄)</code> for the <code>learned</code> family
 has median 0.400 and is negative for 3 of 30 (minimum −0.226). Paired at matched strength over 48 cells (<code>c ≥ 1</code>, 12 <code>test_r3</code> features, 30 prompts,
 <a href="results/paired_expF_r3.csv"><code>results/paired_expF_r3.csv</code></a>, <code>κ = 1.0</code>):</p>
 <table>
@@ -2329,14 +2332,14 @@ has median 0.400 and is negative for 3 of 30 (minimum −0.226). Paired at match
 </table>
 <p>Three further points from the same table. The difference-of-means direction, the standard recipe of
 CAA and persona vectors, is no better than the decoder column on this setup: both intervals cover
-zero, and its cosine with <code>d̄</code> is −0.005, so training on contrastive pairs does not find the confidence
-direction either. Mean-centering changes nothing. Rotation instead of addition delivers less concept
+zero, and its cosine with <code>d̄</code> is −0.005, so the difference-of-means recipe does not find the confidence direction either. Mean-centering changes nothing. Rotation instead of addition delivers less concept
 (−0.109) and is not gentler on the text.</p>
 <p><code>dirfix</code> and <code>shared</code> are the only two arms that dominate on both generation axes, and <code>shared</code> does
 so without any training. On every run <code>shared</code> also delivers more concept than <code>dirfix</code> (48 fresh
 features: +0.411 [+0.319, +0.499] against +0.315 [+0.234, +0.400]; <code>test_r3</code>: +0.510 against +0.386),
 so the learned per-feature half adds concept over the decoder column (<code>residual</code>, +0.061) but not over
-<code>v̂ + d̄</code>, and it adds nothing on the text axis.</p>
+<code>v̂ + d̄</code>, and on the text axis it is a cost, not a gain (<code>residual</code> +0.241 [+0.075, +0.425] against
+naive steering).</p>
 <h3>10.6 The axis that is not fooled: real-text prediction at matched concept delivery</h3>
 <p>If generation perplexity can be bought with confidence, the fluency axis has to be measured on text
 the model did not write. <code>src/capability_sweep.py</code> holds 200 held-out OpenWebText documents of 256
@@ -2508,7 +2511,7 @@ repeated 4-grams 0.026); at equal strength it is worse than naive on real text (
 4.523, <a href="results/capability_kappa_0.25.csv"><code>results/capability_kappa_0.25.csv</code></a>), but no
 matched-concept reading was computed for this <code>κ</code>, so the dose is shown neither to help nor to hurt
 at equal concept.</p>
-<h3>10.7 An entropy penalty reduces the shared component and leaves the comparison within noise</h3>
+<h3>10.7 An entropy penalty reduces the mean shared component; the comparison keeps its sign</h3>
 <p>If the confidence handle were what makes the correction work, a correction trained not to touch
 entropy should lose the gain. <code>src/train_direction_ent.py</code> is the round-2 objective plus
 <code>ent_weight · mean |H(steered) − H(clean)|</code>, the absolute change in next-token entropy through the
@@ -2562,7 +2565,8 @@ statistics fall because the signs cancel. The direction it finds is <em>further<
 column, not closer, and its effect on next-token entropy was not measured.</p>
 <p>On generated text <code>dir_ent</code> is a milder correction: at <code>c = 1</code> it delivers less concept than naive
 steering (keyword hit 0.306 against 0.425) with much lower log-PPL (3.894 against 5.031), its
-repeated-4-gram fraction equals naive steering's at every strength (0.131 against 0.131 at <code>c = 3</code>),
+repeated-4-gram fraction stays within 0.013 of naive steering's at every strength of the grid (0.131
+against 0.131 at <code>c = 3</code>),
 and paired at matched strength over 48 cells it gives −1.090 [−1.762, −0.255] nats and
 +0.164 [+0.082, +0.251] concept (<a href="results/paired_expF_ent.csv"><code>results/paired_expF_ent.csv</code></a>,
 <a href="results/scored_expF_ent_clean.csv"><code>results/scored_expF_ent_clean.csv</code></a>). At matched concept
@@ -2574,9 +2578,9 @@ own interval excludes zero only at 0.40 ([−0.844, −0.014];
 <a href="results/matched_concept_capability_ent_boot.csv"><code>results/matched_concept_capability_ent_boot.csv</code></a>).
 The route is different: <code>dir_ent</code> needs
 more strength than naive to reach each hit rate (<code>c*</code> 0.80 / 0.98 / 1.27 against 0.57 / 0.69 / 0.94)
-and wins because its real-text curve rises more slowly, whereas <code>dir_hot</code> wins by reaching the hit
-rate at lower strength. The advantage at equal concept persists, within noise, under the entropy
-penalty; why the unconstrained objective favors the shared component (the working hypothesis is that
+and is ahead on the point estimate because its real-text curve rises more slowly, whereas <code>dir_hot</code>
+is ahead by reaching the hit rate at lower strength. Under the entropy penalty the point estimates
+keep their sign (−0.18 to −0.54 nats) and the interval excludes zero only at 0.40; why the unconstrained objective favors the shared component (the working hypothesis is that
 it is the cheapest way to lower the nonlinear residual <code>C</code>) was not tested.</p>
 <p>This table is easy to misread. At equal <em>strength</em> <code>dir_ent</code> looks far better than
 everything else on real text (NLL 3.505 against 4.523 for naive at <code>c = 1</code>). That is because it
@@ -2589,10 +2593,11 @@ amounts of looping. <code>src/matched_repetition.py</code> instead finds, for ea
 strength at which the arm reproduces the baseline's repeated-4-gram fraction (linear interpolation on
 the arm's own grid) and compares there (<a href="results/matchedF_summary.csv"><code>results/matchedF_summary.csv</code></a>,
 <a href="results/matchedA_summary.csv"><code>results/matchedA_summary.csv</code></a>). The control turned out to be uninformative. The procedure awards −0.76 to −1.12 nats to arms that
-are indistinguishable from naive steering at equal strength (<code>centred</code> −0.890 [−1.365, −0.344],
-<code>purified</code> −0.792 [−1.278, −0.230], <code>diffmeans</code> −0.761, <code>rotate</code> −1.124): naive steering's
-repeated-4-gram fraction is 0.000 at <code>c = 1</code> for 9 of 12 features and every arm's own curve is 0.000
-at <code>c = 0.5</code>, so the match pins the arm at <code>c ≈ 0.5</code> against the baseline at <code>c = 1</code>. <code>dirfix</code>
+are indistinguishable from naive steering at equal strength (<code>centred</code> −0.890 [−1.365, −0.344], <code>purified</code> −0.792 [−1.278, −0.230], <code>diffmeans</code> −0.761) and
+−1.124 to <code>rotate</code>, which differs from naive steering only by delivering less concept: naive steering's
+repeated-4-gram fraction is 0.000 at <code>c = 1</code> for 6 of 12 features in this run (9 of 12 in the earlier
+run) and every arm's own curve is below 0.006 at <code>c = 0.5</code> (0.02 for <code>shared_only</code>), so the match pins
+the arm near <code>c = 0.5</code> against the baseline at <code>c = 1</code>. <code>dirfix</code>
 (−0.953 [−1.402, −0.412]) sits inside that null range, <code>shared</code> (−1.488 [−1.768, −1.057]) just
 below it, and <code>shared_only</code> shows no text-axis gain (+1.359 [−0.328, +2.896]). For the same reason the
 concept comparison under this matching is not interpretable (the pooled difference, +0.033
@@ -2707,7 +2712,7 @@ text the second most destructive arm after <code>shared</code> at both <code>c =
 <p><strong>Process.</strong> Round four failed three times for infrastructure reasons before it produced anything:
 the feature statistics file was missing from the Kaggle payload, the feature selection needed an
 activation dump the kernel had not built, and the <code>shared</code> arm needed a <code>d̄</code> file that was not
-shipped. Each time the queue summary reported the stages as <code>ok</code>, because the driver catches
+shipped. In two of the three cases the queue summary reported the stages as <code>ok</code>, because the driver catches
 exceptions per stage and returns zero. The fix was to check the artifact, not the status. A second
 near-miss: the first plan took <code>d̄</code> for the 48 new features from <code>dir_hot</code>, a checkpoint trained
 while those features were still in the pool; it was replaced by <code>d̄</code> from <code>dir_r4</code> before generation.</p>
@@ -2718,19 +2723,21 @@ direction specifically is narrowed: it belongs to the direction <code>v̂ + d̄<
 arm reproduces and exceeds on both automatic axes (sections 10.5, 10.8); what training adds beyond
 that is the small feature-specific concept gain of <code>residual</code> (+0.061) and, on real text at matched
 concept, an advantage that <code>shared</code> does not establish (section 10.6). The Pythia log-PPL half of those gains is produced by a shared
-confidence direction that lowers next-token entropy; injected alone it reproduces the entire
-text-axis gain at zero concept (section 10.4) and damages real-text prediction (section 10.6). The
+confidence direction that lowers next-token entropy; injected alone it lowers Pythia log-PPL by more than the full arm at <code>c = 1</code> to <code>2</code>, at zero concept
+(section 10.4) and damages real-text prediction (section 10.6). The
 section 9.9a control did not catch this because confidence lowers perplexity beyond literal repeats.
 The single-annotator audit of section 9.10b, which found more degeneration and no coherence gain, is
 the observation that agrees with the mechanism.</p>
 <p>The concept half of the gains stands: <code>dirfix</code> and <code>shared</code> deliver more of the target feature per
-unit of strength, on TEST, on <code>test_r3</code>, on 48 fresh features and on a second layer, and the
+unit of strength, on TEST, on <code>test_r3</code>, on 48 fresh features and, with a small and feature-dependent
+gain, on a second layer, and the
 matched-concept comparison on real text (section 10.6) shows that this lower required strength is a
 reduction of damage for the learned correction, 0.07 to 0.6 nats depending on how the curves are
-joined, with wide intervals. That reduction persists, within noise, under an entropy penalty that
-reduces the shared component (section 10.7).</p>
-<p>The published artifact remains the round-2 checkpoint <code>dir_hot</code>, because every number in sections 9
-and 10 refers to it. Its model card states that its text-axis gain on generated text is not a fluency
+joined, with wide intervals. Under an entropy penalty that reduces the mean shared component, the point estimates keep their sign
+and the interval excludes zero only at a hit rate of 0.40 (section 10.7).</p>
+<p>The published artifact remains the round-2 checkpoint <code>dir_hot</code>, because every round-2 and round-3 number and the main round-4 tables (sections 10.2 to 10.6) refer to
+it; the 48-feature run uses the retrained <code>dir_r4</code>, the seed sweep its own checkpoints, the layer-10
+run <code>dir_L10</code>, and section 10.7 <code>dir_ent</code>. Its model card states that its text-axis gain on generated text is not a fluency
 gain. <code>dir_ent</code> is included as the variant without the confidence component.</p>
 <h3>10.11 Predictions against results</h3>
 <p>Recorded before each run.</p>
@@ -2756,7 +2763,7 @@ gain. <code>dir_ent</code> is included as the variant without the confidence com
 <tr>
 <td>3</td>
 <td><code>centred</code> and <code>purified</code> are indistinguishable from naive steering</td>
-<td>met</td>
+<td>met for <code>centred</code>; <code>purified</code> is +0.09 nats on the text axis, with an interval that just excludes zero</td>
 </tr>
 <tr>
 <td>4</td>
@@ -2796,8 +2803,9 @@ gain. <code>dir_ent</code> is included as the variant without the confidence com
 </tbody>
 </table>
 <h2>11. Limits of the conclusions</h2>
-<p>One model, one intervention layer, 12 features in each test set, the keyword hit rate as the primary
-metric. The conclusion "the proposed construction does not move the front" is established for GPT-2
+<p>One model, one intervention layer for rounds one to three (a second layer only in section 10.8), 12
+features in each of the round-one-to-three test sets and 48 in round four's, the keyword hit rate as the
+primary metric. The conclusion "the proposed construction does not move the front" is established for GPT-2
 small, at strengths normalized to the feature's natural scale, and with denoisers of up to 2.4M
 parameters. These data do not allow the same claim for larger models or for multi-step
 flow-matching denoisers such as GLP: GLP uses 20 ODE steps per inference by default (Luo et al.,
@@ -2815,7 +2823,8 @@ published seed. TEST was opened twice (section 9.6). No <code>|cos| ≥ 0.3</cod
 buffer around the third-round features was applied in the training pool (section 9.10).</p>
 <p>The direction correction has limits of its own. At low strength (<code>c ≈ 0.5</code>) there is no concept gain
 — on TEST it is 0.192 against 0.217 for naive (section 9.6), i.e. concept is even lower, and the
-gain is only in perplexity. It is trained for <code>c ∈ [0.5, 2.5]</code> and is not tested above <code>c ≈ 3</code>. It
+gain is only in perplexity. It is trained for <code>c ∈ [0.5, 2.5]</code>; rounds two and three test it to <code>c = 3</code>, round four to <code>c = 5</code> on
+<code>test_r3</code> (section 10.4). It
 is a fixed linear map, so it does not model the drift of activations away from the training
 distribution as strength grows (section 8). On lexical diversity it loses to naive steering, and the
 more so the higher the strength (section 6.3). The claim "the decoder column is not optimal as an
@@ -2825,9 +2834,9 @@ transfer to other SAEs.</p>
 documents with no per-feature rows, so the matched-concept table (section 10.6) joins a 12-feature
 concept curve with a 4-feature capability curve and carries no interval on the NLL itself. Next-token entropy was measured for <code>shared</code> and <code>shared_only</code> but not for
 <code>dirfix</code> or <code>dir_ent</code> themselves (section 10.3). The <code>shared</code> arm's blend weight differs between runs
-(<code>κ = 0.75</code> and <code>κ = 1.0</code>), and each table states which it uses. Three groups of numbers from the
-exploratory analysis were not archived as tables (the d̄-alone unembedding diagnostics and the
-cross-seed cosines of d̄, section 10.2 and 10.3), and the per-row scored table of the 48-feature run
+(<code>κ = 0.75</code> and <code>κ = 1.0</code>), and each table states which it uses. Three groups of numbers from the exploratory analysis were not archived as tables (the d̄-alone
+unembedding diagnostics, the cross-seed cosines of d̄ and the monotone-cubic interpolation check,
+sections 10.3, 10.2 and 10.6), and the per-row scored table of the 48-feature run
 was not archived, so the disjointness of its prompts is recorded only in the kernel logs
 (section 10.8). The layer-4 replication diverged and was not repaired. <code>dir_ent</code> was evaluated on the
 12 <code>test_r3</code> features only. There is still no human evaluation of any arm.</p>
@@ -2855,17 +2864,17 @@ layer and SAE.</p>
 model's confidence: injected alone at <code>c = 2</code> it lowers next-token entropy from 3.76 to 2.05 nats (4
 features, 30 prompts; the entropy under <code>dir_hot</code> itself was not measured), collapses the final-layer
 residual norm, and helps the same tokens on real text whichever feature it is attached to. Injected alone it lowers Pythia log-PPL by 2.6 to 4.5 nats at
-<code>c = 1</code> to <code>2</code> with zero concept delivered, more than the full arm at the same strengths, while
+<code>c = 1</code> to <code>2</code> with zero concept delivered, more than the full correction at the same strengths, while
 raising the model's negative log-likelihood on real text. Pythia log-PPL of the model's own output is not a fluency measure in this setting; any
 evaluation of steering that relies on generation perplexity under an external scorer is open to this
 artifact.</p>
 <p><strong>Measured on real text at matched concept delivery, the learned correction still costs less than
-naive steering, and the advantage persists, within noise, under an entropy penalty.</strong> Because it delivers the concept at a
+naive steering, and the sign of that advantage survives an entropy penalty on the correction.</strong> Because it delivers the concept at a
 lower strength, its teacher-forced negative log-likelihood at a given hit rate is lower than naive
 steering's, by 0.07 to 0.6 nats. The feature-bootstrap interval excludes zero on the pooled curves
 but not when the concept curve is restricted to the four capability features, so the measurement
-establishes the sign, not the size. A correction trained with an entropy penalty reduces the
-shared component and leaves this comparison within noise. The shared direction reappears at a
+establishes the sign, not the size. A correction trained with an entropy penalty reduces the mean shared component; its point estimates
+keep their sign, with an interval that excludes zero only at a hit rate of 0.40. The shared direction reappears at a
 second layer (cosine 0.756 with the layer-7 direction).</p>
 <p>The measurement that runs through all four rounds is the same: the decomposition of the downstream
 response into a concept-aligned component and a residual, first in logit space, then on real text.
